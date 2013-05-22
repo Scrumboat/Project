@@ -4,5 +4,4 @@ rvm:
 before_script: bundle exec rake db:migrate
 
 notifications:
-  irc:
-    - "irc.cc.tut.fi#scrumboat"
+  irc: "irc.cc.tut.fi#scrumboat"
