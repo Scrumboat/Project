@@ -22,6 +22,12 @@ end
 
 gem 'jquery-rails'
 
+group :test do
+  # Pretty printed test output
+  gem 'turn', :require => false
+  gem 'rake', "~> 10.0.4"
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
