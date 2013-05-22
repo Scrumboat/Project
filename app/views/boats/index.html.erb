@@ -1,0 +1,67 @@
+<h1>Listing boats</h1>
+
+<table>
+  <tr>
+    <th>Omistaja</th>
+    <th>Jnoom</th>
+    <th>Jnoos</th>
+    <th>Rekpvm</th>
+    <th>Muutospvm</th>
+    <th>Nimi</th>
+    <th>Tyyppi</th>
+    <th>Reknro</th>
+    <th>Valmmalli</th>
+    <th>Pituus</th>
+    <th>Leveys</th>
+    <th>Syvyys</th>
+    <th>Uppouma</th>
+    <th>Korkeus</th>
+    <th>Teho</th>
+    <th>Vuosimalli</th>
+    <th>Venepuha</th>
+    <th>Venepuhb</th>
+    <th>Huomautukset</th>
+    <th>Tarra</th>
+    <th>Katsastus</th>
+    <th>Laituri</th>
+    <th>Telakka</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @boats.each do |boat| %>
+  <tr>
+    <td><%= boat.Omistaja %></td>
+    <td><%= boat.JnoOm %></td>
+    <td><%= boat.JnoOs %></td>
+    <td><%= boat.RekPvm %></td>
+    <td><%= boat.MuutosPvm %></td>
+    <td><%= boat.Nimi %></td>
+    <td><%= boat.tyyppi %></td>
+    <td><%= boat.RekNro %></td>
+    <td><%= boat.ValmMalli %></td>
+    <td><%= boat.Pituus %></td>
+    <td><%= boat.Leveys %></td>
+    <td><%= boat.Syvyys %></td>
+    <td><%= boat.Uppouma %></td>
+    <td><%= boat.Korkeus %></td>
+    <td><%= boat.Teho %></td>
+    <td><%= boat.Vuosimalli %></td>
+    <td><%= boat.VenePuhA %></td>
+    <td><%= boat.VenePuhB %></td>
+    <td><%= boat.Huomautukset %></td>
+    <td><%= boat.Tarra %></td>
+    <td><%= boat.Katsastus %></td>
+    <td><%= boat.Laituri %></td>
+    <td><%= boat.Telakka %></td>
+    <td><%= link_to 'Show', boat %></td>
+    <td><%= link_to 'Edit', edit_boat_path(boat) %></td>
+    <td><%= link_to 'Destroy', boat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Boat', new_boat_path %>

@@ -1,0 +1,97 @@
+<%= form_for(@member) do |f| %>
+  <% if @member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+      <% @member.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Nimi %><br />
+    <%= f.text_field :Nimi %>
+  </div>
+  <div class="field">
+    <%= f.label :Jno %><br />
+    <%= f.number_field :Jno %>
+  </div>
+  <div class="field">
+    <%= f.label :Sotu %><br />
+    <%= f.text_field :Sotu %>
+  </div>
+  <div class="field">
+    <%= f.label :Liittynyt %><br />
+    <%= f.date_select :Liittynyt %>
+  </div>
+  <div class="field">
+    <%= f.label :JK %><br />
+    <%= f.text_field :JK %>
+  </div>
+  <div class="field">
+    <%= f.label :MuutosPvm %><br />
+    <%= f.date_select :MuutosPvm %>
+  </div>
+  <div class="field">
+    <%= f.label :Toimi %><br />
+    <%= f.text_field :Toimi %>
+  </div>
+  <div class="field">
+    <%= f.label :Lisenssi %><br />
+    <%= f.text_field :Lisenssi %>
+  </div>
+  <div class="field">
+    <%= f.label :Osoite %><br />
+    <%= f.text_field :Osoite %>
+  </div>
+  <div class="field">
+    <%= f.label :Posti %><br />
+    <%= f.text_field :Posti %>
+  </div>
+  <div class="field">
+    <%= f.label :Maa %><br />
+    <%= f.text_field :Maa %>
+  </div>
+  <div class="field">
+    <%= f.label :KotiPuh %><br />
+    <%= f.text_field :KotiPuh %>
+  </div>
+  <div class="field">
+    <%= f.label :MatkaPuh %><br />
+    <%= f.text_field :MatkaPuh %>
+  </div>
+  <div class="field">
+    <%= f.label :TyoPuh %><br />
+    <%= f.text_field :TyoPuh %>
+  </div>
+  <div class="field">
+    <%= f.label :EmailFax %><br />
+    <%= f.text_field :EmailFax %>
+  </div>
+  <div class="field">
+    <%= f.label :Ammatti %><br />
+    <%= f.text_field :Ammatti %>
+  </div>
+  <div class="field">
+    <%= f.label :Laivuri %><br />
+    <%= f.text_field :Laivuri %>
+  </div>
+  <div class="field">
+    <%= f.label :Huom %><br />
+    <%= f.text_field :Huom %>
+  </div>
+  <div class="field">
+    <%= f.label :Varasto %><br />
+    <%= f.text_field :Varasto %>
+  </div>
+  <div class="field">
+    <%= f.label :Avain %><br />
+    <%= f.text_field :Avain %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

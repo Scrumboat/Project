@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  Omistaja: MyString
+  JnoOm: MyString
+  JnoOs: MyString
+  RekPvm: 2013-05-22
+  MuutosPvm: 2013-05-22
+  Nimi: MyString
+  tyyppi: MyString
+  RekNro: MyString
+  ValmMalli: MyString
+  Pituus: 9.99
+  Leveys: 9.99
+  Syvyys: 9.99
+  Uppouma: 9.99
+  Korkeus: 9.99
+  Teho: MyString
+  Vuosimalli: 1
+  VenePuhA: MyString
+  VenePuhB: MyString
+  Huomautukset: MyString
+  Tarra: 1
+  Katsastus: MyString
+  Laituri: MyString
+  Telakka: MyString
+
+two:
+  Omistaja: MyString
+  JnoOm: MyString
+  JnoOs: MyString
+  RekPvm: 2013-05-22
+  MuutosPvm: 2013-05-22
+  Nimi: MyString
+  tyyppi: MyString
+  RekNro: MyString
+  ValmMalli: MyString
+  Pituus: 9.99
+  Leveys: 9.99
+  Syvyys: 9.99
+  Uppouma: 9.99
+  Korkeus: 9.99
+  Teho: MyString
+  Vuosimalli: 1
+  VenePuhA: MyString
+  VenePuhB: MyString
+  Huomautukset: MyString
+  Tarra: 1
+  Katsastus: MyString
+  Laituri: MyString
+  Telakka: MyString

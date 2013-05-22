@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  Nimi: MyString
+  Jno: 1
+  Sotu: MyString
+  Liittynyt: 2013-05-22
+  JK: MyString
+  MuutosPvm: 2013-05-22
+  Toimi: MyString
+  Lisenssi: MyString
+  Osoite: MyString
+  Posti: MyString
+  Maa: MyString
+  KotiPuh: MyString
+  MatkaPuh: MyString
+  TyoPuh: MyString
+  EmailFax: MyString
+  Ammatti: MyString
+  Laivuri: MyString
+  Huom: MyString
+  Varasto: MyString
+  Avain: MyString
+
+two:
+  Nimi: MyString
+  Jno: 1
+  Sotu: MyString
+  Liittynyt: 2013-05-22
+  JK: MyString
+  MuutosPvm: 2013-05-22
+  Toimi: MyString
+  Lisenssi: MyString
+  Osoite: MyString
+  Posti: MyString
+  Maa: MyString
+  KotiPuh: MyString
+  MatkaPuh: MyString
+  TyoPuh: MyString
+  EmailFax: MyString
+  Ammatti: MyString
+  Laivuri: MyString
+  Huom: MyString
+  Varasto: MyString
+  Avain: MyString
