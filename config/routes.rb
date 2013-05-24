@@ -1,11 +1,9 @@
 Venerekisteri::Application.routes.draw do
   
-  get "home#index"
+  #get "home#index"
 
   devise_for :admins
   
-  resources :admins
-
   resources :boats
 
   resources :members
