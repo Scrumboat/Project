@@ -19,12 +19,12 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
 gem "bcrypt-ruby", "~> 3.0.1"
 gem "orm_adapter", "~> 0.4.0"
 gem "railties", "~> 3.2.13"
 gem "warden", "~> 1.2.1"
 gem "devise", "~> 2.2.4"
+gem 'figaro'
 
 group :development, :test do
   # Pretty printed test output

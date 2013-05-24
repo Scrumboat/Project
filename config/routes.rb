@@ -2,7 +2,7 @@ Venerekisteri::Application.routes.draw do
   
   #get "home#index"
 
-  devise_for :admins
+  devise_for :admins, :controllers => {:registrations => "registrations"}
   
   resources :boats
 
