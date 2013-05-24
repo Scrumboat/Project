@@ -4,6 +4,8 @@ Venerekisteri::Application.routes.draw do
 
   devise_for :admins
   
+  resources :admins
+
   resources :boats
 
   resources :members
