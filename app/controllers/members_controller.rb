@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   # GET /members
   # GET /members.json
+  before_filter :authenticate_admin!
   def index
     @members = Member.all
 

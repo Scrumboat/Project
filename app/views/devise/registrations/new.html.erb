@@ -1,0 +1,19 @@
+<h2>Rekisteröityminen</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :sähköposti %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :salasana %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label "salasanan vahvistus" %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Rekisteröidy" %></div>
+<% end %>
+
+<%= link_to "Sisään kirjautuminen", new_admin_session_path  %>
+<%= link_to  "Unohditko salasanasi?", new_admin_password_path %>

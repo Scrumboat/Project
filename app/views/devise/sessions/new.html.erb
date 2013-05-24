@@ -1,0 +1,17 @@
+<h1>Sisään kirjautuminen</h1>
+<%= form_for(resource, :as => resource_name, :url => new_admin_session_path) do |f| %>
+	<%= devise_error_messages! %>
+  
+  	<div><%= f.label :sähköposti %><br />
+  	<%= f.email_field :email %></div>
+
+  	<div><%= f.label :salasana %><br />
+  	<%= f.password_field :password %></div>
+
+  	<div><%= f.label "muista minut" %><br />
+  	<%= f.check_box :remember_me %></div>
+  
+  	<%= f.submit 'Kirjaudu' %>
+  	<%= link_to "Unohditko salasanasi?", new_admin_password_path %>
+  	<%= link_to "Rekisteröidy", new_admin_registration_path %>
+<% end %>

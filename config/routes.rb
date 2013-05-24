@@ -1,12 +1,14 @@
 Venerekisteri::Application.routes.draw do
-  resources :boats
+  
+  #get "home/index"
 
+  devise_for :admins
+  
+  resources :boats
 
   resources :members
 
-
-  root :to => redirect('/members')
-  	
+  root :to => "home#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

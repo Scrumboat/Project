@@ -1,6 +1,7 @@
 class BoatsController < ApplicationController
   # GET /boats
   # GET /boats.json
+  before_filter :authenticate_admin!
   def index
     @boats = Boat.all
 

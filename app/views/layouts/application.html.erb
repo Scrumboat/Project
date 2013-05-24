@@ -7,6 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div>
+		<p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+	</div>
+	<div>
+		<% if admin_signed_in? -%>
+		<div id="admin_login_box" style="float:right">
+          <p>Olet kirjautuneena: <%=  current_admin.email %> <%= link_to 'Kirjaudu ulos', destroy_admin_session_path, :method => :delete %></p>
+        </div style="clear:both">
+		<% end -%>
+	</div>
 
 <%= yield %>
 
