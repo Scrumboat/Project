@@ -39,7 +39,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
 end
 
 group :production do
