@@ -1,5 +1,8 @@
 Venerekisteri::Application.routes.draw do
   
+  resources :ownerships
+
+
   #get "home#index"
 
   devise_for :admins, :controllers => {:registrations => "registrations"}

@@ -10,6 +10,6 @@ validates_presence_of :Leveys
 validates_presence_of :Syvyys
 validates_presence_of :Vuosimalli
 
-has_and_belongs_to_many :members
+has_many :members, :through => :ownerships
  attr_accessible :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi
 end
