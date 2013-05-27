@@ -2,7 +2,8 @@ require 'test_helper'
 
 class BoatsControllerTest < ActionController::TestCase
   setup do
-    @boat = boats(:one)
+	sign_in admins(:one)
+	@boat = boats(:one)
   end
 
   test "should get index" do

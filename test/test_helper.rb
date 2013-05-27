@@ -9,6 +9,11 @@ class ActiveSupport::TestCase
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
   fixtures :all
+  $testadmin = Admin.create(:email => 'tester@tester.com', :password => 'password', :password_confirmation => 'password')
 
   # Add more helper methods to be used by all tests here...
+end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
 end
