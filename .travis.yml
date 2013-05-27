@@ -3,5 +3,16 @@ rvm:
   - 1.9.3
 before_script: bundle exec rake db:migrate
 
-notifications:
-  irc: "irc.cc.tut.fi#scrumboat"
+  notifications:
+  email: false
+  irc:
+    channels:
+    - "irc.cc.tut.fi#scrumcaptain"
+    use_notice: true
+    skip_join: true
+    template:
+    - "----"
+    - "%{message}"
+    - "%{repository}/%{branch}#%{build_number} (%{author})"
+    - "Build details : %{build_url}"
+    - "----"
