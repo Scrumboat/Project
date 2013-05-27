@@ -8,7 +8,7 @@ When(/^I go to the boats page$/) do
 end
 
 Then(/^I should be directed to sign in page$/) do
-  page.should have_content("Sinun pitää kirjautua sisään tai rekisteröityä ennen kuin voit jatkaa.")
+  page.should have_content("You need to sign in or sign up before continuing.")
 end
 
 When(/^I go to the members page$/) do
