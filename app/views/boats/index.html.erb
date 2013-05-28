@@ -2,12 +2,13 @@
 
 <table>
   <tr>
-    <th>Omistaja</th>
-    <th>Jnoom</th>
-    <th>Jnoos</th>
-    <th>Rekpvm</th>
-    <th>Muutospvm</th>
-    <th>Nimi</th>
+    <th><%= sortable "Omistaja" %></th>
+    <th><%= sortable "JnoOm" %></th>
+    <th><%= sortable "JnoOs" %></th>
+    <th><%= sortable "RekPvm" %></th>
+    <th><%= sortable "MuutosPvm" %></th>
+    <th><%= sortable "Nimi" %></th>
+    <!-- kommentoitu pois
     <th>Tyyppi</th>
     <th>Reknro</th>
     <th>Valmmalli</th>
@@ -25,12 +26,13 @@
     <th>Katsastus</th>
     <th>Laituri</th>
     <th>Telakka</th>
+    -->
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @boats.each do |boat| %>
+<% for boat in @boats %>
   <tr>
     <td><%= boat.Omistaja %></td>
     <td><%= boat.JnoOm %></td>
@@ -38,6 +40,7 @@
     <td><%= boat.RekPvm %></td>
     <td><%= boat.MuutosPvm %></td>
     <td><%= boat.Nimi %></td>
+    <!-- kommentoitu pois
     <td><%= boat.tyyppi %></td>
     <td><%= boat.RekNro %></td>
     <td><%= boat.ValmMalli %></td>
@@ -55,6 +58,7 @@
     <td><%= boat.Katsastus %></td>
     <td><%= boat.Laituri %></td>
     <td><%= boat.Telakka %></td>
+    -->
     <td><%= link_to 'Tiedot', boat %></td>
     <td><%= link_to 'Muokkaa', edit_boat_path(boat) %></td>
     <td><%= link_to 'Poista', boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>

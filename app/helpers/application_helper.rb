@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
+    link_to title, :sort => column, :direction => direction
+  end
+
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join

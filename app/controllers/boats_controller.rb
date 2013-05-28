@@ -1,15 +1,19 @@
 # encoding: UTF-8
 class BoatsController < ApplicationController
+
+  helper_method :sort_column, :sort_direction
+
   # GET /boats
   # GET /boats.json
   before_filter :authenticate_admin!
   def index
-    @boats = Boat.all
+    @boats = Boat.order(sort_column + ' ' + sort_direction)
+   # @boats = Boat.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @boats }
-    end
+   # respond_to do |format|
+     # format.html # index.html.erb
+     # format.json { render json: @boats }
+    
   end
 
   # GET /boats/1
@@ -108,4 +112,13 @@ class BoatsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def sort_column
+      Boat.column_names.include?(params[:sort]) ? params[:sort] : "Omistaja"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    end
 end

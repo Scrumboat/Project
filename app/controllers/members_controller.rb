@@ -1,15 +1,20 @@
 # encoding: UTF-8
 class MembersController < ApplicationController
+
+  helper_method :sort_column, :sort_direction
+
   # GET /members
   # GET /members.json
   before_filter :authenticate_admin!
   def index
-    @members = Member.find(:all, :conditions => ["deleted_at > ? OR deleted_at IS NULL", 1.years.ago])
+    @members = Member.order(sort_column + ' ' + sort_direction)    
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @members }
-    end
+  #@members = Member.find(:all, :conditions => ["deleted_at > ? OR deleted_at IS NULL", 1.years.ago])
+
+   # respond_to do |format|
+    #  format.html # index.html.erb
+     # format.json { render json: @members }
+    
   end
 
   # GET /members/1
@@ -92,6 +97,15 @@ class MembersController < ApplicationController
         format.json { head :no_content}
       end
     end
+  end
+
+  private
+  def sort_column
+    Member.column_names.include?(params[:sort]) ? params[:sort] : "Jno"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
 
 end

@@ -2,33 +2,19 @@
 
 <table>
   <tr>
-    <th>Nimi</th>
-    <th>Jno</th>
-    <th>Sotu</th>
-    <th>Liittynyt</th>
-    <th>Jk</th>
-    <th>Muutospvm</th>
-    <th>Toimi</th>
-    <th>Lisenssi</th>
-    <th>Osoite</th>
-    <th>Posti</th>
-    <th>Maa</th>
-    <th>Kotipuh</th>
-    <th>Matkapuh</th>
-    <th>Tyopuh</th>
-    <th>Emailfax</th>
-    <th>Ammatti</th>
-    <th>Laivuri</th>
-    <th>Huom</th>
-    <th>Varasto</th>
-    <th>Avain</th>
+    <th><%= sortable "Nimi" %></th>
+    <th><%= sortable "Jno" %></th>
+    <th><%= sortable "Sotu" %></th>
+    <th><%= sortable "Liittynyt" %></th>
+    <th><%= sortable "JK" %></th>
+    <th><%= sortable "MuutosPvm" %></th>
     <th>POISTETTU</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @members.each do |member| %>
+<% for member in @members %>
   <tr>
     <td><%= member.Nimi %></td>
     <td><%= member.Jno %></td>
@@ -36,20 +22,6 @@
     <td><%= member.Liittynyt %></td>
     <td><%= member.JK %></td>
     <td><%= member.MuutosPvm %></td>
-    <td><%= member.Toimi %></td>
-    <td><%= member.Lisenssi %></td>
-    <td><%= member.Osoite %></td>
-    <td><%= member.Posti %></td>
-    <td><%= member.Maa %></td>
-    <td><%= member.KotiPuh %></td>
-    <td><%= member.MatkaPuh %></td>
-    <td><%= member.TyoPuh %></td>
-    <td><%= member.EmailFax %></td>
-    <td><%= member.Ammatti %></td>
-    <td><%= member.Laivuri %></td>
-    <td><%= member.Huom %></td>
-    <td><%= member.Varasto %></td>
-    <td><%= member.Avain %></td>
     <td><%= member.deleted ? 'Kyllä' : 'Ei' %></td>
     <td><%= link_to 'Tiedot', member %></td>
     <td><%= link_to 'Muokkaa', edit_member_path(member) %></td>
