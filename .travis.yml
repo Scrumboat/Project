@@ -14,5 +14,6 @@ notifications:
     - "----"
     - "%{message}"
     - "%{repository}/%{branch}#%{build_number} (%{author})"
+	- "Commit message: {commit_message}"
     - "Build details : %{build_url}"
     - "----"
