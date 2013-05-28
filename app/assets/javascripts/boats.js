@@ -5,6 +5,7 @@ function taydenna() {
 	document.getElementById('boat_ValmMalli').value=nimi;
 
   if (!nimi || 0 === nimi.length) {
+   document.getElementById('boat_Tyyppi').value="";
    document.getElementById('boat_Pituus').value="";
    document.getElementById('boat_Leveys').value="";
    document.getElementById('boat_Syvyys').value="";

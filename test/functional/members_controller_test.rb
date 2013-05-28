@@ -2,8 +2,12 @@ require 'test_helper'
 
 class MembersControllerTest < ActionController::TestCase
   setup do
-	sign_in admins(:one)
+    sign_in admins(:one)
     @member = members(:one)
+  end
+
+  teardown do
+    @member = nil
   end
 
   test "should get index" do
@@ -40,8 +44,9 @@ class MembersControllerTest < ActionController::TestCase
     assert_redirected_to member_path(assigns(:member))
   end
 
-  test "should destroy member" do
-    assert_difference('Member.count', -1) do
+  test "member doesnt get removed when deleted from show list" do
+    #should be no difference, because destroying only set deleted = true
+    assert_difference('Member.count', 0) do
       delete :destroy, id: @member
     end
 
@@ -49,17 +54,29 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should not be able to remove member when boat associated" do
-  @boat = boats(:one)
-  @boats_member = BoatsMember.create(:boat_id => @boat.id, :member_id => @member.id)
+    @boat = boats(:one)
+    @boats_member = BoatsMember.create(:boat_id => @boat.id, :member_id => @member.id)
   
-  #Let's try to remove @member. should be redirected to /members/id (which shows cannot delete message)
-  put :destroy, id: @member
-  assert_redirected_to member_path
+    #Let's try to remove @member. should be redirected to /members/id (which shows cannot delete message)
+    put :destroy, id: @member
+    assert_redirected_to member_path
   
-  #Now, let's remove association with the boat and member and try again. (we should go to /members now)
-  @boats_member.destroy
+    #Now, let's remove association with the boat and member and try again. (we should go to /members now)
+    @boats_member.destroy
 
-  put :destroy, id: @member
-  assert_redirected_to members_path
+    put :destroy, id: @member
+    assert_redirected_to members_path
+  end
+
+  test "deleted field is true when :destroy" do
+    #member.deleted should be false
+    assert !@member.deleted, "member.deleted should be false"
+    #now we delete it
+    put :destroy, id: @member
+    
+    #now fetch it from db ( dunno why it doesn't update @member :O )
+    member = Member.find(@member.id)
+    #member.deleted should be true
+    assert member.deleted, "member.deleted should be true"
   end
 end
