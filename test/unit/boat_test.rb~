@@ -60,7 +60,6 @@ class BoatTest < ActiveSupport::TestCase
   boat.Pituus = "5.7"
   boat.Leveys = "2.5"
   boat.Syvyys = "0.8"
-  boat.Korkeus = "2.0"
   boat.Vuosimalli = "kivi"
   assert !boat.save, "Creates a new boat with incorrect year input"
   end
