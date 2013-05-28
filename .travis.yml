@@ -2,12 +2,12 @@ language: ruby
 rvm:
   - 1.9.3
 before_script: bundle exec rake db:migrate
-script: rake test
+script: bundle exec rake test cucumber
 notifications:
   email: false
   irc:
     channels:
-    - "irc.cc.tut.fi#scrumcaptain"
+    - ircnet.eversible.com#scrumcaptain
     use_notice: true
     skip_join: true
     template:

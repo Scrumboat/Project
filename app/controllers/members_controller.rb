@@ -26,8 +26,8 @@ class MembersController < ApplicationController
   # GET /members/new.json
   def new
     @member = Member.new
-
-    respond_to do |format|
+    
+	respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @member }
     end
@@ -45,6 +45,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
+		$loggeri.member_created current_admin.email, @member.inspect
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
         format.json { render json: @member, status: :created, location: @member }
       else
@@ -61,6 +62,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
+		$loggeri.member_modified current_admin.email, @member.inspect
         format.html { redirect_to @member, notice: 'Member was successfully updated.' }
         format.json { head :no_content }
       else
@@ -74,6 +76,7 @@ class MembersController < ApplicationController
   # DELETE /members/1.json
   def destroy
     @member = Member.find(params[:id])
+	$loggeri.member_deleted current_admin.email, @member.inspect
     @member.destroy
 
     respond_to do |format|
