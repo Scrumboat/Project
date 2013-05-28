@@ -35,6 +35,7 @@ gem "railties", "~> 3.2.13"
 gem "warden", "~> 1.2.1"
 gem "devise", "~> 2.2.4"
 gem 'figaro'
+gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
 
 group :development, :test do
   # Pretty printed test output

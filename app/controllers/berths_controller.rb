@@ -1,4 +1,5 @@
-# encoding: utf-8
+#encoding: utf-8
+
 class BerthsController < ApplicationController
   # GET /berths
   # GET /berths.json

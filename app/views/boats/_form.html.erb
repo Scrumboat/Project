@@ -1,4 +1,4 @@
-<%= form_for(@boat) do |f| %>
+<%= nested_form_for(@boat) do |f| %>
   <% if @boat.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@boat.errors.count, "error") %> prohibited this boat from being saved:</h2>
@@ -11,14 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :Omistaja %><br />
-    <%= f.text_field :Omistaja %>
-  </div>
-  <div class="field">
-    <%= f.label :JnoOm %><br />
-    <%= f.text_field :JnoOm %>
-  </div>
+<%= f.fields_for :BoatsMembers do |yhteys| %>
+	<%= yhteys.label "Omistaja" %><br />
+	<%= yhteys.text_field :member_id, :value => yhteys.object.member_id %><br />
+	<%= yhteys.link_to_remove "Poista yhteys" %>
+<% end %>
+<p><%= f.link_to_add "Uusi yhteys", :BoatsMembers %></p>
+
   <div class="field">
     <%= f.label :JnoOs %><br />
     <%= f.text_field :JnoOs %>

@@ -31,7 +31,7 @@ class BoatsController < ApplicationController
   # GET /boats/new.json
   def new
     @boat = Boat.new
-
+	@boat.BoatsMembers.build
     @mallit = Malli.select("\"ValmMalli\"")
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,8 @@ class BoatsController < ApplicationController
 
   # GET /boats/1/edit
   def edit
-    @boat = Boat.find(params[:id])
+    @boat = Boat.find(params[:id], :include => :members)
+	show_jno_in_edit_instead_of_id
   end
 
   # POST /boats
@@ -63,11 +64,11 @@ class BoatsController < ApplicationController
       @malli.save
     end
 
-    @member = Member.find_by_Jno(params[:boat][:JnoOm])
+    changeJnoToId
+
     respond_to do |format|
-      if @boat.valid? && @member != nil
+      if @boat.valid? && @onkoOk
         @boat.save
-        @boats_member = @boat.BoatsMembers.create(:member_id => @member.id)
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
@@ -83,15 +84,14 @@ class BoatsController < ApplicationController
   # PUT /boats/1.json
   def update
     @boat = Boat.find(params[:id], :include => [:members])
-
-    # if JnoOm has changed, update the BoatsMembers relation also
-    if(@boat.JnoOm != params[:boat][:JnoOm]) 
-      @member = Member.find_by_Jno(params[:boat][:JnoOm])
-      BoatsMember.destroy_all(:boat_id =>  @boat.id, :member_id => @boat.members.first)
-      @boats_member = @boat.BoatsMembers.create(:member_id => @member.id)
-    end
+    #@boat = Boat.find(params[:id])
+    #changeJnoToId
+    change_jno_to_id_for_update
+	if params[:boat][:BoatsMembers_attributes] == nil
+		@onkoOk = false
+	end
     respond_to do |format|
-      if @boat.update_attributes(params[:boat])
+      if @boat.update_attributes(params[:boat]) && @onkoOk
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
@@ -113,6 +113,54 @@ class BoatsController < ApplicationController
     end
   end
 
+  def change_jno_to_id_for_update
+
+    params[:boat][:BoatsMembers_attributes].values.each do |bm|
+      member = Member.find_by_Jno(bm[:member_id])
+      if member == nil
+        @onkoOk = false
+		return
+      end
+      bm[:member_id] = member.id
+    end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+    @onkoOk = true
+  end
+
+  def changeJnoToId
+        taulu = []
+	params[:boat][:BoatsMembers_attributes].values.each do |bm|
+		if bm[:member_id].strip == ""
+			@onkoOk = false
+			return
+		end
+		taulu << bm[:member_id]
+	end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+	
+	i = 0
+	@onkoOk = true
+	@boat.BoatsMembers.each do |bm|
+		@member = Member.find_by_Jno(taulu[i])
+		if @member == nil
+			@onkoOk = false
+			return
+		else
+			bm.member_id = @member.id
+			i = i+1
+		end
+	end
+	@onkoOk = !taulu.empty?
+  end
+  
+  def show_jno_in_edit_instead_of_id
+	@boat.BoatsMembers.each do |bm|
+		@member = Member.find(bm.member_id)
+		if @member == nil
+			@onkoOk = false
+			return
+		end
+		bm.member_id = @member.Jno
+    end
+  end
   private
     def sort_column
       Boat.column_names.include?(params[:sort]) ? params[:sort] : "Omistaja"
