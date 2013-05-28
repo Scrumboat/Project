@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pituus:</b>
+  <%= @dock.length %>
+</p>
+
+<p>
+  <b>Leveys:</b>
+  <%= @dock.width %>
+</p>
+
+<p>
+  <b>Syvyys:</b>
+  <%= @dock.depth %>
+</p>
+
+<p>
+  <b>Paikka on olemassa:</b>
+  <%= @dock.exists %>
+</p>
+
+<p>
+  <b>Numero:</b>
+  <%= @dock.number %>
+</p>
+
+
+<%= link_to 'Muokkaa', edit_dock_path(@dock) %> |
+<%= link_to 'Takaisin', docks_path %>

@@ -1,0 +1,37 @@
+<%= form_for(@dock) do |f| %>
+  <% if @dock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dock.errors.count, "error") %> prohibited this dock from being saved:</h2>
+
+      <ul>
+      <% @dock.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.text_field :length %>
+  </div>
+  <div class="field">
+    <%= f.label :width %><br />
+    <%= f.text_field :width %>
+  </div>
+  <div class="field">
+    <%= f.label :depth %><br />
+    <%= f.text_field :depth %>
+  </div>
+  <div class="field">
+    <%= f.label :exists %><br />
+    <%= f.check_box :exists %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.number_field :number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

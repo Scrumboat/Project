@@ -1,5 +1,8 @@
 Venerekisteri::Application.routes.draw do
   
+  resources :docks
+
+
   resources :ownerships
 
 
