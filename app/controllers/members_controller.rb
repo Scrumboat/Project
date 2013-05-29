@@ -74,11 +74,16 @@ class MembersController < ApplicationController
   # DELETE /members/1.json
   def destroy
     @member = Member.find(params[:id])
-    @member.destroy
 
     respond_to do |format|
-      format.html { redirect_to members_url }
-      format.json { head :no_content }
+      if @member.boats.count > 0
+        format.html { redirect_to @member, notice: "Member has boats associated, delete them first." }
+        format.json { head :no_content }
+      else
+        @member.destroy
+        format.html { redirect_to members_url }
+        format.json { head :no_content}
+      end
     end
   end
 
