@@ -9,10 +9,15 @@ function taydenna() {
 	var e = document.getElementById('malli');
 	var nimi = e.options[e.selectedIndex].text;
 	document.getElementById('boat_ValmMalli').value=nimi;
-	alert('/mallis/'+nimi+'.json');
 	$.getJSON('/mallis/'+nimi+'.json', function(data) {
-                obj = $.parseJSON(""+data);
-		document.getElementById('boat_Syvyys').value=obj.Syvyys;
+          $.each(data, function(key, val) {
+                  if (document.getElementById('boat_'+key) != null) {
+                          document.getElementById('boat_'+key).value = val;
+                  }
+          });
+          
+          //var obj = JSON.parse(data);
+          //document.getElementById('boat_Syvyys').value=obj.Syvyys;
 	});
 	
 }
