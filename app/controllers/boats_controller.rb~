@@ -14,7 +14,7 @@ class BoatsController < ApplicationController
   # GET /boats/1
   # GET /boats/1.json
   def show
-    @boat = Boat.includes(:members).find(params[:id])
+    @boat = Boat.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

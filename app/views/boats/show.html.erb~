@@ -116,14 +116,5 @@
 </p>
 
 
-<b>Omistaja(:t)</b>
-<ul>
-	<% @boat.members.each do |member| %>
-		<li><%= member.Nimi %></li>
-	<% end %>
-</ul>
-
-
-
 <%= link_to 'Edit', edit_boat_path(@boat) %> |
 <%= link_to 'Back', boats_path %>

@@ -100,14 +100,6 @@
   <%= @member.Avain %>
 </p>
 
-<b>Vene(:et)</b>
-<ul>
-	<% @member.boats.each do |boat| %>
-		<li><%= boat.Nimi %></li>
-	<% end %>
-</ul>
-
-
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>
