@@ -43,6 +43,7 @@ class BoatsController < ApplicationController
   # POST /boats.json
   def create
     @boat = Boat.new(params[:boat])
+<<<<<<< HEAD
 
     @malli = Boat.find(:first, :conditions => ["ValmMalli = ?", params[:boat][:ValmMalli]])
 
@@ -58,6 +59,9 @@ class BoatsController < ApplicationController
         @malli.save
      end
 
+=======
+	
+>>>>>>> 548bf304fb295698169eb7b0690b02529c8deebf
     respond_to do |format|
       if @boat.save
         format.html { redirect_to @boat, notice: 'Boat was successfully created.' }

@@ -14,7 +14,7 @@ class BoatsController < ApplicationController
   # GET /boats/1
   # GET /boats/1.json
   def show
-    @boat = Boat.includes(:members).find(params[:id])
+    @boat = Boat.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,6 +27,7 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
 
+    @mallit = Malli.select(:ValmMalli)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -42,7 +43,21 @@ class BoatsController < ApplicationController
   # POST /boats.json
   def create
     @boat = Boat.new(params[:boat])
-	
+
+    @malli = Boat.find(:first, :conditions => ["ValmMalli = ?", params[:boat][:ValmMalli]])
+
+    if @malli == nil
+        @malli = Malli.new
+        @malli.Korkeus = @boat.Korkeus
+	@malli.Leveys = @boat.Leveys
+	@malli.Pituus = @boat.Pituus
+	@malli.Syvyys = @boat.Syvyys
+	@malli.Uppouma = @boat.Uppouma
+	@malli.ValmMalli = @boat.ValmMalli
+	@malli.tyyppi = @boat.tyyppi
+        @malli.save
+     end
+
     respond_to do |format|
       if @boat.save
         format.html { redirect_to @boat, notice: 'Boat was successfully created.' }
@@ -52,6 +67,7 @@ class BoatsController < ApplicationController
         format.json { render json: @boat.errors, status: :unprocessable_entity }
       end
     end
+        
   end
 
   # PUT /boats/1
