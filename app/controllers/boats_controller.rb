@@ -14,7 +14,7 @@ class BoatsController < ApplicationController
   # GET /boats/1
   # GET /boats/1.json
   def show
-    @boat = Boat.includes(:members).find(params[:id])
+    @boat = Boat.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,7 +42,7 @@ class BoatsController < ApplicationController
   # POST /boats.json
   def create
     @boat = Boat.new(params[:boat])
-
+	
     respond_to do |format|
       if @boat.save
         format.html { redirect_to @boat, notice: 'Boat was successfully created.' }

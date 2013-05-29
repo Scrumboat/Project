@@ -14,7 +14,7 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
-    @member = Member.find(params[:id])
+    @member = Member.includes(:boats).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +27,7 @@ class MembersController < ApplicationController
   def new
     @member = Member.new
     
-	respond_to do |format|
+    respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @member }
     end
@@ -41,11 +41,10 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = Member.new(params[:member])
+    @member = Member.new(params[:member].merge(:updated_by => current_admin))
 
     respond_to do |format|
       if @member.save
-		$loggeri.member_created current_admin.email, @member.inspect
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
         format.json { render json: @member, status: :created, location: @member }
       else
@@ -61,8 +60,7 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
 
     respond_to do |format|
-      if @member.update_attributes(params[:member])
-		$loggeri.member_modified current_admin.email, @member.inspect
+      if @member.update_attributes(params[:member].merge(:updated_by => current_admin))
         format.html { redirect_to @member, notice: 'Member was successfully updated.' }
         format.json { head :no_content }
       else
@@ -76,7 +74,6 @@ class MembersController < ApplicationController
   # DELETE /members/1.json
   def destroy
     @member = Member.find(params[:id])
-	$loggeri.member_deleted current_admin.email, @member.inspect
     @member.destroy
 
     respond_to do |format|
@@ -84,4 +81,5 @@ class MembersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
