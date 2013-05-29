@@ -47,4 +47,19 @@ class MembersControllerTest < ActionController::TestCase
 
     assert_redirected_to members_path
   end
+
+  test "should not be able to remove member when boat associated" do
+  @boat = boats(:one)
+  @boats_member = BoatsMember.create(:boat_id => @boat.id, :member_id => @member.id)
+  
+  #Let's try to remove @member. should be redirected to /members/id (which shows cannot delete message)
+  put :destroy, id: @member
+  assert_redirected_to member_path
+  
+  #Now, let's remove association with the boat and member and try again. (we should go to /members now)
+  @boats_member.destroy
+
+  put :destroy, id: @member
+  assert_redirected_to members_path
+  end
 end
