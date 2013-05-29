@@ -1,4 +1,8 @@
 class Member < ActiveRecord::Base
+
+versioned :dependent => :tracking
+attr_accessible :updated_by
+
 validates_presence_of :Nimi
 validates_presence_of :Jno
 validates_presence_of :Sotu
