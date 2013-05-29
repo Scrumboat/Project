@@ -17,7 +17,16 @@ validates_presence_of :Leveys
 validates_presence_of :Syvyys
 validates_presence_of :Vuosimalli
 
+<<<<<<< HEAD
+has_many :members, :through => :ownerships
+ attr_accessible :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi
+=======
 has_many :ownerships
 has_many :members, :through => :ownerships
  attr_accessible :members, :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :tag_attributes
+>>>>>>> 548bf304fb295698169eb7b0690b02529c8deebf
 end
+
+
+
+Boat.new(:Omistaja => "Jaakko", :RekPvm => "25.06.2005", :Nimi => "veneXYZ", :tyyppi => "turbovene", :RekNro => "051277", :ValmMalli => "vv-xx", :Pituus => 150.0, :Leveys => 100.0, :Syvyys => 50.0, :Vuosimalli => "1995")

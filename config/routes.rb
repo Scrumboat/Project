@@ -1,6 +1,6 @@
 Venerekisteri::Application.routes.draw do
   
-  resources :ownerships
+  resources :boats_members
 
 
   #get "home#index"

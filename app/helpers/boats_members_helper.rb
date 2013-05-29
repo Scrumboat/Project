@@ -1,0 +1,2 @@
+module BoatsMembersHelper
+end
