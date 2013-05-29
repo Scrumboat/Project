@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20130529124630) do
 
   create_table "admins", :force => true do |t|
@@ -60,6 +59,13 @@ ActiveRecord::Schema.define(:version => 20130529124630) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "boats_members", :force => true do |t|
+    t.integer  "boat_id"
+    t.integer  "member_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "mallis", :force => true do |t|
     t.string   "tyyppi"
     t.string   "ValmMalli"
@@ -68,11 +74,6 @@ ActiveRecord::Schema.define(:version => 20130529124630) do
     t.decimal  "Syvyys"
     t.decimal  "Uppouma"
     t.decimal  "Korkeus"
-  end
-
-  create_table "boats_members", :force => true do |t|
-    t.integer  "boat_id"
-    t.integer  "member_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
