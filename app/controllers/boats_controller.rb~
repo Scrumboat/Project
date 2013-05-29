@@ -27,7 +27,7 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
 
-    @mallit = Malli.select(:ValmMalli)
+    @mallit = Malli.find(:all, :include => [:ValmMalli])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }

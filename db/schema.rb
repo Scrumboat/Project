@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527143049) do
+ActiveRecord::Schema.define(:version => 20130529101901) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -57,6 +57,18 @@ ActiveRecord::Schema.define(:version => 20130527143049) do
     t.string   "Telakka"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "mallis", :force => true do |t|
+    t.string   "tyyppi"
+    t.string   "ValmMalli"
+    t.decimal  "Pituus"
+    t.decimal  "Leveys"
+    t.decimal  "Syvyys"
+    t.decimal  "Uppouma"
+    t.decimal  "Korkeus"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "members", :force => true do |t|
