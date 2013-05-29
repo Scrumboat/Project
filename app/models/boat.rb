@@ -17,7 +17,7 @@ validates_presence_of :Leveys
 validates_presence_of :Syvyys
 validates_presence_of :Vuosimalli
 
-has_many :ownerships
-has_many :members, :through => :ownerships
- attr_accessible :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :tag_attributes
+has_many :BoatsMembers
+has_many :members, :through => :BoatsMembers
+ attr_accessible :members, :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :tag_attributes
 end
