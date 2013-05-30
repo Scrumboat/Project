@@ -6,7 +6,7 @@ class MallisController < ApplicationController
     if Malli == nil
        puts("jee");
     end
-    @malli = Malli.find(:first, :conditions => ["ValmMalli = ?", params[:id]])
+    @malli = Malli.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:id]])
     respond_to do |format|
       format.json { render json: @malli }
     end

@@ -27,7 +27,7 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
 
-    @mallit = Malli.select(:ValmMalli)
+    @mallit = Malli.select("\"ValmMalli\"")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -44,7 +44,7 @@ class BoatsController < ApplicationController
   def create
     @boat = Boat.new(params[:boat])
 
-    @malli = Boat.find(:first, :conditions => ["ValmMalli = ?", params[:boat][:ValmMalli]])
+    @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
 
     if @malli == nil
         @malli = Malli.new
