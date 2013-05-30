@@ -1,9 +1,17 @@
 Venerekisteri::Application.routes.draw do
-  resources :boats
+  
+  resources :ownerships
 
+
+  #get "home#index"
+
+  devise_for :admins, :controllers => {:registrations => "registrations"}
+  
+  resources :boats
 
   resources :members
 
+  root :to => "home#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -9,6 +9,8 @@ Venerekisteri::Application.routes.draw do
   
   resources :boats
 
+  resources :mallis
+
   resources :members
 
   root :to => "home#index"
