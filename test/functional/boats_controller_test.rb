@@ -47,4 +47,12 @@ class BoatsControllerTest < ActionController::TestCase
 
     assert_redirected_to boats_path
   end
+
+  test "should save new boat models to db" do
+    #Malli.count is different after creating a new boat -> there must be new entry in mallis table!
+    assert_difference('Malli.count') do
+      post :create, boat: { :Omistaja => "ommm", :RekPvm => "1.5.1000", :Nimi => "nimi", :tyyppi => "type-a", :RekNro => 'aaaa', :ValmMalli => 'type-a', :Pituus => 10, :Leveys => 10, :Syvyys => 10, :Vuosimalli => 1999 }
+    end
+  end
+
 end
