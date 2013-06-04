@@ -12,7 +12,7 @@ validates_presence_of :Osoite
 validates_presence_of :Posti
 validates_presence_of :MatkaPuh
 
-has_many :ownerships
-has_many :boats, :through => :ownerships
+has_many :BoatsMembers
+has_many :boats, :through => :BoatsMembers
  attr_accessible :boats, :Ammatti, :Avain, :EmailFax, :Huom, :JK, :Jno, :KotiPuh, :Laivuri, :Liittynyt, :Lisenssi, :Maa, :MatkaPuh, :MuutosPvm, :Nimi, :Osoite, :Posti, :Sotu, :Toimi, :TyoPuh, :Varasto
 end
