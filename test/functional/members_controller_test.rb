@@ -6,6 +6,10 @@ class MembersControllerTest < ActionController::TestCase
     @member = members(:one)
   end
 
+  teardown do
+    @member = nil
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -67,11 +71,12 @@ class MembersControllerTest < ActionController::TestCase
   test "deleted field is true when :destroy" do
     #member.deleted should be false
     assert !@member.deleted, "member.deleted should be false"
-    delete :destroy, id: @member
-    puts "number of boats: " + @member.boats.count.to_s 
-    puts @member.inspect
-
+    #now we delete it
+    put :destroy, id: @member
+    
+    #now fetch it from db ( dunno why it doesn't update @member :O )
+    member = Member.find(@member.id)
     #member.deleted should be true
-    #assert @member.deleted, "member.deleted should be true"
+    assert member.deleted, "member.deleted should be true"
   end
 end
