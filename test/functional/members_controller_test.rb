@@ -40,7 +40,7 @@ class MembersControllerTest < ActionController::TestCase
     assert_redirected_to member_path(assigns(:member))
   end
 
-  test "should destroy member" do
+  test "member doesnt get removed when deleted from show list" do
     #should be no difference, because destroying only set deleted = true
     assert_difference('Member.count', 0) do
       delete :destroy, id: @member
