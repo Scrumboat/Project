@@ -22,6 +22,7 @@
     <th>Huom</th>
     <th>Varasto</th>
     <th>Avain</th>
+    <th>POISTETTU</th>
     <th></th>
     <th></th>
     <th></th>
@@ -49,6 +50,7 @@
     <td><%= member.Huom %></td>
     <td><%= member.Varasto %></td>
     <td><%= member.Avain %></td>
+    <td><%= member.deleted ? 'Kyllä' : 'Ei' %></td>
     <td><%= link_to 'Show', member %></td>
     <td><%= link_to 'Edit', edit_member_path(member) %></td>
     <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>

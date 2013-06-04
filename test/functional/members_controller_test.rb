@@ -41,7 +41,8 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should destroy member" do
-    assert_difference('Member.count', -1) do
+    #should be no difference, because destroying only set deleted = true
+    assert_difference('Member.count', 0) do
       delete :destroy, id: @member
     end
 

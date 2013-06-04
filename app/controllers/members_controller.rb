@@ -80,7 +80,8 @@ class MembersController < ApplicationController
         format.html { redirect_to @member, alert: "Member has boats associated, delete them first." }
         format.json { head :no_content }
       else
-        @member.destroy
+        @member.deleted = true
+	@member.save
         format.html { redirect_to members_url }
         format.json { head :no_content}
       end
