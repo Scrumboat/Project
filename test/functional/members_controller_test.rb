@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MembersControllerTest < ActionController::TestCase
   setup do
-	sign_in admins(:one)
+    sign_in admins(:one)
     @member = members(:one)
   end
 
@@ -50,17 +50,28 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should not be able to remove member when boat associated" do
-  @boat = boats(:one)
-  @boats_member = BoatsMember.create(:boat_id => @boat.id, :member_id => @member.id)
+    @boat = boats(:one)
+    @boats_member = BoatsMember.create(:boat_id => @boat.id, :member_id => @member.id)
   
-  #Let's try to remove @member. should be redirected to /members/id (which shows cannot delete message)
-  put :destroy, id: @member
-  assert_redirected_to member_path
+    #Let's try to remove @member. should be redirected to /members/id (which shows cannot delete message)
+    put :destroy, id: @member
+    assert_redirected_to member_path
   
-  #Now, let's remove association with the boat and member and try again. (we should go to /members now)
-  @boats_member.destroy
+    #Now, let's remove association with the boat and member and try again. (we should go to /members now)
+    @boats_member.destroy
 
-  put :destroy, id: @member
-  assert_redirected_to members_path
+    put :destroy, id: @member
+    assert_redirected_to members_path
+  end
+
+  test "deleted field is true when :destroy" do
+    #member.deleted should be false
+    assert !@member.deleted, "member.deleted should be false"
+    delete :destroy, id: @member
+    puts "number of boats: " + @member.boats.count.to_s 
+    puts @member.inspect
+
+    #member.deleted should be true
+    #assert @member.deleted, "member.deleted should be true"
   end
 end

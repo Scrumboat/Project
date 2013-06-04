@@ -3,7 +3,7 @@ class MembersController < ApplicationController
   # GET /members.json
   before_filter :authenticate_admin!
   def index
-    @members = Member.all
+    @members = Member.find(:all, :conditions => ["deleted_at > ? OR deleted_at IS NULL", 1.years.ago])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -81,6 +81,7 @@ class MembersController < ApplicationController
         format.json { head :no_content }
       else
         @member.deleted = true
+	@member.deleted_at = DateTime.now
 	@member.save
         format.html { redirect_to members_url }
         format.json { head :no_content}
