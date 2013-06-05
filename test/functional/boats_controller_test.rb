@@ -4,6 +4,7 @@ class BoatsControllerTest < ActionController::TestCase
   setup do
 	sign_in admins(:one)
 	@boat = boats(:one)
+  @member = members(:one)
   end
 
   test "should get index" do
@@ -19,7 +20,7 @@ class BoatsControllerTest < ActionController::TestCase
 
   test "should create boat" do
     assert_difference('Boat.count') do
-      post :create, boat: { Huomautukset: @boat.Huomautukset, JnoOm: @boat.JnoOm, JnoOs: @boat.JnoOs, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Laituri: @boat.Laituri, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Omistaja: @boat.Omistaja, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Telakka: @boat.Telakka, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi }
+      post :create, boat: { Huomautukset: @boat.Huomautukset, JnoOm: @member.Jno, JnoOs: @boat.JnoOs, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Laituri: @boat.Laituri, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Omistaja: @boat.Omistaja, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Telakka: @boat.Telakka, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi } 
     end
 
     assert_redirected_to boat_path(assigns(:boat))
@@ -36,7 +37,7 @@ class BoatsControllerTest < ActionController::TestCase
   end
 
   test "should update boat" do
-    put :update, id: @boat, boat: { Huomautukset: @boat.Huomautukset, JnoOm: @boat.JnoOm, JnoOs: @boat.JnoOs, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Laituri: @boat.Laituri, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Omistaja: @boat.Omistaja, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Telakka: @boat.Telakka, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi }
+    put :update, id: @boat, boat: { Huomautukset: @boat.Huomautukset, JnoOm: @member.Jno, JnoOs: @boat.JnoOs, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Laituri: @boat.Laituri, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Omistaja: @boat.Omistaja, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Telakka: @boat.Telakka, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi }
     assert_redirected_to boat_path(assigns(:boat))
   end
 

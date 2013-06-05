@@ -8,20 +8,18 @@ class BoatTest < ActiveSupport::TestCase
   test "test boat versioning" do
     @boat = boats(:one)
 
-    assert @boat.version == 1
-    assert @boat.Omistaja == "MyString"
+    assert @boat.version == 1, "@boat.version should be 1"
+    assert @boat.ValmMalli == "MyString", "@boat.ValmMalli should be MyString"
 
-    @boat.update_attributes(:Omistaja => "Mauri", :JnoOm => "1111")
+    @boat.update_attribute(:ValmMalli, "Mauri")
 
-    assert @boat.version == 2
-    assert @boat.Omistaja == "Mauri"
-    assert @boat.JnoOm == "1111"
+    assert @boat.version == 2, "@boat.version should be 2"
+    assert @boat.ValmMalli == "Mauri", "@boat.ValmMalli should be Mauri"
 
     @boat.revert_to(@boat.version-1)
 
-    assert @boat.version == 1
-    assert @boat.Omistaja == "MyString"
-    assert @boat.JnoOm == "MyString"
+    assert @boat.version == 1, "@boat.version should be 1 again"
+    assert @boat.ValmMalli == "MyString", "@boat.ValmMalli should be MyString again"
 
   end
 
@@ -32,7 +30,7 @@ class BoatTest < ActiveSupport::TestCase
   end
 
   test "works with correct inputs" do
-
+  @member = members(:one)
   boat = Boat.new
   boat.Omistaja = "Karl Segelbåt"
   boat.RekPvm = "2012-09-10"
@@ -45,6 +43,7 @@ class BoatTest < ActiveSupport::TestCase
   boat.Syvyys = "0.8"
   boat.Korkeus = "2.0"
   boat.Vuosimalli = "2009"
+  boat.JnoOm = @member.Jno
   assert boat.save, "Creates a new boat with all needed information"
   end
 
