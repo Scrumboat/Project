@@ -45,6 +45,10 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
+	if @member.VeneRekNro.present?
+		@boat = Boat.find_by_RekNro(params[:member][:VeneRekNro])
+		@boats_member = @member.BoatsMembers.create(:boat_id => @boat.id)
+	end
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
         format.json { render json: @member, status: :created, location: @member }
       else
