@@ -6,7 +6,7 @@ versioned :dependent => :tracking
 attr_accessible :updated_by
 
 validates_presence_of :Nimi
-validates_presence_of :Jno
+validates :Jno, :presence => true, :uniqueness => true
 validates_presence_of :Sotu
 validates_presence_of :Liittynyt
 validates_presence_of :JK
