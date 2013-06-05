@@ -18,6 +18,7 @@ validates_presence_of :Pituus
 validates_presence_of :Leveys
 validates_presence_of :Syvyys
 validates_presence_of :Vuosimalli
+validates_presence_of :JnoOm
 
 validates_numericality_of :Pituus, :greater_than => 0
 validates_numericality_of :Leveys, :greater_than => 0
