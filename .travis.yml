@@ -21,7 +21,7 @@ notifications:
     - ! 'Build details  : %{build_url}'
     - ! '----'
 after_success:
- - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+ - wget -qO- https://toolbelt.heroku.com/install.sh | sh
  - git remote add heroku git@heroku.com:scrumboat.git
  - echo "Host heroku.com" >> ~/.ssh/config
  - echo "   StrichHostKeyChecking no" >> ~/.ssh/config
