@@ -31,8 +31,4 @@ after_success:
 - yes | heroku run rake db:migrate
 env:
   global:
-    secure: ! 'YGas3XgNewWLAUJ/Y3uYR3UctzznYHxdsBFykXzoxckKxup+C7mvTQ8ZumZo
-
-      CyIRthgzSO7dPXnRqn/AYcDRFrpPIzV7PeYVTTWLOvTcbssr3mzphNoRWM5s
-
-      y4Q9jGecf4ntpNgd5IegkMaIouzwX6hDRcUYba9sJHFLU3UGABs='
+    secure: ! 'YGas3XgNewWLAUJ/Y3uYR3UctzznYHxdsBFykXzoxckKxup+C7mvTQ8ZumZoCyIRthgzSO7dPXnRqn/AYcDRFrpPIzV7PeYVTTWLOvTcbssr3mzphNoRWM5sy4Q9jGecf4ntpNgd5IegkMaIouzwX6hDRcUYba9sJHFLU3UGABs='
