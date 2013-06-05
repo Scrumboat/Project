@@ -119,7 +119,7 @@
 <b>Omistaja(:t)</b>
 <ul>
 	<% @boat.members.each do |member| %>
-		<li><%= member.Nimi %></li>
+		<li><%= link_to member.Nimi , member_path(member) %></li>
 	<% end %>
 </ul>
 
