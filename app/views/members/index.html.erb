@@ -1,4 +1,4 @@
-<h1>Listing members</h1>
+<h1>Jäsenet</h1>
 
 <table>
   <tr>
@@ -51,15 +51,15 @@
     <td><%= member.Varasto %></td>
     <td><%= member.Avain %></td>
     <td><%= member.deleted ? 'Kyllä' : 'Ei' %></td>
-    <td><%= link_to 'Show', member %></td>
-    <td><%= link_to 'Edit', edit_member_path(member) %></td>
-    <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Tiedot', member %></td>
+    <td><%= link_to 'Muokkaa', edit_member_path(member) %></td>
+    <td><%= link_to 'Poista', member, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Member', new_member_path %>
+<%= link_to 'Luo uusi jäsen', new_member_path %>
 <br />
 <%= link_to 'Main menu', root_path %>

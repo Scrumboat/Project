@@ -1,4 +1,4 @@
-<h1>Listing boats</h1>
+<h1>Veneet</h1>
 
 <table>
   <tr>
@@ -55,15 +55,15 @@
     <td><%= boat.Katsastus %></td>
     <td><%= boat.Laituri %></td>
     <td><%= boat.Telakka %></td>
-    <td><%= link_to 'Show', boat %></td>
-    <td><%= link_to 'Edit', edit_boat_path(boat) %></td>
-    <td><%= link_to 'Destroy', boat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Tiedot', boat %></td>
+    <td><%= link_to 'Muokkaa', edit_boat_path(boat) %></td>
+    <td><%= link_to 'Poista', boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Boat', new_boat_path %>
+<%= link_to 'Luo uusi vene', new_boat_path %>
 <br />
 <%= link_to 'Main Menu', root_path %>

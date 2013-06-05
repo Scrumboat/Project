@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class BoatsController < ApplicationController
   # GET /boats
   # GET /boats.json
@@ -47,29 +48,31 @@ class BoatsController < ApplicationController
     @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
 
     if @malli == nil
-        @malli = Malli.new
-        @malli.Korkeus = @boat.Korkeus
-	@malli.Leveys = @boat.Leveys
-	@malli.Pituus = @boat.Pituus
-	@malli.Syvyys = @boat.Syvyys
-	@malli.Uppouma = @boat.Uppouma
-	@malli.ValmMalli = @boat.ValmMalli
-	@malli.tyyppi = @boat.tyyppi
-        @malli.save
-     end
+      @malli = Malli.new
+      @malli.Korkeus = @boat.Korkeus
+      @malli.Leveys = @boat.Leveys
+      @malli.Pituus = @boat.Pituus
+      @malli.Syvyys = @boat.Syvyys
+      @malli.Uppouma = @boat.Uppouma
+      @malli.ValmMalli = @boat.ValmMalli
+      @malli.tyyppi = @boat.tyyppi
+      @malli.save
+    end
 
+    @member = Member.find_by_Jno(params[:boat][:JnoOm])
     respond_to do |format|
-      if @boat.save
-	@member = Member.find_by_Jno(params[:boat][:JnoOm])
-	@boats_member = @boat.BoatsMembers.create(:member_id => @member.id)
-        format.html { redirect_to @boat, notice: 'Boat was successfully created.' }
+      if @boat.valid? && @member != nil
+        @boat.save
+        @boats_member = @boat.BoatsMembers.create(:member_id => @member.id)
+        format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
-        format.html { render action: "new" }
+        format.html { flash.now[:alert] = @member == nil ? 'Jäsentä ei löytynyt' : 'Tuntematon virhe' 
+                      render action: "new" }
         format.json { render json: @boat.errors, status: :unprocessable_entity }
       end
     end
-        
+
   end
 
   # PUT /boats/1
@@ -79,7 +82,7 @@ class BoatsController < ApplicationController
 
     respond_to do |format|
       if @boat.update_attributes(params[:boat])
-        format.html { redirect_to @boat, notice: 'Boat was successfully updated.' }
+        format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

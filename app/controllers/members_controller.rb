@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class MembersController < ApplicationController
   # GET /members
   # GET /members.json
@@ -49,7 +50,7 @@ class MembersController < ApplicationController
 		@boat = Boat.find_by_RekNro(params[:member][:VeneRekNro])
 		@boats_member = @member.BoatsMembers.create(:boat_id => @boat.id)
 	end
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
+        format.html { redirect_to @member, notice: 'Jäsen luotiin onnistuneesti.' }
         format.json { render json: @member, status: :created, location: @member }
       else
         format.html { render action: "new" }
@@ -65,7 +66,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.update_attributes(params[:member].merge(:updated_by => current_admin))
-        format.html { redirect_to @member, notice: 'Member was successfully updated.' }
+        format.html { redirect_to @member, notice: 'Jäsenen tietojen päivitys onnistui.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -81,7 +82,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.boats.count > 0
-        format.html { redirect_to @member, alert: "Member has boats associated, delete them first." }
+        format.html { redirect_to @member, alert: "Jäsenen veneet poistettava ensin." }
         format.json { head :no_content }
       else
 	@member.deleted = true
