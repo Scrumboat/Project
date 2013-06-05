@@ -6,6 +6,9 @@ gem 'vestal_versions', :git => 'git://github.com/laserlemon/vestal_versions'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# twitter bootstrap
+gem 'simple_form'
+gem 'bootstrap-sass'
 
 # Gems used only for assets and not required
 # in production environments by default.
