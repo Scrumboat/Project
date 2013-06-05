@@ -21,7 +21,8 @@ notifications:
     - ! 'Build details  : %{build_url}'
     - ! '----'
 after_success:
- - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+ # - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+ - gem install heroku
  - git remote add heroku git@heroku.com:scrumboat.git
  - echo "Host heroku.com" >> ~/.ssh/config
  - echo "   StrichHostKeyChecking no" >> ~/.ssh/config
