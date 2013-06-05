@@ -1,4 +1,3 @@
----
 language: ruby
 rvm:
 - 1.9.3
@@ -30,7 +29,8 @@ after_success:
  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
  - heroku keys:add
  - git push heroku master
- - heroku run rake db:migrate
+ - heroku run rake db:migrate
+
 env:
   global:
     secure: 'F2fszBszZ3NzIVU6kn1zxEWeiXKd9/0s0wR61mS/g9DSWZZOcvFnAnZ+0PyHjyoyOLLvu5C0KfFRYkVVgA9D2MMa0ghk46Z/gr82ZIftExGTmdA1LSV15cvUC8m5yk/7jrKQbwXGREtLcQQVgwY59wTjUA/TayDjRTpUHfzjQ/w='
