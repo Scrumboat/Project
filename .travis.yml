@@ -28,9 +28,9 @@ after_success:
  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
  - echo "   CheckHostIP no" >> ~/.ssh/config
  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
- - yes | heroku keys:add
- - yes | git push heroku master
- - yes | heroku run rake db:migrate
+ - heroku keys:add
+ - git push heroku master
+ - heroku run rake db:migrate
 env:
   global:
     secure: 'F2fszBszZ3NzIVU6kn1zxEWeiXKd9/0s0wR61mS/g9DSWZZOcvFnAnZ+0PyHjyoyOLLvu5C0KfFRYkVVgA9D2MMa0ghk46Z/gr82ZIftExGTmdA1LSV15cvUC8m5yk/7jrKQbwXGREtLcQQVgwY59wTjUA/TayDjRTpUHfzjQ/w='
