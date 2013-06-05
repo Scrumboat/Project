@@ -2,14 +2,6 @@
 language: ruby
 rvm:
 - 1.9.3
-env:
-  global:
-  - secure: ! 'tiNkiaqjX/jqFhDsxomvgqIkqYE9kVpyvurTPieuHfa6VXzP3tBe+uMRbmf5
-
-      XIyxSY1QJwrml9vOHf5+E+src7+9GByt6G3Xl7y9vP/J6Ec8abTpqOOsPSxi
-
-      88FQbvb8ZPTKRh3yAnRNu7vJxYKB1gLafc+1dVe0D7tJdJZ6S68='
-
 before_script: bundle exec rake db:migrate
 script: bundle exec rake test cucumber
 notifications:
@@ -27,7 +19,7 @@ notifications:
     - ! 'Build details  : %{build_url}'
     - ! '----'
 after_success:
-- wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+- wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 - git remote add heroku git@heroku.com:scrumboat.git
 - echo "Host heroku.com" >> ~/.ssh/config
 - echo "   StrichHostKeyChecking no" >> ~/.ssh/config
@@ -37,3 +29,10 @@ after_success:
 - yes | heroku keys:add
 - yes | git push heroku master
 - yes | heroku run rake db:migrate
+env:
+  global:
+    secure: ! 'YGas3XgNewWLAUJ/Y3uYR3UctzznYHxdsBFykXzoxckKxup+C7mvTQ8ZumZo
+
+      CyIRthgzSO7dPXnRqn/AYcDRFrpPIzV7PeYVTTWLOvTcbssr3mzphNoRWM5s
+
+      y4Q9jGecf4ntpNgd5IegkMaIouzwX6hDRcUYba9sJHFLU3UGABs='
