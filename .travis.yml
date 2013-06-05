@@ -1,8 +1,11 @@
+---
 language: ruby
 rvm:
-  - 1.9.3
+- 1.9.3
 before_script: bundle exec rake db:migrate
-script: bundle exec rake test cucumber
+script: 
+ - bundle exec rake test
+ - bundle exec rake cucumber
 notifications:
   email: false
   irc:
@@ -11,9 +14,24 @@ notifications:
     use_notice: true
     skip_join: true
     template:
-    - "----"
-    - "%{message}"
-    - "%{repository}/%{branch}#%{build_number} (%{author})"
-    - "Commit message : %{commit_message}"
-    - "Build details  : %{build_url}"
-    - "----"
+    - ! '----'
+    - ! '%{message}'
+    - ! '%{repository}/%{branch}#%{build_number} (%{author})'
+    - ! 'Commit message : %{commit_message}'
+    - ! 'Build details  : %{build_url}'
+    - ! '----'
+after_success:
+ # - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+ - gem install heroku
+ - git remote add heroku git@heroku.com:scrumboat.git
+ - echo "Host heroku.com" >> ~/.ssh/config
+ - echo "   StrichHostKeyChecking no" >> ~/.ssh/config
+ - echo "   CheckHostIP no" >> ~/.ssh/config
+ - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+ - heroku keys:clear
+ - yes | heroku keys:add
+ - yes | git push heroku master
+ - yes | heroku run rake db:migrate
+env:
+  global:
+    secure: 'F2fszBszZ3NzIVU6kn1zxEWeiXKd9/0s0wR61mS/g9DSWZZOcvFnAnZ+0PyHjyoyOLLvu5C0KfFRYkVVgA9D2MMa0ghk46Z/gr82ZIftExGTmdA1LSV15cvUC8m5yk/7jrKQbwXGREtLcQQVgwY59wTjUA/TayDjRTpUHfzjQ/w='
