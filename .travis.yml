@@ -18,7 +18,7 @@ notifications:
     - ! 'Commit message : %{commit_message}'
     - ! 'Build details  : %{build_url}'
     - ! '----'
-after_success:
+after_script:
 - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 - git remote add heroku git@heroku.com:scrumboat.git
 - echo "Host heroku.com" >> ~/.ssh/config
@@ -31,7 +31,7 @@ after_success:
 - yes | heroku run rake db:migrate
 env:
   global:
-    secure: ! 'F2fszBszZ3NzIVU6kn1zxEWeiXKd9/0s0wR61mS/g9DSWZZOcvFnAnZ+0PyH
+    secure: 'F2fszBszZ3NzIVU6kn1zxEWeiXKd9/0s0wR61mS/g9DSWZZOcvFnAnZ+0PyH
 
       jyoyOLLvu5C0KfFRYkVVgA9D2MMa0ghk46Z/gr82ZIftExGTmdA1LSV15cvU
 
