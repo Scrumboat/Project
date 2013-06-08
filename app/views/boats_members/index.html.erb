@@ -1,5 +1,4 @@
 <h1>Listing boats_members</h1>
-
 <table>
   <tr>
     <th>Boat</th>
@@ -10,12 +9,12 @@
   </tr>
 
 <% @boats_members.each do |boats_member| %>
-  <tr>
-    <td><%= boats_member.boat_id %></td>
-    <td><%= boats_member.member_id %></td>
+    <tr>
+    <td><%= boats_member.boat.RekNro %></td>
+    <td><%= boats_member.member.Nimi %></td>
     <td><%= link_to 'Show', boats_member %></td>
     <td><%= link_to 'Edit', edit_boats_member_path(boats_member) %></td>
-    <td><%= link_to 'Destroy', boats_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', boats_member_path(boats_member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

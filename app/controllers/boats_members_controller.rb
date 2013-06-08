@@ -2,7 +2,7 @@ class BoatsMembersController < ApplicationController
   # GET /boats_members
   # GET /boats_members.json
   def index
-    @boats_members = BoatsMember.all
+    @boats_members = BoatsMember.find(:all, :include => [:boat, :member])
 
     respond_to do |format|
       format.html # index.html.erb

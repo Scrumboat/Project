@@ -78,8 +78,14 @@ class BoatsController < ApplicationController
   # PUT /boats/1
   # PUT /boats/1.json
   def update
-    @boat = Boat.find(params[:id])
+    @boat = Boat.find(params[:id], :include => [:members])
 
+    # if JnoOm has changed, update the BoatsMembers relation also
+    if(@boat.JnoOm != params[:boat][:JnoOm]) 
+      @member = Member.find_by_Jno(params[:boat][:JnoOm])
+      BoatsMember.destroy_all(:boat_id =>  @boat.id, :member_id => @boat.members.first)
+      @boats_member = @boat.BoatsMembers.create(:member_id => @member.id)
+    end
     respond_to do |format|
       if @boat.update_attributes(params[:boat])
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
