@@ -1,13 +1,11 @@
 <% unless admin_signed_in? -%>
   <p><%= link_to 'Rekisteröidy', new_admin_registration_path %></p>
+
   <p><%= link_to 'Kirjaudu sisään', new_admin_session_path %></p>
 <% end -%>
 <% if admin_signed_in? -%>
 <p> <%= link_to 'Veneet', boats_path %></p>
 <p> <%= link_to 'Jäsenet', members_path %></p>
-<<<<<<< HEAD
 <p> <%= link_to 'Luo uusi vene-jäsen yhteys', boats_members_path %></p>
-=======
 <p> <%= link_to 'Laiturit', docks_path %></p>
->>>>>>> dock
 <% end -%>
