@@ -2,4 +2,4 @@
 
 require 'heroku-headless'
 
-HerokuHeadless::Deployer.deploy( 'Scrumboat' )
+HerokuHeadless::Deployer.deploy( 'scrumboat' )
