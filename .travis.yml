@@ -1,8 +1,8 @@
 language: ruby
 rvm:
 - 1.9.3
-before_install:
- - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+#before_install:
+# - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 before_script: bundle exec rake db:migrate
 script: 
  - bundle exec rake test
@@ -21,7 +21,8 @@ notifications:
     - ! 'Commit message : %{commit_message}'
     - ! 'Build details  : %{build_url}'
     - ! '----'
-#after_success:
+after_success:
+  - ./travis_to_heroku.rb
 # - git remote add heroku git@heroku.com:scrumboat.git
 # - echo "Host heroku.com" >> ~/.ssh/config
 # - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
