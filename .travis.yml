@@ -1,12 +1,11 @@
+---
 language: ruby
 rvm:
 - 1.9.3
-#before_install:
-# - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 before_script: bundle exec rake db:migrate
-script: 
- - bundle exec rake test
- - bundle exec rake cucumber
+script:
+- bundle exec rake test
+- bundle exec rake cucumber
 notifications:
   email: false
   irc:
@@ -22,16 +21,12 @@ notifications:
     - ! 'Build details  : %{build_url}'
     - ! '----'
 after_success:
-  - sudo apt-get install uuid-runtime
-  - ./travis_to_heroku.rb
-# - git remote add heroku git@heroku.com:scrumboat.git
-# - echo "Host heroku.com" >> ~/.ssh/config
-# - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
-# - echo "   CheckHostIP no" >> ~/.ssh/config
-# - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-# - yes | heroku keys:add
-# - yes | git push heroku master
-# - yes | heroku run rake db:migrate
-#env:
-#  global:
-#    secure: 'F2fszBszZ3NzIVU6kn1zxEWeiXKd9/0s0wR61mS/g9DSWZZOcvFnAnZ+0PyHjyoyOLLvu5C0KfFRYkVVgA9D2MMa0ghk46Z/gr82ZIftExGTmdA1LSV15cvUC8m5yk/7jrKQbwXGREtLcQQVgwY59wTjUA/TayDjRTpUHfzjQ/w='
+- sudo apt-get install uuid-runtime
+- ./travis_to_heroku.rb
+env:
+  global:
+    secure: ! 'pdfkPhvjf292mi7A8EsIXfRNu5wePCFPP6Fj10BbehxWnRDVx+jbnri+OSkL
+
+      hP+NXjoXkk8S3hMKOK4rCbLU6G1KsGp7lBgDdHiOtaJ/RN9GWxgu4B03hCBR
+
+      lxGrV1M+5TIs9NqMLeiwu2szTuElTmPtYBSfuFLrk2RfagSuz8w='
