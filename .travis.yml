@@ -22,6 +22,7 @@ notifications:
     - ! 'Build details  : %{build_url}'
     - ! '----'
 after_success:
+  - sudo apt-get install uuid-runtime
   - ./travis_to_heroku.rb
 # - git remote add heroku git@heroku.com:scrumboat.git
 # - echo "Host heroku.com" >> ~/.ssh/config
