@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130605134010) do
+=======
+ActiveRecord::Schema.define(:version => 20130601193429) do
+>>>>>>> dock
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -30,6 +34,19 @@ ActiveRecord::Schema.define(:version => 20130605134010) do
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
+
+  create_table "berths", :force => true do |t|
+    t.integer  "number"
+    t.decimal  "length"
+    t.decimal  "width"
+    t.decimal  "depth"
+    t.boolean  "exists"
+    t.integer  "dock_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "berths", ["dock_id"], :name => "index_berths_on_dock_id"
 
   create_table "boats", :force => true do |t|
     t.string   "Omistaja"
@@ -59,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20130605134010) do
     t.datetime "updated_at",   :null => false
   end
 
+<<<<<<< HEAD
   create_table "boats_members", :force => true do |t|
     t.integer  "boat_id"
     t.integer  "member_id"
@@ -74,6 +92,11 @@ ActiveRecord::Schema.define(:version => 20130605134010) do
     t.decimal  "Syvyys"
     t.decimal  "Uppouma"
     t.decimal  "Korkeus"
+=======
+  create_table "docks", :force => true do |t|
+    t.decimal  "length"
+    t.integer  "berth_id"
+>>>>>>> dock
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

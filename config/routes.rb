@@ -2,6 +2,11 @@ Venerekisteri::Application.routes.draw do
   
   resources :boats_members
 
+  resources :docks do    
+    resources :berths
+  end
+
+  resources :ownerships
 
   #get "home#index"
 
@@ -12,6 +17,7 @@ Venerekisteri::Application.routes.draw do
   resources :mallis
 
   resources :members
+
 
   root :to => "home#index"
 

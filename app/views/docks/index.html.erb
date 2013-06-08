@@ -1,0 +1,24 @@
+<h1>Laiturit</h1>
+
+<table>
+  <tr>
+    <th>Pituus</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @docks.each do |dock| %>
+  <tr>
+    <td><%= 'Laituri ' + dock.id.to_s %></td>
+    <td><%= dock.length %></td>
+    <td><%= link_to 'Näytä', dock %></td>
+    <td><%= link_to 'Muokkaa', edit_dock_path(dock) %></td>
+    <td><%= link_to 'Poista', dock, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Uusi laituri', new_dock_path %>

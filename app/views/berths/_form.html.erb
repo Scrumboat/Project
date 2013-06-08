@@ -1,0 +1,31 @@
+<h2> Laiturille <%= @dock.id %></h2>
+
+<%= form_for @berth, :url => dock_berths_path do |f| %>
+  <% if @berth.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@berth.errors.count, "error") %> prohibited this dock from being saved:</h2>
+
+      <ul>
+      <% @berth.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">    
+    <%= f.label :Numero %>
+    <%= f.text_field :number %><br />
+    <%= f.label :Leveys %>
+    <%= f.text_field :width %><br />
+    <%= f.label :Pituus %>
+    <%= f.text_field :length %><br />
+    <%= f.label :Syvyys %>
+    <%= f.text_field :depth %><br />
+    <%= f.label 'On olemassa' %>
+    <%= f.check_box :exists %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Lisää laituripaikka', :id => 'lisaa_laituripaikka'%>
+  </div>
+<% end %>

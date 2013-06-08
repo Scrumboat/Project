@@ -1,0 +1,21 @@
+<%= form_for(@dock) do |f| %>
+  <% if @dock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dock.errors.count, "error") %> prohibited this dock from being saved:</h2>
+
+      <ul>
+      <% @dock.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pituus %><br />
+    <%= f.text_field :length %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Lisää laituri', :id => 'lisaa_laituri' %>
+  </div>
+<% end %>
