@@ -1,0 +1,2 @@
+module BerthsHelper
+end

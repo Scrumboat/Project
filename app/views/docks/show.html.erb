@@ -1,0 +1,38 @@
+<h1>Laituri <%= @dock.id %> </h2>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pituus:</b>
+  <%= @dock.length %>
+</p>
+
+
+<%= link_to 'Muokkaa', edit_dock_path(@dock) %>
+<%= link_to 'Takaisin', docks_path %>
+<%= link_to 'Uusi laituripaikka', new_dock_berth_path(@dock) %>
+
+<h2>Laituripaikat</h2>
+<table>
+ 	<tr>
+	    <th>Numero</th>
+	    <th>Pituus</th>
+		<th>Leveys</th>
+		<th>Syvyys</th>
+		<th>On olemassa</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+  	</tr>
+
+	<% @berths.each do |berth| %>
+	<tr>
+	  	<td><%= 'Laituripaikka ' + berth.number.to_s %></td>
+	    <td><%= berth.length %></td>
+	    <td><%= berth.width %></td>
+	    <td><%= berth.depth %></td>
+	    <td><%= berth.exists?%></td>
+ 	</tr>
+	<% end %>
+</table>
+
+<br />

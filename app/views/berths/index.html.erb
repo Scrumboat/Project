@@ -1,0 +1,21 @@
+<h1>Laituripaikat</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @berths.each do |berth| %>
+  <tr>
+    <td><%= link_to 'Näytä', berth %></td>
+    <td><%= link_to 'Muokkaa', edit_berth_path(berth) %></td>
+    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Uusi laituripaikka', new_berth_path %>
