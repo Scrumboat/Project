@@ -1,4 +1,4 @@
-<h1>Laituri <%= @dock.id %> </h2>
+<h1>Laituri <%= @dock.id %> # </h2>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -12,6 +12,7 @@
 <%= link_to 'Uusi laituripaikka', new_dock_berth_path(@dock) %>
 
 <h2>Laituripaikat</h2>
+<h3>Laituri <%= @dock.id %># vasen: </h3>
 <table>
  	<tr>
 	    <th>Numero</th>
@@ -24,7 +25,8 @@
 	    <th></th>
   	</tr>
 
-	<% @berths.each do |berth| %>
+	<% @berths.each do |berth| %>		
+		<% if berth.number % 2 != 0 %>
 	<tr>
 	  	<td><%= berth.number.to_s %></td>
 	    <td><%= berth.length.to_s + ' m' %></td>
@@ -32,6 +34,33 @@
 	    <td><%= berth.depth.to_s + ' m' %></td>
 	    <td><%= berth.printExists %></td>
  	</tr>
+ 		<%end%>
+	<% end %>
+</table>
+
+<h3>Laituri <%= @dock.id %># oikea: </h3>
+<table>
+ 	<tr>
+	    <th>Numero</th>
+	    <th>Pituus</th>
+		<th>Leveys</th>
+		<th>Syvyys</th>
+		<th>On olemassa</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+  	</tr>
+
+	<% @berths.each do |berth| %>		
+		<% if berth.number % 2 == 0 %>
+	<tr>
+	  	<td><%= berth.number.to_s %></td>
+	    <td><%= berth.length.to_s + ' m' %></td>
+	    <td><%= berth.width.to_s + ' m' %></td>
+	    <td><%= berth.depth.to_s + ' m' %></td>
+	    <td><%= berth.printExists %></td>
+ 	</tr>
+ 		<%end%>
 	<% end %>
 </table>
 <br />
