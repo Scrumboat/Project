@@ -22,4 +22,4 @@ Feature: Admin can add a new dock
 	And I add new dock:
 		|length|
 		|50|
-	Then page should have content "Pituus: 50.0"
+	Then page should have content "Laiturin pituus: 50.0 m"

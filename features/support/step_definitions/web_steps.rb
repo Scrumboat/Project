@@ -4,7 +4,7 @@ Given(/^I am on the "(.*?)" page$/) do |page|
 end
 
 Given(/^I click "(.*?)"$/) do |arg1|
-  click_link_or_button arg1
+	first(:link, arg1).click
 end
 
 When(/^I visit "(.*?)" page$/) do |page|

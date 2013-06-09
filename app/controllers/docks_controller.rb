@@ -15,6 +15,8 @@ class DocksController < ApplicationController
   def show
     @dock = Dock.find(params[:id])
     @berths = @dock.berths
+    currentTotalWidth = Berth.where(:dock_id => params[:id]).sum("width")
+    @spaceLeft = @dock.length - currentTotalWidth
 
     respond_to do |format|
       format.html # show.html.erb

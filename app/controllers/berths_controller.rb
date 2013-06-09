@@ -26,6 +26,8 @@ class BerthsController < ApplicationController
   def new
     @berth = Berth.new
     @dock = Dock.find(params[:dock_id])
+    currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
+    @spaceLeft = @dock.length - currentTotalWidth
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,9 +44,19 @@ class BerthsController < ApplicationController
   # POST /berths.json
   def create
     @dock = Dock.find(params[:dock_id])
-    @dock.berths << @dock.berths.build(params[:berth])
-
-    redirect_to dock_path(@dock)
+    currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
+    spaceLeft = @dock.length - currentTotalWidth
+    newBerth = Berth.new(params[:berth])
+    respond_to do |format|
+      if currentTotalWidth + newBerth.width <= @dock.length
+        @dock.berths << @dock.berths.build(params[:berth])
+        newBerth.save
+        format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.' }
+      else
+        format.html { redirect_to @dock, notice: 'Laituripaikkojen leveys ylitti laiturin leveyden.
+         Laiturissa on tilaa: ' + spaceLeft.to_s + ' m.' }
+      end
+    end
   end
 
   # PUT /berths/1

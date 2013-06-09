@@ -15,8 +15,6 @@ Feature: Create a dock
 		|	40		|
 	Then I am on the "/docks" page
 	And page should have content "Laiturit"
-	And page should have content "Laituri 1"
-	And page should have content "Laituri 2"
-	And page should have content "30"
-	And page should have content "40"
+	And page should have content "30.0 m"
+	And page should have content "40.0 m"
 

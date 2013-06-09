@@ -4,7 +4,7 @@ Feature: Admin can add a new berth to a dock
 	A admin who is signed in
 	Should see a form on the page
 
-	Scenario:
+	Scenario: User navigates to some laituri page
 	Given I login as admin
 	And the following docks exist:
 		|length|
@@ -13,7 +13,7 @@ Feature: Admin can add a new berth to a dock
 	And I am on the "/docks/1" page
 	Then page should have content "Uusi laituripaikka"
 
-	Scenario:
+	Scenario: User clicks Lisää laituripaikka
 	Given I login as admin
 	And the following docks exist:
 		|length|
@@ -23,7 +23,7 @@ Feature: Admin can add a new berth to a dock
 	And I click "Uusi laituripaikka"
 	Then page should have button "Lisää laituripaikka"
 
-	Scenario:
+	Scenario: User add a new laituripaikka
 	Given I login as admin
 	And the following docks exist:
 		|length|
@@ -34,4 +34,17 @@ Feature: Admin can add a new berth to a dock
 	And I add new berth:
 		|number|length|width|depth|exists|
 		|9|3|2|1.5|true|
-	Then page should have content "Laituripaikka 9 3.0 2.0 1.5 true"
+	Then page should have content "9 3.0 m 2.0 m 1.5 m Kyllä"
+
+	Scenario: Laituri is full when user tries to add new laituripaikka
+	Given I login as admin
+	And the following docks exist:
+		|length|
+		|30|
+		|40|
+	And I am on the "/docks/1" page
+	And I click "Uusi laituripaikka"
+	And I add new berth:
+		|number|length|width|depth|exists|
+		|2|5|31|1.5|true|
+	Then page should have content "Laituripaikkojen leveys ylitti laiturin leveyden."

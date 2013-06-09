@@ -2,8 +2,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Pituus:</b>
-  <%= @dock.length %>
+  <b>Laiturin pituus:</b>
+  <%= @dock.length.to_s + ' m' %>
 </p>
 
 
@@ -26,13 +26,13 @@
 
 	<% @berths.each do |berth| %>
 	<tr>
-	  	<td><%= 'Laituripaikka ' + berth.number.to_s %></td>
-	    <td><%= berth.length %></td>
-	    <td><%= berth.width %></td>
-	    <td><%= berth.depth %></td>
-	    <td><%= berth.exists?%></td>
+	  	<td><%= berth.number.to_s %></td>
+	    <td><%= berth.length.to_s + ' m' %></td>
+	    <td><%= berth.width.to_s + ' m' %></td>
+	    <td><%= berth.depth.to_s + ' m' %></td>
+	    <td><%= berth.printExists %></td>
  	</tr>
 	<% end %>
 </table>
-
 <br />
+<p> Laiturissa tilaa : <%= @spaceLeft.to_s + ' m' %>

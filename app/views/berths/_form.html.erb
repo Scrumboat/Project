@@ -1,4 +1,5 @@
 <h2> Laiturille <%= @dock.id %></h2>
+<p>Laiturissa tilaa: <%= @spaceLeft.to_s + ' m'%> </p>
 
 <%= form_for @berth, :url => dock_berths_path do |f| %>
   <% if @berth.errors.any? %>

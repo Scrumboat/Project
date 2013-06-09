@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Laituri numero</th>
     <th>Pituus</th>
     <th></th>
     <th></th>
@@ -10,8 +11,8 @@
 
 <% @docks.each do |dock| %>
   <tr>
-    <td><%= 'Laituri ' + dock.id.to_s %></td>
-    <td><%= dock.length %></td>
+    <td><%= dock.id.to_s %></td>
+    <td><%= dock.length.to_s + ' m' %></td>
     <td><%= link_to 'Näytä', dock %></td>
     <td><%= link_to 'Muokkaa', edit_dock_path(dock) %></td>
     <td><%= link_to 'Poista', dock, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
