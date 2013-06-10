@@ -8,7 +8,6 @@ class Boat < ActiveRecord::Base
 versioned :dependent => :tracking
 attr_accessible :updated_by
 
-validates_presence_of :Omistaja
 validates_presence_of :RekPvm
 validates_presence_of :Nimi
 validates_presence_of :tyyppi
