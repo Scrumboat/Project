@@ -6,6 +6,10 @@ Venerekisteri::Application.routes.draw do
     resources :berths
   end
 
+	resources :docks
+
+	resources :berths
+
   resources :ownerships
 
   #get "home#index"

@@ -33,6 +33,8 @@
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
 	    <td><%= berth.printExists %></td>
+    	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
+	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
  	</tr>
  		<%end%>
 	<% end %>
@@ -59,6 +61,8 @@
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
 	    <td><%= berth.printExists %></td>
+    	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
+	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
  	</tr>
  		<%end%>
 	<% end %>

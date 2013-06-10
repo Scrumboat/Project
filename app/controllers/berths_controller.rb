@@ -14,7 +14,7 @@ class BerthsController < ApplicationController
   # GET /berths/1.json
   def show
     @berth = Berth.find(params[:id])
-
+	@dock = Dock.find(params[:dock_id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @berth }
@@ -24,8 +24,8 @@ class BerthsController < ApplicationController
   # GET /berths/new
   # GET /berths/new.json
   def new
-    @berth = Berth.new
     @dock = Dock.find(params[:dock_id])
+    @berth = @dock.berths.build
     currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
     @spaceLeft = @dock.length - currentTotalWidth
 
@@ -37,7 +37,10 @@ class BerthsController < ApplicationController
 
   # GET /berths/1/edit
   def edit
-    @berth = Berth.find(params[:id])
+	@dock = Dock.find(params[:dock_id])
+    	@berth = Berth.find(params[:id])
+	currentTotalWidth = Berth.where(:dock_id => params[:id]).sum("width")
+	@spaceLeft = @dock.length - currentTotalWidth
   end
 
   # POST /berths
@@ -62,11 +65,11 @@ class BerthsController < ApplicationController
   # PUT /berths/1
   # PUT /berths/1.json
   def update
+	@dock = Dock.find(params[:dock_id])
     @berth = Berth.find(params[:id])
-
-    respond_to do |format|
+	    respond_to do |format|
       if @berth.update_attributes(params[:berth])
-        format.html { redirect_to @berth, notice: 'Berth was successfully updated.' }
+        format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -80,9 +83,9 @@ class BerthsController < ApplicationController
   def destroy
     @berth = Berth.find(params[:id])
     @berth.destroy
-
+    
     respond_to do |format|
-      format.html { redirect_to berths_url }
+      format.html { redirect_to :back, notice: 'Laituripaikka poistettu'}
       format.json { head :no_content }
     end
   end
