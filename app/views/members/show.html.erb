@@ -103,13 +103,20 @@
   <%= @member.VeneRekNro %>
 </p>
 
-<b>Vene(:et)</b>
-<ul>
-	<% @member.boats.each do |boat| %>
-		<li><%= link_to boat.Nimi , boat_path(boat) %></li>
-	<% end %>
-</ul>
+<% if @member.deleted %>
+  <p>
+  <b>Poisto pvm:</b>
+  <%= @member.deleted_at %>
+  </p>
+<% else %>
 
+  <b>Vene(:et)</b>
+  <ul>
+  	<% @member.boats.each do |boat| %>
+  		<li><%= link_to boat.Nimi , boat_path(boat) %></li>
+  	<% end %>
+  </ul>
+<% end %>
 
 
 <%= link_to 'Edit', edit_member_path(@member) %> |

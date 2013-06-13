@@ -11,6 +11,14 @@
     </div>
   <% end %>
 
+  <% if @member.deleted %>
+    <p> Jäsen on poistettu. </p>
+    <div class="field">
+      <label> <%= f.check_box :deleted %>  Poistettu</label>
+    </div>
+  <% end %>
+
+
   <div class="field">
     <%= f.label :Nimi %><br />
     <%= f.text_field :Nimi %>
