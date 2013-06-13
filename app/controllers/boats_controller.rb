@@ -80,9 +80,9 @@ class BoatsController < ApplicationController
   def update
     @boat = Boat.find(params[:id], :include => [:members])
     #@boat = Boat.find(params[:id])
-    changeJnoToId
+    #changeJnoToId
     respond_to do |format|
-      if @boat.update_attributes(params[:boat] && @onkoOk)
+      if @boat.update_attributes(params[:boat] )
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
@@ -107,6 +107,10 @@ class BoatsController < ApplicationController
   def changeJnoToId
         taulu = []
 	params[:boat][:BoatsMembers_attributes].values.each do |bm|
+		if bm[:member_id].strip == ""
+			@onkoOk = false
+			return
+		end
 		taulu << bm[:member_id]
 	end if params[:boat] and params[:boat][:BoatsMembers_attributes]
 	
@@ -116,12 +120,12 @@ class BoatsController < ApplicationController
 		@member = Member.find_by_Jno(taulu[i])
 		if @member == nil
 			@onkoOk = false
-			break
+			return
 		else
 			bm.member_id = @member.id
 			i = i+1
 		end
 	end
-	@onkoOk = taulu.empty?
+	@onkoOk = !taulu.empty?
   end
 end
