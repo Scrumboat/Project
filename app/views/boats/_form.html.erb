@@ -11,14 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :Omistaja %><br />
-    <%= f.text_field :Omistaja %>
-  </div>
-
 <%= f.fields_for :BoatsMembers do |yhteys| %>
-	<%= yhteys.label :member_id %><br />
-	<%= yhteys.text_field :member_id %><br />
+	<%= yhteys.label "Omistaja" %><br />
+	<%= yhteys.text_field :member_id, :value => yhteys.object.member %><br />
 	<%= yhteys.link_to_remove "Poista yhteys" %>
 <% end %>
 <p><%= f.link_to_add "Uusi yhteys", :BoatsMembers %></p>
