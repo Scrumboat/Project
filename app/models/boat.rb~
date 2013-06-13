@@ -2,13 +2,27 @@
 
 class Boat < ActiveRecord::Base
 
+before_create :changeJnoToId
+
+def changeJnoToId
+	taulu = []
+	params[:boat][:BoatsMembers_attributes].values.each do |bm|
+		taulu << bm[:member_id]
+	end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+	
+	i = 0
+	@boat.BoatsMembers.each do |bm|
+		@member = Member.find_by_Jno(taulu[i])
+		bm.member_id = @member.id
+		i = i+1
+	end
+end
 #dependent->tracking tracks DESTROYs and marks them only as deleted in db.
 #or something
 
 versioned :dependent => :tracking
 attr_accessible :updated_by
 
-validates_presence_of :Omistaja
 validates_presence_of :RekPvm
 validates_presence_of :Nimi
 validates_presence_of :tyyppi
@@ -18,7 +32,6 @@ validates_presence_of :Pituus
 validates_presence_of :Leveys
 validates_presence_of :Syvyys
 validates_presence_of :Vuosimalli
-validates_presence_of :JnoOm
 
 validates_numericality_of :Pituus, :greater_than => 0
 validates_numericality_of :Leveys, :greater_than => 0
@@ -28,7 +41,8 @@ validates_numericality_of :Vuosimalli, :only_integer => true
 
 has_many :BoatsMembers, :dependent => :destroy 
 has_many :members, :through => :BoatsMembers
- attr_accessible :members, :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :tag_attributes
+accepts_nested_attributes_for :BoatsMembers, :allow_destroy => true
+attr_accessible :BoatsMembers_attributes, :members, :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :tag_attributes
 end
 
 

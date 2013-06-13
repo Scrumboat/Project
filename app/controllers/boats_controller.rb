@@ -27,7 +27,7 @@ class BoatsController < ApplicationController
   # GET /boats/new.json
   def new
     @boat = Boat.new
-
+	@boat.BoatsMembers.build
     @mallit = Malli.select("\"ValmMalli\"")
     respond_to do |format|
       format.html # new.html.erb
@@ -59,11 +59,11 @@ class BoatsController < ApplicationController
       @malli.save
     end
 
-    @member = Member.find_by_Jno(params[:boat][:JnoOm])
+    changeJnoToId
+
     respond_to do |format|
-      if @boat.valid? && @member != nil
+      if @boat.valid? && @onkoOk
         @boat.save
-        @boats_member = @boat.BoatsMembers.create(:member_id => @member.id)
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
@@ -79,15 +79,10 @@ class BoatsController < ApplicationController
   # PUT /boats/1.json
   def update
     @boat = Boat.find(params[:id], :include => [:members])
-
-    # if JnoOm has changed, update the BoatsMembers relation also
-    if(@boat.JnoOm != params[:boat][:JnoOm]) 
-      @member = Member.find_by_Jno(params[:boat][:JnoOm])
-      BoatsMember.destroy_all(:boat_id =>  @boat.id, :member_id => @boat.members.first)
-      @boats_member = @boat.BoatsMembers.create(:member_id => @member.id)
-    end
+    #@boat = Boat.find(params[:id])
+    changeJnoToId
     respond_to do |format|
-      if @boat.update_attributes(params[:boat])
+      if @boat.update_attributes(params[:boat] && @onkoOk)
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
@@ -107,5 +102,26 @@ class BoatsController < ApplicationController
       format.html { redirect_to boats_url }
       format.json { head :no_content }
     end
+  end
+
+  def changeJnoToId
+        taulu = []
+	params[:boat][:BoatsMembers_attributes].values.each do |bm|
+		taulu << bm[:member_id]
+	end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+	
+	i = 0
+	@onkoOk = true
+	@boat.BoatsMembers.each do |bm|
+		@member = Member.find_by_Jno(taulu[i])
+		if @member == nil
+			@onkoOk = false
+			break
+		else
+			bm.member_id = @member.id
+			i = i+1
+		end
+	end
+	@onkoOk = taulu.empty?
   end
 end

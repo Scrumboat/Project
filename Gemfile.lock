@@ -6,6 +6,12 @@ GIT
       activerecord (~> 3.0)
       activesupport (~> 3.0)
 
+GIT
+  remote: https://github.com/ryanb/nested_form.git
+  revision: a25eebe8205e4e63899873b716535def6c1f5a9d
+  specs:
+    nested_form (0.3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -192,6 +198,7 @@ DEPENDENCIES
   heroku-headless
   jquery-rails
   launchy
+  nested_form!
   nokogiri (~> 1.5.9)
   orm_adapter (~> 0.4.0)
   pg
