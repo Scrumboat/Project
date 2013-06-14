@@ -10,10 +10,10 @@ class BoatsController < ApplicationController
     @boats = Boat.order(sort_column + ' ' + sort_direction)
    # @boats = Boat.all
 
-   # respond_to do |format|
-     # format.html # index.html.erb
-     # format.json { render json: @boats }
-    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @boats }
+    end
   end
 
   # GET /boats/1

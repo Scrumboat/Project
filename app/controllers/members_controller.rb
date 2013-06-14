@@ -11,10 +11,10 @@ class MembersController < ApplicationController
 
   #@members = Member.find(:all, :conditions => ["deleted_at > ? OR deleted_at IS NULL", 1.years.ago])
 
-   # respond_to do |format|
-    #  format.html # index.html.erb
-     # format.json { render json: @members }
-    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @members }
+    end
   end
 
   # GET /members/1
