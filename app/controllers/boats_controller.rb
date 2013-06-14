@@ -38,6 +38,7 @@ class BoatsController < ApplicationController
   # GET /boats/1/edit
   def edit
     @boat = Boat.find(params[:id], :include => :members)
+	show_jno_in_edit_instead_of_id
   end
 
   # POST /boats
@@ -82,6 +83,9 @@ class BoatsController < ApplicationController
     #@boat = Boat.find(params[:id])
     #changeJnoToId
     change_jno_to_id_for_update
+	if params[:boat][:BoatsMembers_attributes] == nil
+		@onkoOk = false
+	end
     respond_to do |format|
       if @boat.update_attributes(params[:boat]) && @onkoOk
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
@@ -106,11 +110,12 @@ class BoatsController < ApplicationController
   end
 
   def change_jno_to_id_for_update
+
     params[:boat][:BoatsMembers_attributes].values.each do |bm|
       member = Member.find_by_Jno(bm[:member_id])
       if member == nil
         @onkoOk = false
-	return
+		return
       end
       bm[:member_id] = member.id
     end if params[:boat] and params[:boat][:BoatsMembers_attributes]
@@ -140,5 +145,16 @@ class BoatsController < ApplicationController
 		end
 	end
 	@onkoOk = !taulu.empty?
+  end
+  
+  def show_jno_in_edit_instead_of_id
+	@boat.BoatsMembers.each do |bm|
+		@member = Member.find(bm.member_id)
+		if @member == nil
+			@onkoOk = false
+			return
+		end
+		bm.member_id = @member.Jno
+    end
   end
 end

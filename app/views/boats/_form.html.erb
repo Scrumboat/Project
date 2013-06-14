@@ -13,7 +13,7 @@
 
 <%= f.fields_for :BoatsMembers do |yhteys| %>
 	<%= yhteys.label "Omistaja" %><br />
-	<%= yhteys.text_field :member_id, :value => yhteys.object.member %><br />
+	<%= yhteys.text_field :member_id, :value => yhteys.object.member_id %><br />
 	<%= yhteys.link_to_remove "Poista yhteys" %>
 <% end %>
 <p><%= f.link_to_add "Uusi yhteys", :BoatsMembers %></p>
