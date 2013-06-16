@@ -10,6 +10,8 @@ class CreateMallis < ActiveRecord::Migration
       t.decimal :Korkeus
 
       t.timestamps
+
+      rename_table :mallis, :models
     end
   end
 end

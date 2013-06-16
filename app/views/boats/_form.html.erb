@@ -43,11 +43,11 @@
     <%= f.text_field :RekNro %>
   </div>
 
-  <% if @mallit != nil %>
+  <% if @model != nil %>
  <div align="left">
   <select name="malli" id="malli" onchange="taydenna()">
      <option value=""> </option>
-     <% @mallit.each do |m| %>
+     <% @model.each do |m| %>
      <option value="<%= m[:ValmMalli] %>"><%= m[:ValmMalli] %></option>
      <% end %>
   </select>
