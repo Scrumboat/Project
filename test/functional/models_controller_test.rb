@@ -1,6 +1,6 @@
  require 'test_helper.rb'
  
-  class MallisControllerTest < ActionController::TestCase
+  class ModelsControllerTest < ActionController::TestCase
     setup do
       assert Model.create(:Korkeus => 10 ,:tyyppi => "typea", :Uppouma => 10, :ValmMalli => "typea", :Pituus => 10, :Leveys => 10, :Syvyys => 10)
     end
