@@ -32,7 +32,7 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
 	@boat.BoatsMembers.build
-    @mallit = Malli.select("\"ValmMalli\"")
+    @models = Model.select("\"ValmMalli\"")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -50,18 +50,18 @@ class BoatsController < ApplicationController
   def create
     @boat = Boat.new(params[:boat])
 
-    @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
+    @model = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
 
-    if @malli == nil
-      @malli = Malli.new
-      @malli.Korkeus = @boat.Korkeus
-      @malli.Leveys = @boat.Leveys
-      @malli.Pituus = @boat.Pituus
-      @malli.Syvyys = @boat.Syvyys
-      @malli.Uppouma = @boat.Uppouma
-      @malli.ValmMalli = @boat.ValmMalli
-      @malli.tyyppi = @boat.tyyppi
-      @malli.save
+    if @model == nil
+      @model = Malli.new
+      @model.Korkeus = @boat.Korkeus
+      @model.Leveys = @boat.Leveys
+      @model.Pituus = @boat.Pituus
+      @model.Syvyys = @boat.Syvyys
+      @model.Uppouma = @boat.Uppouma
+      @model.ValmMalli = @boat.ValmMalli
+      @model.tyyppi = @boat.tyyppi
+      @model.save
     end
 
     changeJnoToId
