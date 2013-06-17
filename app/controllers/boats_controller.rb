@@ -32,7 +32,7 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
 	@boat.BoatsMembers.build
-    @mallit = Malli.select("\"ValmMalli\"")
+    @mallit = Model.select("\"ValmMalli\"")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -53,7 +53,7 @@ class BoatsController < ApplicationController
     @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
 
     if @malli == nil
-      @malli = Malli.new
+      @malli = Model.new
       @malli.Korkeus = @boat.Korkeus
       @malli.Leveys = @boat.Leveys
       @malli.Pituus = @boat.Pituus
@@ -69,6 +69,14 @@ class BoatsController < ApplicationController
     respond_to do |format|
       if @boat.valid? && @onkoOk
         @boat.save
+		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil
+			if params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
+				@dock = Dock.find(params[:boat][:Laituri])
+				@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
+				@berth.Reknro = params[:boat][:RekNro]
+				@berth.save
+			end
+		end
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
@@ -92,6 +100,14 @@ class BoatsController < ApplicationController
 	end
     respond_to do |format|
       if @boat.update_attributes(params[:boat]) && @onkoOk
+		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil
+			if params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
+				@dock = Dock.find(params[:boat][:Laituri])
+				@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
+				@berth.Reknro = params[:boat][:RekNro]
+				@berth.save
+			end
+		end
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else

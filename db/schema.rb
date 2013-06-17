@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605134010) do
+ActiveRecord::Schema.define(:version => 20130617190919) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130605134010) do
     t.integer  "dock_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "Reknro"
   end
 
   add_index "berths", ["dock_id"], :name => "index_berths_on_dock_id"
@@ -68,8 +69,9 @@ ActiveRecord::Schema.define(:version => 20130605134010) do
     t.string   "Katsastus"
     t.string   "Laituri"
     t.string   "Telakka"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "Laituripaikka"
   end
 
   create_table "boats_members", :force => true do |t|
@@ -82,18 +84,6 @@ ActiveRecord::Schema.define(:version => 20130605134010) do
   create_table "docks", :force => true do |t|
     t.decimal  "length"
     t.integer  "berth_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "mallis", :force => true do |t|
-    t.string   "tyyppi"
-    t.string   "ValmMalli"
-    t.decimal  "Pituus"
-    t.decimal  "Leveys"
-    t.decimal  "Syvyys"
-    t.decimal  "Uppouma"
-    t.decimal  "Korkeus"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -124,6 +114,18 @@ ActiveRecord::Schema.define(:version => 20130605134010) do
     t.boolean  "deleted",    :default => false
     t.date     "deleted_at"
     t.string   "VeneRekNro"
+  end
+
+  create_table "models", :force => true do |t|
+    t.string   "tyyppi"
+    t.string   "ValmMalli"
+    t.decimal  "Pituus"
+    t.decimal  "Leveys"
+    t.decimal  "Syvyys"
+    t.decimal  "Uppouma"
+    t.decimal  "Korkeus"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "ownerships", :force => true do |t|

@@ -13,7 +13,8 @@ function taydenna() {
    document.getElementById('boat_Korkeus').value="";
    return;
   }
-	$.getJSON('/mallis/'+nimi+'.json', function(data) {
+	//$.getJSON('/mallis/'+nimi+'.json', function(data) {
+	$.getJSON('/models/'+nimi+'.json', function(data) {
           $.each(data, function(key, val) {
                   if (document.getElementById('boat_'+key) != null) {
                           document.getElementById('boat_'+key).value = val;
