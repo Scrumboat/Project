@@ -53,7 +53,7 @@ class BoatsController < ApplicationController
     @model = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
 
     if @model == nil
-      @model = Malli.new
+      @model = Model.new
       @model.Korkeus = @boat.Korkeus
       @model.Leveys = @boat.Leveys
       @model.Pituus = @boat.Pituus

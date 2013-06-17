@@ -1,6 +1,6 @@
-class CreateMallis < ActiveRecord::Migration
+class CreateModels < ActiveRecord::Migration
   def change
-    create_table :mallis do |t|
+    create_table :models do |t|
       t.string :tyyppi
       t.string :ValmMalli
       t.decimal :Pituus
@@ -12,6 +12,7 @@ class CreateMallis < ActiveRecord::Migration
       t.timestamps
 
       rename_table :mallis, :models
+
     end
   end
 end
