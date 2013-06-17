@@ -56,6 +56,14 @@ class BerthsController < ApplicationController
       if currentTotalWidth + newBerth.width <= @dock.length
         @dock.berths << @dock.berths.build(params[:berth])
         newBerth.save
+		if params[:berth][:Reknro].strip != ""
+			@boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
+			if @boat != nil
+				@boat.Laituri = params[:dock_id]
+				@boat.Laituripaikka = params[:berth][:number]
+				@boat.save
+			end
+		end
         format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.' }
       else
         format.html { redirect_to @dock, notice: 'Laituripaikkojen leveys ylitti laiturin leveyden.
@@ -71,6 +79,14 @@ class BerthsController < ApplicationController
     @berth = Berth.find(params[:id])
 	    respond_to do |format|
       if @berth.update_attributes(params[:berth])
+		if params[:berth][:Reknro].strip != ""
+			@boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
+			if @boat != nil
+				@boat.Laituri = params[:dock_id]
+				@boat.Laituripaikka = params[:berth][:number]
+				@boat.save
+			end
+		end
         format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.' }
         format.json { head :no_content }
       else

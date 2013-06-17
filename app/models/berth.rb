@@ -1,7 +1,8 @@
 # encoding: utf-8
 class Berth < ActiveRecord::Base
   belongs_to :dock
-  attr_accessible :depth, :exists, :length, :number, :width, :dock_id
+  belongs_to :boat
+  attr_accessible :depth, :exists, :length, :number, :width, :dock_id, :Reknro
 
   def printExists
   	print_exists = 'Ei'
