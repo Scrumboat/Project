@@ -11,7 +11,6 @@ class CreateModels < ActiveRecord::Migration
 
       t.timestamps
 
-      rename_table :mallis, :models
 
     end
   end
