@@ -128,18 +128,6 @@ ActiveRecord::Schema.define(:version => 20130616124024) do
     t.string   "VeneRekNro"
   end
 
-  create_table "models", :force => true do |t|
-    t.string   "tyyppi"
-    t.string   "ValmMalli"
-    t.decimal  "Pituus"
-    t.decimal  "Leveys"
-    t.decimal  "Syvyys"
-    t.decimal  "Uppouma"
-    t.decimal  "Korkeus"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "ownerships", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
