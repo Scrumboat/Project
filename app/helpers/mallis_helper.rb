@@ -1,0 +1,2 @@
+module MallisHelper
+end

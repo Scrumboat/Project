@@ -18,7 +18,7 @@ Venerekisteri::Application.routes.draw do
   
   resources :boats
 
-  resources :models
+  resources :mallis
 
   resources :members
 

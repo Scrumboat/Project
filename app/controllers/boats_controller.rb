@@ -32,7 +32,7 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
 	@boat.BoatsMembers.build
-    @mallit = Model.select("\"ValmMalli\"")
+    @mallit = Malli.select("\"ValmMalli\"")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -53,7 +53,7 @@ class BoatsController < ApplicationController
     @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
 
     if @malli == nil
-      @malli = Model.new
+      @malli = Malli.new
       @malli.Korkeus = @boat.Korkeus
       @malli.Leveys = @boat.Leveys
       @malli.Pituus = @boat.Pituus
