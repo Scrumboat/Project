@@ -40,9 +40,9 @@ class BerthsController < ApplicationController
   # GET /berths/1/edit
   def edit
 	@dock = Dock.find(params[:dock_id])
-    	@berth = Berth.find(params[:id])
+    @berth = Berth.find(params[:id])
 	currentTotalWidth = Berth.where(:dock_id => params[:id]).sum("width")
-	@spaceLeft = @dock.length - currentTotalWidth
+	@spaceLeft = @dock.length - BigDecimal(currentTotalWidth.to_s)
   end
 
   # POST /berths
@@ -77,8 +77,14 @@ class BerthsController < ApplicationController
   def update
 	@dock = Dock.find(params[:dock_id])
     @berth = Berth.find(params[:id])
+	
+	newvalue = params[:berth][:width] 
+	currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width') 
+	currentTotalWidth = BigDecimal(currentTotalWidth.to_s) - @berth.width
+	currentTotalWidth = BigDecimal(currentTotalWidth.to_s)+ BigDecimal(newvalue.to_s) 
+	isOk = BigDecimal(currentTotalWidth.to_s) <= @dock.length
 	    respond_to do |format|
-      if @berth.update_attributes(params[:berth])
+      if isOk && @berth.update_attributes(params[:berth])
 		if params[:berth][:Reknro].strip != ""
 			@boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
 			if @boat != nil
@@ -87,10 +93,13 @@ class BerthsController < ApplicationController
 				@boat.save
 			end
 		end
-        format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.' }
+        format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.'}
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { 
+			flash[:notice] = 'Laituripaikkojen leveys ylitti laiturin leveyden'
+			render :edit
+		}
         format.json { render json: @berth.errors, status: :unprocessable_entity }
       end
     end
