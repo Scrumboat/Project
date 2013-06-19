@@ -41,8 +41,8 @@ class BerthsController < ApplicationController
   def edit
 	@dock = Dock.find(params[:dock_id])
     @berth = Berth.find(params[:id])
-	currentTotalWidth = Berth.where(:dock_id => params[:id]).sum("width")
-	@spaceLeft = @dock.length - BigDecimal(currentTotalWidth.to_s)
+	currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum("width")
+	@spaceLeft =  @dock.length - currentTotalWidth
   end
 
   # POST /berths
