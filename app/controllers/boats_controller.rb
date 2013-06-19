@@ -65,18 +65,23 @@ class BoatsController < ApplicationController
     end
 
     changeJnoToId
-
     respond_to do |format|
       if @boat.valid? && @onkoOk
-        @boat.save
+        
 		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil
 			if params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
 				@dock = Dock.find(params[:boat][:Laituri])
 				@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-				@berth.Reknro = params[:boat][:RekNro]
-				@berth.save
+				if BigDecimal(params[:boat][:Pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:Leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:Syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
+					@berth.Reknro = params[:boat][:RekNro]
+					@berth.save
+				else
+					@boat.Laituripaikka = ""
+					@boat.Laituri = ""
+				end
 			end
 		end
+		@boat.save
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
@@ -104,8 +109,14 @@ class BoatsController < ApplicationController
 			if params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
 				@dock = Dock.find(params[:boat][:Laituri])
 				@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-				@berth.Reknro = params[:boat][:RekNro]
-				@berth.save
+				if BigDecimal(@boat.Pituus.to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(@boat.Leveys.to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(@boat.Syvyys.to_s) <= BigDecimal(@berth.depth.to_s)
+					@berth.Reknro = params[:boat][:RekNro]
+					@berth.save
+				else
+					@boat.Laituripaikka = ""
+					@boat.Laituri = ""
+					@boat.save
+				end
 			end
 		end
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
@@ -121,6 +132,14 @@ class BoatsController < ApplicationController
   # DELETE /boats/1.json
   def destroy
     @boat = Boat.find(params[:id])
+	if @boat.Laituri != nil && @boat.Laituripaikka != nil
+		if @boat.Laituri != "" && @boat.Laituripaikka != ""
+			@dock = Dock.find(@boat.Laituri)
+			@berth = Berth.where(:dock_id => @dock.id, :number => @boat.Laituripaikka).first
+			@berth.Reknro = ""
+			@berth.save
+		end
+	end
     @boat.destroy
 
     respond_to do |format|

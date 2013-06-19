@@ -54,16 +54,20 @@ class BerthsController < ApplicationController
     newBerth = Berth.new(params[:berth])
     respond_to do |format|
       if currentTotalWidth + newBerth.width <= @dock.length
-        @dock.berths << @dock.berths.build(params[:berth])
-        newBerth.save
 		if params[:berth][:Reknro].strip != ""
 			@boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
 			if @boat != nil
-				@boat.Laituri = params[:dock_id]
-				@boat.Laituripaikka = params[:berth][:number]
-				@boat.save
+				if @boat.Pituus <= newBerth.length && @boat.Leveys <= newBerth.width && @boat.Syvyys <= newBerth.depth
+					@boat.Laituri = params[:dock_id]
+					@boat.Laituripaikka = params[:berth][:number]
+					@boat.save
+				else
+					params[:berth][:Reknro] = ""
+				end
 			end
 		end
+		@dock.berths << @dock.berths.build(params[:berth])
+		newBerth.save
         format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.' }
       else
         format.html { redirect_to @dock, notice: 'Laituripaikkojen leveys ylitti laiturin leveyden.
@@ -88,9 +92,17 @@ class BerthsController < ApplicationController
 		if params[:berth][:Reknro].strip != ""
 			@boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
 			if @boat != nil
-				@boat.Laituri = params[:dock_id]
-				@boat.Laituripaikka = params[:berth][:number]
-				@boat.save
+				if @boat.Pituus <= BigDecimal(params[:berth][:length].to_s) && @boat.Leveys <= BigDecimal(params[:berth][:width].to_s) && @boat.Syvyys <= BigDecimal(params[:berth][:depth].to_s)
+					@boat.Laituri = params[:dock_id]
+					@boat.Laituripaikka = params[:berth][:number]
+					@boat.save
+				else
+					params[:berth][:Reknro] = ""
+					@boat.Laituri = ""
+					@boat.Laituripaikka = ""
+					@boat.save
+					@berth.update_attributes(params[:berth])
+				end
 			end
 		end
         format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.'}
@@ -109,6 +121,12 @@ class BerthsController < ApplicationController
   # DELETE /berths/1.json
   def destroy
     @berth = Berth.find(params[:id])
+	@boat = Boat.where(:RekNro => @berth.Reknro).first
+	if @boat != nil
+		@boat.Laituri = ""
+		@boat.Laituripaikka = ""
+		@boat.save
+	end
     @berth.destroy
     
     respond_to do |format|

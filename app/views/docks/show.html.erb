@@ -19,6 +19,7 @@
 	    <th>Pituus</th>
 		<th>Leveys</th>
 		<th>Syvyys</th>
+		<th>Reknro</th>
 		<th>On olemassa</th>
 	    <th></th>
 	    <th></th>
@@ -32,6 +33,7 @@
 	    <td><%= berth.length.to_s + ' m' %></td>
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
+		<td><%= berth.Reknro.to_s %></td>
 	    <td><%= berth.printExists %></td>
     	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
 	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
@@ -47,6 +49,7 @@
 	    <th>Pituus</th>
 		<th>Leveys</th>
 		<th>Syvyys</th>
+		<th>Reknro</th>
 		<th>On olemassa</th>
 	    <th></th>
 	    <th></th>
@@ -60,6 +63,7 @@
 	    <td><%= berth.length.to_s + ' m' %></td>
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
+		<td><%= berth.Reknro.to_s %></td>
 	    <td><%= berth.printExists %></td>
     	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
 	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
