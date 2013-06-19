@@ -72,7 +72,7 @@ class BoatsController < ApplicationController
 			if params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
 				@dock = Dock.find(params[:boat][:Laituri])
 				@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-				if BigDecimal(params[:boat][:Pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:Leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:Syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
+				if @berth.Reknro.strip == "" && BigDecimal(params[:boat][:Pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:Leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:Syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
 					@berth.Reknro = params[:boat][:RekNro]
 					@berth.save
 				else
