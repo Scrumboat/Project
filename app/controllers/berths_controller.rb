@@ -73,6 +73,9 @@ class BerthsController < ApplicationController
 		if !okRek
 			params[:berth][:Reknro] = ""
 		end
+		if params[:berth][:jno].strip != ""
+			params[:berth][:jno] = ""
+		end
 		@dock.berths << @dock.berths.build(params[:berth])
 		newBerth.save
         format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.'}
@@ -139,6 +142,10 @@ class BerthsController < ApplicationController
 		end
 		if !okRek
 			params[:berth][:Reknro] = ""
+			@berth.update_attributes(params[:berth])
+		end
+		if params[:berth][:jno].strip != ""
+			params[:berth][:jno] = ""
 			@berth.update_attributes(params[:berth])
 		end
         format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.'}

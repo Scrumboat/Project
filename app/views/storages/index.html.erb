@@ -1,0 +1,32 @@
+<h1>Listing storages</h1>
+
+<table>
+  <tr>
+    <th>Vk</th>
+    <th>Pala</th>
+    <th>Jno</th>
+    <th>Koppimk</th>
+	<th>Omistaja</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @storages.each do |storage| %>
+	<% omistaja = Member.where(:Jno => storage.jno).first %>
+  <tr>
+    <td><%= storage.vk %></td>
+    <td><%= storage.pala %></td>
+    <td><%= storage.jno %></td>
+    <td><%= storage.koppimk %></td>
+	<td><%= omistaja.Nimi %></td>
+    <td><%= link_to 'Tiedot', storage %></td>
+    <td><%= link_to 'Muokkaa', edit_storage_path(storage) %></td>
+    <td><%= link_to 'Poista', storage, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Storage', new_storage_path %>

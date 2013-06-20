@@ -1,5 +1,8 @@
 Venerekisteri::Application.routes.draw do
   
+  resources :storages
+
+
   resources :boats_members
 
   resources :docks do    

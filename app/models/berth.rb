@@ -2,7 +2,7 @@
 class Berth < ActiveRecord::Base
   belongs_to :dock
   belongs_to :boat
-  attr_accessible :depth, :exists, :length, :number, :width, :dock_id, :Reknro
+  attr_accessible :depth, :exists, :length, :number, :width, :dock_id, :Reknro, :jno, :vartio
 
   def printExists
   	print_exists = 'Ei'
