@@ -67,7 +67,7 @@ class BerthsController < ApplicationController
 				end
 			else
 				okRek = false
-				format.html { redirect_to @dock, notice: 'Laituripaikkaa päivitetty kyseiselle rekisterinumerolle, väärä rekisterinumero.'}
+				format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
 			end
 		end
 		if !okRek
@@ -124,7 +124,7 @@ class BerthsController < ApplicationController
 				end
 			else
 				okRek = false
-				format.html { redirect_to @dock, notice: 'Laituripaikkaa päivitetty kyseiselle rekisterinumerolle, väärä rekisterinumero.'}
+				format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
 			end
 		end
 		uusireknro = params[:berth][:Reknro]
