@@ -67,11 +67,14 @@ class BerthsController < ApplicationController
 				end
 			else
 				okRek = false
-				format.html { redirect_to @dock, notice: 'Laituripaikkaa päivitetty kyseiselle rekisterinumerolle, väärä rekisterinumero.'}
+				format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
 			end
 		end
 		if !okRek
 			params[:berth][:Reknro] = ""
+		end
+		if params[:berth][:jno].strip != ""
+			params[:berth][:jno] = ""
 		end
 		@dock.berths << @dock.berths.build(params[:berth])
 		newBerth.save
@@ -121,7 +124,7 @@ class BerthsController < ApplicationController
 				end
 			else
 				okRek = false
-				format.html { redirect_to @dock, notice: 'Laituripaikkaa päivitetty kyseiselle rekisterinumerolle, väärä rekisterinumero.'}
+				format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
 			end
 		end
 		uusireknro = params[:berth][:Reknro]
@@ -139,6 +142,10 @@ class BerthsController < ApplicationController
 		end
 		if !okRek
 			params[:berth][:Reknro] = ""
+			@berth.update_attributes(params[:berth])
+		end
+		if params[:berth][:jno].strip != ""
+			params[:berth][:jno] = ""
 			@berth.update_attributes(params[:berth])
 		end
         format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.'}
