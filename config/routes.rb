@@ -1,17 +1,20 @@
 Venerekisteri::Application.routes.draw do
   
-  resources :storages
+  resources :dockyards do
+    resources :dockyard_spots
+  end
 
+  resources :storages
 
   resources :boats_members
 
   resources :docks do    
     resources :berths
   end
+  
+  resources :docks
 
-	resources :docks
-
-	resources :berths
+  resources :berths
 
   resources :ownerships
 

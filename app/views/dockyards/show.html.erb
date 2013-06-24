@@ -1,0 +1,61 @@
+<h1>Telakka <%= @dockyard.name %> </h2>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nimi:</b>
+  <%= @dockyard.name %>
+</p>
+
+<p>
+  <b>Pituus:</b>
+  <%= @dockyard.length %>
+</p>
+
+<p>
+  <b>Leveys:</b>
+  <%= @dockyard.width %>
+</p>
+
+
+<%= link_to 'Muokkaa', edit_dockyard_path(@dockyard) %> |
+<%= link_to 'Takaisin', dockyards_path %>
+<%= link_to 'Uusi telakkapaikka', new_dockyard_dockyard_spot_path(@dockyard) %>
+
+<h2>Telakkapaikat</h2>
+
+<table>
+  <tr>
+    <th>Numero</th>
+    <th>Pituus</th>
+    <th>Leveys</th>
+    <th>Vene</th>
+    <th>Vpituus</th>
+    <th>Vleveys</th>
+    <th>Trailer</th>
+    <th>Nosto</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @dockyard_spots.each do |dys| %>
+    <tr>
+      <td><%= dys.number %></td>
+      <td><%= dys.length %></td>
+      <td><%= dys.width %></td>
+      <% if !dys.boat.nil? %>
+      <td><%= dys.boat.RekNro  %></td>
+      <td><%= dys.boat.Pituus  %></td>
+      <td><%= dys.boat.Leveys  %></td>
+      <% else %>
+      <td></td>
+      <td></td>
+      <td></td>
+      <% end %>
+      <td><%= dys.trailer %></td>
+      <td><%= dys.lift %></td>
+      <td><%= link_to 'Muokkaa', edit_dockyard_dockyard_spot_path(@dockyard.id, dys) %></td>
+      <td><%= link_to 'Poista', dockyard_dockyard_spot_path(dys), method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>

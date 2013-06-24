@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619194944) do
+ActiveRecord::Schema.define(:version => 20130624151825) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -86,6 +86,28 @@ ActiveRecord::Schema.define(:version => 20130619194944) do
   create_table "docks", :force => true do |t|
     t.decimal  "length"
     t.integer  "berth_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "dockyard_spots", :force => true do |t|
+    t.integer  "number"
+    t.float    "length"
+    t.float    "width"
+    t.float    "boat_width"
+    t.float    "boat_length"
+    t.boolean  "trailer"
+    t.boolean  "lift"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "dockyard_id"
+    t.integer  "boat_id"
+  end
+
+  create_table "dockyards", :force => true do |t|
+    t.string   "name"
+    t.float    "length"
+    t.float    "width"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

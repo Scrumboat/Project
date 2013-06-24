@@ -1,0 +1,13 @@
+<%= simple_form_for(@dockyard) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :length %>
+    <%= f.input :width %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

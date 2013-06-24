@@ -1,0 +1,21 @@
+<h1>Laituripaikat</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @dockyard_spots.each do |dys| %>
+  <tr>
+    <td><%= link_to 'Näytä', dys %></td>
+    <td><%= link_to 'Muokkaa', edit_dockyard_spot_path(dys) %></td>
+    <td><%= link_to 'Poista', dys, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Uusi telakkapaikka', new_dockyard_spot_path %>

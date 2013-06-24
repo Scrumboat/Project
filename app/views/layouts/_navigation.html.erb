@@ -9,6 +9,13 @@
                 </li>
                 <li>
                 <%= link_to 'Laiturit', docks_path %>
+		</li>
+		<li>
+		<%= link_to('Telakat', dockyards_path) %>
+		</li>
+		<li>
+		<%= link_to('Varastokopit', storages_path) %>
+		</li>
         <% end %>
         <% if admin_signed_in? %>
                 <li>

@@ -1,0 +1,32 @@
+
+<%= simple_form_for([@dockyard, @dockyard_spot], :html => {:multipart => true}) do |f| %>
+  <% if @dockyard_spot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dockyard_spot.errors.count, "error") %> prohibited this spot from being saved:</h2>
+
+      <ul>
+      <% @dockyard_spots.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">    
+    <%= f.label :Numero %>
+    <%= f.text_field :number %><br />
+    <%= f.label :Leveys %>
+    <%= f.text_field :width %><br />
+    <%= f.label :Pituus %>
+    <%= f.text_field :length %><br />
+    <%= f.label :Vene %>
+    <%= f.text_field :boat_id %>
+    <%= f.label :Traileri %>
+    <%= f.check_box :trailer %><br />
+    <%= f.label :Nosto %>
+    <%= f.check_box :lift %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit @teksti, :id => 'lisaa_telakkapaikka'%>
+  </div>
+<% end %>

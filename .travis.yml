@@ -4,7 +4,7 @@ rvm:
 - 1.9.3
 before_install:
 - gem install bundler
-before_script: 
+before_script:
 - bundle exec rake db:migrate
 script:
 - bundle exec rake test
@@ -28,8 +28,8 @@ after_success:
 - ./travis_to_heroku.rb
 env:
   global:
-    secure: ! 'pdfkPhvjf292mi7A8EsIXfRNu5wePCFPP6Fj10BbehxWnRDVx+jbnri+OSkL
+    secure: ! 'sFt1s32JjoOlI1+Dyfr2ffriIKnClsNznzngEeRWhGlstR8fX7gK8F60psXZ
 
-      hP+NXjoXkk8S3hMKOK4rCbLU6G1KsGp7lBgDdHiOtaJ/RN9GWxgu4B03hCBR
+      ASZn3HVtStyQ9Zhzfk+v4Kh7PA5W8ZNfE0l7pRqX0GafG91QphplRAnwY7VV
 
-      lxGrV1M+5TIs9NqMLeiwu2szTuElTmPtYBSfuFLrk2RfagSuz8w='
+      0hZ916jzAhYUqbNoGAAFOA0IMB9bTCo1ofn9TXHRu8344pGt2VU='
