@@ -33,7 +33,7 @@ Feature: Admin can add a new berth to a dock
 	And I click "Uusi laituripaikka"
 	And I add new berth:
 		|number|length|width|depth|vartio|exists|
-		|9|3|2|1.5|2013-06-20|true|
+		|9|3|2|1.5|2013-June-20|true|
 	Then page should have content "9 3.0 m 2.0 m 1.5 m 2013-06-20 Kyllä"
 
 	Scenario: Laituri is full when user tries to add new laituripaikka
