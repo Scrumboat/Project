@@ -50,9 +50,12 @@ class BoatsController < ApplicationController
   def create
     @boat = Boat.new(params[:boat])
 
-    @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
+    # @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
+    @malli = Malli.where(:ValmMalli => params[:boat][:ValmMalli]).first
+    #@malli = Boat.find(:first, :conditions => [:ValmMalli => boat.ValmMalli, params[:boat][:ValmMalli]])
+    #@malli = Boat.where(:ValmMalli => params[:boat][:ValmMalli])
 
-    if @malli == nil
+    if @malli.nil?
       @malli = Malli.new
       @malli.Korkeus = @boat.Korkeus
       @malli.Leveys = @boat.Leveys
