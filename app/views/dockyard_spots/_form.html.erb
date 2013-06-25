@@ -20,7 +20,11 @@
     <%= f.label :Pituus %>
     <%= f.text_field :length %><br />
     <%= f.label :Vene %>
-    <%= f.text_field :boat_id %>
+    <% if !@dockyard_spot.boat.nil? %>
+    	<%= f.text_field :boat_id, :value => @dockyard_spot.boat.RekNro %>
+    <% else %>
+    	<%= f.text_field :boat_id%>
+    <% end %>
     <%= f.label :Traileri %>
     <%= f.check_box :trailer %><br />
     <%= f.label :Nosto %>
