@@ -23,7 +23,7 @@ Feature: Admin can add a new berth to a dock
 	And I click "Uusi laituripaikka"
 	Then page should have button "Lisää laituripaikka"
 
-	Scenario: User add a new laituripaikka
+	Scenario: User add a new Berth
 	Given I login as admin
 	And the following docks exist:
 		|length|
@@ -36,7 +36,7 @@ Feature: Admin can add a new berth to a dock
 		|9|3|2|1.5|true|
 	Then page should have content "9 3.0 m 2.0 m 1.5 m Kyllä"
 
-	Scenario: Laituri is full when user tries to add new laituripaikka
+	Scenario: Dock is full when user tries to add new Berth
 	Given I login as admin
 	And the following docks exist:
 		|length|
@@ -47,4 +47,6 @@ Feature: Admin can add a new berth to a dock
 	And I add new berth:
 		|number|length|width|depth|exists|
 		|2|5|31|1.5|true|
-	Then page should have content "Laituripaikkojen leveys ylitti laiturin leveyden."
+	Then page should have content "VIRHE."
+
+	

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class BerthsController < ApplicationController
   # GET /berths
   # GET /berths.json
@@ -51,13 +53,13 @@ class BerthsController < ApplicationController
     spaceLeft = @dock.length - currentTotalWidth
     newBerth = Berth.new(params[:berth])
     respond_to do |format|
-      if currentTotalWidth + newBerth.width <= @dock.length
+      if newBerth.valid? && @dock.hasSpaceFor(newBerth) 
+        #currentTotalWidth + newBerth.width <= @dock.length
         @dock.berths << @dock.berths.build(params[:berth])
         newBerth.save
         format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.' }
       else
-        format.html { redirect_to @dock, notice: 'Laituripaikkojen leveys ylitti laiturin leveyden.
-         Laiturissa on tilaa: ' + spaceLeft.to_s + ' m.' }
+        format.html { redirect_to @dock, notice: 'VIRHE.' }
       end
     end
   end
@@ -68,11 +70,13 @@ class BerthsController < ApplicationController
 	@dock = Dock.find(params[:dock_id])
     @berth = Berth.find(params[:id])
 	    respond_to do |format|
-      if @berth.update_attributes(params[:berth])
+        newParams = params[:berth]
+        newWidth = newParams[:width].to_i
+      if @dock.hasSpaceForNewWidth(newWidth, @berth) && @berth.update_attributes(params[:berth])
         format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to edit_dock_berth_path, notice: 'VIRHE.' }
         format.json { render json: @berth.errors, status: :unprocessable_entity }
       end
     end

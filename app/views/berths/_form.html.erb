@@ -1,5 +1,5 @@
 <h2> Laiturille <%= @dock.id %></h2>
-<p>Laiturissa tilaa: <%= @spaceLeft.to_s + ' m'%> </p>
+<p>Laiturissa tilaa: <%= @dock.spaceLeft.to_s + ' m'%> </p>
 
 <%= form_for([@dock, @berth], :html => {:multipart => true}) do |f| %>
   <% if @berth.errors.any? %>
