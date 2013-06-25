@@ -66,22 +66,48 @@ class BoatsController < ApplicationController
       @malli.tyyppi = @boat.tyyppi
       @malli.save
     end
-
+	
     changeJnoToId
     respond_to do |format|
       if @boat.valid? && @onkoOk
-        
-		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil
-			if params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
-				@dock = Dock.find(params[:boat][:Laituri])
-				@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-				if @berth != nil && @berth.Reknro.strip == "" && BigDecimal(params[:boat][:Pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:Leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:Syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
-					@berth.Reknro = params[:boat][:RekNro]
-					@berth.save
+		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil && params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
+			if is_number?(params[:boat][:Laituripaikka]) && is_number?(params[:boat][:Laituri])
+				#@dock = Dock.find_by_id(params[:boat][:Laituri])
+				if Dock.exists?(params[:boat][:Laituri])
+					@dock = Dock.find(params[:boat][:Laituri])
+					#@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
+					if Berth.exists?(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka])
+						@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
+						if @berth.Reknro == nil
+							@berth.Reknro = ""
+						end
+						if @berth.Reknro == "" && BigDecimal(params[:boat][:Pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:Leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:Syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
+							@berth.Reknro = params[:boat][:RekNro]
+							@berth.save
+						else
+							@boat.Laituripaikka = ""
+							@boat.Laituri = ""
+						end
+					else
+						show_jno_in_edit_instead_of_id
+						format.html { 
+							flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+							render action: "new"
+						}
+					end
 				else
-					@boat.Laituripaikka = ""
-					@boat.Laituri = ""
+					show_jno_in_edit_instead_of_id
+					format.html { 
+						flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+						render action: "new"
+					}
 				end
+			else
+				show_jno_in_edit_instead_of_id
+				format.html { 
+					flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+					render action: "new"
+				}
 			end
 		end
 		@boat.save
@@ -108,24 +134,53 @@ class BoatsController < ApplicationController
 	end
     respond_to do |format|
       if @boat.update_attributes(params[:boat]) && @onkoOk
-		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil
-			if params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
-				@dock = Dock.find(params[:boat][:Laituri])
-				@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-				if @berth != nil && BigDecimal(@boat.Pituus.to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(@boat.Leveys.to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(@boat.Syvyys.to_s) <= BigDecimal(@berth.depth.to_s)
-					@berth.Reknro = params[:boat][:RekNro]
-					@berth.save
+		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil &&  params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
+			if is_number?(params[:boat][:Laituripaikka]) && is_number?(params[:boat][:Laituri])
+				if Dock.exists?(params[:boat][:Laituri])
+					@dock = Dock.find(params[:boat][:Laituri])
+					#@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
+					if Berth.exists?(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka])
+						@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
+						if @berth.Reknro == nil
+							@berth.Reknro = ""
+						end
+						if @berth.Reknro == "" && BigDecimal(@boat.Pituus.to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(@boat.Leveys.to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(@boat.Syvyys.to_s) <= BigDecimal(@berth.depth.to_s)
+							@berth.Reknro = params[:boat][:RekNro]
+							@berth.save
+						else
+							@boat.Laituripaikka = ""
+							@boat.Laituri = ""
+							@boat.save
+						end
+					else
+						show_jno_in_edit_instead_of_id
+						format.html { 
+							flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+							render action: "edit"
+						}
+					end
 				else
-					@boat.Laituripaikka = ""
-					@boat.Laituri = ""
-					@boat.save
+					show_jno_in_edit_instead_of_id
+					format.html { 
+					flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+					render action: "edit"
+					}
 				end
+			else
+				show_jno_in_edit_instead_of_id
+				format.html { 
+					flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+					render action: "edit"
+				}
 			end
 		end
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { 
+					flash[:notice] = 'Virheellinen jäsennumero.'
+					render action: "edit"
+				}
         format.json { render json: @boat.errors, status: :unprocessable_entity }
       end
     end
@@ -199,6 +254,11 @@ class BoatsController < ApplicationController
 		bm.member_id = @member.Jno
     end
   end
+  
+  def is_number?(object)
+	true if Integer(object) rescue false
+  end
+
   private
     def sort_column
       Boat.column_names.include?(params[:sort]) ? params[:sort] : Boat.connection.quote_column_name("Omistaja")
