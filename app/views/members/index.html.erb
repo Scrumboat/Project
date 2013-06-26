@@ -5,7 +5,7 @@
 </script>
 <body>
   <h1>Jäsenet</h1>
-    <ul>Filtterit
+    <div>Filtterit
       <label for="ctoimi"><input type="checkbox" id="ctoimi" onclick="toggle('.toimi', this)"/>Toimi</label> 
       <label for="clisenssi"><input type="checkbox" id="clisenssi" onclick="toggle('.lisenssi', this)"/>Lisenssi</label> 
       <label for="cposti"><input type="checkbox" id="cposti" onclick="toggle('.posti', this)"/>Posti</label> 
@@ -15,7 +15,7 @@
       <label for="cavain"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>Avain</label> 
       <label for="chuom"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>Huom</label> 
 
-    </ul>
+    </div>
     <table>
       <tr>
         <th><%= sortable "Nimi" %></th>
