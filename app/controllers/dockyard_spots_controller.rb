@@ -50,6 +50,8 @@ class DockyardSpotsController < ApplicationController
     @dockyard = Dockyard.find(params[:dockyard_id])
     new_spot = DockyardSpot.new(params[:dockyard_spot])
     new_spot.dockyard_id = @dockyard.id
+    boat = Boat.find_by_RekNro(params[:dockyard_spot][:boat_id])
+    new_spot.boat_id = boat.id
     respond_to do |format|
     if new_spot.save
 	format.html { redirect_to @dockyard, notice: 'Uusi telakkapaikka luotiin onnistuneesti.'}
@@ -64,7 +66,8 @@ class DockyardSpotsController < ApplicationController
   def update
     @dockyard = Dockyard.find(params[:dockyard_id])
     @dockyard_spot = DockyardSpot.find(params[:id])
-    
+    boat = Boat.find_by_RekNro(params[:dockyard_spot][:boat_id])
+    params[:dockyard_spot][:boat_id] = boat.id
     respond_to do |format|
       if @dockyard_spot.update_attributes(params[:dockyard_spot])
         format.html { redirect_to @dockyard, notice: 'Telakkapaikan päivitys onnistui.'}
