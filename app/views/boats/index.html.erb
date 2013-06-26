@@ -1,5 +1,24 @@
+<!DOCTYPE html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+</script>
+<script src="/assets/boatfilter.js">
+</script>
+<body onload="hideAll();">
 <h1>Veneet</h1>
+  <div>Filtterit
+      <label for="ctyyppi"><input type="checkbox" id="ctyyppi" onclick="toggle('.tyyppi', this)"/>Tyyppi</label> 
+      <label for="creknro"><input type="checkbox" id="creknro" onclick="toggle('.reknro', this)"/>RekNro</label> 
+      <label for="cvalmmalli"><input type="checkbox" id="cvalmmalli" onclick="toggle('.valmmalli', this)"/>ValmMalli</label> 
+      <label for="cpituus"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>Pituus</label> 
+      <label for="cleveys"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>Leveys</label> 
+      <label for="csyvyys"><input type="checkbox" id="csyvyys" onclick="toggle('.syvyys', this)"/>Syvyys</label> 
+      <label for="ckorkeus"><input type="checkbox" id="ckorkeus" onclick="toggle('.korkeus', this)"/>Korkeus</label> 
+      <label for="cteho"><input type="checkbox" id="cteho" onclick="toggle('.teho', this)"/>Teho</label>
+      <label for="cvuosimalli"><input type="checkbox" id="cvuosimalli" onclick="toggle('.vuosimalli', this)"/>Vuosimalli</label> 
+      <label for="chuomautukset"><input type="checkbox" id="chuomautukset" onclick="toggle('.huomautukset', this)"/>Huomautukset</label> 
+      <label for="ckatsastus"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>Katsastus</label>  
 
+    </div>
 <table>
   <tr>
     <th><%= sortable "Omistaja" %></th>
@@ -8,25 +27,17 @@
     <th><%= sortable "RekPvm" %></th>
     <th><%= sortable "MuutosPvm" %></th>
     <th><%= sortable "Nimi" %></th>
-    <!-- kommentoitu pois
-    <th>Tyyppi</th>
-    <th>Reknro</th>
-    <th>Valmmalli</th>
-    <th>Pituus</th>
-    <th>Leveys</th>
-    <th>Syvyys</th>
-    <th>Uppouma</th>
-    <th>Korkeus</th>
-    <th>Teho</th>
-    <th>Vuosimalli</th>
-    <th>Venepuha</th>
-    <th>Venepuhb</th>
-    <th>Huomautukset</th>
-    <th>Tarra</th>
-    <th>Katsastus</th>
-    <th>Laituri</th>
-    <th>Telakka</th>
-    -->
+    <th class="tyyppi"><%= sortable "Tyyppi" %></th>
+    <th class="reknro"><%= sortable "Reknro" %></th>
+    <th class="valmmalli"><%= sortable "Valmmalli" %></th>
+    <th class="pituus"><%= sortable "Pituus" %></th>
+    <th class="leveys"><%= sortable "Leveys" %></th>
+    <th class="syvyys"><%= sortable "Syvyys" %></th>
+    <th class="korkeus"><%= sortable "Korkeus" %></th>
+    <th class="teho"><%= sortable "Teho" %></th>
+    <th class="vuosimalli"><%= sortable "Vuosimalli" %></th>
+    <th class="huomautukset"><%= sortable "Huomautukset" %></th>
+    <th class="katsastus"><%= sortable "Katsastus" %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -40,25 +51,19 @@
     <td><%= boat.RekPvm %></td>
     <td><%= boat.MuutosPvm %></td>
     <td><%= boat.Nimi %></td>
-    <!-- kommentoitu pois
-    <td><%= boat.tyyppi %></td>
-    <td><%= boat.RekNro %></td>
-    <td><%= boat.ValmMalli %></td>
-    <td><%= boat.Pituus %></td>
-    <td><%= boat.Leveys %></td>
-    <td><%= boat.Syvyys %></td>
-    <td><%= boat.Uppouma %></td>
-    <td><%= boat.Korkeus %></td>
-    <td><%= boat.Teho %></td>
-    <td><%= boat.Vuosimalli %></td>
-    <td><%= boat.VenePuhA %></td>
-    <td><%= boat.VenePuhB %></td>
-    <td><%= boat.Huomautukset %></td>
-    <td><%= boat.Tarra %></td>
-    <td><%= boat.Katsastus %></td>
-    <td><%= boat.Laituri %></td>
-    <td><%= boat.Telakka %></td>
-    -->
+    
+    <td class="tyyppi"><%= boat.tyyppi %></td>
+    <td class="reknro"><%= boat.RekNro %></td>
+    <td class="valmmalli"><%= boat.ValmMalli %></td>
+    <td class="pituus"><%= boat.Pituus %></td>
+    <td class="leveys"><%= boat.Leveys %></td>
+    <td class="syvyys"><%= boat.Syvyys %></td>
+    <td class="korkeus"><%= boat.Korkeus %></td>
+    <td class="teho"><%= boat.Teho %></td>
+    <td class="vuosimalli"><%= boat.Vuosimalli %></td>
+    <td class="huomautukset"><%= boat.Huomautukset %></td>
+    <td class="katsastus"><%= boat.Katsastus %></td>
+
     <td><%= link_to 'Tiedot', boat %></td>
     <td><%= link_to 'Muokkaa', edit_boat_path(boat) %></td>
     <td><%= link_to 'Poista', boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
@@ -71,3 +76,4 @@
 <%= link_to 'Luo uusi vene', new_boat_path %>
 <br />
 <%= link_to 'Main Menu', root_path %>
+</body>
