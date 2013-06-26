@@ -17,13 +17,13 @@
  	<tr>
 	    <th>Numero</th>
 	    <th>Pituus</th>
-		<th>Leveys</th>
-		<th>Syvyys</th>
-		<th>Reknro</th>
-		<th>Jno</th>
-		<th>Vartiovuoro</th>
-		<th>On olemassa</th>
-	    <th></th>
+	    <th>Leveys</th>
+	    <th>Syvyys</th>
+	    <th>Reknro</th>
+	    <th>Jno</th>
+	    <th>Vartiovuoro</th>
+            <th>Hinta</th>
+	    <th>On olemassa</th>
 	    <th></th>
 	    <th></th>
   	</tr>
@@ -31,13 +31,14 @@
 	<% @berths.each do |berth| %>		
 		<% if berth.number % 2 != 0 %>
 	<tr>
-	  	<td><%= berth.number.to_s %></td>
+            <td><%= berth.number.to_s %></td>
 	    <td><%= berth.length.to_s + ' m' %></td>
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
-		<td><%= link_to berth.Reknro.to_s, Boat.where(:RekNro => berth.Reknro).first %></td>
-		<td><%= berth.jno.to_s %></td>
-		<td><%= berth.vartio.to_s %></td>
+            <td><%= link_to berth.Reknro.to_s, Boat.where(:RekNro => berth.Reknro).first %></td>
+            <td><%= berth.jno.to_s %></td>
+            <td><%= berth.vartio.to_s %></td>
+            <td><%= @pricing %>
 	    <td><%= berth.printExists %></td>
     	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
 	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
@@ -51,13 +52,12 @@
  	<tr>
 	    <th>Numero</th>
 	    <th>Pituus</th>
-		<th>Leveys</th>
-		<th>Syvyys</th>
-		<th>Reknro</th>
-		<th>Jno</th>
-		<th>Vartiovuoro</th>
-		<th>On olemassa</th>
-	    <th></th>
+            <th>Leveys</th>
+            <th>Syvyys</th>
+            <th>Reknro</th>
+            <th>Jno</th>
+            <th>Vartiovuoro</th>
+            <th>On olemassa</th>
 	    <th></th>
 	    <th></th>
   	</tr>

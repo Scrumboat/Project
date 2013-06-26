@@ -1,6 +1,5 @@
 function taydenna() {
-  //     document.getElementById('boat_Pituus').value="50";
-	var e = document.getElementById('malli');
+	var e = document.getElementById('boat_ValmMalli');
 	var nimi = e.options[e.selectedIndex].text;
 	document.getElementById('boat_ValmMalli').value=nimi;
 
@@ -14,14 +13,10 @@ function taydenna() {
    return;
   }
 	$.getJSON('/mallis/'+nimi+'.json', function(data) {
-	//$.getJSON('/models/'+nimi+'.json', function(data) {
           $.each(data, function(key, val) {
                   if (document.getElementById('boat_'+key) != null) {
                           document.getElementById('boat_'+key).value = val;
                   }
           });
-          
-          //var obj = JSON.parse(data);
-          //document.getElementById('boat_Syvyys').value=obj.Syvyys;
 	});
 }

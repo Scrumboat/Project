@@ -31,8 +31,9 @@ class BoatsController < ApplicationController
   # GET /boats/new.json
   def new
     @boat = Boat.new
-	@boat.BoatsMembers.build
+    @boat.BoatsMembers.build
     @mallit = Malli.select("\"ValmMalli\"")
+    @mallis = Malli.all.map(&:ValmMalli).insert(0, "")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }

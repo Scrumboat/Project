@@ -15,6 +15,8 @@ gem 'bootstrap-sass'
 # Deploy to heroku from travis
 gem 'heroku-headless'
 
+# for Money paremeters
+gem 'money-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

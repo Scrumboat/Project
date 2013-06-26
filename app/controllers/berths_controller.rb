@@ -16,7 +16,8 @@ class BerthsController < ApplicationController
   # GET /berths/1.json
   def show
     @berth = Berth.find(params[:id])
-	@dock = Dock.find(params[:dock_id])
+    @dock = Dock.find(params[:dock_id])
+    @pricing => Pricing.minBerthPrice
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @berth }
@@ -39,10 +40,10 @@ class BerthsController < ApplicationController
 
   # GET /berths/1/edit
   def edit
-	@dock = Dock.find(params[:dock_id])
+    @dock = Dock.find(params[:dock_id])
     @berth = Berth.find(params[:id])
-	currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum("width")
-	@spaceLeft =  @dock.length - currentTotalWidth
+    currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum("width")
+    @spaceLeft =  @dock.length - currentTotalWidth
   end
 
   # POST /berths
@@ -52,7 +53,7 @@ class BerthsController < ApplicationController
     currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
     spaceLeft = @dock.length - currentTotalWidth
     newBerth = Berth.new(params[:berth])
-	okRek = true
+    okRek = true
     respond_to do |format|
       if currentTotalWidth + newBerth.width <= @dock.length
 		if params[:berth][:Reknro].strip != ""
@@ -89,7 +90,7 @@ class BerthsController < ApplicationController
   # PUT /berths/1
   # PUT /berths/1.json
   def update
-	@dock = Dock.find(params[:dock_id])
+    @dock = Dock.find(params[:dock_id])
     @berth = Berth.find(params[:id])
 	@vanhareknro = @berth.Reknro
 	newvalue = params[:berth][:width] 
