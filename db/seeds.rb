@@ -35,9 +35,6 @@ puts 'CREATING BERTHS: 1, 2'
 Berth.create([{ id: 1, number: 1, length: 11, width: 2.4, depth: 1.6, exists: true, dock_id: 1, Reknro: 'eee-fff'},
 			{ id: 2, number: 2, length: 31, width: 5.5, depth: 2.4, exists: false, dock_id: 2, Reknro: 'aaa-bbb'}])
 
-puts 'DEFAULT ADMIN'
-user = Admin.find_or_create_by_email :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
-
 
 puts 'CREATING 2 DOCKYARDS'
 Dockyard.create([{ id: 1, length: 100, width: 60, name: "T1A"},
@@ -48,3 +45,7 @@ DockyardSpot.create([{id: 1, boat_length: 50, boat_width: 9, length: 50.8, width
                      {id: 2, length: 7, width: 2, number: 2, dockyard_id: 1},
                      {id: 3, length: 3, width: 1.5, number: 1, dockyard_id: 2}])
 
+puts 'DEFAULT ADMIN (if we got ENV variables for it)'
+if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?
+  user = Admin.find_or_create_by_email :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+end
