@@ -72,47 +72,7 @@ class BoatsController < ApplicationController
     changeJnoToId
     respond_to do |format|
       if @boat.valid? && @onkoOk
-		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil && params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
-			if is_number?(params[:boat][:Laituripaikka]) && is_number?(params[:boat][:Laituri])
-				#@dock = Dock.find_by_id(params[:boat][:Laituri])
-				if Dock.exists?(params[:boat][:Laituri])
-					@dock = Dock.find(params[:boat][:Laituri])
-					#@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-					if Berth.exists?(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka])
-						@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-						if @berth.Reknro == nil
-							@berth.Reknro = ""
-						end
-						if @berth.Reknro == "" && BigDecimal(params[:boat][:Pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:Leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:Syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
-							@berth.Reknro = params[:boat][:RekNro]
-							@berth.save
-						else
-							@boat.Laituripaikka = ""
-							@boat.Laituri = ""
-						end
-					else
-						show_jno_in_edit_instead_of_id
-						format.html { 
-							flash[:notice] = 'Virheellinen laituri/laituripaikka.'
-							render action: "new"
-						}
-					end
-				else
-					show_jno_in_edit_instead_of_id
-					format.html { 
-						flash[:notice] = 'Virheellinen laituri/laituripaikka.'
-						render action: "new"
-					}
-				end
-			else
-				show_jno_in_edit_instead_of_id
-				format.html { 
-					flash[:notice] = 'Virheellinen laituri/laituripaikka.'
-					render action: "new"
-				}
-			end
-		end
-		@boat.save
+	@boat.save
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
@@ -131,58 +91,18 @@ class BoatsController < ApplicationController
     #@boat = Boat.find(params[:id])
     #changeJnoToId
     change_jno_to_id_for_update
-	if params[:boat][:BoatsMembers_attributes] == nil
-		@onkoOk = false
-	end
+    if params[:boat][:BoatsMembers_attributes] == nil
+      @onkoOk = false
+    end
     respond_to do |format|
       if @boat.update_attributes(params[:boat]) && @onkoOk
-		if params[:boat][:Laituripaikka] != nil && params[:boat][:Laituri] != nil &&  params[:boat][:Laituripaikka].strip != "" && params[:boat][:Laituri].strip != ""
-			if is_number?(params[:boat][:Laituripaikka]) && is_number?(params[:boat][:Laituri])
-				if Dock.exists?(params[:boat][:Laituri])
-					@dock = Dock.find(params[:boat][:Laituri])
-					#@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-					if Berth.exists?(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka])
-						@berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:Laituripaikka]).first
-						if @berth.Reknro == nil
-							@berth.Reknro = ""
-						end
-						if @berth.Reknro == "" && BigDecimal(@boat.Pituus.to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(@boat.Leveys.to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(@boat.Syvyys.to_s) <= BigDecimal(@berth.depth.to_s)
-							@berth.Reknro = params[:boat][:RekNro]
-							@berth.save
-						else
-							@boat.Laituripaikka = ""
-							@boat.Laituri = ""
-							@boat.save
-						end
-					else
-						show_jno_in_edit_instead_of_id
-						format.html { 
-							flash[:notice] = 'Virheellinen laituri/laituripaikka.'
-							render action: "edit"
-						}
-					end
-				else
-					show_jno_in_edit_instead_of_id
-					format.html { 
-					flash[:notice] = 'Virheellinen laituri/laituripaikka.'
-					render action: "edit"
-					}
-				end
-			else
-				show_jno_in_edit_instead_of_id
-				format.html { 
-					flash[:notice] = 'Virheellinen laituri/laituripaikka.'
-					render action: "edit"
-				}
-			end
-		end
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
         format.html { 
-					flash[:notice] = 'Virheellinen jäsennumero.'
-					render action: "edit"
-				}
+	  flash[:notice] = 'Virheellinen jäsennumero.'
+	  render action: "edit"
+	}
         format.json { render json: @boat.errors, status: :unprocessable_entity }
       end
     end
