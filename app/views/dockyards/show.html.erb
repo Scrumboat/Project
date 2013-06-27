@@ -1,5 +1,4 @@
-<h1>Telakka <%= @dockyard.name %> </h2>
-<p id="notice"><%= notice %></p>
+<h1>Telakka <%= @dockyard.name %> </h1>
 
 <p>
   <b>Nimi:</b>
@@ -42,14 +41,14 @@
       <td><%= dys.number %></td>
       <td><%= dys.length %></td>
       <td><%= dys.width %></td>
-      <% if !dys.boat.nil? %>
-      <td><%= dys.boat.RekNro  %></td>
-      <td><%= dys.boat.Pituus  %></td>
-      <td><%= dys.boat.Leveys  %></td>
+      <% if dys.boat.nil? %>
+          <td></td>
+          <td></td>
+          <td></td>
       <% else %>
-      <td></td>
-      <td></td>
-      <td></td>
+          <td><%= dys.boat.RekNro  %></td>
+          <td><%= dys.boat.Pituus  %></td>
+          <td><%= dys.boat.Leveys  %></td>
       <% end %>
       <td><%= dys.trailer %></td>
       <td><%= dys.lift %></td>

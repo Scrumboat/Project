@@ -101,7 +101,7 @@ class MembersController < ApplicationController
 
   private
   def sort_column
-    Member.column_names.include?(params[:sort]) ? params[:sort] : Member.connection.quote_column_name("Jno")
+    Member.column_names.include?(params[:sort]) ? Member.connection.quote_column_name(params[:sort]) : Member.connection.quote_column_name("Jno")
   end
   
   def sort_direction
