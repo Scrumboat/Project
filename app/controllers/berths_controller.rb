@@ -52,41 +52,21 @@ class BerthsController < ApplicationController
     @dock = Dock.find(params[:dock_id])
     currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
     spaceLeft = @dock.length - currentTotalWidth
-    newBerth = Berth.new(params[:berth])
-    okRek = true
+    @newBerth = Berth.new(params[:berth])
+    @okRek = true
     respond_to do |format|
-      if currentTotalWidth + newBerth.width <= @dock.length
-		if params[:berth][:Reknro].strip != ""
-			@boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
-			if @boat != nil
-				if @boat.Pituus <= newBerth.length && @boat.Leveys <= newBerth.width && @boat.Syvyys <= newBerth.depth
-					@boat.Laituri = params[:dock_id]
-					@boat.Laituripaikka = params[:berth][:number]
-					@boat.save
-				else
-					params[:berth][:Reknro] = ""
-				end
-			else
-				okRek = false
-				format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
-			end
-		end
-		if !okRek
-			params[:berth][:Reknro] = ""
-		end
-		if params[:berth][:jno].strip != ""
-			params[:berth][:jno] = ""
-		end
-		@dock.berths << @dock.berths.build(params[:berth])
-		newBerth.save
-        format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.'}
+    if currentTotalWidth + @newBerth.width <= @dock.length
+      create_connection_to_the_boat
+      @dock.berths << @dock.berths.build(params[:berth])
+      @newBerth.save
+      format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.'}
       else
         format.html { redirect_to @dock, notice: 'Laituripaikkojen leveys ylitti laiturin leveyden.
          Laiturissa on tilaa: ' + spaceLeft.to_s + ' m.' }
       end
     end
   end
-
+  
   # PUT /berths/1
   # PUT /berths/1.json
   def update
@@ -100,63 +80,63 @@ class BerthsController < ApplicationController
 	isOk = BigDecimal(currentTotalWidth.to_s) <= @dock.length
 	okRek = true
 	    respond_to do |format|
-      if isOk && @berth.update_attributes(params[:berth])
-		if params[:berth][:Reknro].strip != ""
-			@boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
-			if @vanhareknro != nil
-				@boatOld = Boat.where(:RekNro => @vanhareknro).first
-			end
-			if @boat != nil
-				if @boat.Pituus <= BigDecimal(params[:berth][:length].to_s) && @boat.Leveys <= BigDecimal(params[:berth][:width].to_s) && @boat.Syvyys <= BigDecimal(params[:berth][:depth].to_s)
-					if @boatOld != nil
-						@boatOld.Laituri = ""
-						@boatOld.Laituripaikka = ""
-						@boatOld.save
-					end
-					@boat.Laituri = params[:dock_id]
-					@boat.Laituripaikka = params[:berth][:number]
-					@boat.save
-				else
-					params[:berth][:Reknro] = ""
-					@boat.Laituri = ""
-					@boat.Laituripaikka = ""
-					@boat.save
-					@berth.update_attributes(params[:berth])
-				end
-			else
-				okRek = false
-				format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
-			end
-		end
-		uusireknro = params[:berth][:Reknro]
-		if @vanhareknro == uusireknro
-		
-		else
-			if @vanhareknro != nil
-				@boatOld = Boat.where(:RekNro => @vanhareknro).first
-			end
-			if @boatOld != nil
-						@boatOld.Laituri = ""
-						@boatOld.Laituripaikka = ""
-						@boatOld.save
-			end
-		end
-		if !okRek
-			params[:berth][:Reknro] = ""
-			@berth.update_attributes(params[:berth])
-		end
-		if params[:berth][:jno].strip != ""
-			params[:berth][:jno] = ""
-			@berth.update_attributes(params[:berth])
-		end
-        format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.'}
-        format.json { head :no_content }
+if isOk && @berth.update_attributes(params[:berth])
+  if params[:berth][:Reknro].strip != ""
+    @boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
+    if @vanhareknro != nil
+      @boatOld = Boat.where(:RekNro => @vanhareknro).first
+    end
+    if @boat != nil
+      if @boat.Pituus <= BigDecimal(params[:berth][:length].to_s) && @boat.Leveys <= BigDecimal(params[:berth][:width].to_s) && @boat.Syvyys <= BigDecimal(params[:berth][:depth].to_s)
+        if @boatOld != nil
+          @boatOld.Laituri = ""
+          @boatOld.Laituripaikka = ""
+	  @boatOld.save
+	end
+        @boat.Laituri = params[:dock_id]
+        @boat.Laituripaikka = params[:berth][:number]
+        @boat.save
       else
-        format.html { 
-			flash[:notice] = 'Laituripaikkojen leveys ylitti laiturin leveyden'
-			render :edit
-		}
-        format.json { render json: @berth.errors, status: :unprocessable_entity }
+        params[:berth][:Reknro] = ""
+        @boat.Laituri = ""
+        @boat.Laituripaikka = ""
+        @boat.save
+        @berth.update_attributes(params[:berth])
+      end
+    else
+      okRek = false
+      format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
+    end
+  end
+  uusireknro = params[:berth][:Reknro]
+  if @vanhareknro == uusireknro
+		
+  else
+    if @vanhareknro != nil
+      @boatOld = Boat.where(:RekNro => @vanhareknro).first
+    end
+    if @boatOld != nil
+      @boatOld.Laituri = ""
+      @boatOld.Laituripaikka = ""
+      @boatOld.save
+    end
+  end
+  if !okRek
+    params[:berth][:Reknro] = ""
+    @berth.update_attributes(params[:berth])
+  end
+  if params[:berth][:jno].strip != ""
+    params[:berth][:jno] = ""
+    @berth.update_attributes(params[:berth])
+  end
+  format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.'}
+  format.json { head :no_content }
+  else
+    format.html { 
+      flash[:notice] = 'Laituripaikkojen leveys ylitti laiturin leveyden'
+      render :edit
+    }
+    format.json { render json: @berth.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -178,4 +158,29 @@ class BerthsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def create_connection_to_the_boat
+     if params[:berth][:Reknro].strip != ""
+        @boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
+	if @boat != nil
+	  if @boat.Pituus <= @newBerth.length && @boat.Leveys <= @newBerth.width && @boat.Syvyys <= @newBerth.depth
+	    @boat.Laituri = params[:dock_id]
+            @boat.Laituripaikka = params[:berth][:number]
+            @boat.save
+          else
+            params[:berth][:Reknro] = ""
+          end
+        else
+          @okRek = false
+          format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
+        end
+      end
+      if !@okRek
+        params[:berth][:Reknro] = ""
+      end
+      if params[:berth][:jno].strip != ""
+        params[:berth][:jno] = ""
+      end
+  end
+
 end
