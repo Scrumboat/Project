@@ -56,7 +56,7 @@ class BerthsController < ApplicationController
     @okRek = true
     respond_to do |format|
     if currentTotalWidth + @newBerth.width <= @dock.length
-      create_connection_to_the_boat
+      create_connection_to_the_boat(format)
       @dock.berths << @dock.berths.build(params[:berth])
       @newBerth.save
       format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.'}
@@ -159,7 +159,7 @@ if isOk && @berth.update_attributes(params[:berth])
     end
   end
 
-  def create_connection_to_the_boat
+  def create_connection_to_the_boat(format)
      if params[:berth][:Reknro].strip != ""
         @boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
 	if @boat != nil
