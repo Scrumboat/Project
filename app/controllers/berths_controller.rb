@@ -17,7 +17,7 @@ class BerthsController < ApplicationController
   def show
     @berth = Berth.find(params[:id])
     @dock = Dock.find(params[:dock_id])
-    @pricing => Pricing.minBerthPrice
+    #@pricing => Pricing.minBerthPrice
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @berth }
