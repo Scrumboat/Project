@@ -14,7 +14,7 @@
 
   <div class="field">    
     <%= f.label :Numero %>
-    <%= f.text_field :number %><br />
+    <%= f.text_field :number, :value => @next_available_number.nil? ? @dockyard_spot.number : @next_available_number %><br />
     <%= f.label :Leveys %>
     <%= f.text_field :width %><br />
     <%= f.label :Pituus %>

@@ -54,7 +54,7 @@
       <td><%= dys.trailer %></td>
       <td><%= dys.lift %></td>
       <td><%= link_to 'Muokkaa', edit_dockyard_dockyard_spot_path(@dockyard.id, dys) %></td>
-      <td><%= link_to 'Poista', dockyard_dockyard_spot_path(dys), method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+      <td><%= link_to 'Poista', dockyard_dockyard_spot_path(@dockyard.id, dys), method: :delete, data: { confirm: 'Oletko varma?' } %></td>
       <td></td>
     </tr>
   <% end %>

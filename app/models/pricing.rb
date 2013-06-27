@@ -5,7 +5,4 @@ class Pricing < ActiveRecord::Base
   monatize :WidthGap => 0.5
   monatize :dockyardSqPrice => 5
 
-  def minBerthPrice
-     return minBerthPrice
-  end
 end

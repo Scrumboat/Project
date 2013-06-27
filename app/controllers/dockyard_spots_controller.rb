@@ -31,7 +31,12 @@ class DockyardSpotsController < ApplicationController
   def new
     @dockyard = Dockyard.find(params[:dockyard_id])
     @dockyard_spot = @dockyard.dockyard_spots.build
-
+    dysn = DockyardSpot.find_all_by_dockyard_id(params[:dockyard_id]).last
+    if dysn.nil?
+      @next_available_number = 1
+    else
+      @next_available_number = DockyardSpot.find_all_by_dockyard_id(params[:dockyard_id]).last.number + 1
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @dockyard_spot }
@@ -51,10 +56,12 @@ class DockyardSpotsController < ApplicationController
     new_spot = DockyardSpot.new(params[:dockyard_spot])
     new_spot.dockyard_id = @dockyard.id
     boat = Boat.find_by_RekNro(params[:dockyard_spot][:boat_id])
+    new_spot.length = boat.Pituus + 0.8
+    new_spot.width = boat.Leveys + 0.8
     new_spot.boat_id = boat.id
     respond_to do |format|
-    if new_spot.save
-	format.html { redirect_to @dockyard, notice: 'Uusi telakkapaikka luotiin onnistuneesti.'}
+      if new_spot.save
+        format.html { redirect_to @dockyard, notice: 'Uusi telakkapaikka luotiin onnistuneesti.'}
       else
         format.html { redirect_to @dockyard, notice: 'Telakkapaikan luonti epäonnistui.' }
       end
@@ -73,7 +80,7 @@ class DockyardSpotsController < ApplicationController
         format.html { redirect_to @dockyard, notice: 'Telakkapaikan päivitys onnistui.'}
       else
         format.html { flash[:notice] = 'Telakkapaikan päivitys epäonnistui.'
-	              render :edit }
+        render :edit }
         format.json { render json: @berth.errors, status: :unprocessable_entity }
       end
     end
@@ -84,7 +91,7 @@ class DockyardSpotsController < ApplicationController
   def destroy
     @dockyard_spot = DockyardSpot.find(params[:id])
     @dockyard_spot.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Telakkapaikka poistettu.'}
       format.json { head :no_content }
