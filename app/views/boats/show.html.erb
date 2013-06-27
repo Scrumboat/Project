@@ -115,8 +115,8 @@
 </p>
 
 <p>
-  <b>Telakka:</b>
-  <%= @boat.Telakka %>
+  <b>Telakka / paikka:</b>
+  <%= @dockyard.name + " / " + @dockyard_spot.number.to_s unless @dockyard_spot.nil? %>
 </p>
 
 

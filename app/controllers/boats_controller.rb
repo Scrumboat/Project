@@ -20,7 +20,8 @@ class BoatsController < ApplicationController
   # GET /boats/1.json
   def show
     @boat = Boat.find(params[:id])
-
+    @dockyard_spot = DockyardSpot.find_by_boat_id(@boat.id)
+    @dockyard = Dockyard.find(@dockyard_spot.dockyard_id) unless @dockyard_spot.nil?
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @boat }
