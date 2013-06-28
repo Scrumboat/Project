@@ -16,6 +16,14 @@
       <label for="chuom"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>Huom</label> 
 
     </div>
+
+<%= form_tag members_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search" %>
+  </p>
+<% end %>
+
     <table>
       <tr>
         <th><%= sortable "Nimi" %></th>

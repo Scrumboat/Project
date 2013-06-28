@@ -20,6 +20,14 @@
       <label for="ckatsastus"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>Katsastus</label>  
 
     </div>
+
+<%= form_tag boats_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search" %>
+  </p>
+<% end %>
+
 <table>
   <tr>
     <th><%= sortable "Omistaja" %></th>

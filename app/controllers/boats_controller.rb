@@ -7,9 +7,13 @@ class BoatsController < ApplicationController
   # GET /boats.json
   before_filter :authenticate_admin!
   def index
-    @boats = Boat.order(sort_column + ' ' + sort_direction)
+    #@boats = Boat.order(sort_column + ' ' + sort_direction)
    # @boats = Boat.all
-
+    if params[:search]
+      @boats = Boat.search(params[:search])
+    else
+      @boats = Boat.order(sort_column + ' ' + sort_direction)
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @boats }

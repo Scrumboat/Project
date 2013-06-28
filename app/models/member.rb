@@ -23,4 +23,15 @@ has_many :storages
 has_many :boats, :through => :BoatsMembers
 
 attr_accessible :boats, :Ammatti, :Avain, :EmailFax, :Huom, :JK, :Jno, :KotiPuh, :Laivuri, :Liittynyt, :Lisenssi, :Maa, :MatkaPuh, :MuutosPvm, :Nimi, :Osoite, :Posti, :Sotu, :Toimi, :TyoPuh, :Varasto, :deleted, :deleted_at, :VeneRekNro
+
+
+def self.search(search)
+  if search
+    find(:all, :conditions => ['Nimi LIKE ? OR Jno LIKE ?', "%#{search}%", "%#{search}%"])
+  else
+    find(:all)
+  end
+end
+
+
 end

@@ -7,8 +7,13 @@ class MembersController < ApplicationController
   # GET /members.json
   before_filter :authenticate_admin!
   def index
-    @members = Member.order(sort_column + ' ' + sort_direction)    
-
+    #@members = Member.order(sort_column + ' ' + sort_direction)    
+    #@members = Member.search(params[:search])
+    if params[:search]
+      @members = Member.search(params[:search])
+    else
+      @members = Member.order(sort_column + ' ' + sort_direction)
+    end
   #@members = Member.find(:all, :conditions => ["deleted_at > ? OR deleted_at IS NULL", 1.years.ago])
 
     respond_to do |format|
