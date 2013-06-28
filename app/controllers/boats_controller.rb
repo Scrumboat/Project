@@ -90,8 +90,8 @@ class BoatsController < ApplicationController
   # PUT /boats/1.json
   def update
     @boat = Boat.find(params[:id], :include => [:members])
-	  @dockold = Dock.find(params[:Laituri]) unless !params.has_key?[:Laituri]
-	  @berthold = @berth = Berth.where(:dock_id => @dockold.id, :number => params[:Laituripaikka]) unless !params.has_key?[:Laituripaikka]
+	  @dockold = Dock.find(params[:Laituri]) unless !params.has_key?(:Laituri)
+	  @berthold = @berth = Berth.where(:dock_id => @dockold.id, :number => params[:Laituripaikka]) unless !params.has_key?(:Laituripaikka)
 	  #@boat = Boat.find(params[:id])
     #changeJnoToId
     change_jno_to_id_for_update

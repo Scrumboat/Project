@@ -1,8 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  Omistaja: MyString
-  JnoOs: MyString
   RekPvm: 2013-05-22
   MuutosPvm: 2013-05-22
   Nimi: MyString
@@ -21,13 +19,8 @@ one:
   Huomautukset: MyString
   Tarra: 1
   Katsastus: MyString
-  Laituri: MyString
-  Telakka: MyString
 
 two:
-  Omistaja: MyString
-  JnoOm: MyString
-  JnoOs: MyString
   RekPvm: 2013-05-22
   MuutosPvm: 2013-05-22
   Nimi: MyString
@@ -46,5 +39,3 @@ two:
   Huomautukset: MyString
   Tarra: 1
   Katsastus: MyString
-  Laituri: MyString
-  Telakka: MyString

@@ -32,7 +32,6 @@ class BoatTest < ActiveSupport::TestCase
   test "works with correct inputs" do
   @member = members(:one)
   boat = Boat.new
-  boat.Omistaja = "Karl Segelbåt"
   boat.RekPvm = "2012-09-10"
   boat.Nimi = "Virgin of the Maries"
   boat.tyyppi = "Segelbåt"
@@ -43,14 +42,12 @@ class BoatTest < ActiveSupport::TestCase
   boat.Syvyys = "0.8"
   boat.Korkeus = "2.0"
   boat.Vuosimalli = "2009"
-  boat.JnoOm = @member.Jno
   assert boat.save, "Creates a new boat with all needed information"
   end
 
   test "Year can only be an integer" do
 
   boat = Boat.new
-  boat.Omistaja = "Karl Segelbåt"
   boat.RekPvm = "2012-09-10"
   boat.Nimi = "Virgin of the Maries"
   boat.tyyppi = "Segelbåt"
@@ -67,7 +64,6 @@ class BoatTest < ActiveSupport::TestCase
   test "Length, Width, Depth and Height can only be numbers seperated with a dot" do
 
   boat = Boat.new
-  boat.Omistaja = "Karl Segelbåt"
   boat.RekPvm = "2012-09-10"
   boat.Nimi = "Virgin of the Maries"
   boat.tyyppi = "Segelbåt"

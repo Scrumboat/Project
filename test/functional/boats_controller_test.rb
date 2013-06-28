@@ -20,7 +20,7 @@ class BoatsControllerTest < ActionController::TestCase
 
   test "should create boat" do
     assert_difference('Boat.count') do
-      post :create, boat: { Huomautukset: @boat.Huomautukset, JnoOm: @member.Jno, JnoOs: @boat.JnoOs, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Laituri: @boat.Laituri, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Omistaja: @boat.Omistaja, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Telakka: @boat.Telakka, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi, BoatsMembers_attributes: {"0" => {member_id: @member.Jno, boat_id: @boat.id}} }
+      post :create, boat: { Huomautukset: @boat.Huomautukset, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi, BoatsMembers_attributes: {"0" => {member_id: @member.Jno, boat_id: @boat.id}} }
     end
 
     assert_redirected_to boat_path(assigns(:boat))
@@ -37,7 +37,7 @@ class BoatsControllerTest < ActionController::TestCase
   end
 
   test "should update boat" do
-    put :update, id: @boat, boat: { Huomautukset: @boat.Huomautukset, JnoOm: @member.Jno, JnoOs: @boat.JnoOs, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Laituri: @boat.Laituri, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Omistaja: @boat.Omistaja, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Telakka: @boat.Telakka, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi, BoatsMembers_attributes: {"0" => {member_id: @member.Jno, boat_id: @boat.id}} }
+    put :update, id: @boat, boat: { Huomautukset: @boat.Huomautukset, Katsastus: @boat.Katsastus, Korkeus: @boat.Korkeus, Leveys: @boat.Leveys, MuutosPvm: @boat.MuutosPvm, Nimi: @boat.Nimi, Pituus: @boat.Pituus, RekNro: @boat.RekNro, RekPvm: @boat.RekPvm, Syvyys: @boat.Syvyys, Tarra: @boat.Tarra, Teho: @boat.Teho, Uppouma: @boat.Uppouma, ValmMalli: @boat.ValmMalli, VenePuhA: @boat.VenePuhA, VenePuhB: @boat.VenePuhB, Vuosimalli: @boat.Vuosimalli, tyyppi: @boat.tyyppi, BoatsMembers_attributes: {"0" => {member_id: @member.Jno, boat_id: @boat.id}} }
     assert_redirected_to boat_path(assigns(:boat))
   end
 
@@ -52,7 +52,7 @@ class BoatsControllerTest < ActionController::TestCase
   test "should save new boat models to db" do
     #Malli.count is different after creating a new boat -> there must be new entry in mallis table!
     assert_difference('Malli.count') do
-      post :create, boat: { :Omistaja => "ommm", :RekPvm => "1.5.1000", :Nimi => "nimi", :tyyppi => "type-a", :RekNro => 'aaaa', :ValmMalli => 'type-a', :Pituus => 10, :Leveys => 10, :Syvyys => 10, :Vuosimalli => 1999 }
+      post :create, boat: { :RekPvm => "1.5.1000", :Nimi => "nimi", :tyyppi => "type-a", :RekNro => 'aaaa', :ValmMalli => 'type-a', :Pituus => 10, :Leveys => 10, :Syvyys => 10, :Vuosimalli => 1999 }
     end
   end
 
