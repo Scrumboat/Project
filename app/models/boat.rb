@@ -32,7 +32,7 @@ accepts_nested_attributes_for :BoatsMembers, :allow_destroy => true
 attr_accessible :BoatsMembers_attributes, :members, :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :Laituripaikka, :tag_attributes
 def self.search(search)
   if search
-    find(:all, :conditions => ['RekNro LIKE ? OR Nimi LIKE ?', "%#{search}%", "%#{search}%"])
+    find(:all, :conditions => ['"RekNro" LIKE ? OR "Nimi" LIKE ?', "%#{search}%", "%#{search}%"])
   else
     find(:all)
   end

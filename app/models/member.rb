@@ -27,7 +27,7 @@ attr_accessible :boats, :Ammatti, :Avain, :EmailFax, :Huom, :JK, :Jno, :KotiPuh,
 
 def self.search(search)
   if search
-    find(:all, :conditions => ['Nimi LIKE ? OR Jno LIKE ?', "%#{search}%", "%#{search}%"])
+    find(:all, :conditions => ['"Nimi" LIKE ? OR "Jno" LIKE ?', "%#{search}%", "%#{search}%"])
   else
     find(:all)
   end
