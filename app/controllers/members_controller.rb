@@ -10,7 +10,7 @@ class MembersController < ApplicationController
     #@members = Member.order(sort_column + ' ' + sort_direction)    
     #@members = Member.search(params[:search])
     if params[:search]
-      @members = Member.search(params[:search])
+      @members = Member.search(Member.connection.quote_column_name(params[:search]))
     else
       @members = Member.order(sort_column + ' ' + sort_direction)
     end
