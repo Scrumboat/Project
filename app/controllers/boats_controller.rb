@@ -10,7 +10,7 @@ class BoatsController < ApplicationController
     #@boats = Boat.order(sort_column + ' ' + sort_direction)
    # @boats = Boat.all
     if params[:search]
-      @boats = Boat.search(Boat.connection.quote_column_name(params[:search]))
+      @boats = Boat.search(params[:search])
     else
       @boats = Boat.order(sort_column + ' ' + sort_direction)
     end
