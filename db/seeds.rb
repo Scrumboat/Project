@@ -21,19 +21,24 @@ Boat.create([{ id: 1, RekPvm: "1-1-1990", Nimi: "Jallu Kola", tyyppi: "S/S", Rek
              { id: 2, RekPvm: "3-11-2000", Nimi: "Rommi Kola", tyyppi: "GTS", RekNro: "ccc-ddd", ValmMalli: "hoplaa", Pituus: 50,
                Leveys: 9, Syvyys: 3.5, Vuosimalli: 1949, Korkeus: 9.1 },
              { id: 3, RekPvm: "1-1-1990", Nimi: "Kossu Kola", tyyppi: "NS", RekNro: "eee-fff", ValmMalli: "nuc", Pituus: 10,
-               Leveys: 1.5, Syvyys: 1.1, Vuosimalli: 2014, Korkeus: 2.5 }])
+               Leveys: 1.5, Syvyys: 1.1, Vuosimalli: 2014, Korkeus: 2.5 },
+             { id: 3, RekPvm: "3-7-2010", Nimi: "Tupla-Omistus", tyyppi: "soutuvene", RekNro: "ggg-hhh", ValmMalli: "Terhi", Pituus: 2,
+               Leveys: 1, Syvyys: 0.3, Vuosimalli: 1986, Korkeus: 0.4}])
 
 puts 'ADDING BOATS TO MEMBERS RELATIONS'
 BoatsMember.create([{ boat_id: 2, member_id: 1},
                     { boat_id: 1, member_id: 2},
-                    { boat_id: 3, member_id: 3}])
+                    { boat_id: 3, member_id: 3},
+                    { boat_id: 4, member_id: 1},
+                    { boat_id: 4, member_id: 3}])
 
 puts 'CREATING DOCKS: 1, 2'
 Dock.create([{ length: 30}, {length: 40}])
 
 puts 'CREATING BERTHS: 1, 2'
 Berth.create([{ id: 1, number: 1, length: 11, width: 2.4, depth: 1.6, exists: true, dock_id: 1, Reknro: 'eee-fff'},
-			{ id: 2, number: 2, length: 31, width: 5.5, depth: 2.4, exists: false, dock_id: 2, Reknro: 'aaa-bbb'}])
+              { id: 2, number: 2, length: 31, width: 5.5, depth: 2.4, exists: false, dock_id: 2, Reknro: 'aaa-bbb'},
+              { id: 3, number: 3, length: 9, width: 3.5, depth: 3.2, exists: true, dock_id: 1, Reknro: 'ccc-ddd'}])
 
 
 puts 'CREATING 2 DOCKYARDS'
@@ -44,6 +49,9 @@ puts 'CREATING DOCKYARD_SPOTS'
 DockyardSpot.create([{id: 1, boat_length: 50, boat_width: 9, length: 50.8, width: 9.8, number: 1, dockyard_id: 1, boat_id: 2},
                      {id: 2, length: 7, width: 2, number: 2, dockyard_id: 1},
                      {id: 3, length: 3, width: 1.5, number: 1, dockyard_id: 2}])
+
+puts 'CREATING PRICING'
+Pricing.create([{target: "minLaituripaikanHinta", data: 50}, {target: "veneenHinnanKasvu", data: 10}, {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25}, {target: "telakanNeliohinta", data: 5}])
 
 puts 'DEFAULT ADMIN (if we got ENV variables for it)'
 if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?

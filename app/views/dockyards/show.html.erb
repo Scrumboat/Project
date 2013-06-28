@@ -15,6 +15,11 @@
   <%= @dockyard.width %>
 </p>
 
+<p>
+  <b>Tilaa jäljellä / Koko telakka:  </b>
+  <%= @space_left %> m&sup2; / <%= @dockyard.width*@dockyard.length %> m&sup2;
+</p>
+
 
 <%= link_to 'Muokkaa', edit_dockyard_path(@dockyard) %> |
 <%= link_to 'Takaisin', dockyards_path %>
@@ -25,11 +30,11 @@
 <table>
   <tr>
     <th>Numero</th>
-    <th>Pituus</th>
-    <th>Leveys</th>
+    <th>Paikan pituus</th>
+    <th>Paikan leveys</th>
     <th>Vene</th>
-    <th>Vpituus</th>
-    <th>Vleveys</th>
+    <th>Veneen pituus</th>
+    <th>Veneen leveys</th>
     <th>Trailer</th>
     <th>Nosto</th>
     <th></th>
@@ -46,12 +51,12 @@
           <td></td>
           <td></td>
       <% else %>
-          <td><%= dys.boat.RekNro  %></td>
+          <td><%= link_to dys.boat.RekNro, dys.boat  %></td>
           <td><%= dys.boat.Pituus  %></td>
           <td><%= dys.boat.Leveys  %></td>
       <% end %>
-      <td><%= dys.trailer %></td>
-      <td><%= dys.lift %></td>
+      <td><%= dys.trailer ? 'Kyllä' : 'Ei' %></td>
+      <td><%= dys.lift ? 'Kyllä' : 'Ei' %></td>
       <td><%= link_to 'Muokkaa', edit_dockyard_dockyard_spot_path(@dockyard.id, dys) %></td>
       <td><%= link_to 'Poista', dockyard_dockyard_spot_path(@dockyard.id, dys), method: :delete, data: { confirm: 'Oletko varma?' } %></td>
       <td></td>

@@ -76,8 +76,12 @@ class DockyardSpotsController < ApplicationController
     @dockyard = Dockyard.find(params[:dockyard_id])
     @dockyard_spot = DockyardSpot.find(params[:id])
     @boat = Boat.find_by_RekNro(params[:dockyard_spot][:boat_id])
-    params[:dockyard_spot][:boat_id] = @boat.id
-    can_fit = check_if_it_fits
+    params[:dockyard_spot][:boat_id] = @boat.id unless @boat.nil?
+    if @boat.nil?
+      can_fit = true
+    elsif
+      can_fit = check_if_it_fits
+    end
 
     respond_to do |format|
       if boat_already_has_spot && can_fit && @dockyard_spot.update_attributes(params[:dockyard_spot])
@@ -112,16 +116,16 @@ end
 def check_if_it_fits
   current_width  = DockyardSpot.where(:dockyard_id => params[:dockyard_id]).sum('width')
   current_length = DockyardSpot.where(:dockyard_id => params[:dockyard_id]).sum('length')
-  spot_width     = @boat.nil? ? @dockyard_spot.width : @boat.Leveys + 0.8
-  spot_length    = @boat.nil? ? @dockyard_spot.length : @boat.Pituus + 0.8
+  spot_width     = @dockyard_spot.width
+  spot_length    = @dockyard_spot.length
   if !@boat.nil?
-    if @dockyard_spot.width < @boat.Leveys
+    if @dockyard_spot.width < @boat.Leveys + 0.8
       return false
-    elsif @dockyard_spot.length < @boat.Pituus
+    elsif @dockyard_spot.length < @boat.Pituus + 0.8
       return false
     end
   end
-  return current_width + spot_width <= @dockyard.width && current_length + spot_length <= @dockyard.length
+  return spot_width * spot_width < current_width * current_length
 end
 
 def boat_already_has_spot

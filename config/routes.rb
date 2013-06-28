@@ -1,5 +1,8 @@
 Venerekisteri::Application.routes.draw do
   
+  resources :pricings
+
+
   resources :dockyards do
     resources :dockyard_spots
   end
