@@ -38,7 +38,7 @@
             <td><%= link_to berth.Reknro.to_s, Boat.where(:RekNro => berth.Reknro).first %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
-            <td><%= @pricing %>
+            <td><%= ((berth.width.to_f)/(@leveysLaituripaikanHinnanKasvuun.to_f)).ceil*@veneenHinnanKasvu+@minLaituripaikanHinta %></td>
 	    <td><%= berth.printExists %></td>
     	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
 	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
@@ -57,6 +57,7 @@
             <th>Reknro</th>
             <th>Jno</th>
             <th>Vartiovuoro</th>
+            <th>Hinta</th>
             <th>On olemassa</th>
 	    <th></th>
 	    <th></th>
@@ -69,9 +70,10 @@
 	    <td><%= berth.length.to_s + ' m' %></td>
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
-		<td><%= berth.Reknro.to_s %></td>
-		<td><%= berth.jno.to_s %></td>
-		<td><%= berth.vartio.to_s %></td>
+            <td><%= berth.Reknro.to_s %></td>
+            <td><%= berth.jno.to_s %></td>
+            <td><%= berth.vartio.to_s %></td>
+            <td><%= ((berth.width.to_f)/(@leveysLaituripaikanHinnanKasvuun.to_f)).ceil*@veneenHinnanKasvu+@minLaituripaikanHinta %></td>
 	    <td><%= berth.printExists %></td>
     	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
 	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>

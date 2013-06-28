@@ -33,7 +33,8 @@ Dock.create([{ length: 30}, {length: 40}])
 
 puts 'CREATING BERTHS: 1, 2'
 Berth.create([{ id: 1, number: 1, length: 11, width: 2.4, depth: 1.6, exists: true, dock_id: 1, Reknro: 'eee-fff'},
-			{ id: 2, number: 2, length: 31, width: 5.5, depth: 2.4, exists: false, dock_id: 2, Reknro: 'aaa-bbb'}])
+              { id: 2, number: 2, length: 31, width: 5.5, depth: 2.4, exists: false, dock_id: 2, Reknro: 'aaa-bbb'},
+              { id: 3, number: 3, length: 9, width: 3.5, depth: 3.2, exists: true, dock_id: 1, Reknro: 'ccc-ddd'}])
 
 
 puts 'CREATING 2 DOCKYARDS'
@@ -44,6 +45,9 @@ puts 'CREATING DOCKYARD_SPOTS'
 DockyardSpot.create([{id: 1, boat_length: 50, boat_width: 9, length: 50.8, width: 9.8, number: 1, dockyard_id: 1, boat_id: 2},
                      {id: 2, length: 7, width: 2, number: 2, dockyard_id: 1},
                      {id: 3, length: 3, width: 1.5, number: 1, dockyard_id: 2}])
+
+puts 'CREATING PRICING'
+Pricing.create([{target: "minLaituripaikanHinta", data: 50}, {target: "veneenHinnanKasvu", data: 10}, {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25}, {target: "telakanNeliohinta", data: 5}])
 
 puts 'DEFAULT ADMIN (if we got ENV variables for it)'
 if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?

@@ -17,6 +17,12 @@ class DocksController < ApplicationController
     @berths = @dock.berths
     currentTotalWidth = Berth.where(:dock_id => params[:id]).sum("width")
     @spaceLeft = @dock.length - currentTotalWidth
+    @minLaituripaikanHinta = Pricing.where(:target => "minLaituripaikanHinta").first.data
+    @veneenHinnanKasvu = Pricing.where(:target => "veneenHinnanKasvu").first.data
+    @leveysLaituripaikanHinnanKasvuun = Pricing.where(:target => "leveysLaituripaikanHinnanKasvuun").first.data
+     #Dock.find(:width => params[:id])
+    #<td><%= (berth.width/@leveysLaituripaikanHinnanKasvuun.to_s).ceil.to_s %></td>
+     #<td><%= BigDecimal(berth.width.to_s)/BigDecimal(@leveysLaituripaikanHinnanKasvuun.to_s).to_s.ceil %></td>
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @dock }

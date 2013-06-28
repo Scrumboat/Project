@@ -1,0 +1,13 @@
+<p>
+  <b>Kohde:</b>
+  <%= @pricing.target %>
+</p>
+
+<p>
+  <b>Arvo:</b>
+  <%= @pricing.data %>
+</p>
+
+
+<%= link_to 'Muokkaa', edit_pricing_path(@pricing) %> |
+<%= link_to 'Takaisin', pricings_path %>
