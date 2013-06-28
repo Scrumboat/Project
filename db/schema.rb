@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130624151825) do
+ActiveRecord::Schema.define(:version => 20130628113153) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -48,9 +48,6 @@ ActiveRecord::Schema.define(:version => 20130624151825) do
   add_index "berths", ["dock_id"], :name => "index_berths_on_dock_id"
 
   create_table "boats", :force => true do |t|
-    t.string   "Omistaja"
-    t.string   "JnoOm"
-    t.string   "JnoOs"
     t.date     "RekPvm"
     t.date     "MuutosPvm"
     t.string   "Nimi"
@@ -69,11 +66,9 @@ ActiveRecord::Schema.define(:version => 20130624151825) do
     t.string   "Huomautukset"
     t.integer  "Tarra"
     t.string   "Katsastus"
-    t.string   "Laituri"
     t.string   "Telakka"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "Laituripaikka"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "boats_members", :force => true do |t|
@@ -149,7 +144,6 @@ ActiveRecord::Schema.define(:version => 20130624151825) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "deleted",    :default => false
     t.date     "deleted_at"
-    t.string   "VeneRekNro"
   end
 
   create_table "ownerships", :force => true do |t|
@@ -157,6 +151,13 @@ ActiveRecord::Schema.define(:version => 20130624151825) do
     t.datetime "updated_at", :null => false
     t.integer  "boat_id"
     t.integer  "member_id"
+  end
+
+  create_table "pricings", :force => true do |t|
+    t.string   "target"
+    t.float    "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "storages", :force => true do |t|

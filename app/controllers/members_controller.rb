@@ -51,10 +51,10 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-	if @member.VeneRekNro.present?
-		@boat = Boat.find_by_RekNro(params[:member][:VeneRekNro])
-		@boats_member = @member.BoatsMembers.create(:boat_id => @boat.id)
-	end
+	      if params.has_key?(:VeneRekNro) && params[:VeneRekNro].strip != ''
+		      @boat = Boat.find_by_RekNro(params[:VeneRekNro])
+          @boats_member = @member.BoatsMembers.create(:boat_id => @boat.id)
+	      end
         format.html { redirect_to @member, notice: 'Jäsen luotiin onnistuneesti.' }
         format.json { render json: @member, status: :created, location: @member }
       else
@@ -87,12 +87,12 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.boats.count > 0
-        format.html { redirect_to @member, alert: "Jäsenen veneet poistettava ensin." }
+        format.html { redirect_to @member, alert: 'Jäsenen veneet poistettava ensin.' }
         format.json { head :no_content }
       else
-	@member.deleted = true
-	@member.deleted_at = DateTime.now
-	@member.save
+	      @member.deleted = true
+	      @member.deleted_at = DateTime.now
+	      @member.save
         format.html { redirect_to members_url }
         format.json { head :no_content}
       end

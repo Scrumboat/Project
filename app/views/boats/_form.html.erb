@@ -19,10 +19,6 @@
 <p><%= f.link_to_add "Uusi yhteys", :BoatsMembers %></p>
 
   <div class="field">
-    <%= f.label :JnoOs %><br />
-    <%= f.text_field :JnoOs %>
-  </div>
-  <div class="field">
     <%= f.label :RekPvm %><br />
     <%= f.date_select :RekPvm %>
   </div>
@@ -101,15 +97,11 @@
   </div>
   <div class="field">
     <%= f.label :Laituri %><br />
-    <%= f.text_field :Laituri %>
+    <%= number_field_tag :Laituri %>
   </div>
   <div class="field">
     <%= f.label :Laituripaikka %><br />
-    <%= f.text_field :Laituripaikka %>
-  </div>
-  <div class="field">
-    <%= f.label :Telakka %><br />
-    <%= f.text_field :Telakka %>
+    <%= number_field_tag :Laituripaikka %>
   </div>
   <div class="actions">
     <%= f.submit %>
