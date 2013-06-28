@@ -29,7 +29,7 @@ def self.search(search)
   if search
     param_string = search.to_s
     param_int    = search.to_i rescue param_int = nil
-    find(:all, :conditions => ['"Nimi" LIKE ? OR "Jno" LIKE ?', "%#{param_string}%", "%#{param_int}%"])
+    find(:all, :conditions => ['"Nimi" LIKE ? OR "Jno" = ?', "%#{param_string}%", param_int])
   else
     find(:all)
   end
