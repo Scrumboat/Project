@@ -43,18 +43,18 @@ class StoragesController < ApplicationController
   # POST /storages.json
   def create
     @storage = Storage.new(params[:storage])
-	fetch_member_and_set_isOk
+    fetch_member_and_set_isOk
     respond_to do |format|
       if @isOk && @storage.save
-		@member.Varasto = @storage.vk
-		@member.save
-        format.html { redirect_to @storage, notice: 'Varastokoppi luotu onnistuneesti'}
-        format.json { render json: @storage, status: :created, location: @storage }
+        @member.Varasto = @storage.vk
+        @member.save
+      format.html { redirect_to @storage, notice: 'Varastokoppi luotu onnistuneesti'}
+      format.json { render json: @storage, status: :created, location: @storage }
       else
         format.html { 
-			flash[:notice] = 'Virheellinen Jno.'
-			render :new
-		}
+          flash[:notice] = 'Virheellinen Jno.'
+          render :new
+        }
         format.json { render json: @storage.errors, status: :unprocessable_entity }
       end
     end
@@ -69,22 +69,22 @@ class StoragesController < ApplicationController
 	
     respond_to do |format|
       if @isOk && @storage.update_attributes(params[:storage])
-		if oldjno != @storage.jno
-			oldmember = Member.where(:Jno => oldjno).first
-			if oldmember != nil
-				oldmember.Varasto = ""
-				oldmember.save
-			end
-		end
-	  	@member.Varasto = @storage.vk
-		@member.save
+        if oldjno != @storage.jno
+          oldmember = Member.where(:Jno => oldjno).first
+          if oldmember != nil
+            oldmember.Varasto = ""
+            oldmember.save
+          end
+        end
+        @member.Varasto = @storage.vk
+        @member.save
         format.html { redirect_to @storage, notice: 'Varastokoppi muokattu onnistuneesti' }
         format.json { head :no_content }
       else
         format.html { 
-			flash[:notice] = 'Virheellinen Jno.'
-			render :edit
-		}
+          flash[:notice] = 'Virheellinen Jno.'
+          render :edit
+        }
         format.json { render json: @storage.errors, status: :unprocessable_entity }
       end
     end
@@ -108,10 +108,10 @@ class StoragesController < ApplicationController
   end
   
   def fetch_member_and_set_isOk
-	@isOk= true
-	@member = Member.where(:Jno => params[:storage][:jno]).first
-	if @member == nil
-		@isOk = false
-	end
+    @isOk= true
+    @member = Member.where(:Jno => params[:storage][:jno]).first
+    if @member == nil
+      @isOk = false
+    end
   end
 end
