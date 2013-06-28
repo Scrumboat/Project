@@ -1,18 +1,11 @@
 
-<p>
-  <b>Omistaja:</b>
-  <%= @boat.Omistaja %>
-</p>
+<b>Omistaja(:t)</b>
+<ul>
+  <% @boat.members.each do |member| %>
+      <li><%= link_to member.Nimi , member_path(member) %></li>
+  <% end %>
+</ul>
 
-<p>
-  <b>Jnoom:</b>
-  <%= @boat.JnoOm %>
-</p>
-
-<p>
-  <b>Jnoos:</b>
-  <%= @boat.JnoOs %>
-</p>
 
 <p>
   <b>Rekpvm:</b>
@@ -105,27 +98,18 @@
 </p>
 
 <p>
-  <b>Laituri:</b>
-  <%= @boat.Laituri %>
-</p>
-
-<p>
-  <b>Laituripaikka:</b>
-  <%= @boat.Laituripaikka %>
+  <b>Laituri / paikka:</b>
+  <% berth_string = @berth.dock_id.to_s + ' / ' + @berth.number.to_s unless @berth.nil? %>
+  <%= link_to berth_string, edit_dock_berth_path(@berth.dock_id, @berth) unless @berth.nil? %>
 </p>
 
 <p>
   <b>Telakka / paikka:</b>
-  <%= @dockyard.name + " / " + @dockyard_spot.number.to_s unless @dockyard_spot.nil? %>
+    <% dockyard_string = @dockyard.name + " / " + @dockyard_spot.number.to_s unless @dockyard.nil? %>
+    <%= link_to dockyard_string, edit_dockyard_dockyard_spot_path(@dockyard, @dockyard_spot) unless @dockyard.nil? %>
 </p>
 
 
-<b>Omistaja(:t)</b>
-<ul>
-	<% @boat.members.each do |member| %>
-		<li><%= link_to member.Nimi , member_path(member) %></li>
-	<% end %>
-</ul>
 
 
 

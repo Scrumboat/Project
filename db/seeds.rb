@@ -21,12 +21,16 @@ Boat.create([{ id: 1, RekPvm: "1-1-1990", Nimi: "Jallu Kola", tyyppi: "S/S", Rek
              { id: 2, RekPvm: "3-11-2000", Nimi: "Rommi Kola", tyyppi: "GTS", RekNro: "ccc-ddd", ValmMalli: "hoplaa", Pituus: 50,
                Leveys: 9, Syvyys: 3.5, Vuosimalli: 1949, Korkeus: 9.1 },
              { id: 3, RekPvm: "1-1-1990", Nimi: "Kossu Kola", tyyppi: "NS", RekNro: "eee-fff", ValmMalli: "nuc", Pituus: 10,
-               Leveys: 1.5, Syvyys: 1.1, Vuosimalli: 2014, Korkeus: 2.5 }])
+               Leveys: 1.5, Syvyys: 1.1, Vuosimalli: 2014, Korkeus: 2.5 },
+             { id: 3, RekPvm: "3-7-2010", Nimi: "Tupla-Omistus", tyyppi: "soutuvene", RekNro: "ggg-hhh", ValmMalli: "Terhi", Pituus: 2,
+               Leveys: 1, Syvyys: 0.3, Vuosimalli: 1986, Korkeus: 0.4}])
 
 puts 'ADDING BOATS TO MEMBERS RELATIONS'
 BoatsMember.create([{ boat_id: 2, member_id: 1},
                     { boat_id: 1, member_id: 2},
-                    { boat_id: 3, member_id: 3}])
+                    { boat_id: 3, member_id: 3},
+                    { boat_id: 4, member_id: 1},
+                    { boat_id: 4, member_id: 3}])
 
 puts 'CREATING DOCKS: 1, 2'
 Dock.create([{ length: 30}, {length: 40}])

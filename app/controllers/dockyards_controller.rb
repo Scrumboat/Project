@@ -16,8 +16,13 @@ class DockyardsController < ApplicationController
   # GET /dockyards/1
   # GET /dockyards/1.json
   def show
-    @dockyard = Dockyard.find(params[:id])
+    @dockyard       = Dockyard.find(params[:id])
     @dockyard_spots = @dockyard.dockyard_spots
+    length_taken    = DockyardSpot.where(:dockyard_id => params[:id]).sum('length')
+    width_taken     = DockyardSpot.where(:dockyard_id => params[:id]).sum('width')
+    @space_left     = (@dockyard.length * @dockyard.width) - (length_taken * width_taken)
+    @width_left     = @dockyard.width - width_taken
+    @length_left    = @dockyard.length - length_taken
 
     respond_to do |format|
       format.html # show.html.erb
