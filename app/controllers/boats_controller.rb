@@ -103,7 +103,7 @@ class BoatsController < ApplicationController
       @onkoOk = false
     end
     respond_to do |format|
-      if @boat.update_attributes(params[:boat]) && @onkoOk
+      if @onkoOk && @boat.update_attributes(params[:boat])
 	    check_dock_and_berth(format)
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
