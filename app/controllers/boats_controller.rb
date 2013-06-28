@@ -22,6 +22,7 @@ class BoatsController < ApplicationController
     @boat = Boat.find(params[:id])
     @dockyard_spot = DockyardSpot.find_by_boat_id(@boat.id)
     @dockyard = Dockyard.find(@dockyard_spot.dockyard_id) unless @dockyard_spot.nil?
+    @berth = Berth.find_by_Reknro(@boat.RekNro)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @boat }
