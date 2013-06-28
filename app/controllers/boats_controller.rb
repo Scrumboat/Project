@@ -236,7 +236,7 @@ class BoatsController < ApplicationController
 
   private
     def sort_column
-      Boat.column_names.include?(params[:sort]) ? Boat.connection.quote_column_name(params[:sort]) : Boat.connection.quote_column_name("Omistaja")
+      Boat.column_names.include?(params[:sort]) ? Boat.connection.quote_column_name(params[:sort]) : Boat.connection.quote_column_name("Nimi")
     end
   
     def sort_direction
