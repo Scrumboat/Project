@@ -65,7 +65,15 @@ class DockyardSpotsController < ApplicationController
       if boat_already_has_spot && can_fit && @dockyard_spot.save
         format.html { redirect_to @dockyard, notice: 'Uusi telakkapaikka luotiin onnistuneesti.'}
       else
-        format.html { render action: "new", alert: can_fit ? 'Telakkapaikan luonti epäonnistui.' : 'Ei tarpeeksi tilaa veneelle.' }
+        if !can_fit
+          err_msg = 'Ei tarpeeksi tilaa veneelle.'
+        elsif !boat_already_has_spot
+          err_msg = 'Veneellä on jo telakkapaikka.'
+        else
+          err_msg = 'Telakkapaikan luonti epäonnistui.'
+        end
+        format.html { flash.now[:alert] = err_msg
+                      render action: 'new' }
       end
     end
   end
@@ -125,7 +133,7 @@ def check_if_it_fits
       return false
     end
   end
-  return spot_width * spot_width < current_width * current_length
+  return spot_width * spot_length + current_width * current_length < @dockyard.width * @dockyard.length
 end
 
 def boat_already_has_spot
