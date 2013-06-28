@@ -25,7 +25,7 @@ notifications:
     - ! '----'
 after_success:
 - sudo apt-get install uuid-runtime
-- ./travis_to_heroku.rb
+- if [[ "$TRAVIS_BRANCH" == "master" ]]; then ./travis_to_heroku.rb; fi
 env:
   global:
     secure: ! 'sFt1s32JjoOlI1+Dyfr2ffriIKnClsNznzngEeRWhGlstR8fX7gK8F60psXZ
