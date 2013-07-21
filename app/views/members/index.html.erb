@@ -3,50 +3,59 @@
 </script>
 <script src="/assets/memberfilter.js">
 </script>
-<body>
+<script src="/assets/jquery.tablesorter.js">
+</script>
+<body onload="hideAll();">
+  
   <h1>Jäsenet</h1>
-    <div>Filtterit
-      <label for="ctoimi"><input type="checkbox" id="ctoimi" onclick="toggle('.toimi', this)"/>Toimi</label> 
-      <label for="clisenssi"><input type="checkbox" id="clisenssi" onclick="toggle('.lisenssi', this)"/>Lisenssi</label> 
-      <label for="cposti"><input type="checkbox" id="cposti" onclick="toggle('.posti', this)"/>Posti</label> 
-      <label for="cmaa"><input type="checkbox" id="cmaa" onclick="toggle('.maa', this)"/>Maa</label> 
-      <label for="claivuri"><input type="checkbox" id="claivuri" onclick="toggle('.laivuri', this)"/>Laivuri</label> 
-      <label for="cvarasto"><input type="checkbox" id="cvarasto" onclick="toggle('.varasto', this)"/>Varasto</label> 
-      <label for="cavain"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>Avain</label> 
-      <label for="chuom"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>Huom</label> 
 
-    </div>
-
-<%= form_tag members_path, :method => 'get' do %>
+  <%= form_tag members_path, :method => 'get' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search" %>
   </p>
-<% end %>
+  <% end %>
 
-    <table>
+    <H4>Filtterit</H4>
+
+    <form class="form-inline">
+
+      <label for="ctoimi" class="checkbox"><input type="checkbox" id="ctoimi" onclick="toggle('.toimi', this)"/>Toimi</label> 
+      <label for="clisenssi" class="checkbox"><input type="checkbox" id="clisenssi" onclick="toggle('.lisenssi', this)"/>Lisenssi</label> 
+      <label for="cposti" class="checkbox"><input type="checkbox" id="cposti" onclick="toggle('.posti', this)"/>Posti</label> 
+      <label for="cmaa" class="checkbox"><input type="checkbox" id="cmaa" onclick="toggle('.maa', this)"/>Maa</label> 
+      <label for="claivuri" class="checkbox"><input type="checkbox" id="claivuri" onclick="toggle('.laivuri', this)"/>Laivuri</label> 
+      <label for="cvarasto" class="checkbox"><input type="checkbox" id="cvarasto" onclick="toggle('.varasto', this)"/>Varasto</label> 
+      <label for="cavain" class="checkbox"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>Avain</label> 
+      <label for="chuom" class="checkbox"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>Huom</label> 
+
+    </form>
+
+    <table id="myTable" class="table table-condensed">
+      <thead>
       <tr>
-        <th><%= sortable "Nimi" %></th>
-        <th><%= sortable "Jno" %></th>
-        <th><%= sortable "MatkaPuh" %></th>
-        <th><%= sortable "EmailFax" %></th>
-        <th><%= sortable "Sotu" %></th>
-        <th><%= sortable "Liittynyt" %></th>
-        <th><%= sortable "JK" %></th>
-        <th class="toimi"><%= sortable "Toimi" %></th>
-        <th class="lisenssi"><%= sortable "Lisenssi" %></th>
-        <th class="posti"><%= sortable "Posti" %></th>
-        <th class="maa"><%= sortable "Maa" %></th>
-        <th class="laivuri"><%= sortable "Laivuri" %></th>
-        <th class="varasto"><%= sortable "Varasto" %></th>
-        <th class="avain"><%= sortable "Avain" %></th>
-        <th class="huom"><%= sortable "Huom" %></th>
-        <th><%= sortable "MuutosPvm" %></th>
+        <th>Nimi</th>
+        <th>Jno</th>
+        <th>MatkaPuh</th>
+        <th>EmailFax</th>
+        <th>Sotu</th>
+        <th>Liittynyt</th>
+        <th>JK</th>
+        <th class="toimi">Toimi</th>
+        <th class="lisenssi">Lisenssi</th>
+        <th class="posti">Posti</th>
+        <th class="maa">Maa</th>
+        <th class="laivuri">Laivuri</th>
+        <th class="varasto">Varasto</th>
+        <th class="avain">Avain</th>
+        <th class="huom">Huom</th>
+        <th>MuutosPvm</th>
         <th>POISTETTU</th>
         <th></th>
         <th></th>
         <th></th>
       </tr>
+      </thead>
 
     <% for member in @members %>
       <tr>
@@ -79,4 +88,11 @@
     <%= link_to 'Luo uusi jäsen', new_member_path %>
     <br />
     <%= link_to 'Main menu', root_path %>
+  <script>
+  $(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+  ); 
+  </script>
 </body>

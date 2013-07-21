@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class BoatsController < ApplicationController
 
-  helper_method :sort_column, :sort_direction
+ # helper_method :sort_column, :sort_direction
 
   # GET /boats
   # GET /boats.json
@@ -9,11 +9,11 @@ class BoatsController < ApplicationController
   def index
     #@boats = Boat.order(sort_column + ' ' + sort_direction)
    # @boats = Boat.all
-    if params[:search]
+   # if params[:search]
       @boats = Boat.search(params[:search])
-    else
-      @boats = Boat.order(sort_column + ' ' + sort_direction)
-    end
+   # else
+     # @boats = Boat.order(sort_column + ' ' + sort_direction)
+   # end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @boats }
@@ -234,12 +234,12 @@ class BoatsController < ApplicationController
     end
   end
 
-  private
-    def sort_column
-      Boat.column_names.include?(params[:sort]) ? Boat.connection.quote_column_name(params[:sort]) : Boat.connection.quote_column_name("Nimi")
-    end
+ # private
+   # def sort_column
+    #  Boat.column_names.include?(params[:sort]) ? Boat.connection.quote_column_name(params[:sort]) : Boat.connection.quote_column_name("Nimi")
+    #end
   
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
-    end
+   # def sort_direction
+     # %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    #end
 end
