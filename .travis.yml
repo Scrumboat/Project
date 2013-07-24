@@ -4,6 +4,7 @@ rvm:
 - 1.9.3
 before_install:
 - gem install bundler
+- gem install heroku-headless
 before_script:
 - bundle exec rake db:migrate
 script:

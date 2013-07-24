@@ -13,7 +13,7 @@ gem 'bootstrap-sass'
 
 
 # Deploy to heroku from travis
-gem 'heroku-headless'
+# gem 'heroku-headless'
 
 # for Money paremeters
 gem 'money-rails'
