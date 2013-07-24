@@ -1,9 +1,9 @@
----
 language: ruby
 rvm:
 - 1.9.3
 before_install:
 - gem install bundler
+#- gem install heroku-headless
 before_script:
 - bundle exec rake db:migrate
 script:
@@ -23,9 +23,9 @@ notifications:
     - ! 'Commit message : %{commit_message}'
     - ! 'Build details  : %{build_url}'
     - ! '----'
-after_success:
-- sudo apt-get install uuid-runtime
-- if [[ "$TRAVIS_BRANCH" == "master" ]]; then ./travis_to_heroku.rb; fi
+#after_success:
+#- sudo apt-get install uuid-runtime
+#- if [[ "$TRAVIS_BRANCH" == "master" ]]; then ./travis_to_heroku.rb; fi
 env:
   global:
     secure: ! 'sFt1s32JjoOlI1+Dyfr2ffriIKnClsNznzngEeRWhGlstR8fX7gK8F60psXZ
@@ -33,3 +33,10 @@ env:
       ASZn3HVtStyQ9Zhzfk+v4Kh7PA5W8ZNfE0l7pRqX0GafG91QphplRAnwY7VV
 
       0hZ916jzAhYUqbNoGAAFOA0IMB9bTCo1ofn9TXHRu8344pGt2VU='
+deploy:
+  provider: heroku
+  api_key:
+    secure: D7C10oLmx2q7KOh+nEEhLSqwnu3sPcDY/I/AcjQGOjcJHf8Tb2i0R1j/iMbZEQkNIqje4ksfB84FxSn2l+9VNcqqWKSrLsxB5N28firpRIJtKO4E+yxqy4H30m6EmTDhUY34dF6B8wflSczbSlFSTTn2x8e+zHc2OqpH8hEdGKE=
+  app: scrumboat
+  on:
+    repo: Scrumboat/Project
