@@ -4,6 +4,15 @@
 </p>
 
 <p>
+  <b>Laskut: </b>
+  <ul>
+    <% @member.invoices.each do |invoice| %>
+      <li><%= link_to invoice.viitenumero, invoice_path(invoice) %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
   <b>Jno:</b>
   <%= @member.Jno %>
 </p>
