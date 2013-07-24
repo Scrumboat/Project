@@ -7,28 +7,28 @@
 <h1>Veneet</h1>
 <h2></h2>
   <div>Filtterit
-      <label for="ctyyppi"><input type="checkbox" id="ctyyppi" onclick="toggle('.tyyppi', this)"/>Tyyppi</label> 
-      <label for="creknro"><input type="checkbox" id="creknro" onclick="toggle('.reknro', this)"/>RekNro</label> 
-      <label for="cvalmmalli"><input type="checkbox" id="cvalmmalli" onclick="toggle('.valmmalli', this)"/>ValmMalli</label> 
-      <label for="cpituus"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>Pituus</label> 
-      <label for="cleveys"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>Leveys</label> 
-      <label for="csyvyys"><input type="checkbox" id="csyvyys" onclick="toggle('.syvyys', this)"/>Syvyys</label> 
-      <label for="ckorkeus"><input type="checkbox" id="ckorkeus" onclick="toggle('.korkeus', this)"/>Korkeus</label> 
-      <label for="cteho"><input type="checkbox" id="cteho" onclick="toggle('.teho', this)"/>Teho</label>
-      <label for="cvuosimalli"><input type="checkbox" id="cvuosimalli" onclick="toggle('.vuosimalli', this)"/>Vuosimalli</label> 
-      <label for="chuomautukset"><input type="checkbox" id="chuomautukset" onclick="toggle('.huomautukset', this)"/>Huomautukset</label> 
-      <label for="ckatsastus"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>Katsastus</label>  
+      <label class="checkbox inline" for="ctyyppi"><input name="checkboxes[]" type="checkbox" id="ctyyppi" onclick="toggle('.tyyppi', this)" />Tyyppi</label>
+      <label class="checkbox inline" for="creknro"><input name="checkboxes[]" type="checkbox" id="creknro" onclick="toggle('.reknro', this)"/>RekNro</label>
+      <label class="checkbox inline" for="cvalmmalli"><input name="checkboxes[]" type="checkbox" id="cvalmmalli" onclick="toggle('.valmmalli', this)"/>ValmMalli</label>
+      <label class="checkbox inline" for="cpituus"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>Pituus</label>
+      <label class="checkbox inline" for="cleveys"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>Leveys</label>
+      <label class="checkbox inline" for="csyvyys"><input type="checkbox" id="csyvyys" onclick="toggle('.syvyys', this)"/>Syvyys</label>
+      <label class="checkbox inline" for="ckorkeus"><input type="checkbox" id="ckorkeus" onclick="toggle('.korkeus', this)"/>Korkeus</label>
+      <label class="checkbox inline" for="cteho"><input type="checkbox" id="cteho" onclick="toggle('.teho', this)"/>Teho</label>
+      <label class="checkbox inline" for="cvuosimalli"><input type="checkbox" id="cvuosimalli" onclick="toggle('.vuosimalli', this)"/>Vuosimalli</label>
+      <label class="checkbox inline" for="chuomautukset"><input type="checkbox" id="chuomautukset" onclick="toggle('.huomautukset', this)"/>Huomautukset</label>
+      <label class="checkbox inline" for="ckatsastus"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>Katsastus</label>
 
     </div>
 
-<%= form_tag boats_path, :method => 'get' do %>
+<%= form_tag boats_path, :method => 'get', :class => 'form-search' do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
+    <%= text_field_tag :search, params[:search], :class => 'input-medium search-query' %>
     <%= submit_tag "Search" %>
   </p>
 <% end %>
 
-<table>
+<table class="table table-condensed table-hover table-fluid">
   <tr>
     <th><%= sortable "RekPvm" %></th>
     <th><%= sortable "MuutosPvm" %></th>
@@ -36,17 +36,16 @@
     <th class="tyyppi"><%= sortable "Tyyppi" %></th>
     <th class="reknro"><%= sortable "Reknro" %></th>
     <th class="valmmalli"><%= sortable "Valmmalli" %></th>
-    <th class="pituus"><%= sortable "Pituus" %></th>
-    <th class="leveys"><%= sortable "Leveys" %></th>
-    <th class="syvyys"><%= sortable "Syvyys" %></th>
-    <th class="korkeus"><%= sortable "Korkeus" %></th>
-    <th class="teho"><%= sortable "Teho" %></th>
-    <th class="vuosimalli"><%= sortable "Vuosimalli" %></th>
+    <th class="pituus numeric"><%= sortable "Pituus" %></th>
+    <th class="leveys numeric"><%= sortable "Leveys" %></th>
+    <th class="syvyys numeric"><%= sortable "Syvyys" %></th>
+    <th class="korkeus numeric"><%= sortable "Korkeus" %></th>
+    <th class="teho numeric"><%= sortable "Teho" %></th>
+    <th class="vuosimalli numeric"><%= sortable "Vuosimalli" %></th>
     <th class="huomautukset"><%= sortable "Huomautukset" %></th>
     <th class="katsastus"><%= sortable "Katsastus" %></th>
     <th></th>
-    <th></th>
-    <th></th>
+
   </tr>
 
 <% for boat in @boats %>
@@ -67,9 +66,9 @@
     <td class="huomautukset"><%= boat.Huomautukset %></td>
     <td class="katsastus"><%= boat.Katsastus %></td>
 
-    <td><%= link_to 'Tiedot', boat %></td>
-    <td><%= link_to 'Muokkaa', edit_boat_path(boat) %></td>
-    <td><%= link_to 'Poista', boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+    <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, boat %>
+        <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_boat_path(boat) %>
+        <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 </table>
