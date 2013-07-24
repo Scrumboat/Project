@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130628113153) do
+ActiveRecord::Schema.define(:version => 20130724102738) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -107,6 +107,33 @@ ActiveRecord::Schema.define(:version => 20130628113153) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "invoices", :force => true do |t|
+    t.string   "nimi"
+    t.integer  "jno"
+    t.string   "toimihlokerroin"
+    t.integer  "talkookerroin"
+    t.decimal  "viitesuoritukset"
+    t.decimal  "suorituksetIlmanViitetta"
+    t.decimal  "suorituksetKassaan"
+    t.decimal  "annetutHyvitykset"
+    t.decimal  "maksetunSummanPalautus"
+    t.decimal  "liittymismaksu"
+    t.decimal  "jasenmaksu"
+    t.decimal  "edellisenKaudenLaskutus"
+    t.decimal  "venerekisterimaksu"
+    t.decimal  "varastokoppimaksu"
+    t.decimal  "laiturimaksu"
+    t.decimal  "ensirekisterimaksu"
+    t.decimal  "telakkamaksu"
+    t.decimal  "muutMaksut"
+    t.decimal  "talkoosakko"
+    t.decimal  "katsastussakko"
+    t.decimal  "vartiosakko"
+    t.decimal  "laskutuslisa"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
   create_table "mallis", :force => true do |t|
     t.string   "tyyppi"
     t.string   "ValmMalli"
@@ -155,7 +182,7 @@ ActiveRecord::Schema.define(:version => 20130628113153) do
 
   create_table "pricings", :force => true do |t|
     t.string   "target"
-    t.float    "data"
+    t.decimal  "data"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

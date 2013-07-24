@@ -1,0 +1,32 @@
+<%= simple_form_for(@invoice) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :nimi %>
+    <%= f.input :jno %>
+    <%= f.input :toimihlokerroin %>
+    <%= f.input :talkookerroin %>
+    <%= f.input :viitesuoritukset %>
+    <%= f.input :suorituksetIlmanViitetta %>
+    <%= f.input :suorituksetKassaan %>
+    <%= f.input :annetutHyvitykset %>
+    <%= f.input :maksetunSummanPalautus %>
+    <%= f.input :liittymismaksu %>
+    <%= f.input :jasenmaksu %>
+    <%= f.input :edellisenKaudenLaskutus %>
+    <%= f.input :venerekisterimaksu %>
+    <%= f.input :varastokoppimaksu %>
+    <%= f.input :laiturimaksu %>
+    <%= f.input :ensirekisterimaksu %>
+    <%= f.input :telakkamaksu %>
+    <%= f.input :muutMaksut %>
+    <%= f.input :talkoosakko %>
+    <%= f.input :katsastussakko %>
+    <%= f.input :vartiosakko %>
+    <%= f.input :laskutuslisa %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

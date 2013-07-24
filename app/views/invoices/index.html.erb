@@ -1,0 +1,65 @@
+<h1>Listing invoices</h1>
+
+<table>
+  <tr>
+    <th>Nimi</th>
+    <th>Jno</th>
+    <th>Toimihlokerroin</th>
+    <th>Talkookerroin</th>
+    <th>Viitesuoritukset</th>
+    <th>Suorituksetilmanviitetta</th>
+    <th>Suorituksetkassaan</th>
+    <th>Annetuthyvitykset</th>
+    <th>Maksetunsummanpalautus</th>
+    <th>Liittymismaksu</th>
+    <th>Jasenmaksu</th>
+    <th>Edellisenkaudenlaskutus</th>
+    <th>Venerekisterimaksu</th>
+    <th>Varastokoppimaksu</th>
+    <th>Laiturimaksu</th>
+    <th>Ensirekisterimaksu</th>
+    <th>Telakkamaksu</th>
+    <th>Muutmaksut</th>
+    <th>Talkoosakko</th>
+    <th>Katsastussakko</th>
+    <th>Vartiosakko</th>
+    <th>Laskutuslisa</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @invoices.each do |invoice| %>
+  <tr>
+    <td><%= invoice.nimi %></td>
+    <td><%= invoice.jno %></td>
+    <td><%= invoice.toimihlokerroin %></td>
+    <td><%= invoice.talkookerroin %></td>
+    <td><%= invoice.viitesuoritukset %></td>
+    <td><%= invoice.suorituksetIlmanViitetta %></td>
+    <td><%= invoice.suorituksetKassaan %></td>
+    <td><%= invoice.annetutHyvitykset %></td>
+    <td><%= invoice.maksetunSummanPalautus %></td>
+    <td><%= invoice.liittymismaksu %></td>
+    <td><%= invoice.jasenmaksu %></td>
+    <td><%= invoice.edellisenKaudenLaskutus %></td>
+    <td><%= invoice.venerekisterimaksu %></td>
+    <td><%= invoice.varastokoppimaksu %></td>
+    <td><%= invoice.laiturimaksu %></td>
+    <td><%= invoice.ensirekisterimaksu %></td>
+    <td><%= invoice.telakkamaksu %></td>
+    <td><%= invoice.muutMaksut %></td>
+    <td><%= invoice.talkoosakko %></td>
+    <td><%= invoice.katsastussakko %></td>
+    <td><%= invoice.vartiosakko %></td>
+    <td><%= invoice.laskutuslisa %></td>
+    <td><%= link_to 'Show', invoice %></td>
+    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+    <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Invoice', new_invoice_path %>

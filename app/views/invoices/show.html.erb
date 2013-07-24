@@ -1,0 +1,115 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nimi:</b>
+  <%= @invoice.nimi %>
+</p>
+
+<p>
+  <b>Jno:</b>
+  <%= @invoice.jno %>
+</p>
+
+<p>
+  <b>Toimihlokerroin:</b>
+  <%= @invoice.toimihlokerroin %>
+</p>
+
+<p>
+  <b>Talkookerroin:</b>
+  <%= @invoice.talkookerroin %>
+</p>
+
+<p>
+  <b>Viitesuoritukset:</b>
+  <%= @invoice.viitesuoritukset %>
+</p>
+
+<p>
+  <b>Suorituksetilmanviitetta:</b>
+  <%= @invoice.suorituksetIlmanViitetta %>
+</p>
+
+<p>
+  <b>Suorituksetkassaan:</b>
+  <%= @invoice.suorituksetKassaan %>
+</p>
+
+<p>
+  <b>Annetuthyvitykset:</b>
+  <%= @invoice.annetutHyvitykset %>
+</p>
+
+<p>
+  <b>Maksetunsummanpalautus:</b>
+  <%= @invoice.maksetunSummanPalautus %>
+</p>
+
+<p>
+  <b>Liittymismaksu:</b>
+  <%= @invoice.liittymismaksu %>
+</p>
+
+<p>
+  <b>Jasenmaksu:</b>
+  <%= @invoice.jasenmaksu %>
+</p>
+
+<p>
+  <b>Edellisenkaudenlaskutus:</b>
+  <%= @invoice.edellisenKaudenLaskutus %>
+</p>
+
+<p>
+  <b>Venerekisterimaksu:</b>
+  <%= @invoice.venerekisterimaksu %>
+</p>
+
+<p>
+  <b>Varastokoppimaksu:</b>
+  <%= @invoice.varastokoppimaksu %>
+</p>
+
+<p>
+  <b>Laiturimaksu:</b>
+  <%= @invoice.laiturimaksu %>
+</p>
+
+<p>
+  <b>Ensirekisterimaksu:</b>
+  <%= @invoice.ensirekisterimaksu %>
+</p>
+
+<p>
+  <b>Telakkamaksu:</b>
+  <%= @invoice.telakkamaksu %>
+</p>
+
+<p>
+  <b>Muutmaksut:</b>
+  <%= @invoice.muutMaksut %>
+</p>
+
+<p>
+  <b>Talkoosakko:</b>
+  <%= @invoice.talkoosakko %>
+</p>
+
+<p>
+  <b>Katsastussakko:</b>
+  <%= @invoice.katsastussakko %>
+</p>
+
+<p>
+  <b>Vartiosakko:</b>
+  <%= @invoice.vartiosakko %>
+</p>
+
+<p>
+  <b>Laskutuslisa:</b>
+  <%= @invoice.laskutuslisa %>
+</p>
+
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>
