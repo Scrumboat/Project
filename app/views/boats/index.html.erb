@@ -81,9 +81,12 @@
 
 <br />
 
-<%= link_to 'Luo uusi vene', new_boat_path %>
 <br />
-<%= link_to 'Main Menu', root_path %>
+
+<%= link_to '<i class="btn btn-danger"><i class="icon-home icon-white"></i>    Etusivulle</i>'.html_safe, root_path %>
+
+<%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi vene</i>'.html_safe, new_boat_path %>
+
 <script>
 $(document).ready(function() 
     { 
