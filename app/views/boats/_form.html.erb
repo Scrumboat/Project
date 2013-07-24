@@ -1,4 +1,4 @@
-<%= nested_form_for(@boat) do |f| %>
+<%= simple_nested_form_for @boat, :html => { :class => 'form-horizontal'} do |f| %>
   <% if @boat.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@boat.errors.count, "error") %> prohibited this boat from being saved:</h2>
@@ -11,96 +11,100 @@
     </div>
   <% end %>
 
-<%= f.fields_for :BoatsMembers do |yhteys| %>
-	<%= yhteys.label "Omistaja" %><br />
-	<%= yhteys.text_field :member_id, :value => yhteys.object.member_id %><br />
-	<%= yhteys.link_to_remove "Poista yhteys" %>
-<% end %>
-<p><%= f.link_to_add "Uusi yhteys", :BoatsMembers %></p>
+<%= f.simple_fields_for :BoatsMembers, :html => { :class => 'control-group'} do |yhteys| %>
+	<% yhteys.input :Omistaja, :class => 'control-label' do %>
+	  <%= yhteys.text_field :member_id, :value => yhteys.object.member_id %>
+	  <%= yhteys.link_to_remove "Poista omistaja", :class => 'btn btn-mini btn-danger' %>
+                                  <% end %>
+    <% end %>
+    <div class="center">
+  <%= f.link_to_add "Uusi omistaja", :BoatsMembers, :class => 'btn btn-mini btn-primary' %>
+      </div>
 
   <div class="field">
-    <%= f.label :RekPvm %><br />
+    <%= f.label :RekPvm %>
     <%= f.date_select :RekPvm %>
   </div>
   <div class="field">
-    <%= f.label :MuutosPvm %><br />
+    <%= f.label :MuutosPvm %>
     <%= f.date_select :MuutosPvm %>
   </div>
   <div class="field">
-    <%= f.label :Nimi %><br />
+    <%= f.label :Nimi %>
     <%= f.text_field :Nimi %>
   </div>
   <div class="field">
-    <%= f.label :tyyppi %><br />
+    <%= f.label :tyyppi %>
     <%= f.text_field :tyyppi %>
   </div>
   <div class="field">
-    <%= f.label :RekNro %><br />
+    <%= f.label :RekNro %>
     <%= f.text_field :RekNro %>
   </div>
 
   <% if @mallit != nil %>
-     <%= f.select :ValmMalli, @mallis, {}, onchange: "taydenna()" %>
+      <%= f.label 'Veneiden tiedot' %>
+      <%= f.select :ValmMalli, @mallis, {}, onchange: "taydenna()" %>
   <% end %>
 
   <div class="field">
-    <%= f.label :ValmMalli %><br />
+    <%= f.label :ValmMalli %>
     <%= f.text_field :ValmMalli %>
   </div>
   <div class="field">
-    <%= f.label :Pituus %><br />
+    <%= f.label :Pituus %>
     <%= f.text_field :Pituus %>
   </div>
   <div class="field">
-    <%= f.label :Leveys %><br />
+    <%= f.label :Leveys %>
     <%= f.text_field :Leveys %>
   </div>
   <div class="field">
-    <%= f.label :Syvyys %><br />
+    <%= f.label :Syvyys %>
     <%= f.text_field :Syvyys %>
   </div>
   <div class="field">
-    <%= f.label :Uppouma %><br />
+    <%= f.label :Uppouma %>
     <%= f.text_field :Uppouma %>
   </div>
   <div class="field">
-    <%= f.label :Korkeus %><br />
+    <%= f.label :Korkeus %>
     <%= f.text_field :Korkeus %>
   </div>
   <div class="field">
-    <%= f.label :Teho %><br />
+    <%= f.label :Teho %>
     <%= f.text_field :Teho %>
   </div>
   <div class="field">
-    <%= f.label :Vuosimalli %><br />
+    <%= f.label :Vuosimalli %>
     <%= f.number_field :Vuosimalli %>
   </div>
   <div class="field">
-    <%= f.label :VenePuhA %><br />
+    <%= f.label :VenePuhA %>
     <%= f.text_field :VenePuhA %>
   </div>
   <div class="field">
-    <%= f.label :VenePuhB %><br />
+    <%= f.label :VenePuhB %>
     <%= f.text_field :VenePuhB %>
   </div>
   <div class="field">
-    <%= f.label :Huomautukset %><br />
+    <%= f.label :Huomautukset %>
     <%= f.text_field :Huomautukset %>
   </div>
   <div class="field">
-    <%= f.label :Tarra %><br />
+    <%= f.label :Tarra %>
     <%= f.number_field :Tarra %>
   </div>
   <div class="field">
-    <%= f.label :Katsastus %><br />
+    <%= f.label :Katsastus %>
     <%= f.text_field :Katsastus %>
   </div>
   <div class="field">
-    <%= f.label :Laituri %><br />
+    <%= f.label :Laituri %>
     <%= number_field_tag :Laituri %>
   </div>
   <div class="field">
-    <%= f.label :Laituripaikka %><br />
+    <%= f.label :Laituripaikka %>
     <%= number_field_tag :Laituripaikka %>
   </div>
   <div class="actions">

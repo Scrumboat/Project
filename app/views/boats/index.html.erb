@@ -9,9 +9,9 @@
 
 <h1>Veneet</h1>
 
-<%= form_tag boats_path, :method => 'get' do %>
+<%= form_tag boats_path, :method => 'get', :class => 'form-search' do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
+    <%= text_field_tag :search, params[:search], :class => 'input-medium search-query' %>
     <%= submit_tag "Search" %>
   </p>
 <% end %>
@@ -71,9 +71,9 @@
     <td class="huomautukset"><%= boat.Huomautukset %></td>
     <td class="katsastus"><%= boat.Katsastus %></td>
 
-    <td><%= link_to 'Tiedot', boat %></td>
-    <td><%= link_to 'Muokkaa', edit_boat_path(boat) %></td>
-    <td><%= link_to 'Poista', boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+    <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, boat %>
+        <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_boat_path(boat) %>
+        <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 
