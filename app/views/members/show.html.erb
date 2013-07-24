@@ -7,7 +7,7 @@
   <b>Laskut: </b>
   <ul>
     <% @member.invoices.each do |invoice| %>
-      <li><%= link_to invoice.viitenumero, invoice_path(invoice) %></li>
+      <li><%= link_to invoice.erapvm, invoice_path(invoice) %> <%= invoice.maksettu ? 'Maksettu' : (invoice.eraantynyt ? 'ERÄÄNTYNYT' : 'Ei maksettu') %> </li>
     <% end %>
   </ul>
 </p>

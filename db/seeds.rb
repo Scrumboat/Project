@@ -57,3 +57,6 @@ puts 'DEFAULT ADMIN (if we got ENV variables for it)'
 if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?
   user = Admin.find_or_create_by_email :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 end
+
+puts 'CREATING INVOICES'
+Invoice.create([{ member_id: 1, erapvm: '2012-1-1', vartiosakko: 300, maksettu: true},{ member_id: 1, erapvm: '2014-11-11', liittymismaksu: 123},{ member_id: 1, erapvm: '2011-04-01', vartiosakko: 444}])
