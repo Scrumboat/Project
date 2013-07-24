@@ -3,23 +3,11 @@
 </script>
 <script src="/assets/boatfilter.js">
 </script>
+<script src="/assets/jquery.tablesorter.js">
+</script>
 <body onload="hideAll();">
-<h1>Veneet</h1>
-<h2></h2>
-  <div>Filtterit
-      <label class="checkbox inline" for="ctyyppi"><input name="checkboxes[]" type="checkbox" id="ctyyppi" onclick="toggle('.tyyppi', this)" />Tyyppi</label>
-      <label class="checkbox inline" for="creknro"><input name="checkboxes[]" type="checkbox" id="creknro" onclick="toggle('.reknro', this)"/>RekNro</label>
-      <label class="checkbox inline" for="cvalmmalli"><input name="checkboxes[]" type="checkbox" id="cvalmmalli" onclick="toggle('.valmmalli', this)"/>ValmMalli</label>
-      <label class="checkbox inline" for="cpituus"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>Pituus</label>
-      <label class="checkbox inline" for="cleveys"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>Leveys</label>
-      <label class="checkbox inline" for="csyvyys"><input type="checkbox" id="csyvyys" onclick="toggle('.syvyys', this)"/>Syvyys</label>
-      <label class="checkbox inline" for="ckorkeus"><input type="checkbox" id="ckorkeus" onclick="toggle('.korkeus', this)"/>Korkeus</label>
-      <label class="checkbox inline" for="cteho"><input type="checkbox" id="cteho" onclick="toggle('.teho', this)"/>Teho</label>
-      <label class="checkbox inline" for="cvuosimalli"><input type="checkbox" id="cvuosimalli" onclick="toggle('.vuosimalli', this)"/>Vuosimalli</label>
-      <label class="checkbox inline" for="chuomautukset"><input type="checkbox" id="chuomautukset" onclick="toggle('.huomautukset', this)"/>Huomautukset</label>
-      <label class="checkbox inline" for="ckatsastus"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>Katsastus</label>
 
-    </div>
+<h1>Veneet</h1>
 
 <%= form_tag boats_path, :method => 'get', :class => 'form-search' do %>
   <p>
@@ -28,34 +16,51 @@
   </p>
 <% end %>
 
-<table class="table table-condensed table-hover table-fluid">
-  <tr>
-    <th><%= sortable "RekPvm" %></th>
-    <th><%= sortable "MuutosPvm" %></th>
-    <th><%= sortable "Nimi" %></th>
-    <th class="tyyppi"><%= sortable "Tyyppi" %></th>
-    <th class="reknro"><%= sortable "Reknro" %></th>
-    <th class="valmmalli"><%= sortable "Valmmalli" %></th>
-    <th class="pituus numeric"><%= sortable "Pituus" %></th>
-    <th class="leveys numeric"><%= sortable "Leveys" %></th>
-    <th class="syvyys numeric"><%= sortable "Syvyys" %></th>
-    <th class="korkeus numeric"><%= sortable "Korkeus" %></th>
-    <th class="teho numeric"><%= sortable "Teho" %></th>
-    <th class="vuosimalli numeric"><%= sortable "Vuosimalli" %></th>
-    <th class="huomautukset"><%= sortable "Huomautukset" %></th>
-    <th class="katsastus"><%= sortable "Katsastus" %></th>
-    <th></th>
+<h4>Filtterit</h4>
 
+  <form class ="form-inline">
+      <label for="cvalmmalli" class="checkbox"><input type="checkbox" id="cvalmmalli" onclick="toggle('.valmmalli', this)"/>Valmistusmalli</label> 
+      <label for="cpituus" class="checkbox"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>Pituus</label> 
+      <label for="cleveys" class="checkbox"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>Leveys</label> 
+      <label for="csyvyys" class="checkbox"><input type="checkbox" id="csyvyys" onclick="toggle('.syvyys', this)"/>Syvyys</label> 
+      <label for="ckorkeus" class="checkbox"><input type="checkbox" id="ckorkeus" onclick="toggle('.korkeus', this)"/>Korkeus</label> 
+      <label for="cteho" class="checkbox"><input type="checkbox" id="cteho" onclick="toggle('.teho', this)"/>Teho</label>
+      <label for="cvuosimalli" class="checkbox"><input type="checkbox" id="cvuosimalli" onclick="toggle('.vuosimalli', this)"/>Vuosimalli</label> 
+      <label for="chuomautukset" class="checkbox"><input type="checkbox" id="chuomautukset" onclick="toggle('.huomautukset', this)"/>Huomautukset</label> 
+      <label for="ckatsastus" class="checkbox"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>Katsastus</label>  
+
+    </form>
+
+
+
+<table id="myTable" class="table table-condensed">
+  <thead>
+  <tr>
+    <th>RekPvm</th>
+    <th>MuutosPvm</th>
+    <th>Nimi</th>
+    <th>Tyyppi</th>
+    <th>Reknro</th>
+    <th class="valmmalli">Valmmalli</th>
+    <th class="pituus">Pituus</th>
+    <th class="leveys">Leveys</th>
+    <th class="syvyys">Syvyys</th>
+    <th class="korkeus">Korkeus</th>
+    <th class="teho">Teho</th>
+    <th class="vuosimalli">Vuosimalli</th>
+    <th class="huomautukset">Huomautukset</th>
+    <th class="katsastus">Katsastus</th>
   </tr>
+  </thead>
 
 <% for boat in @boats %>
   <tr>
     <td><%= boat.RekPvm %></td>
     <td><%= boat.MuutosPvm %></td>
     <td><%= boat.Nimi %></td>
-    
-    <td class="tyyppi"><%= boat.tyyppi %></td>
-    <td class="reknro"><%= boat.RekNro %></td>
+    <td><%= boat.tyyppi %></td>
+    <td><%= boat.RekNro %></td>
+
     <td class="valmmalli"><%= boat.ValmMalli %></td>
     <td class="pituus"><%= boat.Pituus %></td>
     <td class="leveys"><%= boat.Leveys %></td>
@@ -71,6 +76,7 @@
         <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, boat, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
+
 </table>
 
 <br />
@@ -78,4 +84,11 @@
 <%= link_to 'Luo uusi vene', new_boat_path %>
 <br />
 <%= link_to 'Main Menu', root_path %>
+<script>
+$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+</script>
 </body>

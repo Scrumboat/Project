@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class MembersController < ApplicationController
 
-  helper_method :sort_column, :sort_direction
+ # helper_method :sort_column, :sort_direction
 
   # GET /members
   # GET /members.json
@@ -9,11 +9,11 @@ class MembersController < ApplicationController
   def index
     #@members = Member.order(sort_column + ' ' + sort_direction)    
     #@members = Member.search(params[:search])
-    if params[:search]
+   # if params[:search]
       @members = Member.search(params[:search])
-    else
-      @members = Member.order(sort_column + ' ' + sort_direction)
-    end
+   # else
+    # @members = Member.order(sort_column + ' ' + sort_direction)
+   # end
   #@members = Member.find(:all, :conditions => ["deleted_at > ? OR deleted_at IS NULL", 1.years.ago])
 
     respond_to do |format|
@@ -104,13 +104,13 @@ class MembersController < ApplicationController
     end
   end
 
-  private
-  def sort_column
-    Member.column_names.include?(params[:sort]) ? Member.connection.quote_column_name(params[:sort]) : Member.connection.quote_column_name("Jno")
-  end
+ # private
+ # def sort_column
+  #  Member.column_names.include?(params[:sort]) ? Member.connection.quote_column_name(params[:sort]) : Member.connection.quote_column_name("Jno")
+ # end
   
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
-  end
+ # def sort_direction
+  #  %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+ # end
 
 end
