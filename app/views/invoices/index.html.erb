@@ -1,5 +1,22 @@
 <h1>Listing invoices</h1>
-
+<%= form_tag invoices_path, :method => 'get' do %>
+  <p>
+    <%= hidden_field_tag :search, params[:search] %>
+    <%= submit_tag "Maksetut/Erääntyneet" %>
+  </p>
+<% end %>
+<%= form_tag invoices_path, :method => 'get' do %>
+  <p>
+    <%= hidden_field_tag :search, params[:search] %>
+    <%= submit_tag "Maksamattomat" %>
+  </p>
+<% end %>
+<%= form_tag invoices_path, :method => 'get' do %>
+  <p>
+    <%= hidden_field_tag :search, params[:search] %>
+    <%= submit_tag "Näytä kaikki" %>
+  </p>
+<% end %>
 <table>
   <tr>
     <th>Nimi</th>
