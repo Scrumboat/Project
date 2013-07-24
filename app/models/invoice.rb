@@ -2,8 +2,14 @@ class Invoice < ActiveRecord::Base
   belongs_to :member
   attr_accessible :annetutHyvitykset, :edellisenKaudenLaskutus, :ensirekisterimaksu, :jasenmaksu, :jno, :katsastussakko, :laiturimaksu, :laskutuslisa, :liittymismaksu, :maksetunSummanPalautus, :muutMaksut, :nimi, :suorituksetIlmanViitetta, :suorituksetKassaan, :talkookerroin, :talkoosakko, :telakkamaksu, :toimihlokerroin, :varastokoppimaksu, :vartiosakko, :venerekisterimaksu, :viitesuoritukset, :luontipvm, :lahetyspvm, :tunniste, :maksettu, :erapvm, :member_id
   
-  def self.search()
-    find(:all, :conditions => ['"maksettu" LIKE ?', true])
+  def self.search(search)
+    if search == "paid"
+	  find(:all, :conditions => ['"maksettu" LIKE ?', true])
+	elsif search == "unpaid"
+	  find(:all, :conditions => ['"maksettu" LIKE ?', false])
+	else
+      find(:all)
+	end
   end
   def eraantynyt()
     if self.erapvm < DateTime.now.to_date

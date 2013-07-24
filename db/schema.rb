@@ -130,13 +130,13 @@ ActiveRecord::Schema.define(:version => 20130724122934) do
     t.decimal  "katsastussakko"
     t.decimal  "vartiosakko"
     t.decimal  "laskutuslisa"
-    t.integer  "member_id"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.date     "luontipvm"
     t.date     "lahetyspvm"
     t.string   "tunniste"
     t.boolean  "maksettu",                 :default => false
+    t.integer  "member_id"
     t.date     "erapvm"
   end
 
