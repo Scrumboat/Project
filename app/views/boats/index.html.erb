@@ -5,6 +5,13 @@
 </script>
 <script src="/assets/jquery.tablesorter.js">
 </script>
+<script>
+$(document).ready(function(){
+  $("#button").click(function(){
+    $("#filtterit").toggle();
+  });
+});
+</script>
 <body onload="hideAll();">
 
 <h1>Veneet</h1>
@@ -16,9 +23,9 @@
   </p>
 <% end %>
 
-<h4>Filtterit</h4>
+<button class="btn btn-info" type="button" id="button">Filtterit</button>
 
-  <form class ="form-inline">
+  <form id="filtterit" class ="form-inline">
       <label for="cvalmmalli" class="checkbox"><input type="checkbox" id="cvalmmalli" onclick="toggle('.valmmalli', this)"/>Valmistusmalli</label> 
       <label for="cpituus" class="checkbox"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>Pituus</label> 
       <label for="cleveys" class="checkbox"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>Leveys</label> 
