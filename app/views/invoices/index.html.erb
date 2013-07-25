@@ -1,74 +1,97 @@
+<!DOCTYPE html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+</script>
+<script src="/assets/invoicefilter.js">
+</script>
+<script src="/assets/jquery.tablesorter.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#button").click(function(){
+    $("#filtterit").toggle();
+  });
+});
+</script>
+<html>
+<body onload="hideAll();">
+
 <h1>Listing invoices</h1>
+
+<span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
-  <p>
     <%= hidden_field_tag :search, "paid" %>
     <%= submit_tag "Maksetut" %>
-  </p>
 <% end %>
+</span>
+<span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
-  <p>
     <%= hidden_field_tag :search, "unpaid" %>
     <%= submit_tag "Maksamattomat" %>
-  </p>
 <% end %>
+</span>
 <%= form_tag invoices_path, :method => 'get' do %>
-  <p>
     <%= submit_tag "Näytä kaikki" %>
-  </p>
 <% end %>
-<table>
+
+
+<button class="btn btn-info" type="button" id="button">Filtterit</button>
+
+  <form id="filtterit" class ="form-inline">
+      <label for="csuorkas" class="checkbox"><input type="checkbox" id="csuorkas" onclick="toggle('.suorkas', this)"/>Suoritukset kassaan</label> 
+      <label for="cannehyv" class="checkbox"><input type="checkbox" id="cannehyv" onclick="toggle('.annehyv', this)"/>Annetut hyvitykset</label> 
+      <label for="cedelkau" class="checkbox"><input type="checkbox" id="cedelkau" onclick="toggle('.edelkau', this)"/>Edellisen kauden laskutus</label> 
+      <label for="ctalksak" class="checkbox"><input type="checkbox" id="ctalksak" onclick="toggle('.talksak', this)"/>Talkoosakko</label> 
+      <label for="ckatssak" class="checkbox"><input type="checkbox" id="ckatssak" onclick="toggle('.katssak', this)"/>Katsastussakko</label> 
+      <label for="cvartsak" class="checkbox"><input type="checkbox" id="cvartsak" onclick="toggle('.vartsak', this)"/>Vartiosakko</label>
+      <label for="clasklis" class="checkbox"><input type="checkbox" id="clasklis" onclick="toggle('.lasklis', this)"/>Laskutuslisä</label>  
+
+</form>
+
+<table id="myTable" class="table table-condensed">
+ <thead>
   <tr>
     <th>Nimi</th>
     <th>Jno</th>
-    <th>Toimihlokerroin</th>
-    <th>Talkookerroin</th>
-    <th>Viitesuoritukset</th>
-    <th>Suorituksetilmanviitetta</th>
-    <th>Suorituksetkassaan</th>
-    <th>Annetuthyvitykset</th>
-    <th>Maksetunsummanpalautus</th>
+    <th class="suorkas">Suorituksetkassaan</th>
+    <th class="annehyv">Annetuthyvitykset</th>
     <th>Liittymismaksu</th>
     <th>Jasenmaksu</th>
-    <th>Edellisenkaudenlaskutus</th>
+    <th class="edelkau">Edellisenkaudenlaskutus</th>
     <th>Venerekisterimaksu</th>
     <th>Varastokoppimaksu</th>
     <th>Laiturimaksu</th>
     <th>Ensirekisterimaksu</th>
     <th>Telakkamaksu</th>
     <th>Muutmaksut</th>
-    <th>Talkoosakko</th>
-    <th>Katsastussakko</th>
-    <th>Vartiosakko</th>
-    <th>Laskutuslisa</th>
+    <th class="talksak">Talkoosakko</th>
+    <th class="katssak">Katsastussakko</th>
+    <th class="vartsak">Vartiosakko</th>
+    <th class="lasklis">Laskutuslisa</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
+ </thead>
 
 <% @invoices.each do |invoice| %>
   <tr>
     <td><%= invoice.nimi %></td>
     <td><%= invoice.jno %></td>
-    <td><%= invoice.toimihlokerroin %></td>
-    <td><%= invoice.talkookerroin %></td>
-    <td><%= invoice.viitesuoritukset %></td>
-    <td><%= invoice.suorituksetIlmanViitetta %></td>
-    <td><%= invoice.suorituksetKassaan %></td>
-    <td><%= invoice.annetutHyvitykset %></td>
-    <td><%= invoice.maksetunSummanPalautus %></td>
+    <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
+    <td class="annehyv"><%= invoice.annetutHyvitykset %></td>
     <td><%= invoice.liittymismaksu %></td>
     <td><%= invoice.jasenmaksu %></td>
-    <td><%= invoice.edellisenKaudenLaskutus %></td>
+    <td class="edelkau"><%= invoice.edellisenKaudenLaskutus %></td>
     <td><%= invoice.venerekisterimaksu %></td>
     <td><%= invoice.varastokoppimaksu %></td>
     <td><%= invoice.laiturimaksu %></td>
     <td><%= invoice.ensirekisterimaksu %></td>
     <td><%= invoice.telakkamaksu %></td>
     <td><%= invoice.muutMaksut %></td>
-    <td><%= invoice.talkoosakko %></td>
-    <td><%= invoice.katsastussakko %></td>
-    <td><%= invoice.vartiosakko %></td>
-    <td><%= invoice.laskutuslisa %></td>
+    <td class="talksak"><%= invoice.talkoosakko %></td>
+    <td class="katssak"><%= invoice.katsastussakko %></td>
+    <td class="vartsak"><%= invoice.vartiosakko %></td>
+    <td class="lasklis"><%= invoice.laskutuslisa %></td>
     <td><%= link_to 'Show', invoice %></td>
     <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
     <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -79,3 +102,5 @@
 <br />
 
 <%= link_to 'New Invoice', new_invoice_path %>
+</body>
+</html>
