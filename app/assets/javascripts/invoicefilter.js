@@ -6,6 +6,7 @@ function hideAll() {
   $(".katssak").hide();
   $(".vartsak").hide();
   $(".lasklis").hide();
+  $("#filtterit").hide();
 }
 
 function toggle(className, obj) {

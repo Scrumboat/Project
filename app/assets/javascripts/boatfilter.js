@@ -10,6 +10,7 @@ function hideAll() {
   $(".vuosimalli").hide();
   $(".huomautukset").hide();
   $(".katsastus").hide();
+  $("#filtterit").hide();
 }
 
 function toggle(className, obj) {
