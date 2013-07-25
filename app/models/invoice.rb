@@ -34,15 +34,20 @@ class Invoice < ActiveRecord::Base
         varastomaksu = (Pricing.find_by_target("varastokoppinelio").data)*(Storage.find_by_vk(jasen.Varasto).pala)
       end
       laiturimaksu = Pricing.find_by_target("minLaituripaikanHinta").data
+      telakkamaksu = 0
       veneet = jasen.boats
       for vene in veneet
         #veneelle voisi luoda boolean muuttujakentän siitä että onko veneen laiturimaksu jo laskutettu jos on monta omistajaa samalla veneellä, jos true niin skipattais tässä
         laituri = Berth.find_by_Reknro(vene.RekNro)
+        if !DockyardSpot.find_by_boat_id(vene.id).nil?
+          telakka = DockyardSpot.find_by_boat_id(vene.id)
+          telakkamaksu = (Pricing.find_by_target("telakanNeliohinta").data)*(telakka.length*telakka.width)
+        end
         if !laituri.nil? && laituri.width > 2
           laiturimaksu += (Pricing.find_by_target("leveysLaituripaikanHinnanKasvuun").data)*((laituri.width - 2)/0.5).ceil
         end
       end
-      Invoice.create({member_id: jasen.id, nimi: nimi, jno: jno, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, erapvm: '2012-1-1', vartiosakko: 300, maksettu: false})
+      Invoice.create({member_id: jasen.id, nimi: nimi, jno: jno, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: '2012-1-1', vartiosakko: 300, maksettu: false})
     end
   end
 end
