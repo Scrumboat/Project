@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724122934) do
+ActiveRecord::Schema.define(:version => 20130725115403) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20130724122934) do
     t.boolean  "maksettu",                 :default => false
     t.integer  "member_id"
     t.date     "erapvm"
+    t.decimal  "summa"
   end
 
   create_table "mallis", :force => true do |t|
