@@ -3,7 +3,13 @@ class InvoicesController < ApplicationController
   # GET /invoices.json
   def index
     #@invoices = Invoice.all
-	@invoices = Invoice.search(params[:search])
+    @invoices = Invoice.search(params[:search])
+    if params[:create]
+      Invoice.createInvoices()
+      flash[:notice] = "Laskut luotu kaikille."
+      redirect_to invoices_url
+      return
+    end
 
     respond_to do |format|
       format.html # index.html.erb
