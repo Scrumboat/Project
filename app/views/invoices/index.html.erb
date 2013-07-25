@@ -20,13 +20,17 @@ $(document).ready(function(){
 <span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
     <%= hidden_field_tag :search, "paid" %>
-    <%= submit_tag "Maksetut" %>
+<%= button_tag(type: "submit", class: "btn btn-success") do %>
+    <i class="icon-ok icon-white"></i> Maksetut
+<% end %>
 <% end %>
 </span>
 <span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
     <%= hidden_field_tag :search, "unpaid" %>
-    <%= submit_tag "Maksamattomat" %>
+<%= button_tag(type: "submit", class: "btn btn-danger") do %>
+    <i class="icon-warning-sign icon-white"></i> Maksamattomat
+<% end %>
 <% end %>
 </span>
 <%= form_tag invoices_path, :method => 'get' do %>
