@@ -20,7 +20,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.createInvoices()
-    @jasenet = Member.find(:all)
+    @jasenet = Member.all
     for jasen in @jasenet
       nimi = jasen.Nimi
       jno = jasen.Jno
@@ -47,7 +47,9 @@ class Invoice < ActiveRecord::Base
           laiturimaksu += (Pricing.find_by_target("leveysLaituripaikanHinnanKasvuun").data)*((laituri.width - 2)/0.5).ceil
         end
       end
-      Invoice.create({member_id: jasen.id, nimi: nimi, jno: jno, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: '2012-1-1', vartiosakko: 300, maksettu: false})
+      erapaiva = Time.now + 2.weeks #Pricingsi tableen laskunmaksuaika data? Time.now + n.days esim
+      luontipaiva = Time.now
+      Invoice.create({member_id: jasen.id, nimi: nimi, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false})
     end
   end
 end
