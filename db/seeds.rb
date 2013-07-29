@@ -51,7 +51,8 @@ DockyardSpot.create([{id: 1, boat_length: 50, boat_width: 9, length: 50.8, width
                      {id: 3, length: 3, width: 1.5, number: 1, dockyard_id: 2}])
 
 puts 'CREATING PRICING'
-Pricing.create([{target: "minLaituripaikanHinta", data: 50}, {target: "veneenHinnanKasvu", data: 10}, {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25}, {target: "telakanNeliohinta", data: 5}, {target: "liittymismaksu", data: 100}, {target: "jasenmaksu", data: 50},{target: "telakanNeliohinta", data: 5}, {target: "ensirekmaksu", data: 40},{target: "veneenvuosimaksu", data: 25},{target: "varastokoppinelio", data: 5}])
+
+Pricing.create([{target: "minLaituripaikanHinta", data: 50}, {target: "veneenHinnanKasvu", data: 10}, {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25}, {target: "telakanNeliohinta", data: 5}, {target: "liittymismaksu", data: 100}, {target: "jasenmaksu", data: 50}, {target: "ensirekmaksu", data: 40},{target: "veneenvuosimaksu", data: 25},{target: "varastokoppinelio", data: 5}])
 
 puts 'DEFAULT ADMIN (if we got ENV variables for it)'
 if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?
@@ -59,4 +60,9 @@ if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?
 end
 
 puts 'CREATING INVOICES'
-Invoice.create([{ member_id: 1, erapvm: '2012-1-1', vartiosakko: 300, maksettu: true},{ member_id: 1, erapvm: '2014-11-11', liittymismaksu: 123},{ member_id: 1, erapvm: '2011-04-01', vartiosakko: 444}])
+Invoice.create([{ member_id: 1, erapvm: '2012-01-01', jno: 4421, viitenumero: 442100001, telakkamaksu: 300, maksettu: true},
+                { member_id: 1, erapvm: '2014-11-11', jno: 4421, viitenumero: 442100002, liittymismaksu: 123, maksettu: false},
+                { member_id: 1, erapvm: '2014-04-01', jno: 4421, viitenumero: 442100003, vartiosakko: 444, maksettu: false},
+                { member_id: 2, erapvm: '2014-01-05', jno: 2149, viitenumero: 214900001, telakkamaksu: 55, maksettu: true},
+                { member_id: 2, erapvm: '2011-11-09', jno: 2149, viitenumero: 214900002, vartiosakko: 200, maksettu: true},
+                { member_id: 3, erapvm: '2014-05-05', jno: 2222, viitenumero: 222200001, varastokoppimaksu: 100, maksettu: true}])
