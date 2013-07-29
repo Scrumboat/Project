@@ -15,7 +15,7 @@ $(document).ready(function(){
 <html>
 <body onload="hideAll();">
 
-<h1>Listing invoices</h1>
+<h1>Laskut</h1>
 
 <span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
@@ -65,9 +65,11 @@ $(document).ready(function(){
       <label for="ctalksak" class="checkbox"><input type="checkbox" id="ctalksak" onclick="toggle('.talksak', this)"/>Talkoosakko</label> 
       <label for="ckatssak" class="checkbox"><input type="checkbox" id="ckatssak" onclick="toggle('.katssak', this)"/>Katsastussakko</label> 
       <label for="cvartsak" class="checkbox"><input type="checkbox" id="cvartsak" onclick="toggle('.vartsak', this)"/>Vartiosakko</label>
-      <label for="clasklis" class="checkbox"><input type="checkbox" id="clasklis" onclick="toggle('.lasklis', this)"/>Laskutuslisä</label>  
+      <label for="clasklis" class="checkbox"><input type="checkbox" id="clasklis" onclick="toggle('.lasklis', this)"/>Laskutuslisä</label>
+      <label for="cmuutmak" class="checkbox"><input type="checkbox" id="cmuutmak" onclick="toggle('.muutmak', this)"/>Muut maksut</label>
+      <label for="censrekm" class="checkbox"><input type="checkbox" id="censrekm" onclick="toggle('.ensrekm', this)"/>Laskutuslisä</label>
 
-</form>
+  </form>
 
 <table id="myTable" class="table table-condensed">
  <thead>
@@ -82,23 +84,21 @@ $(document).ready(function(){
     <th>Venerekisterimaksu</th>
     <th>Varastokoppimaksu</th>
     <th>Laiturimaksu</th>
-    <th>Ensirekisterimaksu</th>
+    <th class="ensrekm">Ensirekisterimaksu</th>
     <th>Telakkamaksu</th>
-    <th>Muutmaksut</th>
+    <th class="muutmak">Muutmaksut</th>
     <th>Viitenumero</th>
     <th class="talksak">Talkoosakko</th>
     <th class="katssak">Katsastussakko</th>
     <th class="vartsak">Vartiosakko</th>
     <th class="lasklis">Laskutuslisa</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
  </thead>
 
 <% @invoices.each do |invoice| %>
   <tr>
-    <td><%= invoice.nimi %></td>
+    <td><%= !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi %></td>
     <td><%= invoice.jno %></td>
     <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
     <td class="annehyv"><%= invoice.annetutHyvitykset %></td>
@@ -108,18 +108,20 @@ $(document).ready(function(){
     <td><%= invoice.venerekisterimaksu %></td>
     <td><%= invoice.varastokoppimaksu %></td>
     <td><%= invoice.laiturimaksu %></td>
-    <td><%= invoice.ensirekisterimaksu %></td>
+    <td class="ensrekm"><%= invoice.ensirekisterimaksu %></td>
     <td><%= invoice.telakkamaksu %></td>
-    <td><%= invoice.muutMaksut %></td>
+    <td class="muutmak"><%= invoice.muutMaksut %></td>
     <td><%= invoice.viitenumero %></td>
     <td class="talksak"><%= invoice.talkoosakko %></td>
     <td class="katssak"><%= invoice.katsastussakko %></td>
     <td class="vartsak"><%= invoice.vartiosakko %></td>
     <td class="lasklis"><%= invoice.laskutuslisa %></td>
 
-    <td><%= link_to 'Show', invoice %></td>
-    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-    <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, invoice %>
+        <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_invoice_path(invoice) %>
+        <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, invoice, method: :delete, data: { confirm: 'Oletko varma?' } %>
+    </td>
+
   </tr>
 <% end %>
 </table>

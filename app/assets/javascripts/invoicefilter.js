@@ -6,6 +6,8 @@ function hideAll() {
   $(".katssak").hide();
   $(".vartsak").hide();
   $(".lasklis").hide();
+  $(".muutmak").hide();
+  $(".ensrekm").hide();
   $("#filtterit").hide();
 }
 

@@ -48,6 +48,8 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(params[:invoice])
+    member = Member.find_all_by_Jno(params[:invoice][:jno]).first
+    @invoice.member_id = member.id
 
     respond_to do |format|
       if @invoice.save

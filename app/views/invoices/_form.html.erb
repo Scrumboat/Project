@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.input :nimi %>
     <%= f.input :jno, input_html: { value: params[:jno]} %>
+    <%= f.input :erapvm, input_html: { value: Time.now+2.weeks } %>
     <%= f.input :toimihlokerroin %>
     <%= f.input :talkookerroin %>
     <%= f.input :viitesuoritukset %>
