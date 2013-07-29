@@ -37,6 +37,7 @@
     <th>Veneen leveys</th>
     <th>Trailer</th>
     <th>Nosto</th>
+    <th>Hinta</th>
     <th></th>
     <th></th>
     <th></th>
@@ -57,6 +58,7 @@
       <% end %>
       <td><%= dys.trailer ? 'Kyllä' : 'Ei' %></td>
       <td><%= dys.lift ? 'Kyllä' : 'Ei' %></td>
+      <td><%= @telakanNeliohinta.data %></td>
       <td><%= link_to 'Muokkaa', edit_dockyard_dockyard_spot_path(@dockyard.id, dys) %></td>
       <td><%= link_to 'Poista', dockyard_dockyard_spot_path(@dockyard.id, dys), method: :delete, data: { confirm: 'Oletko varma?' } %></td>
       <td></td>

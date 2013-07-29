@@ -38,7 +38,7 @@
             <td><%= link_to berth.Reknro.to_s, Boat.where(:RekNro => berth.Reknro).first %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
-            <td><%= ((berth.width.to_s.to_d)/(@leveysLaituripaikanHinnanKasvuun.to_s.to_d)).ceil*@veneenHinnanKasvu+@minLaituripaikanHinta unless @veneenHinnanKasvu.nil? %></td>
+            <td><%= (berth.width.to_s.to_d/@leveysLaituripaikanHinnanKasvuun.data)*@veneenHinnanKasvu.data+@minLaituripaikanHinta.data unless @veneenHinnanKasvu.nil? %></td>
 	    <td><%= berth.printExists %></td>
     	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
 	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
@@ -73,7 +73,7 @@
             <td><%= berth.Reknro.to_s %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
-            <td><%= ((berth.width.to_f)/(@leveysLaituripaikanHinnanKasvuun.to_f)).ceil*@veneenHinnanKasvu+@minLaituripaikanHinta %></td>
+            <td><%= (berth.width.to_s.to_d/@leveysLaituripaikanHinnanKasvuun.data)*@veneenHinnanKasvu.data+@minLaituripaikanHinta.data unless @veneenHinnanKasvu.nil? %></td>
 	    <td><%= berth.printExists %></td>
     	    <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
 	    <td><%= link_to 'Poista', berth, method: :delete, data: { confirm: 'Oletko varma?' } %></td>

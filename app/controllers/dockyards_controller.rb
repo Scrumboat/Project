@@ -23,7 +23,8 @@ class DockyardsController < ApplicationController
     @space_left     = (@dockyard.length * @dockyard.width) - (length_taken * width_taken)
     @width_left     = @dockyard.width - width_taken
     @length_left    = @dockyard.length - length_taken
-
+    @telakanNeliohinta = Pricing.where(:target => "telakanNeliohinta").first
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @dockyard }
