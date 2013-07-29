@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
-</script>
-<script src="/assets/memberfilter.js">
+</script><script src="/assets/memberfilter.js">
 </script>
 <script src="/assets/jquery.tablesorter.js">
 </script>
+<script>
+    $(document).ready(function(){
+        $("#button").click(function() {
+            $("#filtterit").toggle();
+        });
+    });
+</script>
+
 <body onload="hideAll();">
-  
-  <h1>Jäsenet</h1>
 
-  <%= form_tag members_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search" %>
-  </p>
-  <% end %>
+<h1>Jäsenet</h1>
 
-    <H4>Filtterit</H4>
+<%= form_tag members_path, :method => 'get', :class => 'form-search' do %>
+    <p>
+      <%= text_field_tag :search, params[:search], :class => 'input-medium search-query' %>
+      <%= submit_tag "Search" %>
+    </p>
+<% end %>
 
-    <form class="form-inline">
+<button class="btn btn-info" type="button" id="button">Filtterit</button>
 
-      <label for="ctoimi" class="checkbox"><input type="checkbox" id="ctoimi" onclick="toggle('.toimi', this)"/>Toimi</label> 
-      <label for="clisenssi" class="checkbox"><input type="checkbox" id="clisenssi" onclick="toggle('.lisenssi', this)"/>Lisenssi</label> 
-      <label for="cposti" class="checkbox"><input type="checkbox" id="cposti" onclick="toggle('.posti', this)"/>Posti</label> 
-      <label for="cmaa" class="checkbox"><input type="checkbox" id="cmaa" onclick="toggle('.maa', this)"/>Maa</label> 
-      <label for="claivuri" class="checkbox"><input type="checkbox" id="claivuri" onclick="toggle('.laivuri', this)"/>Laivuri</label> 
-      <label for="cvarasto" class="checkbox"><input type="checkbox" id="cvarasto" onclick="toggle('.varasto', this)"/>Varasto</label> 
-      <label for="cavain" class="checkbox"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>Avain</label> 
-      <label for="chuom" class="checkbox"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>Huom</label> 
 
-    </form>
+<form class="form-inline" id="filtterit">
 
-    <table id="myTable" class="table table-condensed">
-      <thead>
-      <tr>
-        <th>Nimi</th>
-        <th>Jno</th>
-        <th>MatkaPuh</th>
-        <th>EmailFax</th>
-        <th>Sotu</th>
-        <th>Liittynyt</th>
-        <th>JK</th>
-        <th class="toimi">Toimi</th>
-        <th class="lisenssi">Lisenssi</th>
-        <th class="posti">Posti</th>
-        <th class="maa">Maa</th>
-        <th class="laivuri">Laivuri</th>
-        <th class="varasto">Varasto</th>
-        <th class="avain">Avain</th>
-        <th class="huom">Huom</th>
-        <th>MuutosPvm</th>
-        <th>POISTETTU</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      </thead>
+  <label for="ctoimi" class="checkbox"><input type="checkbox" id="ctoimi" onclick="toggle('.toimi', this)"/>Toimi</label>
+  <label for="clisenssi" class="checkbox"><input type="checkbox" id="clisenssi" onclick="toggle('.lisenssi', this)"/>Lisenssi</label>
+  <label for="cposti" class="checkbox"><input type="checkbox" id="cposti" onclick="toggle('.posti', this)"/>Posti</label>
+  <label for="cmaa" class="checkbox"><input type="checkbox" id="cmaa" onclick="toggle('.maa', this)"/>Maa</label>
+  <label for="claivuri" class="checkbox"><input type="checkbox" id="claivuri" onclick="toggle('.laivuri', this)"/>Laivuri</label>
+  <label for="cvarasto" class="checkbox"><input type="checkbox" id="cvarasto" onclick="toggle('.varasto', this)"/>Varasto</label>
+  <label for="cavain" class="checkbox"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>Avain</label>
+  <label for="chuom" class="checkbox"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>Huom</label>
 
-    <% for member in @members %>
+</form>
+
+<table id="myTable" class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Nimi</th>
+    <th>Jno</th>
+    <th>MatkaPuh</th>
+    <th>EmailFax</th>
+    <th>Sotu</th>
+    <th>Liittynyt</th>
+    <th>JK</th>
+    <th class="toimi">Toimi</th>
+    <th class="lisenssi">Lisenssi</th>
+    <th class="posti">Posti</th>
+    <th class="maa">Maa</th>
+    <th class="laivuri">Laivuri</th>
+    <th class="varasto">Varasto</th>
+    <th class="avain">Avain</th>
+    <th class="huom">Huom</th>
+    <th>MuutosPvm</th>
+    <th>POISTETTU</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <% for member in @members %>
       <tr>
         <td><%= member.Nimi %></td>
         <td><%= member.Jno %></td>
@@ -76,23 +82,22 @@
         <td class="huom"><%= member.Huom %></td>
         <td><%= member.MuutosPvm %></td>
         <td><%= member.deleted ? 'Kyllä' : 'Ei' %></td>
-        <td><%= link_to 'Tiedot', member %></td>
-        <td><%= link_to 'Muokkaa', edit_member_path(member) %></td>
-        <td><%= link_to 'Poista', member, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+        <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, member %>
+            <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_member_path(member) %>
+            <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, member, method: :delete, data: { confirm: 'Oletko varma?' } %>
+        </td>
       </tr>
-    <% end %>
-    </table>
+  <% end %>
+</table>
 
-    <br />
+<br />
 
-    <%= link_to 'Luo uusi jäsen', new_member_path %>
-    <br />
-    <%= link_to 'Main menu', root_path %>
-  <script>
-  $(document).ready(function() 
-    { 
-        $("#myTable").tablesorter(); 
-    } 
-  ); 
-  </script>
+<%= link_to '<i class="btn btn-danger"><i class="icon-home icon-white"></i>    Etusivulle</i>'.html_safe, root_path %>
+
+<%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi jäsen</i>'.html_safe, new_member_path %>
+<script>
+    $(document).ready(function() {
+        $("#myTable").tablesorter();
+    });
+</script>
 </body>
