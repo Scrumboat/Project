@@ -30,7 +30,7 @@ class Invoice < ActiveRecord::Base
       end
       jasenmaksu = Pricing.find_by_target("jasenmaksu").data
       varastomaksu = 0
-      if jasen.Varasto
+      if !jasen.Varasto.blank?
         varastomaksu = (Pricing.find_by_target("varastokoppinelio").data)*(Storage.find_by_vk(jasen.Varasto).pala)
       end
       laiturimaksu = Pricing.find_by_target("minLaituripaikanHinta").data

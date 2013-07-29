@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :nimi %>
-    <%= f.input :jno %>
+    <%= f.input :jno, input_html: { value: params[:jno]} %>
     <%= f.input :toimihlokerroin %>
     <%= f.input :talkookerroin %>
     <%= f.input :viitesuoritukset %>

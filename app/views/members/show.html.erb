@@ -5,11 +5,13 @@
 
 <p>
   <b>Laskut: </b>
+  <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-plus-sign icon-white"></i> Uusi lasku</i>'.html_safe, new_invoice_path(:jno => @member.Jno)%>
   <ul>
     <% @member.invoices.each do |invoice| %>
       <li><%= link_to invoice.erapvm, invoice_path(invoice) %> <%= invoice.maksettu ? 'Maksettu' : (invoice.eraantynyt ? 'ERÄÄNTYNYT' : 'Ei maksettu') %> </li>
     <% end %>
   </ul>
+
 </p>
 
 <p>
