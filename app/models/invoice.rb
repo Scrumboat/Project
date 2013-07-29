@@ -4,13 +4,14 @@ class Invoice < ActiveRecord::Base
   
   def self.search(search)
     if search == "paid"
-	  find(:all, :conditions => ['"maksettu" IS ?', true])
-	elsif search == "unpaid"
-	  find(:all, :conditions => ['"maksettu" IS ?', false])
-	else
+	    where('"maksettu" = ?', true)
+	  elsif search == "unpaid"
+	    where('"maksettu"  = ?', false)
+	  else
       find(:all)
-	end
+	  end
   end
+
   def eraantynyt()
     if self.erapvm < DateTime.now.to_date
       return true
