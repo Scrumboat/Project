@@ -7,7 +7,9 @@ class Invoice < ActiveRecord::Base
 	    where('"maksettu" = ?', true)
 	  elsif search == "unpaid"
 	    where('"maksettu"  = ?', false)
-	  else
+    elsif search == "overdue"
+      where('"maksettu" = ? AND erapvm < ?', false, Time.now.to_date)
+    else
       find(:all)
 	  end
   end

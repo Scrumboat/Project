@@ -34,6 +34,15 @@ $(document).ready(function(){
 <% end %>
 </span>
 
+<span style="float:left;">
+<%= form_tag invoices_path, :method => 'get' do %>
+    <%= hidden_field_tag :search, "overdue" %>
+      <%= button_tag(type: "submit", class: "btn") do %>
+    <i class="icon-warning-sign"></i> Erääntyneet
+<% end %>
+<% end %>
+</span>
+
 <%= form_tag invoices_path, :method => 'get' do %>
     <%= button_tag(type: "submit", class: "btn") do %>
     <i class="icon-list"></i> Näytä kaikki
