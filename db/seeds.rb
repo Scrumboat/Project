@@ -51,8 +51,7 @@ DockyardSpot.create([{id: 1, boat_length: 50, boat_width: 9, length: 50.8, width
                      {id: 3, length: 3, width: 1.5, number: 1, dockyard_id: 2}])
 
 puts 'CREATING PRICING'
-
-Pricing.create([{target: 'jasenmaksu', data: 67}, {target: "minLaituripaikanHinta", data: 50}, {target: "veneenHinnanKasvu", data: 10}, {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25}, {target: "telakanNeliohinta", data: 5}, {target: "liittymismaksu", data: 100}, {target: "jasenmaksu", data: 50}, {target: "ensirekmaksu", data: 40},{target: "veneenvuosimaksu", data: 25},{target: "varastokoppinelio", data: 5}])
+Pricing.create([{target: "minLaituripaikanHinta", data: 50}, {target: "veneenHinnanKasvu", data: 10}, {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25}, {target: "telakanNeliohinta", data: 5}, {target: "liittymismaksu", data: 100}, {target: "jasenmaksu", data: 50},{target: "telakanNeliohinta", data: 5}, {target: "ensirekmaksu", data: 40},{target: "veneenvuosimaksu", data: 25},{target: "varastokoppinelio", data: 5}])
 
 puts 'DEFAULT ADMIN (if we got ENV variables for it)'
 if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?
