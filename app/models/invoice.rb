@@ -4,9 +4,9 @@ class Invoice < ActiveRecord::Base
   
   def self.search(search)
     if search == "paid"
-	  find(:all, :conditions => ['"maksettu" LIKE ?', true])
+	  find(:all, :conditions => ['"maksettu" IS ?', true])
 	elsif search == "unpaid"
-	  find(:all, :conditions => ['"maksettu" LIKE ?', false])
+	  find(:all, :conditions => ['"maksettu" IS ?', false])
 	else
       find(:all)
 	end
