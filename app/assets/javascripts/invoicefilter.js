@@ -16,3 +16,8 @@ function toggle(className, obj) {
     if ($input.prop('checked')) $(className).show();
     else $(className).hide();
 }
+
+function taydenna() {
+  var e = document.getElementById('invoice_nimi');
+  document.getElementById('invoice_jno').value=e.value;
+}

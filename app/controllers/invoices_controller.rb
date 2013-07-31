@@ -32,6 +32,11 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice = Invoice.new
+    #member = Invoice.find(params[:jno])
+    #@laskut = Invoice.find_all_by_jno(member.Jno)
+    #@testi = :id
+    #member = Member.find_all_by_Jno(params[:invoice][:jno]).first
+    #@invoice.member_id = member.id
 
     respond_to do |format|
       format.html # new.html.erb

@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :nimi %>
+    <%= f.input :nimi, :input_html => {:onchange => "taydenna()"} %>
     <%= f.input :jno, input_html: { value: params[:jno]} %>
     <%= f.input :erapvm, input_html: { value: Time.now+2.weeks } %>
     <%= f.input :toimihlokerroin %>
@@ -29,6 +29,11 @@
     <%= f.input :lahetyspvm %>
     <%= f.input :tunniste %>
     <%= f.input :maksettu %>
+    <% #@laskut.each do |lasku| %>
+    <% #lasku.viitenumero %>
+    <% #end %>
+    <%= @testi %>
+
   </div>
 
   <div class="form-actions">
