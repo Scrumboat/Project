@@ -59,6 +59,7 @@
     <th class="huom">Huom</th>
     <th>MuutosPvm</th>
     <th>POISTETTU</th>
+    <th>Viitenumero</th>
     <th></th>
   </tr>
   </thead>
@@ -82,6 +83,7 @@
         <td class="huom"><%= member.Huom %></td>
         <td><%= member.MuutosPvm %></td>
         <td><%= member.deleted ? 'Kyllä' : 'Ei' %></td>
+        <td><%= member.viitenumero %></td>
         <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, member %>
             <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_member_path(member) %>
             <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, member, method: :delete, data: { confirm: 'Oletko varma?' } %>

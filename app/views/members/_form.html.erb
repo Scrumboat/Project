@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :Jno %><br />
-    <%= f.number_field :Jno %>
+    <%= f.number_field :Jno, :onchange => "generateIndexNumber()" %>
   </div>
   <div class="field">
     <%= f.label :Sotu %><br />
@@ -103,7 +103,13 @@
     <%= f.label :VeneRekNro %><br />
     <%= text_field_tag :VeneRekNro %>
   </div>
+  <div class="field">
+    <%= f.hidden_field :viitenumero %><br />
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
+
+
 <% end %>
