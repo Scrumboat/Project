@@ -60,9 +60,9 @@ if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?
 end
 
 puts 'CREATING INVOICES'
-Invoice.create([{ member_id: 1, erapvm: '2012-01-01', jno: 4421, viitenumero: 442100001, telakkamaksu: 300, maksettu: false},
-                { member_id: 1, erapvm: '2014-11-11', jno: 4421, viitenumero: 442100002, liittymismaksu: 123, maksettu: false},
-                { member_id: 1, erapvm: '2014-04-01', jno: 4421, viitenumero: 442100003, vartiosakko: 444, maksettu: false},
-                { member_id: 2, erapvm: '2014-01-05', jno: 2149, viitenumero: 214900001, telakkamaksu: 55, maksettu: true},
-                { member_id: 2, erapvm: '2011-11-09', jno: 2149, viitenumero: 214900002, vartiosakko: 200, maksettu: true},
-                { member_id: 3, erapvm: '2014-05-05', jno: 2222, viitenumero: 222200001, varastokoppimaksu: 100, maksettu: true}])
+Invoice.create([{ member_id: 1, erapvm: '2012-01-01', jno: 4421, telakkamaksu: 300, maksettu: false},
+                { member_id: 1, erapvm: '2014-11-11', jno: 4421, liittymismaksu: 123, maksettu: false},
+                { member_id: 1, erapvm: '2014-04-01', jno: 4421, vartiosakko: 444, maksettu: false},
+                { member_id: 2, erapvm: '2014-01-05', jno: 2149, telakkamaksu: 55, maksettu: true},
+                { member_id: 2, erapvm: '2011-11-09', jno: 2149, vartiosakko: 200, maksettu: true},
+                { member_id: 3, erapvm: '2014-05-05', jno: 2222, varastokoppimaksu: 100, maksettu: true}])

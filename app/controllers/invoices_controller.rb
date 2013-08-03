@@ -33,24 +33,6 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
     
-    #@members_in_json = Invoice.select(:viitenumero).to_json
-    #@viitenumerot = Invoice.select(:viitenumero)
-    @laskut = Invoice.all
-    @taulu = []
-    @laskut.each do |lasku|
-      @taulu.push(lasku.viitenumero)
-    end
-
-    #@members_in_json = Member.all.to_json
-    #@members_in_json = '1000'
-    #@invoice.viitenumero = '7777'
-    #@invoice.save
-    #member = Invoice.find(params[:jno])
-    #@laskut = Invoice.find_all_by_jno(member.Jno)
-    #@testi = :id
-    #member = Member.find_all_by_Jno(params[:invoice][:jno]).first
-    #@invoice.member_id = member.id
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }

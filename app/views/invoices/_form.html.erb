@@ -1,13 +1,9 @@
-<script type="text/html" id="member_data_in_json">
-   <%= @taulu %>
-</script>
-
 <%= simple_form_for(@invoice) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :nimi %>
-    <%= f.input :jno, input_html: { value: params[:jno]}, :input_html => {:onchange => "generateViite()"} %>
+    <%= f.input :jno, input_html: { value: params[:jno]} %>
     <%= f.input :erapvm, input_html: { value: Time.now + 2.week } %>
     <%= f.input :toimihlokerroin %>
     <%= f.input :talkookerroin %>
@@ -33,12 +29,6 @@
     <%= f.input :lahetyspvm %>
     <%= f.input :tunniste %>
     <%= f.input :maksettu %>
-    <% #@laskut.each do |lasku| %>
-    <% #lasku.viitenumero %>
-    <% #end %>
-    <%= @taulu %>
-    <% #@numero %>
-    <%= f.hidden_field :viitenumero, :value => "11" %>
 
   </div>
 
