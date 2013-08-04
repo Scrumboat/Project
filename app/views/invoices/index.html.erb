@@ -76,10 +76,8 @@ $(document).ready(function(){
     <th>Nimi</th>
     <th>Jno</th>
     <th class="suorkas">Suorituksetkassaan</th>
-    <th class="annehyv">Annetuthyvitykset</th>
     <th>Liittymismaksu</th>
     <th>Jasenmaksu</th>
-    <th class="edelkau">Edellisenkaudenlaskutus</th>
     <th>Venerekisterimaksu</th>
     <th>Varastokoppimaksu</th>
     <th>Laiturimaksu</th>
@@ -100,10 +98,8 @@ $(document).ready(function(){
     <td><%= link_to !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi, member_path(invoice.member) %></td>
     <td><%= invoice.jno %></td>
     <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
-    <td class="annehyv"><%= invoice.annetutHyvitykset %></td>
     <td><%= invoice.liittymismaksu %></td>
     <td><%= invoice.jasenmaksu %></td>
-    <td class="edelkau"><%= invoice.edellisenKaudenLaskutus %></td>
     <td><%= invoice.venerekisterimaksu %></td>
     <td><%= invoice.varastokoppimaksu %></td>
     <td><%= invoice.laiturimaksu %></td>
