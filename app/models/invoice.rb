@@ -22,6 +22,27 @@ class Invoice < ActiveRecord::Base
       return false
     end
   end
+  
+  def self.karhu()
+    @jasenet = Member.all
+    for jasen in @jasenet
+	  for invoice in jasen.invoices
+	    if invoice.eraantynyt() && !invoice.maksettu
+		  if invoice.karhuttu != nil
+	        invoice.karhuttu += Pricing.find_by_target("karhumaksu").data
+		  else
+		    invoice.karhuttu = Pricing.find_by_target("karhumaksu").data
+		  end
+		  if invoice.summa != nil
+	        invoice.summa += Pricing.find_by_target("karhumaksu").data
+		  else
+		    invoice.summa = Pricing.find_by_target("karhumaksu").data
+		  end
+		  invoice.save
+	    end
+	  end
+	end
+  end
 
   def self.createInvoices()
     @jasenet = Member.all

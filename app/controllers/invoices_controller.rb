@@ -10,6 +10,12 @@ class InvoicesController < ApplicationController
       redirect_to invoices_url
       return
     end
+	if params[:karhu]
+      Invoice.karhu()
+      flash[:notice] = "Karhukirjeet luotu"
+      redirect_to invoices_url
+      return
+    end
 
     respond_to do |format|
       format.html # index.html.erb
