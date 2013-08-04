@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.input :nimi %>
     <%= f.input :jno, input_html: { value: params[:jno]} %>
-    <%= f.input :erapvm, input_html: { value: Time.now + 2.week } %>
+    <%= f.input :erapvm, :default => Date.today + 1.month, :order => [ :day, :month, :year] %>
     <%= f.input :toimihlokerroin %>
     <%= f.input :talkookerroin %>
     <%= f.input :viitesuoritukset %>
@@ -21,9 +21,10 @@
     <%= f.input :katsastussakko %>
     <%= f.input :vartiosakko %>
     <%= f.input :laskutuslisa %>
-    <%= f.input :luontipvm %>
-    <%= f.input :lahetyspvm %>
+    <%= f.input :luontipvm, :order => [ :day, :month, :year] %>
+    <%= f.input :lahetyspvm, :order => [ :day, :month, :year] %>
     <%= f.input :tunniste %>
+    <%= f.input :vapaasana %>
     <%= f.input :maksettu %>
 
   </div>

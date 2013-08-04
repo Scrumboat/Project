@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :Liittynyt %><br />
-    <%= f.date_select :Liittynyt %>
+    <%= f.date_select :Liittynyt, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :JK %><br />
@@ -41,7 +41,7 @@
   </div>
   <div class="field">
     <%= f.label :MuutosPvm %><br />
-    <%= f.date_select :MuutosPvm %>
+    <%= f.date_select :MuutosPvm, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :Toimi %><br />

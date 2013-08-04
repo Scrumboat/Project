@@ -23,11 +23,11 @@
 
   <div class="field">
     <%= f.label :RekPvm %>
-    <%= f.date_select :RekPvm %>
+    <%= f.date_select :RekPvm, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :MuutosPvm %>
-    <%= f.date_select :MuutosPvm %>
+    <%= f.date_select :MuutosPvm, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :Nimi %>

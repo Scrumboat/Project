@@ -13,7 +13,6 @@
   <tr>
     <td><%= pricing.target %></td>
     <td><%= pricing.data %></td>
-    <td><%= link_to 'Näytä', pricing %></td>
     <td><%= link_to 'Muokkaa', edit_pricing_path(pricing) %></td>
     <td><%= link_to 'Poista', pricing, method: :delete, data: { confirm: 'Oletko aivan varma? Järjestelmä voi seota jos näitä kenttiä poistetaan. Ne voidaan luoda uudestaan mutta kenttien nimet täytyy kirjoittaa tismalleen samalla tavalla kuin ennen' } %></td>
   </tr>
