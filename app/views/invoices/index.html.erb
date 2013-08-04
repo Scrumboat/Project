@@ -50,7 +50,7 @@ $(document).ready(function(){
 <% end %>
 <%= form_tag invoices_path, :method => 'get' do %>
   <%= hidden_field_tag :create, "create" %>
-    <%= button_tag(type: "submit", class: "btn btn-warning") do %>
+    <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
     <i class="icon-briefcase icon-white"></i> Luo kaikille lasku
 <% end %>
 <% end %>
@@ -97,7 +97,7 @@ $(document).ready(function(){
 
 <% @invoices.each do |invoice| %>
   <tr>
-    <td><%= !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi %></td>
+    <td><%= link_to !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi, member_path(invoice.member) %></td>
     <td><%= invoice.jno %></td>
     <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
     <td class="annehyv"><%= invoice.annetutHyvitykset %></td>
@@ -119,6 +119,7 @@ $(document).ready(function(){
     <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, invoice %>
         <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_invoice_path(invoice) %>
         <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, invoice, method: :delete, data: { confirm: 'Oletko varma?' } %>
+		<%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Uusi lasku</i>'.html_safe, new_invoice_path(:jno => invoice.member.Jno) %>
     </td>
 
   </tr>

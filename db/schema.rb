@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803101435) do
+ActiveRecord::Schema.define(:version => 20130804110205) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -113,13 +113,9 @@ ActiveRecord::Schema.define(:version => 20130803101435) do
     t.string   "toimihlokerroin"
     t.integer  "talkookerroin"
     t.decimal  "viitesuoritukset"
-    t.decimal  "suorituksetIlmanViitetta"
     t.decimal  "suorituksetKassaan"
-    t.decimal  "annetutHyvitykset"
-    t.decimal  "maksetunSummanPalautus"
     t.decimal  "liittymismaksu"
     t.decimal  "jasenmaksu"
-    t.decimal  "edellisenKaudenLaskutus"
     t.decimal  "venerekisterimaksu"
     t.decimal  "varastokoppimaksu"
     t.decimal  "laiturimaksu"
@@ -130,12 +126,12 @@ ActiveRecord::Schema.define(:version => 20130803101435) do
     t.decimal  "katsastussakko"
     t.decimal  "vartiosakko"
     t.decimal  "laskutuslisa"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.date     "luontipvm"
     t.date     "lahetyspvm"
     t.string   "tunniste"
-    t.boolean  "maksettu",                 :default => false
+    t.boolean  "maksettu",           :default => false
     t.integer  "member_id"
     t.date     "erapvm"
     t.decimal  "summa"
@@ -175,11 +171,15 @@ ActiveRecord::Schema.define(:version => 20130803101435) do
     t.string   "Huom"
     t.string   "Varasto"
     t.string   "Avain"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.boolean  "deleted",     :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "deleted",                  :default => false
     t.date     "deleted_at"
     t.string   "viitenumero"
+    t.decimal  "annetutHyvitykset"
+    t.decimal  "suorituksetIlmanViitetta"
+    t.decimal  "maksetunSummanPalautus"
+    t.decimal  "edellisenKaudenLaskutus"
   end
 
   create_table "ownerships", :force => true do |t|
