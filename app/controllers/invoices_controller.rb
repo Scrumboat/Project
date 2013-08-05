@@ -8,21 +8,22 @@ class InvoicesController < ApplicationController
     if params[:Viitesuoritustiedosto].blank?
       flash[:error] = 'Ei tiedostoa'
     else
+      flash[:notice] = 'Viitesuorituksia toivottavasti purettu.'
       data_array = InvoicesHelper.parse_ref_numbers_from_file params[:Viitesuoritustiedosto]
-      data_array.each do | payment |
-        member = Member.find_by_viitenumero(payment[0])     # tuupataanko memberiin tietoa että on maksettu ?
-        invoice = Invoice.find_by_viitenumero(payment[0])   # laskuun ei voi, koska monella laskulla sama viitenumero
-        amount_paid = payment[1] * 0.01                     # memberillä pitäs olla 'rahat' kenttä jota täältä aina kasvatetaan
-                                                            # ja mitä laskun luonti aina pienentää. tai sitten jokaisella laskulla
-                                                            # uniikki viitenro
-        flash[:notice] = 'Viitesuorituksia toivottavasti purettu.'
-      end
-
-
+      logger.fatal data_array.inspect
+      data_array.each { |payment|
+        #member = Member.find_by_viitenumero(payment[:ref_number])     # tuupataanko memberiin tietoa että on maksettu ?
+        #invoice = Invoice.find_by_viitenumero(payment[:ref_number])   # laskuun ei voi, koska monella laskulla sama viitenumero
+        #amount_paid = payment[:amount] * 0.01                         # memberillä pitäs olla 'rahat' kenttä jota täältä aina kasvatetaan
+                                                                      # ja mitä laskun luonti aina pienentää. tai sitten jokaisella laskulla
+      }
     end
+
     redirect_to invoices_url
-  rescue
-    flash[:error] = 'Suoritusten purku epäonnistui!'
+
+  rescue Exception => e
+    flash[:error] = 'Virhe suorituksia purkaessa: ' + e.message
+    logger.fatal e.backtrace.inspect
     redirect_to invoices_url
   end
 
