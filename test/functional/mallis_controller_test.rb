@@ -2,6 +2,7 @@
  
   class MallisControllerTest < ActionController::TestCase
     setup do
+      sign_in admins(:one)
       assert Malli.create(:Korkeus => 10 ,:tyyppi => "typea", :Uppouma => 10, :ValmMalli => "typea", :Pituus => 10, :Leveys => 10, :Syvyys => 10)
     end
  
