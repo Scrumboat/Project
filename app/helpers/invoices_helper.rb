@@ -66,9 +66,19 @@ module InvoicesHelper
   end
 
 
-  def parse_ref_numbers_from_file file
-
-
+  def parse_ref_numbers_from_file(file)
+    result_array = Array.new()
+    lines = file.readlines()
+    lines.each do |line|
+      if line[0].to_i == 3                              # 3 on VIITEMAKSU, tarvitaanko suoraveloituksia (5)?
+        ref_number = line[43, 20]
+        amount = line[77, 10]
+        day_paid = line[]
+        result_array.push(Array.new(ref_number, amount))
+      end
+    result_array
+    end
   end
 
+  #12222222222222233333344444455555555555555556666666666666666666677777777777789aaaaaaaaaabcd
 end

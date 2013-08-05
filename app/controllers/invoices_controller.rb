@@ -2,14 +2,27 @@
 
 class InvoicesController < ApplicationController
 
-
+  # POST /invoices/uploadFile
   def uploadFile
 
     if params[:Viitesuoritustiedosto].blank?
       flash[:error] = 'Ei tiedostoa'
     else
-      flash[:notice] = 'Saatiin file'
+      data_array = InvoicesHelper.parse_ref_numbers_from_file params[:Viitesuoritustiedosto]
+      data_array.each do | payment |
+        member = Member.find_by_viitenumero(payment[0])     # tuupataanko memberiin tietoa että on maksettu ?
+        invoice = Invoice.find_by_viitenumero(payment[0])   # laskuun ei voi, koska monella laskulla sama viitenumero
+        amount_paid = payment[1] * 0.01                     # memberillä pitäs olla 'rahat' kenttä jota täältä aina kasvatetaan
+                                                            # ja mitä laskun luonti aina pienentää. tai sitten jokaisella laskulla
+                                                            # uniikki viitenro
+        flash[:notice] = 'Viitesuorituksia toivottavasti purettu.'
+      end
+
+
     end
+    redirect_to invoices_url
+  rescue
+    flash[:error] = 'Suoritusten purku epäonnistui!'
     redirect_to invoices_url
   end
 
