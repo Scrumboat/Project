@@ -6,12 +6,15 @@ module InvoicesHelper
   def self.popover_text(invoice)
     text = '<b>Viitenumero: </b>' + invoice.member.viitenumero.to_s + '<br />'
     total = 0
+    if !invoice.tunniste.blank?
+      text = text + '<b>Tunniste: </b>' + invoice.tunniste + '<br />'
+    end
     if !invoice.suorituksetKassaan.blank?
-      text = text + '<b>Suoritukset kassaan:</b> ' + invoice.suorituksetKassaan.to_s + '<br />'
+      text = text + '<b>Suoritukset kassaan: </b> ' + invoice.suorituksetKassaan.to_s + '<br />'
       total = total + invoice.suorituksetKassaan
     end
     if !invoice.liittymismaksu.blank?
-      text = text + '<b>Liittymismaksu:</b> ' + invoice.liittymismaksu.to_s + '<br />'
+      text = text + '<b>Liittymismaksu: </b> ' + invoice.liittymismaksu.to_s + '<br />'
       total = total + invoice.liittymismaksu
     end
     if !invoice.jasenmaksu.blank?
