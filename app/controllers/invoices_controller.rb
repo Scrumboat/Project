@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
@@ -5,8 +7,13 @@ class InvoicesController < ApplicationController
     #@invoices = Invoice.all
     @invoices = Invoice.search(params[:search])
     if params[:create]
+      if params[:tunniste].blank?
+        flash[:error] = 'Lisää laskulle tunniste!'
+        redirect_to invoices_url
+        return
+      end
       Invoice.createInvoices(params[:tunniste])
-      flash[:notice] = "Laskut luotu kaikille."
+      flash[:notice] = "Laskut luotu kaikille tunnisteella: " + params[:tunniste] + "."
       redirect_to invoices_url
       return
     end
