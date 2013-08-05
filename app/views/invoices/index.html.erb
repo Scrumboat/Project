@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
 </script>
+<script src="/assets/bootstrap-tooltip.js" > </script>
+<script src="/assets/bootstrap-popover.js" > </script>
 <script src="/assets/invoicefilter.js">
 </script>
 <script src="/assets/jquery.tablesorter.js">
@@ -101,8 +103,10 @@ $(document).ready(function(){
   </tr>
  </thead>
 
+  <tbody>
 <% @invoices.each do |invoice| %>
-  <tr>
+  <tr rel="popover" id="<%= invoice.id %>" onclick="
+      $(function () {$('#<%=invoice.id%>').popover({placement: 'top', html: true, title: '<%= invoice.member.Nimi %>', content: '<%= InvoicesHelper.popover_text(invoice) %>'}); });">
     <td><%= link_to !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi, member_path(invoice.member) %></td>
     <td><%= invoice.jno %></td>
     <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
@@ -128,6 +132,7 @@ $(document).ready(function(){
 
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />

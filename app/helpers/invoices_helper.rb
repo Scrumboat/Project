@@ -1,2 +1,66 @@
+#encoding: utf-8
+
 module InvoicesHelper
+
+
+  def self.popover_text(invoice)
+    text = '<b>Viitenumero: </b>' + invoice.member.viitenumero.to_s + '<br />'
+    if !invoice.suorituksetKassaan.blank?
+      text = text + '<b>Suoritukset kassaan:</b> ' + invoice.suorituksetKassaan.to_s + '<br />'
+    end
+    if !invoice.liittymismaksu.blank?
+      text = text + '<b>Liittymismaksu:</b> ' + invoice.liittymismaksu.to_s + '<br />'
+    end
+    if !invoice.jasenmaksu.blank?
+      text = text + '<b>Jäsenmaksu: </b>' + invoice.jasenmaksu.to_s + '<br />'
+    end
+    if !invoice.venerekisterimaksu.blank?
+      text = text + '<b>Venerekisterimaksu: </b>' + invoice.venerekisterimaksu.to_s + '<br />'
+    end
+    if !invoice.varastokoppimaksu.blank?
+      text = text + '<b>Varastokoppimaksu: </b>' + invoice.varastokoppimaksu.to_s + '<br />'
+    end
+    if !invoice.laiturimaksu.blank?
+      text = text + '<b>Laiturimaksu: </b>' + invoice.laiturimaksu.to_s + '<br />'
+    end
+    if !invoice.ensirekisterimaksu.blank?
+      text = text + '<b>Ensirekisterimaksu: </b>' + invoice.ensirekisterimaksu.to_s + '<br />'
+    end
+    if !invoice.telakkamaksu.blank?
+      text = text + '<b>Telakkamaksu: </b>' + invoice.telakkamaksu.to_s + '<br />'
+    end
+    if !invoice.muutMaksut.blank?
+      text = text + '<b>Muut maksut: </b>' + invoice.muutMaksut.to_s + '<br />'
+    end
+    if !invoice.talkoosakko.blank?
+      text = text + '<b>Talkoosakko: </b>' + invoice.talkoosakko.to_s + '<br />'
+    end
+    if !invoice.katsastussakko.blank?
+      text = text + '<b>Katsastussakko: </b>' + invoice.katsastussakko.to_s + '<br />'
+    end
+    if !invoice.vartiosakko.blank?
+      text = text + '<b>Vartiosakko: </b>' + invoice.vartiosakko.to_s + '<br />'
+    end
+    if !invoice.laskutuslisa.blank?
+      text = text + '<b>Laskutuslisä: </b>' + invoice.laskutuslisa.to_s + '<br />'
+    end
+    text
+  end
+
+
+
+#  <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
+#    <td><%= invoice.liittymismaksu %></td>
+#  <td><%= invoice.jasenmaksu %></td>
+#    <td><%= invoice.venerekisterimaksu %></td>
+#  <td><%= invoice.varastokoppimaksu %></td>
+#    <td><%= invoice.laiturimaksu %></td>
+#  <td class="ensrekm"><%= invoice.ensirekisterimaksu %></td>
+#    <td><%= invoice.telakkamaksu %></td>
+#  <td class="muutmak"><%= invoice.muutMaksut %></td>
+#    <td><%= invoice.member.viitenumero %></td>
+#  <td class="talksak"><%= invoice.talkoosakko %></td>
+#    <td class="katssak"><%= invoice.katsastussakko %></td>
+#    <td class="vartsak"><%= invoice.vartiosakko %></td>
+#    <td class="lasklis"><%= invoice.laskutuslisa %></td>
 end
