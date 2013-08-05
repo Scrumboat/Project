@@ -63,19 +63,9 @@ module InvoicesHelper
   end
 
 
+  def parse_ref_numbers_from_file file
 
-#  <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
-#    <td><%= invoice.liittymismaksu %></td>
-#  <td><%= invoice.jasenmaksu %></td>
-#    <td><%= invoice.venerekisterimaksu %></td>
-#  <td><%= invoice.varastokoppimaksu %></td>
-#    <td><%= invoice.laiturimaksu %></td>
-#  <td class="ensrekm"><%= invoice.ensirekisterimaksu %></td>
-#    <td><%= invoice.telakkamaksu %></td>
-#  <td class="muutmak"><%= invoice.muutMaksut %></td>
-#    <td><%= invoice.member.viitenumero %></td>
-#  <td class="talksak"><%= invoice.talkoosakko %></td>
-#    <td class="katssak"><%= invoice.katsastussakko %></td>
-#    <td class="vartsak"><%= invoice.vartiosakko %></td>
-#    <td class="lasklis"><%= invoice.laskutuslisa %></td>
+
+  end
+
 end

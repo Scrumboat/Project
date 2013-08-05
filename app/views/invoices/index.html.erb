@@ -66,6 +66,11 @@ $(document).ready(function(){
 <% end %>
 <% end %>
 
+  <%= form_tag invoices_uploadFile_path, :method => 'post', :action => 'uploadFile', :multipart => true do %>
+      <label for="Viitesuoritustiedosto">Tuo viitesuorituksia</label><%= file_field_tag 'Viitesuoritustiedosto', accept: 'text/plain' %>
+      <%= submit_tag 'Lähetä' %>
+  <% end %>
+
 <button class="btn btn-info" type="button" id="button">Filtterit</button>
 
   <form id="filtterit" class ="form-inline">

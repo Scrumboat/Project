@@ -1,6 +1,19 @@
 #encoding: utf-8
 
 class InvoicesController < ApplicationController
+
+
+  def uploadFile
+
+    if params[:Viitesuoritustiedosto].blank?
+      flash[:error] = 'Ei tiedostoa'
+    else
+      flash[:notice] = 'Saatiin file'
+    end
+    redirect_to invoices_url
+  end
+
+
   # GET /invoices
   # GET /invoices.json
   def index
