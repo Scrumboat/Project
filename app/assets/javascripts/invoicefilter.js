@@ -16,7 +16,3 @@ function toggle(className, obj) {
     if ($input.prop('checked')) $(className).show();
     else $(className).hide();
 }
-
-$(function () {
-    $("#1").popover({placement: 'top', title: 'HaaHoo!', content: 'Laskun tiedot tähän.'});
-});
