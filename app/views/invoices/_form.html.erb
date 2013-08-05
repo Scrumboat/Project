@@ -3,14 +3,14 @@
 
   <div class="form-inputs">
     <%= f.input :nimi %>
-    <%= f.input :jno, input_html: { value: params[:jno]} %>
-    <%= f.input :erapvm, :default => Date.today + 1.month, :order => [ :day, :month, :year] %>
-    <%= f.input :toimihlokerroin %>
+    <%= f.input :jno, input_html: { value: params[:jno]}, :label => 'Jäsennumero' %>
+    <%= f.input :erapvm, :default => Date.today + 1.month, :order => [ :day, :month, :year], :label => 'Eräpvm' %>
+    <%= f.input :toimihlokerroin, :label => 'Toimihlökerroin' %>
     <%= f.input :talkookerroin %>
     <%= f.input :viitesuoritukset %>
     <%= f.input :suorituksetKassaan %>
     <%= f.input :liittymismaksu %>
-    <%= f.input :jasenmaksu %>
+    <%= f.input :jasenmaksu, :label => 'Jäsenmaksu' %>
     <%= f.input :venerekisterimaksu %>
     <%= f.input :varastokoppimaksu %>
     <%= f.input :laiturimaksu %>
@@ -20,9 +20,9 @@
     <%= f.input :talkoosakko %>
     <%= f.input :katsastussakko %>
     <%= f.input :vartiosakko %>
-    <%= f.input :laskutuslisa %>
+    <%= f.input :laskutuslisa, :label => 'Laskutuslisä' %>
     <%= f.input :luontipvm, :order => [ :day, :month, :year] %>
-    <%= f.input :lahetyspvm, :order => [ :day, :month, :year] %>
+    <%= f.input :lahetyspvm, :order => [ :day, :month, :year], :label => 'Lähetyspvm' %>
     <%= f.input :tunniste %>
     <%= f.input :vapaasana %>
     <%= f.input :maksettu %>
@@ -30,6 +30,6 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.submit @teksti %>
   </div>
 <% end %>

@@ -1,8 +1,8 @@
-<h1>Listing boats_members</h1>
+<h1>Vene-jäsen yhteydet</h1>
 <table>
   <tr>
-    <th>Boat</th>
-    <th>Member</th>
+    <th>Vene</th>
+    <th>Jäsen</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,14 +12,12 @@
     <tr>
     <td><%= boats_member.boat.RekNro %></td>
     <td><%= boats_member.member.Nimi %></td>
-    <td><%= link_to 'Show', boats_member %></td>
-    <td><%= link_to 'Edit', edit_boats_member_path(boats_member) %></td>
-    <td><%= link_to 'Destroy', boats_member_path(boats_member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Muokkaa', edit_boats_member_path(boats_member) %></td>
+    <td><%= link_to 'Poista', boats_member_path(boats_member), method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Boats member', new_boats_member_path %>
-<%= link_to 'Main menu', root_path %>
+<%= link_to 'Luo uusi vene-jäsen yhteys', new_boats_member_path %>

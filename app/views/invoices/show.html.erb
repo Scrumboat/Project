@@ -6,12 +6,12 @@
 </p>
 
 <p>
-  <b>Jno:</b>
+  <b>Jäsennumero:</b>
   <%= @invoice.jno %>
 </p>
 
 <p>
-  <b>Toimihlokerroin:</b>
+  <b>Toimihlökerroin:</b>
   <%= @invoice.toimihlokerroin %>
 </p>
 
@@ -36,7 +36,7 @@
 </p>
 
 <p>
-  <b>Jasenmaksu:</b>
+  <b>Jäsenmaksu:</b>
   <%= @invoice.jasenmaksu %>
 </p>
 
@@ -86,7 +86,7 @@
 </p>
 
 <p>
-  <b>Laskutuslisa:</b>
+  <b>Laskutuslisä:</b>
   <%= @invoice.laskutuslisa %>
 </p>
 
@@ -106,5 +106,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+<%= link_to 'Muokkaa', edit_invoice_path(@invoice) %> |
+<%= link_to 'Takaisin', invoices_path %>
