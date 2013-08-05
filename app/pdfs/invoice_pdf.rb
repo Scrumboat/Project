@@ -41,7 +41,7 @@ class InvoicePdf < Prawn::Document
 	move_down 10
 	text "Summa:  #{@invoice.summa}"
 	move_down 10
-	text "Viitenumero:  #{@invoice.viitenumero}"
+	text "Viitenumero:  #{@member.viitenumero}"
 	move_down 10
 	text "Lahetyspvm:  #{@invoice.lahetyspvm}"
 	move_down 10
