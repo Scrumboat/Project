@@ -26,7 +26,7 @@ group :assets do
   gem 'therubyracer'
   gem 'execjs'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  #gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -39,6 +39,7 @@ gem "warden", "~> 1.2.1"
 gem "devise", "~> 2.2.4"
 gem 'figaro'
 gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
+gem 'prawn'
 
 group :development, :test do
   # Pretty printed test output
