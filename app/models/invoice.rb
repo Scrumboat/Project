@@ -83,7 +83,4 @@ class Invoice < ActiveRecord::Base
     end
   end
 
-  def invoice_already_created
-
-  end
 end

@@ -1,6 +1,5 @@
 class DockyardsController < ApplicationController
 
-  before_filter :authenticate_admin!
 
   # GET /dockyards
   # GET /dockyards.json
