@@ -44,9 +44,13 @@ class Invoice < ActiveRecord::Base
 	end
   end
 
-  def self.createInvoices()
+  def self.createInvoices(tunniste)
     @jasenet = Member.all
     for jasen in @jasenet
+      vanha_lasku = Invoice.where(:tunniste => tunniste, :member_id => jasen.id)
+      if !vanha_lasku.empty?
+        return
+      end
       nimi = jasen.Nimi
       jno = jasen.Jno
       liittymismaksu = 0
@@ -74,7 +78,9 @@ class Invoice < ActiveRecord::Base
       end
       erapaiva = Time.now + 2.weeks #Pricingsi tableen laskunmaksuaika data? Time.now + n.days esim
       luontipaiva = Time.now
-      Invoice.create({member_id: jasen.id, nimi: nimi, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false})
+
+      Invoice.create({member_id: jasen.id, nimi: nimi, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
     end
   end
+
 end

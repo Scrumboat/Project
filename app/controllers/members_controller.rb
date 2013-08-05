@@ -5,7 +5,6 @@ class MembersController < ApplicationController
 
   # GET /members
   # GET /members.json
-  before_filter :authenticate_admin!
   def index
     #@members = Member.order(sort_column + ' ' + sort_direction)    
     #@members = Member.search(params[:search])

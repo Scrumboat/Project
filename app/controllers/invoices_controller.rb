@@ -1,12 +1,32 @@
+#encoding: utf-8
+
 class InvoicesController < ApplicationController
+
+
+  def uploadFile
+
+    if params[:Viitesuoritustiedosto].blank?
+      flash[:error] = 'Ei tiedostoa'
+    else
+      flash[:notice] = 'Saatiin file'
+    end
+    redirect_to invoices_url
+  end
+
+
   # GET /invoices
   # GET /invoices.json
   def index
     #@invoices = Invoice.all
     @invoices = Invoice.search(params[:search])
     if params[:create]
-      Invoice.createInvoices()
-      flash[:notice] = "Laskut luotu kaikille."
+      if params[:tunniste].blank?
+        flash[:error] = 'Lisää laskulle tunniste!'
+        redirect_to invoices_url
+        return
+      end
+      Invoice.createInvoices(params[:tunniste])
+      flash[:notice] = "Laskut luotu kaikille tunnisteella: " + params[:tunniste] + "."
       redirect_to invoices_url
       return
     end

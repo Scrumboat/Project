@@ -12,14 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :boat_id %><br />
+    <%= f.label :boat_id, :label => 'Vene' %><br />
     <%= f.number_field :boat_id %>
   </div>
   <div class="field">
-    <%= f.label :member_id %><br />
+    <%= f.label :member_id, :label => 'Jäsen' %><br />
     <%= f.number_field :member_id %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit @teksti %>
   </div>
 <% end %>

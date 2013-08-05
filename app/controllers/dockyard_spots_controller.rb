@@ -2,7 +2,6 @@
 
 class DockyardSpotsController < ApplicationController
 
-  before_filter :authenticate_admin!
 
   # GET /dockyard_spots
   # GET /dockyard_spots.json

@@ -24,7 +24,7 @@
     <%= f.text_field :Nimi %>
   </div>
   <div class="field">
-    <%= f.label :Jno %><br />
+    <%= f.label :Jno, :label => 'Jäsennumero' %><br />
     <%= f.number_field :Jno, :onchange => "generateIndexNumber()" %>
   </div>
   <div class="field">
@@ -72,7 +72,7 @@
     <%= f.text_field :MatkaPuh %>
   </div>
   <div class="field">
-    <%= f.label :TyoPuh %><br />
+    <%= f.label :TyoPuh, :label => 'Työpuh' %><br />
     <%= f.text_field :TyoPuh %>
   </div>
   <div class="field">
@@ -107,7 +107,7 @@
     <%= f.hidden_field :viitenumero %><br />
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit @teksti %>
   </div>
 
 
