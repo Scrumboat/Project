@@ -2,9 +2,9 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Length</th>
-    <th>Width</th>
+    <th>Nimi</th>
+    <th>Pituus</th>
+    <th>Leveys</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,7 +17,7 @@
     <td><%= dockyard.width %></td>
     <td><%= link_to 'Näytä', dockyard %></td>
     <td><%= link_to 'Muokkaa', edit_dockyard_path(dockyard) %></td>
-    <td><%= link_to 'Poista', dockyard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Poista', dockyard, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 </table>
