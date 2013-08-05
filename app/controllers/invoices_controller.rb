@@ -5,7 +5,7 @@ class InvoicesController < ApplicationController
     #@invoices = Invoice.all
     @invoices = Invoice.search(params[:search])
     if params[:create]
-      Invoice.createInvoices()
+      Invoice.createInvoices(params[:tunniste])
       flash[:notice] = "Laskut luotu kaikille."
       redirect_to invoices_url
       return
