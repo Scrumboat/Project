@@ -12,11 +12,12 @@ $(document).ready(function(){
   $("#button").click(function(){
     $("#filtterit").toggle();
   });
+    $(".popover-link").popover();
 });
 </script>
 <html>
 <body onload="hideAll();">
-
+<div class="container">
 <h1>Laskut</h1>
 
 <span style="float:left;">
@@ -105,8 +106,7 @@ $(document).ready(function(){
 
   <tbody>
 <% @invoices.each do |invoice| %>
-  <tr rel="popover" id="<%= invoice.id %>" onclick="
-      $(function () {$('#<%=invoice.id%>').popover({placement: 'top', html: true, title: '<%= invoice.member.Nimi %>', content: '<%= InvoicesHelper.popover_text(invoice) %>'}); });">
+  <tr rel="popover" class="popover-link" id="<%= invoice.id %>" data-trigger="hover" data-toggle="popover" data-placement="top" data-title="<%= invoice.member.Nimi %>" data-html="true" data-content="<%= InvoicesHelper.popover_text(invoice) %>" >
     <td><%= link_to !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi, member_path(invoice.member) %></td>
     <td><%= invoice.jno %></td>
     <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
@@ -127,7 +127,7 @@ $(document).ready(function(){
     <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, invoice %>
         <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_invoice_path(invoice) %>
         <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, invoice, method: :delete, data: { confirm: 'Oletko varma?' } %>
-		<%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Uusi lasku</i>'.html_safe, new_invoice_path(:jno => invoice.member.Jno) %>
+		<%= link_to '<i class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i>  Uusi lasku</i>'.html_safe, new_invoice_path(:jno => invoice.member.Jno) %>
     </td>
 
   </tr>
@@ -147,5 +147,6 @@ $(document).ready(function()
     } 
 ); 
 </script>
+</div>
 </body>
 </html>

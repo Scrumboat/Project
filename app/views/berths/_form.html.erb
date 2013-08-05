@@ -1,7 +1,7 @@
 <h2> Laiturille <%= @dock.id %></h2>
 <p>Laiturissa tilaa: <%= @spaceLeft.to_s + ' m'%> </p>
 
-<%= form_for([@dock, @berth], :html => {:multipart => true}) do |f| %>
+<%= simple_form_for([@dock, @berth], :html => {:multipart => true}) do |f| %>
   <% if @berth.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@berth.errors.count, "error") %> prohibited this dock from being saved:</h2>
