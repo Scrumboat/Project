@@ -2,10 +2,9 @@
 
 <table>
   <tr>
-    <th>Vk</th>
-    <th>Pala</th>
-    <th>Jno</th>
-    <th>Koppimk</th>
+    <th>Nimi</th>
+    <th>Pinta-ala</th>
+    <th>Jäsennumero</th>
 	<th>Omistaja</th>
     <th></th>
     <th></th>
@@ -18,9 +17,7 @@
     <td><%= storage.vk %></td>
     <td><%= storage.pala %></td>
     <td><%= storage.jno %></td>
-    <td><%= storage.koppimk %></td>
 	<td><%= omistaja.Nimi %></td>
-    <td><%= link_to 'Tiedot', storage %></td>
     <td><%= link_to 'Muokkaa', edit_storage_path(storage) %></td>
     <td><%= link_to 'Poista', storage, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>

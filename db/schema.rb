@@ -213,7 +213,6 @@ ActiveRecord::Schema.define(:version => 20130806123431) do
     t.string   "vk"
     t.decimal  "pala"
     t.integer  "jno"
-    t.integer  "koppimk"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

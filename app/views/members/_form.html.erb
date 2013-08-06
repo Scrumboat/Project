@@ -1,4 +1,4 @@
-<%= simple_form_for(@member) do |f| %>
+<%= simple_form_for(@member, :html => {:onsubmit => "generateIndexNumber()"}) do |f| %>
   <% if @member.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :Jno, :label => 'Jäsennumero' %><br />
-    <%= f.number_field :Jno, :onchange => "generateIndexNumber()" %>
+    <%= f.number_field :Jno, :value => @nextJno %>
   </div>
   <div class="field">
     <%= f.label :Sotu %><br />
@@ -36,7 +36,7 @@
     <%= f.date_select :Liittynyt, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
-    <%= f.label :JK %><br />
+    <%= f.label :JK, :label => 'Jäsenkoodi' %><br />
     <%= f.text_field :JK %>
   </div>
   <div class="field">
