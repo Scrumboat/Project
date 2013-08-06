@@ -1,0 +1,37 @@
+<h2>Suoritukset tähän laskuun</h2>
+
+<h4><%= link_to 'Laskun tiedot', invoice_path(@invoice) %></h4>
+<p>
+  Viitenumero: <%= @invoice.member.viitenumero %> <br />
+  Summa:       <%= @invoice.summa %> <br />
+  Päivämäärä:  <%= @invoice.luontipvm %> <br />
+  Eräpäivä:    <%= @invoice.erapvm %> <br />
+</p>
+<table>
+  <thead>
+    <tr>
+        <th>Maksupvm</th>
+        <th>Summa</th>
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+<% @payments.each do |payment| %>
+  <tr>
+    <td><%= payment.payment_date.strftime('%d.%m.%Y') %> </td>
+    <td><%= payment.amount %></td>
+
+    <td>
+      <%= link_to 'Näytä', invoice_payment_path(@invoice, payment) %>
+      <%= link_to 'Muokkaa', edit_invoice_payment_path(@invoice, payment) %>
+      <%= link_to 'Poista', invoice_payment_path(@invoice, payment), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'Uusi maksu tähän laskuun', new_invoice_payment_path(@invoice) %>

@@ -2,6 +2,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :member, :foreign_key => 'member_id'
   attr_accessible :annetutHyvitykset, :edellisenKaudenLaskutus, :ensirekisterimaksu, :jasenmaksu, :jno, :katsastussakko, :laiturimaksu, :laskutuslisa, :liittymismaksu, :maksetunSummanPalautus, :muutMaksut, :nimi, :suorituksetIlmanViitetta, :suorituksetKassaan, :talkookerroin, :talkoosakko, :telakkamaksu, :toimihlokerroin, :varastokoppimaksu, :vartiosakko, :venerekisterimaksu, :viitesuoritukset, :luontipvm, :lahetyspvm, :tunniste, :maksettu, :erapvm, :member_id, :summa, :viitenumero, :karhuttu, :vapaasana
   accepts_nested_attributes_for :member
+  has_many :payments
 
   def self.search(search)
     if search == "paid"
@@ -51,6 +52,7 @@ class Invoice < ActiveRecord::Base
       if !vanha_lasku.empty?
         return
       end
+      summa = 0.0
       nimi = jasen.Nimi
       jno = jasen.Jno
       liittymismaksu = 0
@@ -78,8 +80,8 @@ class Invoice < ActiveRecord::Base
       end
       erapaiva = Time.now + 2.weeks #Pricingsi tableen laskunmaksuaika data? Time.now + n.days esim
       luontipaiva = Time.now
-
-      Invoice.create({member_id: jasen.id, nimi: nimi, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
+      summa = liittymismaksu + jasenmaksu + varastomaksu + laiturimaksu + telakkamaksu  # TODO: TARVITSEE SAKOT YMS
+      Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
     end
   end
 

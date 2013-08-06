@@ -1,7 +1,10 @@
 Venerekisteri::Application.routes.draw do
 
+
   post '/invoices/uploadFile', to: 'invoices#uploadFile'
-  resources :invoices
+  resources :invoices do
+    resources :payments
+  end
 
 
   resources :pricings

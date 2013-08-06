@@ -1,157 +1,157 @@
 <!DOCTYPE html>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
-</script>
-<script src="/assets/bootstrap-tooltip.js" > </script>
-<script src="/assets/bootstrap-popover.js" > </script>
-<script src="/assets/invoicefilter.js">
-</script>
-<script src="/assets/jquery.tablesorter.js">
-</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/assets/bootstrap-tooltip.js" ></script>
+<script src="/assets/bootstrap-popover.js" ></script>
+<script src="/assets/invoicefilter.js"></script>
+<script src="/assets/jquery.tablesorter.js"></script>
 <script>
-$(document).ready(function(){
-  $("#button").click(function(){
-    $("#filtterit").toggle();
-  });
-    $(".popover-link").popover();
-});
+    $(document).ready(function(){
+        $("#button").click(function(){
+            $("#filtterit").toggle();
+        });
+        $(".popover-link").popover();
+    });
 </script>
+
 <html>
 <body onload="hideAll();">
 <div class="container">
-<h1>Laskut</h1>
+  <h1>Laskut</h1>
 
 <span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
     <%= hidden_field_tag :search, "paid" %>
-<%= button_tag(type: "submit", class: "btn") do %>
-    <i class="icon-ok"></i> Maksetut
-<% end %>
+    <%= button_tag(type: "submit", class: "btn") do %>
+        <i class="icon-ok"></i> Maksetut
+    <% end %>
 <% end %>
 </span>
 <span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
     <%= hidden_field_tag :search, "unpaid" %>
-<%= button_tag(type: "submit", class: "btn") do %>
-    <i class="icon-warning-sign"></i> Maksamattomat
-<% end %>
+    <%= button_tag(type: "submit", class: "btn") do %>
+        <i class="icon-warning-sign"></i> Maksamattomat
+    <% end %>
 <% end %>
 </span>
 
 <span style="float:left;">
 <%= form_tag invoices_path, :method => 'get' do %>
     <%= hidden_field_tag :search, "overdue" %>
-      <%= button_tag(type: "submit", class: "btn") do %>
-    <i class="icon-warning-sign"></i> Erääntyneet
-<% end %>
+    <%= button_tag(type: "submit", class: "btn") do %>
+        <i class="icon-warning-sign"></i> Erääntyneet
+    <% end %>
 <% end %>
 </span>
 
-<%= form_tag invoices_path, :method => 'get' do %>
-    <%= button_tag(type: "submit", class: "btn") do %>
-    <i class="icon-list"></i> Näytä kaikki
-<% end %>
-<% end %>
-<%= form_tag invoices_path, :method => 'get' do %>
-  <%= hidden_field_tag :create, "create" %>
-    <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
-    <i class="icon-briefcase icon-white"></i> Luo kaikille lasku
+  <%= form_tag invoices_path, :method => 'get' do %>
+      <%= button_tag(type: "submit", class: "btn") do %>
+          <i class="icon-list"></i> Näytä kaikki
+      <% end %>
+  <% end %>
+  <%= form_tag invoices_path, :method => 'get' do %>
+      <%= hidden_field_tag :create, "create" %>
+      <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
+          <i class="icon-briefcase icon-white"></i> Luo kaikille lasku
 
-    <% end %>
-    <%= text_field_tag :tunniste, nil, :placeholder => 'Laskun tunniste' %>
-<% end %>
-<%= form_tag invoices_path, :method => 'get' do %>
-  <%= hidden_field_tag :karhu, "karhu" %>
-    <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
-    <i class="icon-briefcase icon-white"></i> Luo karhukirje
-<% end %>
-<% end %>
+      <% end %>
+      <%= text_field_tag :tunniste, nil, :placeholder => 'Laskun tunniste' %>
+  <% end %>
+  <%= form_tag invoices_path, :method => 'get' do %>
+      <%= hidden_field_tag :karhu, "karhu" %>
+      <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
+          <i class="icon-briefcase icon-white"></i> Luo karhukirje
+      <% end %>
+  <% end %>
 
   <%= form_tag invoices_uploadFile_path, :method => 'post', :action => 'uploadFile', :multipart => true do %>
       <label for="Viitesuoritustiedosto">Tuo viitesuorituksia</label><%= file_field_tag 'Viitesuoritustiedosto', accept: 'text/plain' %>
       <%= submit_tag 'Lähetä' %>
   <% end %>
 
-<button class="btn btn-info" type="button" id="button">Filtterit</button>
+  <button class="btn btn-info" type="button" id="button">Filtterit</button>
 
   <form id="filtterit" class ="form-inline">
-      <label for="csuorkas" class="checkbox"><input type="checkbox" id="csuorkas" onclick="toggle('.suorkas', this)"/>Suoritukset kassaan</label> 
-      <label for="cannehyv" class="checkbox"><input type="checkbox" id="cannehyv" onclick="toggle('.annehyv', this)"/>Annetut hyvitykset</label> 
-      <label for="cedelkau" class="checkbox"><input type="checkbox" id="cedelkau" onclick="toggle('.edelkau', this)"/>Edellisen kauden laskutus</label> 
-      <label for="ctalksak" class="checkbox"><input type="checkbox" id="ctalksak" onclick="toggle('.talksak', this)"/>Talkoosakko</label> 
-      <label for="ckatssak" class="checkbox"><input type="checkbox" id="ckatssak" onclick="toggle('.katssak', this)"/>Katsastussakko</label> 
-      <label for="cvartsak" class="checkbox"><input type="checkbox" id="cvartsak" onclick="toggle('.vartsak', this)"/>Vartiosakko</label>
-      <label for="clasklis" class="checkbox"><input type="checkbox" id="clasklis" onclick="toggle('.lasklis', this)"/>Laskutuslisä</label>
-      <label for="cmuutmak" class="checkbox"><input type="checkbox" id="cmuutmak" onclick="toggle('.muutmak', this)"/>Muut maksut</label>
-      <label for="censrekm" class="checkbox"><input type="checkbox" id="censrekm" onclick="toggle('.ensrekm', this)"/>Laskutuslisä</label>
+    <label for="csuorkas" class="checkbox"><input type="checkbox" id="csuorkas" onclick="toggle('.suorkas', this)"/>Suoritukset kassaan</label>
+    <label for="cannehyv" class="checkbox"><input type="checkbox" id="cannehyv" onclick="toggle('.annehyv', this)"/>Annetut hyvitykset</label>
+    <label for="cedelkau" class="checkbox"><input type="checkbox" id="cedelkau" onclick="toggle('.edelkau', this)"/>Edellisen kauden laskutus</label>
+    <label for="ctalksak" class="checkbox"><input type="checkbox" id="ctalksak" onclick="toggle('.talksak', this)"/>Talkoosakko</label>
+    <label for="ckatssak" class="checkbox"><input type="checkbox" id="ckatssak" onclick="toggle('.katssak', this)"/>Katsastussakko</label>
+    <label for="cvartsak" class="checkbox"><input type="checkbox" id="cvartsak" onclick="toggle('.vartsak', this)"/>Vartiosakko</label>
+    <label for="clasklis" class="checkbox"><input type="checkbox" id="clasklis" onclick="toggle('.lasklis', this)"/>Laskutuslisä</label>
+    <label for="cmuutmak" class="checkbox"><input type="checkbox" id="cmuutmak" onclick="toggle('.muutmak', this)"/>Muut maksut</label>
+    <label for="censrekm" class="checkbox"><input type="checkbox" id="censrekm" onclick="toggle('.ensrekm', this)"/>Laskutuslisä</label>
 
   </form>
 
-<table id="myTable" class="table table-condensed">
- <thead>
-  <tr>
-    <th>Nimi</th>
-    <th>Jno</th>
-    <th class="suorkas">Suorituksetkassaan</th>
-    <th>Liittymismaksu</th>
-    <th>Jasenmaksu</th>
-    <th>Venerekisterimaksu</th>
-    <th>Varastokoppimaksu</th>
-    <th>Laiturimaksu</th>
-    <th class="ensrekm">Ensirekisterimaksu</th>
-    <th>Telakkamaksu</th>
-    <th class="muutmak">Muutmaksut</th>
-    <th>Viitenumero</th>
-    <th class="talksak">Talkoosakko</th>
-    <th class="katssak">Katsastussakko</th>
-    <th class="vartsak">Vartiosakko</th>
-    <th class="lasklis">Laskutuslisa</th>
-    <th></th>
-  </tr>
- </thead>
+  <table id="myTable" class="table table-condensed">
+    <thead>
+    <tr>
+      <th>Nimi</th>
+      <th>Jno</th>
+      <th class="suorkas">Suorituksetkassaan</th>
+      <th>Liittymismaksu</th>
+      <th>Jasenmaksu</th>
+      <th>Venerekisterimaksu</th>
+      <th>Varastokoppimaksu</th>
+      <th>Laiturimaksu</th>
+      <th class="ensrekm">Ensirekisterimaksu</th>
+      <th>Telakkamaksu</th>
+      <th class="muutmak">Muutmaksut</th>
+      <th>Viitenumero</th>
+      <th class="talksak">Talkoosakko</th>
+      <th class="katssak">Katsastussakko</th>
+      <th class="vartsak">Vartiosakko</th>
+      <th class="lasklis">Laskutuslisa</th>
+      <th></th>
+    </tr>
+    </thead>
 
-  <tbody>
-<% @invoices.each do |invoice| %>
-  <tr rel="popover" class="popover-link" id="<%= invoice.id %>" data-trigger="hover" data-toggle="popover" data-placement="top" data-title="<%= invoice.member.Nimi %>" data-html="true" data-content="<%= InvoicesHelper.popover_text(invoice) %>" >
-    <td><%= link_to !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi, member_path(invoice.member) %></td>
-    <td><%= invoice.jno %></td>
-    <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
-    <td><%= invoice.liittymismaksu %></td>
-    <td><%= invoice.jasenmaksu %></td>
-    <td><%= invoice.venerekisterimaksu %></td>
-    <td><%= invoice.varastokoppimaksu %></td>
-    <td><%= invoice.laiturimaksu %></td>
-    <td class="ensrekm"><%= invoice.ensirekisterimaksu %></td>
-    <td><%= invoice.telakkamaksu %></td>
-    <td class="muutmak"><%= invoice.muutMaksut %></td>
-    <td><%= invoice.member.viitenumero %></td>
-    <td class="talksak"><%= invoice.talkoosakko %></td>
-    <td class="katssak"><%= invoice.katsastussakko %></td>
-    <td class="vartsak"><%= invoice.vartiosakko %></td>
-    <td class="lasklis"><%= invoice.laskutuslisa %></td>
+    <tbody>
+    <% @invoices.each do |invoice| %>
+        <tr rel="popover" class="popover-link" id="<%= invoice.id %>" data-trigger="hover" data-toggle="popover" data-placement="top" data-title="<%= invoice.member.Nimi %>" data-html="true" data-content="<%= InvoicesHelper.popover_text(invoice) %>" >
+          <td><%= link_to !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi, member_path(invoice.member) %></td>
+          <td><%= invoice.jno %></td>
+          <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
+          <td><%= invoice.liittymismaksu %></td>
+          <td><%= invoice.jasenmaksu %></td>
+          <td><%= invoice.venerekisterimaksu %></td>
+          <td><%= invoice.varastokoppimaksu %></td>
+          <td><%= invoice.laiturimaksu %></td>
+          <td class="ensrekm"><%= invoice.ensirekisterimaksu %></td>
+          <td><%= invoice.telakkamaksu %></td>
+          <td class="muutmak"><%= invoice.muutMaksut %></td>
+          <td><%= invoice.member.viitenumero %></td>
+          <td class="talksak"><%= invoice.talkoosakko %></td>
+          <td class="katssak"><%= invoice.katsastussakko %></td>
+          <td class="vartsak"><%= invoice.vartiosakko %></td>
+          <td class="lasklis"><%= invoice.laskutuslisa %></td>
 
-    <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, invoice %>
-        <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_invoice_path(invoice) %>
-        <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, invoice, method: :delete, data: { confirm: 'Oletko varma?' } %>
-		<%= link_to '<i class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i>  Uusi lasku</i>'.html_safe, new_invoice_path(:jno => invoice.member.Jno) %>
-    </td>
+          <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, invoice %>
+            <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_invoice_path(invoice) %>
+            <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, invoice, method: :delete, data: { confirm: 'Oletko varma?' } %>
+            <%= link_to '<i class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i>  Uusi lasku</i>'.html_safe, new_invoice_path(:jno => invoice.member.Jno) %>
+            <%= link_to '<i class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i>Suoritukset</i>'.html_safe, invoice_payments_path(invoice) %>
 
-  </tr>
-<% end %>
-</tbody>
-</table>
+          </td>
 
-<br />
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-<%= link_to '<i class="btn btn-danger"><i class="icon-home icon-white"></i>    Etusivulle</i>'.html_safe, root_path %>
+  <br />
 
-<%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi lasku</i>'.html_safe, new_invoice_path %>
-<script>
-$(document).ready(function() 
-    { 
-        $("#myTable").tablesorter(); 
-    } 
-); 
-</script>
+  <%= link_to '<i class="btn btn-danger"><i class="icon-home icon-white"></i>    Etusivulle</i>'.html_safe, root_path %>
+
+  <%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi lasku</i>'.html_safe, new_invoice_path %>
+  <script>
+      $(document).ready(function()
+              {
+                  $("#myTable").tablesorter();
+              }
+      );
+  </script>
 </div>
 </body>
 </html>

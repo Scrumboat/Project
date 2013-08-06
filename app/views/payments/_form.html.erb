@@ -1,0 +1,25 @@
+#encoding: utf-8
+
+<%= simple_form_for([@invoice, @payment]) do |f| %>
+
+  <div class="form-inputs">
+  </div>
+
+  <div class="fields">
+    <!--  attr_accessible :payment_date, :amount, :ref_number, :id, :need_survey, :invoice_id, :raw_data -->
+    <%= f.label :Päivämäärä %>
+    <%= f.date_select :payment_date, :order => [ :day, :month, :year] %>
+    <%= f.label :Summa %>
+    <%= f.number_field :amount %>
+    <%= f.label :Viitenumero %>
+    <%= f.number_field :ref_number %>
+    <%= f.label :Käteismaksu %>
+    <p>MUISTA LAITTAA PAYMENT MODELILLE KÄTEISMAXU BOOL :D</p>
+    <%= f.label :Raakana%>
+    <%= f.text_field :raw_data %>
+
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

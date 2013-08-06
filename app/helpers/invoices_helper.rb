@@ -46,7 +46,7 @@ module InvoicesHelper
       if line[0].to_i == 3                              # 3 on VIITEMAKSU, tarvitaanko suoraveloituksia (5)?
         ref_number = line[43, 20]
         amount = line[77, 10]
-        result_array.push({:ref_number => ref_number, :amount => amount})
+        result_array.push({:ref_number => ref_number, :amount => amount, :raw_data => line, :payment_date => Time.now}) #TODO: PARSE MAKSUPVM
       end
     end
     return result_array

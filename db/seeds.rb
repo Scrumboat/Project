@@ -55,14 +55,14 @@ puts 'CREATING PRICING'
 Pricing.create([{target: "minLaituripaikanHinta", data: 50}, {target: "karhumaksu", data: 20}, {target: "veneenHinnanKasvu", data: 10}, {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25}, {target: "telakanNeliohinta", data: 5}, {target: "liittymismaksu", data: 100}, {target: "jasenmaksu", data: 50}, {target: "ensirekmaksu", data: 40},{target: "veneenvuosimaksu", data: 25},{target: "varastokoppinelio", data: 5}])
 
 puts 'DEFAULT ADMIN (if we got ENV variables for it)'
-if !ENV['ADMIN_EMAIL'].nil? && !ENV['ADMIN_PASSWORD'].nil?
+if ENV['ADMIN_EMAIL'] && ENV['ADMIN_PASSWORD']
   user = Admin.find_or_create_by_email :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 end
 
 puts 'CREATING INVOICES'
-Invoice.create([{ member_id: 1, erapvm: '2012-01-01', jno: 4421, telakkamaksu: 300, maksettu: false, luontipvm: Time.now},
-                { member_id: 1, erapvm: '2014-11-11', jno: 4421, liittymismaksu: 123, maksettu: false, luontipvm: Time.now},
-                { member_id: 1, erapvm: '2014-04-01', jno: 4421, vartiosakko: 444, maksettu: false, luontipvm: Time.now},
-                { member_id: 2, erapvm: '2014-01-05', jno: 2149, telakkamaksu: 55, maksettu: true, luontipvm: Time.now},
-                { member_id: 2, erapvm: '2011-11-09', jno: 2149, vartiosakko: 200, maksettu: true, luontipvm: Time.now},
-                { member_id: 3, erapvm: '2014-05-05', jno: 2222, varastokoppimaksu: 100, maksettu: true, luontipvm: Time.now}])
+Invoice.create([{ member_id: 1, erapvm: '2012-01-01', jno: 4421, telakkamaksu: 300, summa: 300,maksettu: false, luontipvm: Time.now},
+                { member_id: 1, erapvm: '2014-11-11', jno: 4421, liittymismaksu: 123, summa: 123, maksettu: false, luontipvm: Time.now},
+                { member_id: 1, erapvm: '2014-04-01', jno: 4421, vartiosakko: 444, summa: 444, maksettu: false, luontipvm: Time.now},
+                { member_id: 2, erapvm: '2014-01-05', jno: 2149, telakkamaksu: 55, summa: 55, maksettu: true, luontipvm: Time.now},
+                { member_id: 2, erapvm: '2011-11-09', jno: 2149, vartiosakko: 200, summa: 200, maksettu: true, luontipvm: Time.now},
+                { member_id: 3, erapvm: '2014-05-05', jno: 2222, varastokoppimaksu: 100, summa: 100, maksettu: true, luontipvm: Time.now}])
