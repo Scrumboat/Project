@@ -47,6 +47,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(params[:payment])
     @invoice = Invoice.find(params[:invoice_id])
+    @payment.invoice_id = params[:invoice_id]
 
     respond_to do |format|
       if @payment.save

@@ -1,8 +1,20 @@
 #encoding: utf-8
 
 <%= simple_form_for([@invoice, @payment]) do |f| %>
+    <% if @payment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this spot from being saved:</h2>
 
-  <div class="form-inputs">
+          <ul>
+            <% @payment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="form-inputs">
   </div>
 
   <div class="fields">
@@ -11,12 +23,14 @@
     <%= f.date_select :payment_date, :order => [ :day, :month, :year] %>
     <%= f.label :Summa %>
     <%= f.number_field :amount %>
-    <%= f.label :Viitenumero %>
-    <%= f.number_field :ref_number %>
-    <%= f.label :Käteismaksu %>
-    <p>MUISTA LAITTAA PAYMENT MODELILLE KÄTEISMAXU BOOL :D</p>
-    <%= f.label :Raakana%>
-    <%= f.text_field :raw_data %>
+    <%= f.label :Viitenumero  %>
+    <%= f.number_field :ref_number, :value => @invoice.member.viitenumero %>
+    <!--<%= f.label :Käteismaksu %>-->
+    <%= f.hidden_field :cash_payment, :value => true %>
+    <% unless @kirjaus || @payment.cash_payment %>
+        <%= f.label :Raakana%>
+        <%= f.text_field :raw_data %>
+    <% end %>
 
   </div>
   <div class="form-actions">

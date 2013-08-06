@@ -6,7 +6,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    #@members = Member.order(sort_column + ' ' + sort_direction)    
+    #@members = Member.order(sort_column + ' ' + sort_direction)
     #@members = Member.search(params[:search])
    # if params[:search]
       if params[:deleted]

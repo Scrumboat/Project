@@ -8,7 +8,7 @@ class InvoicesController < ApplicationController
     if params[:Viitesuoritustiedosto].blank?
       flash[:error] = 'Ei tiedostoa'
     else
-      flash[:notice] = 'Viitesuorituksia toivottavasti purettu.'
+      flash[:notice] = 'Viitesuoritukset (toivottavasti) purettu.'
       data_array = InvoicesHelper.parse_ref_numbers_from_file params[:Viitesuoritustiedosto]
       data_array.each { |payment|
         payment_processed = false
@@ -16,6 +16,7 @@ class InvoicesController < ApplicationController
         member.invoices do |invoice|
           if invoice.summa == (payment[:amount] * 0.01)
             invoice.maksettu = true
+            invoice.viitesuoritukset = payment[:amount] * 0.01
             invoice.save
             Payment.create(invoice_id: invoice.id, payment_date: payment[:payment_date], amount: payment[:amount], ref_number: payment[:ref_number], need_survey: false, raw_data: payment[:raw_data])
             #attr_accessible :payment_date, :amount, :ref_number, :id, :need_survey, :invoice_id, :raw_data
@@ -25,7 +26,8 @@ class InvoicesController < ApplicationController
         end unless member.nil?
 
         unless payment_processed
-          # Luo suoritus ja laita se selvitystilaan (:need_survey)
+          # TODO: Luo suoritus ja laita se selvitystilaan (:need_survey)
+          flash[:alert] = 'Löytyi selvitystä vaativia suorituksia.'
         end
 
       }
