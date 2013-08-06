@@ -7,7 +7,7 @@ attr_accessible :updated_by
 
 validates_presence_of :Nimi
 validates :Jno, :presence => true, :uniqueness => true, length: {maximum: 5}, :numericality => { :greater_than_or_equal_to => 1 }
-validates :MatkaPuh, :numericality => { :greater_than_or_equal_to => 1 }
+#validates :MatkaPuh, :numericality => { :greater_than_or_equal_to => 1 }
 validates_presence_of :Sotu
 validates_presence_of :Liittynyt
 validates_presence_of :JK
@@ -37,7 +37,7 @@ def self.search(search)
   end
 end
 
-  scope :deleted, -> { where(deleted: true) }
+  scope :is_deleted, -> { where(deleted: true) }
   scope :active, -> { where(deleted: false) }
 
 

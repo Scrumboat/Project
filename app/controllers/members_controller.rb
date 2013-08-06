@@ -10,7 +10,7 @@ class MembersController < ApplicationController
     #@members = Member.search(params[:search])
    # if params[:search]
       if params[:deleted]
-        @members = Member.deleted.search(params[:search])
+        @members = Member.is_deleted.search(params[:search])
         @naytateksti = "Näytä aktiiviset"
         @osoite = "actived"
       else

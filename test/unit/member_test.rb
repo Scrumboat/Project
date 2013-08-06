@@ -9,24 +9,24 @@ class MemberTest < ActiveSupport::TestCase
     @member = members(:one)
     
     #Check that name equals the one set in fixture
-    assert @member.Nimi.eql? "MyString"
+    assert (@member.Nimi.eql? "MyString"), 'Nimi is correct.'
     
     #Check that version is correct
     assert @member.version == 1
 
     #Change few attributes and check that everything has changed accordingly
     @member.update_attributes(:Nimi => "Mauri", :Jno => 14444)
-    assert @member.Nimi == "Mauri"
-    assert (@member.version == 2)
-    assert @member.Jno == 14444
+    assert @member.Nimi == "Mauri", 'Nimi is correct after change'
+    assert (@member.version == 2), 'Version number is 2'
+    assert @member.Jno == 14444, 'Jno is 1444'
 
     #revert to previous version, the one before mauri and 14444
     @member.revert_to(@member.version-1)
 
     #Check that we have the original data
-    assert @member.Nimi == "MyString"
-    assert @member.Jno == 1
-    assert @member.version == 1
+    assert @member.Nimi == "MyString", 'Nimi is MyString again'
+    assert @member.Jno == 12, 'Jno is 1 again'
+    assert @member.version == 1, 'Version is reverted back to 1'
 
   end
   test "does not create a member without information" do
