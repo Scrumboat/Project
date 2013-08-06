@@ -9,7 +9,15 @@ class MembersController < ApplicationController
     #@members = Member.order(sort_column + ' ' + sort_direction)    
     #@members = Member.search(params[:search])
    # if params[:search]
-      @members = Member.search(params[:search])
+      if params[:deleted]
+        @members = Member.deleted.search(params[:search])
+        @naytateksti = "Näytä aktiiviset"
+        @osoite = "actived"
+      else
+        @members = Member.active.search(params[:search])
+        @naytateksti = "Näytä poistetut"
+        @osoite = "deleted"
+      end
    # else
     # @members = Member.order(sort_column + ' ' + sort_direction)
    # end
@@ -36,7 +44,8 @@ class MembersController < ApplicationController
   # GET /members/new.json
   def new
     @member = Member.new
-    
+    @nextJno = Member.maximum("Jno") + 1
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @member }

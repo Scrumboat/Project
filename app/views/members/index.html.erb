@@ -23,8 +23,12 @@
     </p>
 <% end %>
 
-<button class="btn btn-info" type="button" id="button">Filtterit</button>
+<%= form_tag members_path, :method => 'get' do %>
+    <%= hidden_field_tag @osoite, 1 %>
+    <%= submit_tag @naytateksti, :class => 'btn btn-info' %>
+<% end %>
 
+<button class="btn btn-info" type="button" id="button">Filtterit</button>
 
 <form class="form-inline" id="filtterit">
 
@@ -43,12 +47,12 @@
   <thead>
   <tr>
     <th>Nimi</th>
-    <th>Jno</th>
+    <th>Jäsennumero</th>
     <th>MatkaPuh</th>
     <th>EmailFax</th>
     <th>Sotu</th>
     <th>Liittynyt</th>
-    <th>JK</th>
+    <th>Jäsenkoodi</th>
     <th class="toimi">Toimi</th>
     <th class="lisenssi">Lisenssi</th>
     <th class="posti">Posti</th>
@@ -58,7 +62,6 @@
     <th class="avain">Avain</th>
     <th class="huom">Huom</th>
     <th>MuutosPvm</th>
-    <th>POISTETTU</th>
     <th>Viitenumero</th>
     <th></th>
   </tr>
@@ -82,7 +85,6 @@
         <td class="avain"><%= member.Avain %></td>
         <td class="huom"><%= member.Huom %></td>
         <td><%= member.MuutosPvm %></td>
-        <td><%= member.deleted ? 'Kyllä' : 'Ei' %></td>
         <td><%= member.viitenumero %></td>
         <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, member %>
             <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_member_path(member) %>
