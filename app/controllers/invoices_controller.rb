@@ -10,12 +10,17 @@ class InvoicesController < ApplicationController
     else
       flash[:notice] = 'Viitesuorituksia toivottavasti purettu.'
       data_array = InvoicesHelper.parse_ref_numbers_from_file params[:Viitesuoritustiedosto]
-      logger.fatal data_array.inspect
       data_array.each { |payment|
-        #member = Member.find_by_viitenumero(payment[:ref_number])     # tuupataanko memberiin tietoa että on maksettu ?
-        #invoice = Invoice.find_by_viitenumero(payment[:ref_number])   # laskuun ei voi, koska monella laskulla sama viitenumero
-        #amount_paid = payment[:amount] * 0.01                         # memberillä pitäs olla 'rahat' kenttä jota täältä aina kasvatetaan
-                                                                      # ja mitä laskun luonti aina pienentää. tai sitten jokaisella laskulla
+
+        member = Member.find_by_viitenumero(payment[:ref_number])
+        member.invoices do |invoice|
+          if invoice.summa == (payment[:amount] * 0.01)
+            invoice.maksettu = true
+            invoice.save
+            break # löydettiin 'sopiva' lasku ja se merkattiin maksetuksi. ei enempää.
+          end
+        end unless member.nil?
+
       }
     end
 

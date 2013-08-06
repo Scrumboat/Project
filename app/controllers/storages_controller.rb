@@ -82,7 +82,7 @@ class StoragesController < ApplicationController
         format.json { head :no_content }
       else
         format.html { 
-          flash[:notice] = 'Virheellinen Jno.'
+          flash[:error] = 'Virheellinen Jno.'
           render :edit
         }
         format.json { render json: @storage.errors, status: :unprocessable_entity }

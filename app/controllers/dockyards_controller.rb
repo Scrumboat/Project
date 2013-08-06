@@ -4,7 +4,7 @@ class DockyardsController < ApplicationController
   # GET /dockyards
   # GET /dockyards.json
   def index
-    @dockyards = Dockyard.all
+    @dockyards = Dockyard.order(:name)
 
     respond_to do |format|
       format.html # index.html.erb

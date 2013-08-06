@@ -2,69 +2,40 @@
 
 module InvoicesHelper
 
-
   def self.popover_text(invoice)
-    text = '<b>Viitenumero: </b>' + invoice.member.viitenumero.to_s + '<br />'
-    total = 0
-    if !invoice.tunniste.blank?
-      text = text + '<b>Tunniste: </b>' + invoice.tunniste + '<br />'
+    o = {
+        'suorituksetKassaan' => nil,
+        'liittymismaksu' => nil,
+        'jasenmaksu' => 'Jäsenmaksu',
+        'venerekisterimaksu' => nil,
+        'varastokoppimaksu' => nil,
+        'laiturimaksu' => nil,
+        'ensirekisterimaksu' => nil,
+        'telakkamaksu' => nil,
+        'muutMaksut' => nil,
+        'talkoosakko' => nil,
+        'katsastussakko' => nil,
+        'vartiosakko' => nil,
+        'laskutuslisa' => 'Laskutuslisä'
+    }
+
+    text = ""
+    total = 0.0
+    text << "<b>Tunniste: </b> #{invoice.send(:tunniste)} <br />"
+    text << "<b>Eräpäivä: </b>" << (invoice.eraantynyt() ? "<span style=\"color:#FF0000\"> #{invoice.erapvm.strftime('%d.%m.%Y')} </span> <br />" : "#{invoice.erapvm.strftime('%d.%m.%Y')} <br />")
+    o.each do |nimi|
+      nimi = nimi.first.to_sym
+      unless invoice.send(nimi).blank?
+        text << "<b> #{nimi_to_human(nimi.to_s, o)} </b>  #{invoice.send(nimi).to_s} <br />"
+        total = total + invoice.send(nimi).to_f if invoice.send(nimi)
+      end
     end
-    if !invoice.suorituksetKassaan.blank?
-      text = text + '<b>Suoritukset kassaan: </b> ' + invoice.suorituksetKassaan.to_s + '<br />'
-      total = total + invoice.suorituksetKassaan
-    end
-    if !invoice.liittymismaksu.blank?
-      text = text + '<b>Liittymismaksu: </b> ' + invoice.liittymismaksu.to_s + '<br />'
-      total = total + invoice.liittymismaksu
-    end
-    if !invoice.jasenmaksu.blank?
-      text = text + '<b>Jäsenmaksu: </b>' + invoice.jasenmaksu.to_s + '<br />'
-      total = total + invoice.jasenmaksu
-    end
-    if !invoice.venerekisterimaksu.blank?
-      text = text + '<b>Venerekisterimaksu: </b>' + invoice.venerekisterimaksu.to_s + '<br />'
-      total = total + invoice.venerekisterimaksu
-    end
-    if !invoice.varastokoppimaksu.blank?
-      text = text + '<b>Varastokoppimaksu: </b>' + invoice.varastokoppimaksu.to_s + '<br />'
-      total = total + invoice.varastokoppimaksu
-    end
-    if !invoice.laiturimaksu.blank?
-      text = text + '<b>Laiturimaksu: </b>' + invoice.laiturimaksu.to_s + '<br />'
-      total = total + invoice.laiturimaksu
-    end
-    if !invoice.ensirekisterimaksu.blank?
-      text = text + '<b>Ensirekisterimaksu: </b>' + invoice.ensirekisterimaksu.to_s + '<br />'
-      total = total + invoice.ensirekisterimaksu
-    end
-    if !invoice.telakkamaksu.blank?
-      text = text + '<b>Telakkamaksu: </b>' + invoice.telakkamaksu.to_s + '<br />'
-      total = total + invoice.telakkamaksu
-    end
-    if !invoice.muutMaksut.blank?
-      text = text + '<b>Muut maksut: </b>' + invoice.muutMaksut.to_s + '<br />'
-      total = total + invoice.muutMaksut
-    end
-    if !invoice.talkoosakko.blank?
-      text = text + '<b>Talkoosakko: </b>' + invoice.talkoosakko.to_s + '<br />'
-      total = total + invoice.talkoosakko
-    end
-    if !invoice.katsastussakko.blank?
-      text = text + '<b>Katsastussakko: </b>' + invoice.katsastussakko.to_s + '<br />'
-      total = total + invoice.katsastussakko
-    end
-    if !invoice.vartiosakko.blank?
-      text = text + '<b>Vartiosakko: </b>' + invoice.vartiosakko.to_s + '<br />'
-      total = total + invoice.vartiosakko
-    end
-    if !invoice.laskutuslisa.blank?
-      text = text + '<b>Laskutuslisä: </b>' + invoice.laskutuslisa.to_s + '<br />'
-      total = total + invoice.laskutuslisa
-    end
-    text = text + '<hr/><b>Yhteensä: </b>' + total.to_s
-    text
+    text << "<hr/><b>Summa: </b>  #{total.to_s}"
   end
 
+  def self.nimi_to_human(nimi, o)
+    o[nimi] || nimi.underscore.humanize
+  end
 
   def self.parse_ref_numbers_from_file(file)
     result_array = Array.new()
