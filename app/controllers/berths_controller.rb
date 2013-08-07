@@ -51,17 +51,20 @@ class BerthsController < ApplicationController
     @dock = Dock.find(params[:dock_id])
     currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
     spaceLeft = @dock.length - currentTotalWidth
+    @boat = Boat.find_by_RekNro(params[:berth][:Reknro])
     @newBerth = Berth.new(params[:berth])
-    @okRek = true
+    @newBerth.boat_id = @boat.id
+    @ok = true unless @boat.Leveys < params[:berth][:width].to_f && @boat.Pituus < params[:berth][:length].to_f
+    @newBerth.dock_id = params[:dock_id]
     respond_to do |format|
-      if currentTotalWidth + @newBerth.width <= @dock.length
-        create_connection_to_the_boat(format)
-        @dock.berths << @dock.berths.build(params[:berth])
+      if (currentTotalWidth + @newBerth.width <= @dock.length) && @ok
+        #create_connection_to_the_boat(format)
+        #@dock.berths << @dock.berths.build(params[:berth])
         @newBerth.save
         format.html { redirect_to @dock, notice: 'Uusi laituripaikka luotiin onnistuneesti.'}
       else
         format.html { redirect_to @dock, notice: 'Laituripaikkojen leveys ylitti laiturin leveyden.
-         Laiturissa on tilaa: ' + spaceLeft.to_s + ' m.' }
+         Laiturissa on tilaa: ' + spaceLeft.to_s + ' m. Tai veneen mitat ylittivät paikan mitat.' }
       end
     end
   end

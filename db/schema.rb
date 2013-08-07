@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806190850) do
+ActiveRecord::Schema.define(:version => 20130807133007) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130806190850) do
     t.string   "Reknro"
     t.integer  "jno"
     t.date     "vartio"
+    t.integer  "boat_id"
   end
 
   add_index "berths", ["dock_id"], :name => "index_berths_on_dock_id"

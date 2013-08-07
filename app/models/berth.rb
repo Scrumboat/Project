@@ -2,7 +2,7 @@
 class Berth < ActiveRecord::Base
   belongs_to :dock
   belongs_to :boat
-  attr_accessible :depth, :exists, :length, :number, :width, :dock_id, :Reknro, :jno, :vartio
+  attr_accessible :depth, :exists, :length, :number, :width, :dock_id, :Reknro, :jno, :vartio, :boat_id
   before_save :reknro_default_value
   def reknro_default_value
     self.Reknro ||= ""
