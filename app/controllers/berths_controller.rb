@@ -54,7 +54,7 @@ class BerthsController < ApplicationController
     @boat = Boat.find_by_RekNro(params[:berth][:Reknro])
     @newBerth = Berth.new(params[:berth])
     @newBerth.boat_id = @boat.id
-    @ok = true unless @boat.Leveys < params[:berth][:width].to_f && @boat.Pituus < params[:berth][:length].to_f
+    @ok = true if @boat.Leveys < params[:berth][:width].to_f && @boat.Pituus < params[:berth][:length].to_f
     @newBerth.dock_id = params[:dock_id]
     respond_to do |format|
       if (currentTotalWidth + @newBerth.width <= @dock.length) && @ok
