@@ -70,7 +70,7 @@
 	    <td><%= berth.length.to_s + ' m' %></td>
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
-            <td><%= berth.Reknro.to_s %></td>
+            <td><%= link_to berth.Reknro.to_s, Boat.where(:RekNro => berth.Reknro).first %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
             <td><%= (berth.width.to_s.to_d/@leveysLaituripaikanHinnanKasvuun.data)*@veneenHinnanKasvu.data+@minLaituripaikanHinta.data unless @veneenHinnanKasvu.nil? %></td>
