@@ -52,10 +52,10 @@ class BerthsController < ApplicationController
     currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
     spaceLeft = @dock.length - currentTotalWidth
     @boat = Boat.find_by_RekNro(params[:berth][:Reknro])
-    @newBerth = Berth.new(params[:berth])
-    @newBerth.boat_id = @boat.id
-    @ok = true if @boat.Leveys < params[:berth][:width].to_f && @boat.Pituus < params[:berth][:length].to_f
-    @newBerth.dock_id = params[:dock_id]
+    @newBerth = @dock.berths.build(params[:berth])
+    @newBerth.boat_id = @boat.id unless @boat.nil?
+    @ok = true if @boat.nil? || (@boat.Leveys < params[:berth][:width].to_f && @boat.Pituus < params[:berth][:length].to_f)
+    #@newBerth.dock_id = params[:dock_id]
     respond_to do |format|
       if (currentTotalWidth + @newBerth.width <= @dock.length) && @ok
         #create_connection_to_the_boat(format)
