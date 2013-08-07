@@ -64,6 +64,12 @@ class InvoicesController < ApplicationController
       redirect_to invoices_url
       return
     end
+	if params[:sposti]
+      Invoice.laskuta()
+      flash[:notice] = "Laskut lähetetty!"
+      redirect_to invoices_url
+      return
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -79,11 +85,12 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
 	  format.pdf do
-        pdf = InvoicePdf.new(@invoice, view_context)
+        pdf = InvoicePdf.new(@invoice)
         send_data pdf.render, filename: 
         #"invoice_#{@invoice.nimi}#{@invoice.created_at.strftime("%d/%m/%Y")}.pdf",
 		"Lasku_#{@invoice.nimi}.pdf",
-        type: "application/pdf"
+        type: "application/pdf",
+		disposition: "inline"
       end
       format.json { render json: @invoice }
     end

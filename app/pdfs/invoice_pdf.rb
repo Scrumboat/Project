@@ -1,9 +1,8 @@
 class InvoicePdf < Prawn::Document
 
-  def initialize(invoice, view)
+  def initialize(invoice)
     super()
 	@invoice = invoice
-    @view = view
 	@member = Member.find_by_Jno(@invoice.jno)
     text "Lasku #{@invoice.tunniste}"
 	move_down 10

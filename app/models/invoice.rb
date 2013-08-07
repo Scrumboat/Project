@@ -44,6 +44,20 @@ class Invoice < ActiveRecord::Base
 	  end
 	end
   end
+  
+  def self.laskuta()
+    @jasenet = Member.all
+	for jasen in @jasenet
+	  if jasen.EmailFax != nil
+	    for invoice in jasen.invoices
+	      if !invoice.maksettu
+		    InvoiceMailer.lasku(jasen, invoice).deliver 
+		  end
+	    end
+	  end
+	  
+	end
+  end
 
   def self.createInvoices(tunniste)
     @jasenet = Member.all
