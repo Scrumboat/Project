@@ -68,7 +68,6 @@ class MembersController < ApplicationController
 		      @boat = Boat.find_by_RekNro(params[:VeneRekNro])
           @boats_member = @member.BoatsMembers.create(:boat_id => @boat.id)
 	      end
-		#InvoiceMailer.lasku(@member).deliver 
         format.html { redirect_to @member, notice: 'Jäsen luotiin onnistuneesti.' }
         format.json { render json: @member, status: :created, location: @member }
       else
