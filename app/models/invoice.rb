@@ -46,19 +46,94 @@ class Invoice < ActiveRecord::Base
   end
   
   def self.laskuta()
+    yhdistettavat = []
     @jasenet = Member.all
 	for jasen in @jasenet
 	  if jasen.EmailFax != nil
 	    for invoice in jasen.invoices
 	      if !invoice.maksettu
 		    InvoiceMailer.lasku(jasen, invoice).deliver 
+			invoice.lahetetty = true
+			invoice.lahetystapa = "Email"
+			invoice.save
 		  end
 	    end
+	  else
+	    for invoice in jasen.invoices
+		  if !invoice.maksettu
+		    #pdf = InvoicePdf.new(invoice)
+		    yhdistettavat.push invoice
+			invoice.lahetetty = true
+			invoice.lahetystapa = "Posti"
+			invoice.save
+		  end
+		end
 	  end
-	  
 	end
+	counter = 0
+	filuja = 0
+	haluttumaaraperpdf = 2
+	pdf = Prawn::Document.new
+	  for lasku in yhdistettavat
+	    if filuja%haluttumaaraperpdf == 0 && filuja != 0
+		  pdf.render_file counter.to_s+".pdf"
+		  pdf = Prawn::Document.new
+		  counter += 1
+		end
+	    @invoice = lasku
+	    @member = Member.find_by_Jno(@invoice.jno)
+        pdf.text "Lasku #{@invoice.tunniste}"
+	    pdf.move_down 10
+	    pdf.text "Nimi:  #{@invoice.nimi}"
+	    pdf.move_down 10
+	    pdf.text "Jasennumero:  #{@invoice.jno}"
+	    pdf.move_down 10
+	    pdf.text "Osoite:  #{@member.Osoite}"
+	    pdf.move_down 10
+	    pdf.text "Posti:  #{@member.Posti}"
+	    pdf.move_down 10
+	    pdf.text "Email:  #{@member.EmailFax}"
+	    pdf.move_down 10
+	    pdf.text "Katsastussakko:  #{@invoice.katsastussakko}"
+	    pdf.move_down 10
+	    pdf.text "Laiturimaksu:  #{@invoice.laiturimaksu}"
+	    pdf.move_down 10
+        pdf.text "Liittymismaksu:  #{@invoice.liittymismaksu}"
+	    pdf.move_down 10
+	    pdf.text "Muut maksut:  #{@invoice.muutMaksut}"
+	    pdf.move_down 10
+	    pdf.text "Talkoosakko:  #{@invoice.talkoosakko}"
+	    pdf.move_down 10
+	    pdf.text "Telakkamaksu:  #{@invoice.telakkamaksu}"
+	    pdf.move_down 10
+	    pdf.text "Varastokoppimaksu:  #{@invoice.varastokoppimaksu}"
+	    pdf.move_down 10
+	    pdf.text "Vartiosakko:  #{@invoice.vartiosakko}"
+	    pdf.move_down 10
+	    pdf.text "Venerekisterimaksu:  #{@invoice.venerekisterimaksu}"
+	    pdf.move_down 10
+	    pdf.text "Viivastysmaksu:  #{@invoice.karhuttu}"
+	    pdf.move_down 10
+	    pdf.text "Lisatietoja:  #{@invoice.vapaasana}"
+	    pdf.move_down 10
+	    pdf.text "Summa:  #{@invoice.summa}"
+	    pdf.move_down 10
+	    pdf.text "Viitenumero:  #{@member.viitenumero}"
+	    pdf.move_down 10
+	    pdf.text "Lahetyspvm:  #{@invoice.lahetyspvm}"
+	    pdf.move_down 10
+	    pdf.text "Erapvm:  #{@invoice.erapvm}"
+	    pdf.move_down 10
+		filuja += 1
+		if filuja%haluttumaaraperpdf != 0 && filuja < yhdistettavat.length
+		  pdf.start_new_page
+		end
+		if filuja == yhdistettavat.length
+		  pdf.render_file counter.to_s+".pdf"
+		end
+	  end
   end
-
+  
   def self.createInvoices(tunniste)
     @jasenet = Member.all
     for jasen in @jasenet

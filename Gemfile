@@ -40,6 +40,7 @@ gem "devise", "~> 2.2.4"
 gem 'figaro'
 gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
 gem 'prawn'
+gem 'pdf-merger'
 
 group :development, :test do
   # Pretty printed test output
