@@ -52,6 +52,9 @@ class Invoice < ActiveRecord::Base
 	    for invoice in jasen.invoices
 	      if !invoice.maksettu
 		    InvoiceMailer.lasku(jasen, invoice).deliver 
+			invoice.lahetetty = true
+			invoice.lahetystapa = "Email"
+			invoice.save
 		  end
 	    end
 	  end

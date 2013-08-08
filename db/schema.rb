@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807133007) do
+ActiveRecord::Schema.define(:version => 20130808103333) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -139,6 +139,8 @@ ActiveRecord::Schema.define(:version => 20130807133007) do
     t.string   "viitenumero"
     t.integer  "karhuttu"
     t.string   "vapaasana"
+    t.string   "lahetystapa"
+    t.boolean  "lahetetty",          :default => false
   end
 
   create_table "mallis", :force => true do |t|

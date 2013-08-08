@@ -105,6 +105,16 @@
   <%= @invoice.vapaasana %>
 </p>
 
+<p>
+  <b>Lähetetty:</b>
+  <%= @invoice.lahetetty %>
+</p>
+
+<p>
+  <b>Lähetystapa:</b>
+  <%= @invoice.lahetystapa %>
+</p>
+
 <%= link_to "Lataa lasku", invoice_path(@invoice.id, :format => "pdf") %>
 <%= link_to 'Muokkaa', edit_invoice_path(@invoice) %>
 <%= link_to 'Takaisin', invoices_path %>
