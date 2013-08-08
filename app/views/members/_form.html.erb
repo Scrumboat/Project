@@ -36,8 +36,7 @@
     <%= f.date_select :Liittynyt, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
-    <%= f.label :JK, :label => 'Jäsenkoodi' %><br />
-    <%= f.text_field :JK %>
+    <%= f.select :jasentyyppi, Member::JASENTYYPIT %><br />
   </div>
   <div class="field">
     <%= f.label :MuutosPvm %><br />

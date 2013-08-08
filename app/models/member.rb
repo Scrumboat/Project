@@ -10,7 +10,7 @@ validates :Jno, :presence => true, :uniqueness => true, length: {maximum: 5}, :n
 #validates :MatkaPuh, :numericality => { :greater_than_or_equal_to => 1 }
 validates_presence_of :Sotu
 validates_presence_of :Liittynyt
-validates_presence_of :JK
+validates_presence_of :jasentyyppi
 validates_presence_of :Osoite
 validates_presence_of :Posti
 validates_presence_of :MatkaPuh
@@ -24,8 +24,9 @@ has_many :storages
 has_many :boats, :through => :BoatsMembers
 has_many :invoices
 
-attr_accessible :boats, :Ammatti, :Avain, :EmailFax, :Huom, :JK, :Jno, :KotiPuh, :Laivuri, :Liittynyt, :Lisenssi, :Maa, :MatkaPuh, :MuutosPvm, :Nimi, :Osoite, :Posti, :Sotu, :Toimi, :TyoPuh, :Varasto, :deleted, :deleted_at, :VeneRekNro, :viitenumero
+attr_accessible :boats, :Ammatti, :Avain, :EmailFax, :Huom, :jasentyyppi, :Jno, :KotiPuh, :Laivuri, :Liittynyt, :Lisenssi, :Maa, :MatkaPuh, :MuutosPvm, :Nimi, :Osoite, :Posti, :Sotu, :Toimi, :TyoPuh, :Varasto, :deleted, :deleted_at, :VeneRekNro, :viitenumero
 
+JASENTYYPIT = {'Ainaisjäsen' => 'ainaisjasen', 'Puolisojäsen' => 'puolisojasen', 'Nuorisojäsen' => 'nuorisojasen', 'Kunniajäsen' => 'kunniajasen', 'Kutsujäsen' => 'kutsujasen'}
 
 def self.search(search)
   if search

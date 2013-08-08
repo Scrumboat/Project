@@ -52,7 +52,7 @@
     <th>EmailFax</th>
     <th>Sotu</th>
     <th>Liittynyt</th>
-    <th>Jäsenkoodi</th>
+    <th>Jäsentyyppi</th>
     <th class="toimi">Toimi</th>
     <th class="lisenssi">Lisenssi</th>
     <th class="posti">Posti</th>
@@ -75,7 +75,7 @@
         <td><%= member.EmailFax %></td>
         <td><%= truncate(member.Sotu, :length => 7, :omission => "") %></td>
         <td><%= member.Liittynyt %></td>
-        <td><%= member.JK %></td>
+        <td><%= member.jasentyyppi %></td>
         <td class="toimi"><%= member.Toimi %></td>
         <td class="lisenssi"><%= member.Lisenssi %></td>
         <td class="posti"><%= member.Posti %></td>
