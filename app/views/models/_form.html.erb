@@ -1,10 +1,10 @@
-<%= simple_form_for(@malli) do |f| %>
-  <% if @malli.errors.any? %>
+<%= simple_form_for(@model) do |f| %>
+  <% if @model.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@malli.errors.count, "error") %> prohibited this malli from being saved:</h2>
+      <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
 
       <ul>
-      <% @malli.errors.full_messages.each do |msg| %>
+      <% @model.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -42,6 +42,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit @teksti %>
   </div>
 <% end %>

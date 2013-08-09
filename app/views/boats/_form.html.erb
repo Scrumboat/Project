@@ -44,7 +44,7 @@
 
   <% if @mallit != nil %>
       <%= f.label 'Veneiden tiedot' %>
-      <%= f.select :ValmMalli, @mallis, {}, onchange: "taydenna()" %>
+      <%= f.select :ValmMalli, @models, {}, onchange: "taydenna()" %>
   <% end %>
 
   <div class="field">

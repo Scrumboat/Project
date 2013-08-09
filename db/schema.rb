@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808110025) do
+ActiveRecord::Schema.define(:version => 20130809124108) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -143,18 +143,6 @@ ActiveRecord::Schema.define(:version => 20130808110025) do
     t.boolean  "lahetetty",          :default => false
   end
 
-  create_table "mallis", :force => true do |t|
-    t.string   "tyyppi"
-    t.string   "ValmMalli"
-    t.decimal  "Pituus"
-    t.decimal  "Leveys"
-    t.decimal  "Syvyys"
-    t.decimal  "Uppouma"
-    t.decimal  "Korkeus"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "members", :force => true do |t|
     t.string   "Nimi"
     t.integer  "Jno"
@@ -185,6 +173,18 @@ ActiveRecord::Schema.define(:version => 20130808110025) do
     t.decimal  "suorituksetIlmanViitetta"
     t.decimal  "maksetunSummanPalautus"
     t.decimal  "edellisenKaudenLaskutus"
+  end
+
+  create_table "models", :force => true do |t|
+    t.string   "tyyppi"
+    t.string   "ValmMalli"
+    t.decimal  "Pituus"
+    t.decimal  "Leveys"
+    t.decimal  "Syvyys"
+    t.decimal  "Uppouma"
+    t.decimal  "Korkeus"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "ownerships", :force => true do |t|

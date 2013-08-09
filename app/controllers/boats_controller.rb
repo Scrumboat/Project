@@ -38,8 +38,8 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
     @boat.BoatsMembers.build
-    @mallit = Malli.select("\"ValmMalli\"")
-    @mallis = Malli.all.map(&:ValmMalli).insert(0, "")
+    @mallit = Model.select("\"ValmMalli\"")
+    @models = Model.all.map(&:ValmMalli).insert(0, "")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -49,6 +49,9 @@ class BoatsController < ApplicationController
   # GET /boats/1/edit
   def edit
     @boat = Boat.find(params[:id], :include => :members)
+    @mallit = Model.select("\"ValmMalli\"")
+    @models = Model.all.map(&:ValmMalli).insert(0, "")
+    
 	  show_jno_in_edit_instead_of_id
   end
 
@@ -58,20 +61,20 @@ class BoatsController < ApplicationController
     @boat = Boat.new(params[:boat])
 
     # @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
-    @malli = Malli.where(:ValmMalli => params[:boat][:ValmMalli]).first
+    @model = Model.where(:ValmMalli => params[:boat][:ValmMalli]).first
     #@malli = Boat.find(:first, :conditions => [:ValmMalli => boat.ValmMalli, params[:boat][:ValmMalli]])
     #@malli = Boat.where(:ValmMalli => params[:boat][:ValmMalli])
 
-    if @malli.nil?
-      @malli = Malli.new
-      @malli.Korkeus = @boat.Korkeus
-      @malli.Leveys = @boat.Leveys
-      @malli.Pituus = @boat.Pituus
-      @malli.Syvyys = @boat.Syvyys
-      @malli.Uppouma = @boat.Uppouma
-      @malli.ValmMalli = @boat.ValmMalli
-      @malli.tyyppi = @boat.tyyppi
-      @malli.save
+    if @model.nil?
+      @model = Model.new
+      @model.Korkeus = @boat.Korkeus
+      @model.Leveys = @boat.Leveys
+      @model.Pituus = @boat.Pituus
+      @model.Syvyys = @boat.Syvyys
+      @model.Uppouma = @boat.Uppouma
+      @model.ValmMalli = @boat.ValmMalli
+      @model.tyyppi = @boat.tyyppi
+      @model.save
     end
 	
     changeJnoToId

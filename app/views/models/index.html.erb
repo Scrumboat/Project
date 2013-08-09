@@ -1,0 +1,36 @@
+<h1>Mallit</h1>
+
+<table>
+  <tr>
+    <th>Korkeus</th>
+    <th>Leveys</th>
+	<th>Pituus</th>
+	<th>Syvyys</th>
+	<th>Uppouma</th>
+	<th>ValmMalli</th>
+	<th>tyyppi</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% for model in @models %>
+  <tr>
+    <td><%= model.Korkeus %></td>
+    <td><%= model.Leveys %></td>
+    <td><%= model.Pituus %></td>
+    <td><%= model.Syvyys %></td>
+    <td><%= model.Uppouma %></td>
+    <td><%= model.ValmMalli %></td>
+    <td><%= model.tyyppi %></td>
+    <td><%= link_to 'Muokkaa', edit_model_path(model) %></td>
+    <td><%= link_to 'Poista', model, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Luo uusi malli', new_model_path %>
+<br />
+<%= link_to 'Main menu', root_path %>
