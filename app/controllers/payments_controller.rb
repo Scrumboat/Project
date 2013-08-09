@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    @payments = Payment.where(:invoice_id => params[:invoice_id])
     @invoice = Invoice.find(params[:invoice_id])
 
     respond_to do |format|
@@ -48,7 +48,20 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(params[:payment])
     @invoice = Invoice.find(params[:invoice_id])
     @payment.invoice_id = params[:invoice_id]
+    if @payment.amount == @invoice.summa then
+      @invoice.maksettu = true
+    else
+      @invoice.viitesuoritukset += @payment.amount
+      if @invoice.viitesuoritukset == @invoice.summa
+        @invoice.maksettu = true
+      elsif @invoice.viitesuoritukset > @invoice.summa
+        flash[:notice] = 'MAKSOIT LIIKAA! HÄHÄHÄHÄÄ! RAHASI MENIVÄT LIMBOON!'
+        @invoice.maksettu = true
+      end
 
+    end
+
+    @invoice.save
     respond_to do |format|
       if @payment.save
         format.html { redirect_to invoice_payments_url(@invoice), notice: 'Payment was successfully created.' }
