@@ -139,6 +139,8 @@ ActiveRecord::Schema.define(:version => 20130808110025) do
     t.string   "viitenumero"
     t.integer  "karhuttu"
     t.string   "vapaasana"
+    t.string   "lahetystapa"
+    t.boolean  "lahetetty",          :default => false
   end
 
   create_table "mallis", :force => true do |t|

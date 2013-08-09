@@ -8,13 +8,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 puts 'CREATING FEW MEMBERS'
-Member.create([{ id: 1, JK: 'normaali', Jno: 4421, MatkaPuh: "044-4443331", Nimi: "Esa Esimerkki", Osoite: "Osoitetie 4",
+Member.create([{ id: 1, jasentyyppi: 'puolisojasen', Jno: 4421, MatkaPuh: "044-4443331", Nimi: "Esa Esimerkki", Osoite: "Osoitetie 4",
                  Posti: "00100 Helsinki", Sotu: "010177-124M", Liittynyt: "5-11-2005", viitenumero: "044215"},
-               { id: 2, JK: 'normaali', Jno: 2149, MatkaPuh: "044-3334442", Nimi: "Eero Engel", Osoite: "Venepolku 85 c 35",
+               { id: 2, jasentyyppi: 'ainaisjasen', Jno: 2149, MatkaPuh: "044-3334442", Nimi: "Eero Engel", Osoite: "Venepolku 85 c 35",
                  Posti: "00500 Helsinki", Sotu: "221166-031W", Liittynyt: "1-6-1999", viitenumero: "021490"},
-               { id: 3, JK: 'hiiohoi', Jno: 2222, MatkaPuh: "050-8497764", Nimi: "Mauri Menomajava", Osoite: "Patokuja 1",
+               { id: 3, jasentyyppi: 'kunniajasen', Jno: 2222, MatkaPuh: "050-8497764", Nimi: "Mauri Menomajava", Osoite: "Patokuja 1",
                  Posti: "99500 Kaukana", Sotu: "091033-129K", Liittynyt: "31-1-1940", viitenumero: "022224"},
-               { id: 4, JK: 'jippii', Jno: 12, MatkaPuh: "040-1234567", Nimi: "Matti Meikalainen", Osoite: "Jokutie 6",
+               { id: 4, jasentyyppi: 'kutsujasen', Jno: 12, MatkaPuh: "040-1234567", Nimi: "Matti Meikalainen", Osoite: "Jokutie 6",
                  Posti: "10101 Jyvaskyla", Sotu: "041055-52A", Liittynyt: "15-04-2008", viitenumero: "000123", deleted: true}])
 
 puts 'CREATING FEW BOATS'
