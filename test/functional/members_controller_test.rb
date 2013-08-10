@@ -23,7 +23,7 @@ class MembersControllerTest < ActionController::TestCase
 
   test "should create member" do
     assert_difference('Member.count') do
-      post :create, member: { Ammatti: @member.Ammatti, Avain: @member.Avain, EmailFax: @member.EmailFax, Huom: @member.Huom, JK: @member.JK, Jno: @member.Jno+5, KotiPuh: @member.KotiPuh, Laivuri: @member.Laivuri, Liittynyt: @member.Liittynyt, Lisenssi: @member.Lisenssi, Maa: @member.Maa, MatkaPuh: @member.MatkaPuh, MuutosPvm: @member.MuutosPvm, Nimi: @member.Nimi, Osoite: @member.Osoite, Posti: @member.Posti, Sotu: @member.Sotu, Toimi: @member.Toimi, TyoPuh: @member.TyoPuh, Varasto: @member.Varasto }
+      post :create, member: { Ammatti: @member.Ammatti, Avain: @member.Avain, EmailFax: @member.EmailFax, Huom: @member.Huom, jasentyyppi: @member.jasentyyppi, Jno: @member.Jno+5, KotiPuh: @member.KotiPuh, Laivuri: @member.Laivuri, Liittynyt: @member.Liittynyt, Lisenssi: @member.Lisenssi, Maa: @member.Maa, MatkaPuh: @member.MatkaPuh, MuutosPvm: @member.MuutosPvm, Nimi: @member.Nimi, Osoite: @member.Osoite, Posti: @member.Posti, Sotu: @member.Sotu, Toimi: @member.Toimi, TyoPuh: @member.TyoPuh, Varasto: @member.Varasto }
     end
 
     assert_redirected_to member_path(assigns(:member))
@@ -40,7 +40,7 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should update member" do
-    put :update, id: @member, member: { Ammatti: @member.Ammatti, Avain: @member.Avain, EmailFax: @member.EmailFax, Huom: @member.Huom, JK: @member.JK, Jno: @member.Jno, KotiPuh: @member.KotiPuh, Laivuri: @member.Laivuri, Liittynyt: @member.Liittynyt, Lisenssi: @member.Lisenssi, Maa: @member.Maa, MatkaPuh: @member.MatkaPuh, MuutosPvm: @member.MuutosPvm, Nimi: @member.Nimi, Osoite: @member.Osoite, Posti: @member.Posti, Sotu: @member.Sotu, Toimi: @member.Toimi, TyoPuh: @member.TyoPuh, Varasto: @member.Varasto }
+    put :update, id: @member, member: { Ammatti: @member.Ammatti, Avain: @member.Avain, EmailFax: @member.EmailFax, Huom: @member.Huom, jasentyyppi: @member.jasentyyppi, Jno: @member.Jno, KotiPuh: @member.KotiPuh, Laivuri: @member.Laivuri, Liittynyt: @member.Liittynyt, Lisenssi: @member.Lisenssi, Maa: @member.Maa, MatkaPuh: @member.MatkaPuh, MuutosPvm: @member.MuutosPvm, Nimi: @member.Nimi, Osoite: @member.Osoite, Posti: @member.Posti, Sotu: @member.Sotu, Toimi: @member.Toimi, TyoPuh: @member.TyoPuh, Varasto: @member.Varasto }
     assert_redirected_to member_path(assigns(:member))
   end
 

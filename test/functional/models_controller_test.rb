@@ -1,9 +1,9 @@
  require 'test_helper.rb'
  
-  class MallisControllerTest < ActionController::TestCase
+  class ModelsControllerTest < ActionController::TestCase
     setup do
       sign_in admins(:one)
-      assert Malli.create(:Korkeus => 10 ,:tyyppi => "typea", :Uppouma => 10, :ValmMalli => "typea", :Pituus => 10, :Leveys => 10, :Syvyys => 10)
+      assert Model.create(:Korkeus => 10 ,:tyyppi => "typea", :Uppouma => 10, :ValmMalli => "typea", :Pituus => 10, :Leveys => 10, :Syvyys => 10)
     end
  
     def json_response

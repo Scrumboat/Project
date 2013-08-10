@@ -5,7 +5,7 @@ one:
   Jno: 12
   Sotu: MyString
   Liittynyt: 2013-05-22
-  JK: MyString
+  jasentyyppi: ainaisjasen
   MuutosPvm: 2013-05-22
   Toimi: MyString
   Lisenssi: MyString
@@ -27,7 +27,7 @@ two:
   Jno: 2
   Sotu: MyString
   Liittynyt: 2013-05-22
-  JK: MyString
+  jasentyyppi: ainaisjasen
   MuutosPvm: 2013-05-22
   Toimi: MyString
   Lisenssi: MyString

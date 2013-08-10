@@ -29,7 +29,7 @@ has_one :berth
 has_one :dockyard_spot
 
 accepts_nested_attributes_for :BoatsMembers, :allow_destroy => true
-attr_accessible :BoatsMembers_attributes, :members, :Huomautukset, :JnoOm, :JnoOs, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Omistaja, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :Laituripaikka, :tag_attributes
+attr_accessible :BoatsMembers_attributes, :members, :Huomautukset, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :tag_attributes
 def self.search(search)
   if search
     #@omistajat = Member.where(:Nimi => search).map(&:id)
