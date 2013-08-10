@@ -74,62 +74,26 @@ class BerthsController < ApplicationController
   def update
     @dock = Dock.find(params[:dock_id])
     @berth = Berth.find(params[:id])
-    @vanhareknro = @berth.Reknro
     newvalue = params[:berth][:width]
-    currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
-    currentTotalWidth = BigDecimal(currentTotalWidth.to_s) - @berth.width
-    currentTotalWidth = BigDecimal(currentTotalWidth.to_s)+ BigDecimal(newvalue.to_s)
-    isOk = BigDecimal(currentTotalWidth.to_s) <= @dock.length
+    currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width').to_f
+    currentTotalWidth = currentTotalWidth - @berth.width.to_f
+    currentTotalWidth = currentTotalWidth + newvalue.to_f
+    isOk = currentTotalWidth <= @dock.length.to_f
     okRek = true
     respond_to do |format|
       if isOk && @berth.update_attributes(params[:berth])
-        if params[:berth][:Reknro].strip != ""
+        unless params[:berth][:Reknro].blank?
           @boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
-          if @vanhareknro != nil
-            @boatOld = Boat.where(:RekNro => @vanhareknro).first
-          end
           if @boat != nil
-            if @boat.Pituus <= BigDecimal(params[:berth][:length].to_s) && @boat.Leveys <= BigDecimal(params[:berth][:width].to_s) && @boat.Syvyys <= BigDecimal(params[:berth][:depth].to_s)
-              if @boatOld != nil
-                @boatOld.Laituri = ""
-                @boatOld.Laituripaikka = ""
-                @boatOld.save
-              end
-              @boat.Laituri = params[:dock_id]
-              @boat.Laituripaikka = params[:berth][:number]
-              @boat.save
-            else
+            unless @boat.Pituus.to_f <= params[:berth][:length].to_f && @boat.Leveys.to_f <= params[:berth][:width].to_f && @boat.Syvyys.to_f <= params[:berth][:depth].to_f
               params[:berth][:Reknro] = ""
-              @boat.Laituri = ""
-              @boat.Laituripaikka = ""
-              @boat.save
+              flash[:alert] = 'Vene on liian suuri mahtuakseen paikkaan.'
               @berth.update_attributes(params[:berth])
             end
           else
             okRek = false
             format.html { redirect_to @dock, notice: 'Laituripaikkaa ei päivitetty kyseiselle rekisterinumerolle, virheellinen rekisterinumero.'}
           end
-        end
-        uusireknro = params[:berth][:Reknro]
-        if @vanhareknro == uusireknro
-
-        else
-          if @vanhareknro != nil
-            @boatOld = Boat.where(:RekNro => @vanhareknro).first
-          end
-          if @boatOld != nil
-            @boatOld.Laituri = ""
-            @boatOld.Laituripaikka = ""
-            @boatOld.save
-          end
-        end
-        if !okRek
-          params[:berth][:Reknro] = ""
-          @berth.update_attributes(params[:berth])
-        end
-        if params[:berth][:jno].strip != ""
-          params[:berth][:jno] = ""
-          @berth.update_attributes(params[:berth])
         end
         format.html { redirect_to @dock, notice: 'Laituripaikka päivitetty.'}
         format.json { head :no_content }
@@ -147,12 +111,15 @@ class BerthsController < ApplicationController
   # DELETE /berths/1.json
   def destroy
     @berth = Berth.find(params[:id])
-    @boat = Boat.where(:RekNro => @berth.Reknro).first
-    if @boat != nil
-      @boat.Laituri = ""
-      @boat.Laituripaikka = ""
-      @boat.save
-    end
+
+    # boat ei enää pidä kirjaa laituristaan
+    #@boat = Boat.where(:RekNro => @berth.Reknro).first
+    #if @boat != nil
+    #  @boat.Laituri = ""
+    #  @boat.Laituripaikka = ""
+    #  @boat.save
+    #end
+
     @berth.destroy
 
     respond_to do |format|
