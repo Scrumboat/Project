@@ -75,6 +75,12 @@
       <%= submit_tag 'Lähetä' %>
   <% end %>
 
+  <%= form_tag payments_survey_path, :method => 'get' do %>
+      <%= button_tag(type: "submit", class: "btn btn-warning") do %>
+          <i class="icon-briefcase icon-white"></i> Epäselvät suoritukset
+      <% end %>
+  <% end %>
+
   <button class="btn btn-info" type="button" id="button">Filtterit</button>
 
   <form id="filtterit" class ="form-inline">

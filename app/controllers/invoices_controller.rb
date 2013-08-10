@@ -118,6 +118,8 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new(params[:invoice])
     member = Member.find_all_by_Jno(params[:invoice][:jno]).first
     @invoice.member_id = member.id
+    @invoice.viitenumero = member.viitenumero
+    @invoice.summa =
 
     respond_to do |format|
       if @invoice.save

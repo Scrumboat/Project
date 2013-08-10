@@ -1,0 +1,25 @@
+<h2>Epäselvät viitesuoritukset</h2>
+
+
+<table>
+  <thead>
+  <tr>
+    <th>Viitenumero</th>
+    <th>Summa</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @payments.each do |payment| %>
+
+      <tr>
+        <td><%= payment.ref_number %></td>
+        <td><%= payment.amount %></td>
+        <td><%= link_to 'Selvitä', "#{payment.id}/survey" %> </td>
+      </tr>
+
+
+
+  <% end %>
+  </tbody>
+</table>

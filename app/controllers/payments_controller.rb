@@ -1,5 +1,35 @@
 #encoding: utf-8
 class PaymentsController < ApplicationController
+
+  # GET /payments/survey
+  def survey_index
+    @payments = Payment.where(:need_survey => true)
+
+    respond_to do |format|
+      format.html #survey_index.html.erb
+    end
+  end
+
+  # GET /payments/:id/survey
+  def survey
+    @payment = Payment.find(params[:id])
+    @member = Member.find_by_viitenumero(@payment.ref_number)
+    @invoices = @member.invoices
+    respond_to do |format|
+      format.html  #survey.html.erb
+    end
+  end
+
+  # POST /payments/:id/survey
+  def survey_done
+    flash[:alert] = "Not yet implemented, but we got invoice id: #{params[:invoice]}"
+
+    respond_to do |format|
+      format.html { redirect_to '/payments/survey'}
+    end
+
+  end
+
   # GET /payments
   # GET /payments.json
   def index
