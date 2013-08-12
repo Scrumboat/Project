@@ -173,5 +173,7 @@ class Invoice < ActiveRecord::Base
       Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
     end
   end
-
+  def summa
+    #TODO: laske summa aina uusiksi, jos jossain unohdetaan päivittää invoice.summa kenttää...
+  end
 end

@@ -22,7 +22,27 @@ class PaymentsController < ApplicationController
 
   # POST /payments/:id/survey
   def survey_done
-    flash[:alert] = "Not yet implemented, but we got invoice id: #{params[:invoice]}"
+    payment = Payment.find(params[:id])
+    invoice = Invoice.find(params[:invoice])
+
+    payment.invoice_id = invoice.id
+    if invoice.viitesuoritukset.nil? then invoice.viitesuoritukset = 0 end
+    invoice.viitesuoritukset += payment.amount
+    if invoice.viitesuoritukset == invoice.summa
+      invoice.maksettu = true
+    elsif invoice.viitesuoritukset > invoice.summa
+      #TODO: memberille ylijäämät
+      invoice.maksettu = true
+      money_to_member = invoice.viitesuoritukset - invoice.summa
+      member = Member.find(invoice.member.id)
+      # mihis kirjataan memberin ylimaksamat jutut?
+      invoice.viitesuoritukset = invoice.summa
+      flash[:notice] = 'Laskun summa ylittyi. Meni limboon.'
+    end
+    payment.need_survey = false
+    payment.save
+    invoice.save
+    member.save unless member.nil?
 
     respond_to do |format|
       format.html { redirect_to '/payments/survey'}

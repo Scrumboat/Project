@@ -10,11 +10,11 @@ class InvoicesController < ApplicationController
     else
       flash[:notice] = 'Viitesuoritukset (toivottavasti) purettu.'
       data_array = InvoicesHelper.parse_ref_numbers_from_file params[:Viitesuoritustiedosto]
-      data_array.each { |payment|
+      data_array.each do |payment|
         payment_processed = false
         member = Member.find_by_viitenumero(payment[:ref_number])
         member.invoices do |invoice|
-          if invoice.summa == (payment[:amount] * 0.01)
+          if invoice.summa == (payment[:amount] * 0.01) && !invoice.maksettu
             invoice.maksettu = true
             invoice.viitesuoritukset = payment[:amount] * 0.01
             invoice.save
@@ -26,11 +26,11 @@ class InvoicesController < ApplicationController
         end unless member.nil?
 
         unless payment_processed
-          # TODO: Luo suoritus ja laita se selvitystilaan (:need_survey)
+          Payment.create(invoice_id: nil, payment_date: payment[:payment_date], amount: payment[:amount], ref_number: payment[:ref_number], need_survey: true, raw_data: payment[:raw_data])
           flash[:alert] = 'Löytyi selvitystä vaativia suorituksia.'
         end
 
-      }
+      end
     end
 
     redirect_to invoices_url
@@ -119,7 +119,8 @@ class InvoicesController < ApplicationController
     member = Member.find_all_by_Jno(params[:invoice][:jno]).first
     @invoice.member_id = member.id
     @invoice.viitenumero = member.viitenumero
-    @invoice.summa =
+    #TODO: Laske laskulle summa
+    #@invoice.summa =
 
     respond_to do |format|
       if @invoice.save
