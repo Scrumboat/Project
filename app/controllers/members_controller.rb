@@ -44,7 +44,7 @@ class MembersController < ApplicationController
   # GET /members/new.json
   def new
     @member = Member.new
-    @nextJno = Member.maximum("Jno") + 1
+    @nextJno = Member.maximum("Jno") + 1 unless Member.count == 0
 
     respond_to do |format|
       format.html # new.html.erb
