@@ -1,4 +1,4 @@
-<%= simple_form_for(@member, :html => {:onsubmit => "generateIndexNumber()"}) do |f| %>
+<%= simple_form_for(@member, :html => { :class => 'form-horizontal', :onsubmit => "generateIndexNumber()"}) do |f| %>
   <% if @member.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
@@ -20,90 +20,91 @@
 
 
   <div class="field">
-    <%= f.label :Nimi %><br />
+    <%= f.label :Nimi %>
     <%= f.text_field :Nimi %>
   </div>
   <div class="field">
-    <%= f.label :Jno, :label => 'Jäsennumero' %><br />
+    <%= f.label :Jno, :label => 'Jäsennumero' %>
     <%= f.number_field :Jno, :value => @nextJno %>
   </div>
   <div class="field">
-    <%= f.label :Sotu %><br />
+    <%= f.label :Sotu %>
     <%= f.text_field :Sotu %>
   </div>
   <div class="field">
-    <%= f.label :Liittynyt %><br />
+    <%= f.label :Liittynyt %>
     <%= f.date_select :Liittynyt, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
+    <%= f.label 'Jäsentyyppi' %>
     <%= f.select :jasentyyppi, Member::JASENTYYPIT %><br />
   </div>
   <div class="field">
-    <%= f.label :MuutosPvm %><br />
+    <%= f.label :MuutosPvm %>
     <%= f.date_select :MuutosPvm, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
-    <%= f.label :Toimi %><br />
+    <%= f.label :Toimi %>
     <%= f.text_field :Toimi %>
   </div>
   <div class="field">
-    <%= f.label :Lisenssi %><br />
+    <%= f.label :Lisenssi %>
     <%= f.text_field :Lisenssi %>
   </div>
   <div class="field">
-    <%= f.label :Osoite %><br />
+    <%= f.label :Osoite %>
     <%= f.text_field :Osoite %>
   </div>
   <div class="field">
-    <%= f.label :Posti %><br />
+    <%= f.label :Posti %>
     <%= f.text_field :Posti %>
   </div>
   <div class="field">
-    <%= f.label :Maa %><br />
+    <%= f.label :Maa %>
     <%= f.text_field :Maa %>
   </div>
   <div class="field">
-    <%= f.label :KotiPuh %><br />
+    <%= f.label :KotiPuh %>
     <%= f.text_field :KotiPuh %>
   </div>
   <div class="field">
-    <%= f.label :MatkaPuh %><br />
+    <%= f.label :MatkaPuh %>
     <%= f.text_field :MatkaPuh %>
   </div>
   <div class="field">
-    <%= f.label :TyoPuh, :label => 'Työpuh' %><br />
+    <%= f.label :TyoPuh, :label => 'Työpuh' %>
     <%= f.text_field :TyoPuh %>
   </div>
   <div class="field">
-    <%= f.label :EmailFax %><br />
+    <%= f.label :EmailFax %>
     <%= f.text_field :EmailFax %>
   </div>
   <div class="field">
-    <%= f.label :Ammatti %><br />
+    <%= f.label :Ammatti %>
     <%= f.text_field :Ammatti %>
   </div>
   <div class="field">
-    <%= f.label :Laivuri %><br />
+    <%= f.label :Laivuri %>
     <%= f.text_field :Laivuri %>
   </div>
   <div class="field">
-    <%= f.label :Huom %><br />
+    <%= f.label :Huom %>
     <%= f.text_field :Huom %>
   </div>
   <div class="field">
-    <%= f.label :Varasto %><br />
+    <%= f.label :Varasto %>
     <%= f.text_field :Varasto %>
   </div>
   <div class="field">
-    <%= f.label :Avain %><br />
+    <%= f.label :Avain %>
     <%= f.text_field :Avain %>
   </div>
   <div class="field">
-    <%= f.label :VeneRekNro %><br />
+    <%= f.label :VeneRekNro %>
     <%= text_field_tag :VeneRekNro %>
   </div>
   <div class="field">
-    <%= f.hidden_field :viitenumero %><br />
+    <%= f.hidden_field :viitenumero %>
   </div>
   <div class="actions">
     <%= f.submit @teksti %>

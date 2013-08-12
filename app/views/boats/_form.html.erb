@@ -11,11 +11,11 @@
     </div>
   <% end %>
 
-<%= f.simple_fields_for :BoatsMembers, :html => { :class => 'control-group'} do |yhteys| %>
-	<% yhteys.input :Omistaja, :class => 'control-label' do %>
-	  <%= yhteys.text_field :member_id, :value => yhteys.object.member_id %>
-	  <%= yhteys.link_to_remove "Poista omistaja", :class => 'btn btn-mini btn-danger' %>
-                                  <% end %>
+    <%= f.simple_fields_for :BoatsMembers, :html => { :class => 'control-group'} do |yhteys| %>
+        <% yhteys.input :Omistaja, :class => 'control-label' do %>
+            <%= yhteys.text_field :member_id, :value => yhteys.object.member_id %>
+            <%= yhteys.link_to_remove "Poista omistaja", :class => 'btn btn-mini btn-danger' %>
+        <% end %>
     <% end %>
     <div class="center">
   <%= f.link_to_add "Uusi omistaja", :BoatsMembers, :class => 'btn btn-mini btn-primary' %>
