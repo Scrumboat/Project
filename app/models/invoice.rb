@@ -52,22 +52,22 @@ class Invoice < ActiveRecord::Base
 	  if jasen.EmailFax != nil
 	    for invoice in jasen.invoices
 	      if !invoice.maksettu
-		    InvoiceMailer.lasku(jasen, invoice).deliver 
-			invoice.lahetetty = true
-			invoice.lahetystapa = "Email"
-			invoice.save
-		  end
+		      InvoiceMailer.lasku(jasen, invoice).deliver
+			    invoice.lahetetty = true
+			    invoice.lahetystapa = "Email"
+			    invoice.save
+		    end
 	    end
 	  else
 	    for invoice in jasen.invoices
-		  if !invoice.maksettu
-		    #pdf = InvoicePdf.new(invoice)
-		    yhdistettavat.push invoice
-			invoice.lahetetty = true
-			invoice.lahetystapa = "Posti"
-			invoice.save
+		    if !invoice.maksettu
+		      #pdf = InvoicePdf.new(invoice)
+		      yhdistettavat.push invoice
+			    invoice.lahetetty = true
+			    invoice.lahetystapa = "Posti"
+			    invoice.save
+		    end
 		  end
-		end
 	  end
 	end
 	counter = 0
@@ -167,12 +167,14 @@ class Invoice < ActiveRecord::Base
           laiturimaksu += (Pricing.find_by_target("leveysLaituripaikanHinnanKasvuun").data)*((laituri.width - 2)/0.5).ceil
         end
       end
-      erapaiva = Time.now + 2.weeks #Pricingsi tableen laskunmaksuaika data? Time.now + n.days esim
+      erapaiva = Time.now + 1.month #Pricingsi tableen laskunmaksuaika data? Time.now + n.days esim
       luontipaiva = Time.now
-      summa = liittymismaksu + jasenmaksu + varastomaksu + laiturimaksu + telakkamaksu  # TODO: TARVITSEE SAKOT YMS
-      Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
+      inv = Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
+      inv.summa = inv.sum_fields
+      inv.save
     end
   end
+
   def sum_fields
     o = {
         'ensirekisterimaksu' => '+',

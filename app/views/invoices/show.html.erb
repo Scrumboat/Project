@@ -22,7 +22,7 @@
 
 <p>
   <b>Viitesuoritukset:</b>
-  <%= @invoice.viitesuoritukset %>
+  <%= @invoice.payments.sum(:amount) %>
 </p>
 
 <p>
@@ -96,8 +96,10 @@
 </p>
 
 <p>
-  <b>Summa:</b>
-  <%= @invoice.summa %>
+  <b>Laskun summa:</b>
+  <%= @invoice.summa %> <br />
+  <b>Maksettavaa jäljellä:</b>
+  <%= @invoice.sum_fields - @invoice.payments.sum(:amount) %>
 </p>
 
 <p>
@@ -116,6 +118,7 @@
 </p>
 
 <%= link_to "Lataa lasku", invoice_path(@invoice.id, :format => "pdf") %>
+<%= link_to 'Näytä suoritukset', invoice_payments_path(@invoice) %>
 <%= link_to 'Muokkaa', edit_invoice_path(@invoice) %>
 <%= link_to 'Takaisin', invoices_path %>
 

@@ -26,17 +26,15 @@ class PaymentsController < ApplicationController
     invoice = Invoice.find(params[:invoice])
 
     payment.invoice_id = invoice.id
-    if invoice.viitesuoritukset.nil? then invoice.viitesuoritukset = 0 end
-    invoice.viitesuoritukset += payment.amount
-    if invoice.viitesuoritukset == invoice.summa
+    payment.save
+    if invoice.payments.sum(:amount) == invoice.summa
       invoice.maksettu = true
-    elsif invoice.viitesuoritukset > invoice.summa
+    elsif invoice.payments.sum(:amount) > invoice.summa
       #TODO: memberille ylijäämät
       invoice.maksettu = true
       money_to_member = invoice.viitesuoritukset - invoice.summa
       member = Member.find(invoice.member.id)
       # mihis kirjataan memberin ylimaksamat jutut?
-      invoice.viitesuoritukset = invoice.summa
       flash[:notice] = 'Laskun summa ylittyi. Meni limboon.'
     end
     payment.need_survey = false
@@ -98,13 +96,12 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(params[:payment])
     @invoice = Invoice.find(params[:invoice_id])
     @payment.invoice_id = params[:invoice_id]
-    if @payment.amount == @invoice.summa then
+    if @payment.amount == @invoice.sum_fields then
       @invoice.maksettu = true
     else
-      @invoice.viitesuoritukset += @payment.amount
-      if @invoice.viitesuoritukset == @invoice.summa
+      if @invoice.payments.sum(:amount) + @payment.amount == @invoice.summa
         @invoice.maksettu = true
-      elsif @invoice.viitesuoritukset > @invoice.summa
+      elsif @invoice.payments.sum(:amount) + @payment.amount > @invoice.summa
         flash[:notice] = 'MAKSOIT LIIKAA! HÄHÄHÄHÄÄ! RAHASI MENIVÄT LIMBOON!'
         @invoice.maksettu = true
       end
