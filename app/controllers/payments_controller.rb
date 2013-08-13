@@ -14,7 +14,7 @@ class PaymentsController < ApplicationController
   def survey
     @payment = Payment.find(params[:id])
     @member = Member.find_by_viitenumero(@payment.ref_number)
-    @invoices = @member.invoices
+    @invoices = @member.invoices unless @member.nil?
     respond_to do |format|
       format.html  #survey.html.erb
     end
