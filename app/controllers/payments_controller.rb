@@ -102,7 +102,7 @@ class PaymentsController < ApplicationController
       if (@invoice.payments.sum(:amount)).to_d + @payment.amount == (@invoice.summa).to_d
         @invoice.maksettu = true
       elsif @invoice.payments.sum(:amount).to_d + @payment.amount.to_d > @invoice.summa.to_d
-        flash[:notice] = 'MAKSOIT LIIKAA! HÄHÄHÄHÄÄ! RAHASI MENIVÄT LIMBOON!'
+        flash[:alert] = 'MAKSOIT LIIKAA! HÄHÄHÄHÄÄ! RAHASI MENIVÄT LIMBOON!'
         @invoice.maksettu = true
       end
 

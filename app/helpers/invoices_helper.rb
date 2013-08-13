@@ -31,6 +31,12 @@ module InvoicesHelper
       end
     end
     text << "<hr/><b>Summa: </b>  #{total.to_s}"
+    if invoice.summa
+      unless invoice.amount_left_to_pay == invoice.summa.to_d
+        text << "<br />Jäljellä: #{invoice.amount_left_to_pay}"
+      end
+    end
+    text
   end
 
   def self.nimi_to_human(nimi, o)
