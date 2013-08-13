@@ -7,18 +7,18 @@ Feature: Admin can add a new dock
 	Scenario:
 	Given I login as admin
 	And I am on the "/docks" page
-	Then page should have content "Uusi laituri"
+	Then page should have content "Luo uusi laituri"
 
 	Scenario:
 	Given I login as admin
 	And I am on the "/docks" page
-	And I click "Uusi laituri"
+	And I push "Luo uusi laituri"
 	Then page should have button "Lisää laituri"
 
 	Scenario:
 	Given I login as admin
 	And I am on the "/docks" page
-	And I click "Uusi laituri"
+	And I push "Luo uusi laituri"
 	And I add new dock:
 		|length|
 		|50|
