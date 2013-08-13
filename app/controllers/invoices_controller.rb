@@ -125,11 +125,13 @@ class InvoicesController < ApplicationController
     member = Member.find_all_by_Jno(params[:invoice][:jno]).first
     @invoice.member_id = member.id
     @invoice.viitenumero = member.viitenumero
-    #TODO: Laske laskulle summa
-    #@invoice.summa =
+    @invoice.summa = @invoice.amount_left_to_pay
 
     respond_to do |format|
       if @invoice.save
+        #invoice needs to be saved in order to get .amount_left_to_pay
+        @invoice.summa = @invoice.amount_left_to_pay
+        @invoice.save
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render json: @invoice, status: :created, location: @invoice }
       else
