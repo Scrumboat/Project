@@ -11,6 +11,9 @@
         });
     });
 </script>
+<style type="text/css">
+th { cursor: pointer;}
+</style>
 
 <body onload="hideAll();">
 
@@ -95,8 +98,6 @@
 </table>
 
 <br />
-
-<%= link_to '<i class="btn btn-danger"><i class="icon-home icon-white"></i>    Etusivulle</i>'.html_safe, root_path %>
 
 <%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi jäsen</i>'.html_safe, new_member_path %>
 <script>

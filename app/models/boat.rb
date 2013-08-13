@@ -20,7 +20,6 @@ validates_presence_of :Vuosimalli
 validates_numericality_of :Pituus, :greater_than => 0
 validates_numericality_of :Leveys, :greater_than => 0
 validates_numericality_of :Syvyys
-validates_numericality_of :Korkeus, :greater_than => 0
 validates_numericality_of :Vuosimalli, :only_integer => true
 
 has_many :BoatsMembers, :dependent => :destroy

@@ -1,6 +1,6 @@
 <h1>Telakat</h1>
 
-<table>
+<table class="table table-condensed">
   <tr>
     <th>Nimi</th>
     <th>Pituus</th>
@@ -15,13 +15,13 @@
     <td><%= dockyard.name %></td>
     <td><%= dockyard.length %></td>
     <td><%= dockyard.width %></td>
-    <td><%= link_to 'Näytä', dockyard %></td>
-    <td><%= link_to 'Muokkaa', edit_dockyard_path(dockyard) %></td>
-    <td><%= link_to 'Poista', dockyard, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+    <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, dockyard %>
+        <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_dockyard_path(dockyard) %>
+        <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, dockyard, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Uusi telakka', new_dockyard_path %>
+<%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi telakka</i>'.html_safe, new_dockyard_path %>

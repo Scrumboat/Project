@@ -1,11 +1,11 @@
 <h1>Varastokopit</h1>
 
-<table>
+<table class="table table-condensed">
   <tr>
     <th>Nimi</th>
     <th>Pinta-ala</th>
     <th>Jäsennumero</th>
-	<th>Omistaja</th>
+    <th>Omistaja</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,12 +18,12 @@
     <td><%= storage.pala %></td>
     <td><%= storage.jno %></td>
 	<td><%= omistaja.Nimi %></td>
-    <td><%= link_to 'Muokkaa', edit_storage_path(storage) %></td>
-    <td><%= link_to 'Poista', storage, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+        <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_storage_path(storage) %>
+        <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, storage, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Uusi varastokoppi', new_storage_path %>
+<%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi varastokoppi</i>'.html_safe, new_storage_path %>

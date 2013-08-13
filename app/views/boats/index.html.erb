@@ -5,6 +5,9 @@
 </script>
 <script src="/assets/jquery.tablesorter.js">
 </script>
+<style type="text/css">
+th { cursor: pointer;}
+</style>
 <script>
 $(document).ready(function(){
   $("#button").click(function(){
@@ -93,8 +96,6 @@ $(document).ready(function(){
 <br />
 
 <br />
-
-<%= link_to '<i class="btn btn-danger"><i class="icon-home icon-white"></i>    Etusivulle</i>'.html_safe, root_path %>
 
 <%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi vene</i>'.html_safe, new_boat_path %>
 
