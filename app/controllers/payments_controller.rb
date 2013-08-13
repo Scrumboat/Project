@@ -27,9 +27,9 @@ class PaymentsController < ApplicationController
 
     payment.invoice_id = invoice.id
     payment.save
-    if invoice.payments.sum(:amount) == invoice.summa
+    if BigDecimal(invoice.payments.sum(:amount)) == BigDecimal(invoice.summa)
       invoice.maksettu = true
-    elsif invoice.payments.sum(:amount) > invoice.summa
+    elsif BigDecimal(invoice.payments.sum(:amount)) > BigDecimal(invoice.summa)
       #TODO: memberille ylijäämät
       invoice.maksettu = true
       money_to_member = invoice.viitesuoritukset - invoice.summa
@@ -96,21 +96,20 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(params[:payment])
     @invoice = Invoice.find(params[:invoice_id])
     @payment.invoice_id = params[:invoice_id]
-    if @payment.amount == @invoice.amount_left_to_pay then
+    if (@payment.amount).to_d == @invoice.amount_left_to_pay then
       @invoice.maksettu = true
     else
-      if @invoice.payments.sum(:amount) + @payment.amount == @invoice.summa
+      if (@invoice.payments.sum(:amount)).to_d + @payment.amount == (@invoice.summa).to_d
         @invoice.maksettu = true
-      elsif @invoice.payments.sum(:amount) + @payment.amount > @invoice.summa
+      elsif @invoice.payments.sum(:amount).to_d + @payment.amount.to_d > @invoice.summa.to_d
         flash[:notice] = 'MAKSOIT LIIKAA! HÄHÄHÄHÄÄ! RAHASI MENIVÄT LIMBOON!'
         @invoice.maksettu = true
       end
 
     end
 
-    @invoice.save
     respond_to do |format|
-      if @payment.save
+      if @payment.save && @invoice.save
         format.html { redirect_to invoice_payments_url(@invoice), notice: 'Payment was successfully created.' }
         format.json { render json: @payment, status: :created, location: @payment }
       else

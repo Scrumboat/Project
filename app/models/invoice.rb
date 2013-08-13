@@ -202,6 +202,6 @@ class Invoice < ActiveRecord::Base
         end
       end
     end
-    sum - payments.sum(:amount)
+    (sum - payments.sum(:amount)).to_d(2)
   end
 end

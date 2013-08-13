@@ -50,6 +50,8 @@ class InvoicesController < ApplicationController
   # GET /invoices.json
   def index
     #@invoices = Invoice.all
+    #listataan defaulttina maksamattomat!
+    if params[:search].blank? then params[:search] = 'unpaid' end
     @invoices = Invoice.search(params[:search])
     if params[:create]
       if params[:tunniste].blank?
