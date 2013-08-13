@@ -1,6 +1,7 @@
 <h3>Suorituksen tiedot:</h3>
 
 <b>Maksettu:</b> <%= @payment.amount %>   <br />
+<b>Maksupäivä:</b> <%= @payment.payment_date.strftime('%d.%m.%Y') %> <br />
 <b>Viitenumero:</b> <%= @payment.ref_number %>  <br />
 <b>Raaka data:</b> <%= @payment.raw_data %>   <br />
 
@@ -9,7 +10,8 @@
 <h4>Laskut: </h4>
 <% @invoices.each do |invoice| %>
    Viite: <%= invoice.member.viitenumero %> <br />
-   Summa: <%= invoice.summa %>       <br />
+   Eräpäivä: <%= invoice.erapvm.strftime('%d.%m.%Y') %> <br />
+   Summa: <%= invoice.sum_fields %>       <br />
    <%= button_to 'Valitse tämä', survey_done_path(@payment.id, :invoice => invoice.id), :method => 'post' %>
     <br />
 

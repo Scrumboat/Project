@@ -4,7 +4,6 @@ class InvoicesController < ApplicationController
 
   # POST /invoices/uploadFile
   def uploadFile
-
     if params[:Viitesuoritustiedosto].blank?
       flash[:error] = 'Ei tiedostoa'
     else
@@ -13,18 +12,23 @@ class InvoicesController < ApplicationController
       data_array.each do |payment|
         payment_processed = false
         member = Member.find_by_viitenumero(payment[:ref_number])
-        member.invoices do |invoice|
-          if invoice.summa == (payment[:amount] * 0.01) && !invoice.maksettu
-            invoice.maksettu = true
-            invoice.viitesuoritukset = payment[:amount] * 0.01
-            invoice.save
-            Payment.create(invoice_id: invoice.id, payment_date: payment[:payment_date], amount: payment[:amount], ref_number: payment[:ref_number], need_survey: false, raw_data: payment[:raw_data])
-            #attr_accessible :payment_date, :amount, :ref_number, :id, :need_survey, :invoice_id, :raw_data
-            payment_processed = true
-            break # löydettiin 'sopiva' lasku ja se merkattiin maksetuksi. ei enempää.
+        if member.nil?
+          Payment.create(invoice_id: nil, payment_date: payment[:payment_date], amount: payment[:amount], ref_number: payment[:ref_number], need_survey: true, raw_data: payment[:raw_data])
+          flash[:alert] = 'Löytyi selvitystä vaativia suorituksia.'
+          payment_processed = true
+        else
+          member.invoices do |invoice|
+            if invoice.summa == (payment[:amount]) && !invoice.maksettu
+              invoice.maksettu = true
+              invoice.viitesuoritukset = payment[:amount]
+              invoice.save
+              Payment.create(invoice_id: invoice.id, payment_date: payment[:payment_date], amount: payment[:amount], ref_number: payment[:ref_number], need_survey: false, raw_data: payment[:raw_data])
+              #attr_accessible :payment_date, :amount, :ref_number, :id, :need_survey, :invoice_id, :raw_data
+              payment_processed = true
+              break # löydettiin 'sopiva' lasku ja se merkattiin maksetuksi. ei enempää.
+            end
           end
-        end unless member.nil?
-
+        end
         unless payment_processed
           Payment.create(invoice_id: nil, payment_date: payment[:payment_date], amount: payment[:amount], ref_number: payment[:ref_number], need_survey: true, raw_data: payment[:raw_data])
           flash[:alert] = 'Löytyi selvitystä vaativia suorituksia.'
@@ -54,7 +58,7 @@ class InvoicesController < ApplicationController
         return
       end
       Invoice.createInvoices(params[:tunniste])
-      flash[:notice] = "Laskut luotu kaikille tunnisteella: " + params[:tunniste] + "."
+      flash[:notice] = "Laskut luotu kaikille tunnisteella:  #{params[:tunniste]}."
       redirect_to invoices_url
       return
     end

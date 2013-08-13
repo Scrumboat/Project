@@ -46,11 +46,30 @@ module InvoicesHelper
       if line[0].to_i == 3                              # 3 on VIITEMAKSU, tarvitaanko suoraveloituksia (5)?
         ref_number = line[43, 20]
         amount = line[77, 10]
-        result_array.push({:ref_number => ref_number, :amount => amount, :raw_data => line, :payment_date => Time.now}) #TODO: PARSE MAKSUPVM
+        amount = amount.to_f / 100    # amount tuli senteissä, muutetaan euroiksi
+        payment_date = DateTime.strptime("#{line[21,6]}", '%y%m%d')
+        result_array.push({:ref_number => ref_number, :amount => amount, :raw_data => line, :payment_date => payment_date})
       end
     end
     return result_array
   end
 
+  #         10        20        30        40        50        60        70        80
+  #012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
   #12222222222222233333344444455555555555555556666666666666666666677777777777789aaaaaaaaaabcd
+  #
+  # 1 = 3 on viitesuoritus, 5 suoraveloitus, tietuetunnus
+  # 2 = Tilinro jolle suoritus on kirjattu
+  # 3 = Kirjauspäivä  (vvkkpp)
+  # 4 = Maksupäivä    (vvkkpp)
+  # 5 = Arkistointitunnus
+  # 6 = Viite
+  # 7 = Maksajan nimilyhenne
+  # 8 = Rahayksikön koodi (1=euro)
+  # 9 = Nimen lähde (A-asiakas, J-pankki, K-näppäilty konttorissa)
+  # a = Rahamäärä senteissä
+  # b = Oikaisutunnus (0-maksu, 1-maksun oikaisu)
+  # c = Välitystapa   (A-asiakkaalta konekielisesti tai itsepalv. J-muodostettu pankin järjestelmässä, K-tallentanu pankin toimihenkilö konttorissa)
+  # d = Palautekoodi (Liittyy suoraveloituksiin)
+
 end

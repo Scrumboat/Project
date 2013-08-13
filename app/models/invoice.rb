@@ -1,6 +1,6 @@
 class Invoice < ActiveRecord::Base
   belongs_to :member, :foreign_key => 'member_id'
-  attr_accessible :annetutHyvitykset, :edellisenKaudenLaskutus, :ensirekisterimaksu, :jasenmaksu, :jno, :katsastussakko, :laiturimaksu, :laskutuslisa, :liittymismaksu, :maksetunSummanPalautus, :muutMaksut, :nimi, :suorituksetIlmanViitetta, :suorituksetKassaan, :talkookerroin, :talkoosakko, :telakkamaksu, :toimihlokerroin, :varastokoppimaksu, :vartiosakko, :venerekisterimaksu, :viitesuoritukset, :luontipvm, :lahetyspvm, :tunniste, :maksettu, :erapvm, :member_id, :summa, :viitenumero, :karhuttu, :vapaasana
+  attr_accessible :ensirekisterimaksu, :jasenmaksu, :jno, :katsastussakko, :laiturimaksu, :laskutuslisa, :liittymismaksu, :muutMaksut, :nimi, :suorituksetKassaan, :talkookerroin, :talkoosakko, :telakkamaksu, :toimihlokerroin, :varastokoppimaksu, :vartiosakko, :venerekisterimaksu, :viitesuoritukset, :luontipvm, :lahetyspvm, :tunniste, :maksettu, :erapvm, :member_id, :summa, :viitenumero, :karhuttu, :vapaasana
   accepts_nested_attributes_for :member
   has_many :payments
 
@@ -173,7 +173,33 @@ class Invoice < ActiveRecord::Base
       Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
     end
   end
-  def summa
-    #TODO: laske summa aina uusiksi, jos jossain unohdetaan päivittää invoice.summa kenttää...
+  def sum_fields
+    o = {
+        'ensirekisterimaksu' => '+',
+        'jasenmaksu'         => '+',
+        'katsastussakko'     => '+',
+        'laiturimaksu'       => '+',
+        'laskutuslisa'       => '+',
+        'liittymismaksu'     => '+',
+        'muutMaksut'         => '+',
+        'talkoosakko'        => '+',
+        'telakkamaksu'       => '+',
+        'varastokoppimaksu'  => '+',
+        'vartiosakko'        => '+',
+        'venerekisterimaksu' => '+',
+        'viitesuoritukset'   => '-'
+    }
+    sum = 0.0
+    o.each do |k, v|
+      field_name = k.to_sym
+      unless send(field_name).blank?
+        if v.eql?('+')
+          sum += send(field_name).to_f
+        elsif v.eql?('-')
+          sum -= send(field_name).to_f
+        end
+      end
+    end
+    sum
   end
 end
