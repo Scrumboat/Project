@@ -18,7 +18,7 @@ class InvoicesController < ApplicationController
           payment_processed = true
         else
           member.invoices do |invoice|
-            if invoice.sum_fields == (payment[:amount]) && !invoice.maksettu
+            if invoice.amount_left_to_pay == (payment[:amount]) && !invoice.maksettu
               invoice.maksettu = true
               #invoice.viitesuoritukset = payment[:amount]
               invoice.save

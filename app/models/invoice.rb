@@ -170,12 +170,12 @@ class Invoice < ActiveRecord::Base
       erapaiva = Time.now + 1.month #Pricingsi tableen laskunmaksuaika data? Time.now + n.days esim
       luontipaiva = Time.now
       inv = Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
-      inv.summa = inv.sum_fields
+      inv.summa = inv.amount_left_to_pay
       inv.save
     end
   end
 
-  def sum_fields
+  def amount_left_to_pay
     o = {
         'ensirekisterimaksu' => '+',
         'jasenmaksu'         => '+',
@@ -202,6 +202,6 @@ class Invoice < ActiveRecord::Base
         end
       end
     end
-    sum
+    sum - payments.sum(:amount)
   end
 end

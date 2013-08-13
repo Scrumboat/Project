@@ -99,7 +99,7 @@
   <b>Laskun summa:</b>
   <%= @invoice.summa %> <br />
   <b>Maksettavaa jäljellä:</b>
-  <%= @invoice.sum_fields - @invoice.payments.sum(:amount) %>
+  <%= @invoice.amount_left_to_pay %>
 </p>
 
 <p>

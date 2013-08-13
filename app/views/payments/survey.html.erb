@@ -11,7 +11,7 @@
 <% @invoices.each do |invoice| %>
    Viite: <%= invoice.member.viitenumero %> <br />
    Eräpäivä: <%= invoice.erapvm.strftime('%d.%m.%Y') %> <br />
-   Summa: <%= invoice.sum_fields %>       <br />
+   Summa: <%= invoice.amount_left_to_pay %>       <br />
    <%= link_to 'Näytä lasku', invoice_path(invoice) %>
    <%= button_to 'Valitse tämä', survey_done_path(@payment.id, :invoice => invoice.id), :method => 'post' %>
     <br />

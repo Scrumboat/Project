@@ -96,7 +96,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(params[:payment])
     @invoice = Invoice.find(params[:invoice_id])
     @payment.invoice_id = params[:invoice_id]
-    if @payment.amount == @invoice.sum_fields then
+    if @payment.amount == @invoice.amount_left_to_pay then
       @invoice.maksettu = true
     else
       if @invoice.payments.sum(:amount) + @payment.amount == @invoice.summa
