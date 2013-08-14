@@ -1,3 +1,4 @@
+<script src="/assets/dockswap.js"></script>
 <h1>Laituri <%= @dock.id %> # </h1>
 <p id="notice"><%= notice %></p>
 
@@ -12,21 +13,24 @@
 <%= link_to 'Uusi laituripaikka', new_dock_berth_path(@dock) %>
 
 <h2>Laituripaikat</h2>
+
+<button type="button" id="button">Swap</button>
 <h3>Laituri <%= @dock.id %># vasen: </h3>
 <table>
-  <tr>
-    <th>Numero</th>
-    <th>pituus</th>
-    <th>leveys</th>
-    <th>syvyys</th>
-    <th>reknro</th>
-    <th>jno</th>
-    <th>Vartiovuoro</th>
-    <th>Hinta</th>
-    <th>On olemassa</th>
-    <th></th>
-    <th></th>
-  </tr>
+ 	<tr>
+      <th>Vaihto</th>
+	    <th>Numero</th>
+	    <th>Pituus</th>
+	    <th>Leveys</th>
+	    <th>Syvyys</th>
+	    <th>Reknro</th>
+	    <th>Jno</th>
+	    <th>Vartiovuoro</th>
+            <th>Hinta</th>
+	    <th>On olemassa</th>
+	    <th></th>
+	    <th></th>
+  	</tr>
 
   <% @berths.each do |berth| %>
       <% if berth.number % 2 != 0 %>

@@ -145,6 +145,8 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails3-jquery-autocomplete (1.0.11)
+      rails (~> 3.0)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -227,6 +229,7 @@ DEPENDENCIES
   pg
   prawn
   rails (= 3.2.13)
+  rails3-jquery-autocomplete
   railties (~> 3.2.13)
   rake (~> 10.0.4)
   rspec-rails (>= 2.0.1)
