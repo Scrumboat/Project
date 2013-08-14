@@ -1,6 +1,6 @@
 class Invoice < ActiveRecord::Base
   belongs_to :member, :foreign_key => 'member_id'
-  attr_accessible :ensirekisterimaksu, :jasenmaksu, :jno, :katsastussakko, :laiturimaksu, :laskutuslisa, :liittymismaksu, :muutMaksut, :nimi, :suorituksetKassaan, :talkookerroin, :talkoosakko, :telakkamaksu, :toimihlokerroin, :varastokoppimaksu, :vartiosakko, :venerekisterimaksu, :viitesuoritukset, :luontipvm, :lahetyspvm, :tunniste, :maksettu, :erapvm, :member_id, :summa, :viitenumero, :karhuttu, :vapaasana
+  attr_accessible :ensirekisterimaksu, :jasenmaksu, :jno, :katsastussakko, :laiturimaksu, :laskutuslisa, :liittymismaksu, :muutMaksut, :nimi, :suoritukset_kassaan, :talkookerroin, :talkoosakko, :telakkamaksu, :toimihlokerroin, :varastokoppimaksu, :vartiosakko, :venerekisterimaksu, :viitesuoritukset, :luontipvm, :lahetyspvm, :tunniste, :maksettu, :erapvm, :member_id, :summa, :viitenumero, :karhuttu, :vapaasana
   accepts_nested_attributes_for :member
   has_many :payments
 
@@ -49,7 +49,7 @@ class Invoice < ActiveRecord::Base
     yhdistettavat = []
     @jasenet = Member.all
 	for jasen in @jasenet
-	  if jasen.EmailFax != nil
+	  if jasen.email_fax != nil
 	    for invoice in jasen.invoices
 	      if !invoice.maksettu
 		      InvoiceMailer.lasku(jasen, invoice).deliver
@@ -64,7 +64,7 @@ class Invoice < ActiveRecord::Base
 		      #pdf = InvoicePdf.new(invoice)
 		      yhdistettavat.push invoice
 			    invoice.lahetetty = true
-			    invoice.lahetystapa = "Posti"
+			    invoice.lahetystapa = "posti"
 			    invoice.save
 		    end
 		  end
@@ -81,20 +81,20 @@ class Invoice < ActiveRecord::Base
 		  counter += 1
 		end
 	    @invoice = lasku
-	    @member = Member.find_by_Jno(@invoice.jno)
+	    @member = Member.find_by_jno(@invoice.jno)
         pdf.text "Lasku #{@invoice.tunniste}"
 	    pdf.move_down 10
-	    pdf.text "Nimi:  #{@invoice.nimi}"
+	    pdf.text "nimi:  #{@invoice.nimi}"
 	    pdf.move_down 10
 	    pdf.text "Jasennumero:  #{@invoice.jno}"
 	    pdf.move_down 10
-	    pdf.text "Osoite:  #{@member.Osoite}"
+	    pdf.text "osoite:  #{@member.osoite}"
 	    pdf.move_down 10
-	    pdf.text "Posti:  #{@member.Posti}"
+	    pdf.text "posti:  #{@member.posti}"
 	    pdf.move_down 10
-	    pdf.text "Email:  #{@member.EmailFax}"
+	    pdf.text "Email:  #{@member.email_fax}"
 	    pdf.move_down 10
-	    pdf.text "Katsastussakko:  #{@invoice.katsastussakko}"
+	    pdf.text "katsastussakko:  #{@invoice.katsastussakko}"
 	    pdf.move_down 10
 	    pdf.text "Laiturimaksu:  #{@invoice.laiturimaksu}"
 	    pdf.move_down 10
@@ -104,9 +104,9 @@ class Invoice < ActiveRecord::Base
 	    pdf.move_down 10
 	    pdf.text "Talkoosakko:  #{@invoice.talkoosakko}"
 	    pdf.move_down 10
-	    pdf.text "Telakkamaksu:  #{@invoice.telakkamaksu}"
+	    pdf.text "telakkamaksu:  #{@invoice.telakkamaksu}"
 	    pdf.move_down 10
-	    pdf.text "Varastokoppimaksu:  #{@invoice.varastokoppimaksu}"
+	    pdf.text "varastokoppimaksu:  #{@invoice.varastokoppimaksu}"
 	    pdf.move_down 10
 	    pdf.text "Vartiosakko:  #{@invoice.vartiosakko}"
 	    pdf.move_down 10
@@ -142,23 +142,23 @@ class Invoice < ActiveRecord::Base
         return
       end
       summa = 0.0
-      nimi = jasen.Nimi
-      jno = jasen.Jno
+      nimi = jasen.nimi
+      jno = jasen.jno
       liittymismaksu = 0
-      if jasen.Liittynyt > (Date.today - 6.months)
+      if jasen.liittynyt > (Date.today - 6.months)
         liittymismaksu = Pricing.find_by_target("liittymismaksu").data
       end
       jasenmaksu = Pricing.find_by_target("jasenmaksu").data
       varastomaksu = 0
-      if !jasen.Varasto.blank?
-        varastomaksu = (Pricing.find_by_target("varastokoppinelio").data)*(Storage.find_by_vk(jasen.Varasto).pala)
+      if !jasen.varasto.blank?
+        varastomaksu = (Pricing.find_by_target("varastokoppinelio").data)*(Storage.find_by_vk(jasen.varasto).pala)
       end
       laiturimaksu = Pricing.find_by_target("minLaituripaikanHinta").data
       telakkamaksu = 0
       veneet = jasen.boats
       for vene in veneet
         #veneelle voisi luoda boolean muuttujakentän siitä että onko veneen laiturimaksu jo laskutettu jos on monta omistajaa samalla veneellä, jos true niin skipattais tässä
-        laituri = Berth.find_by_Reknro(vene.RekNro)
+        laituri = Berth.find_by_reknro(vene.reknro)
         if !DockyardSpot.find_by_boat_id(vene.id).nil?
           telakka = DockyardSpot.find_by_boat_id(vene.id)
           telakkamaksu = (Pricing.find_by_target("telakanNeliohinta").data)*(telakka.length*telakka.width)

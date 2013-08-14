@@ -51,10 +51,10 @@ class BerthsController < ApplicationController
     @dock = Dock.find(params[:dock_id])
     currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
     spaceLeft = @dock.length - currentTotalWidth
-    @boat = Boat.find_by_RekNro(params[:berth][:Reknro])
+    @boat = Boat.find_by_reknro(params[:berth][:reknro])
     @newBerth = @dock.berths.build(params[:berth])
     @newBerth.boat_id = @boat.id unless @boat.nil?
-    @ok = true if @boat.nil? || (@boat.Leveys < params[:berth][:width].to_f && @boat.Pituus < params[:berth][:length].to_f)
+    @ok = true if @boat.nil? || (@boat.leveys < params[:berth][:width].to_f && @boat.pituus < params[:berth][:length].to_f)
     #@newBerth.dock_id = params[:dock_id]
     respond_to do |format|
       if (currentTotalWidth + @newBerth.width <= @dock.length) && @ok
@@ -82,11 +82,11 @@ class BerthsController < ApplicationController
     okRek = true
     respond_to do |format|
       if isOk && @berth.update_attributes(params[:berth])
-        unless params[:berth][:Reknro].blank?
-          @boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
+        unless params[:berth][:reknro].blank?
+          @boat = Boat.where(:reknro => params[:berth][:reknro]).first
           if @boat != nil
-            unless @boat.Pituus.to_f <= params[:berth][:length].to_f && @boat.Leveys.to_f <= params[:berth][:width].to_f && @boat.Syvyys.to_f <= params[:berth][:depth].to_f
-              params[:berth][:Reknro] = ""
+            unless @boat.pituus.to_f <= params[:berth][:length].to_f && @boat.leveys.to_f <= params[:berth][:width].to_f && @boat.syvyys.to_f <= params[:berth][:depth].to_f
+              params[:berth][:reknro] = ""
               flash[:alert] = 'Vene on liian suuri mahtuakseen paikkaan.'
               @berth.update_attributes(params[:berth])
             end
@@ -113,7 +113,7 @@ class BerthsController < ApplicationController
     @berth = Berth.find(params[:id])
 
     # boat ei enää pidä kirjaa laituristaan
-    #@boat = Boat.where(:RekNro => @berth.Reknro).first
+    #@boat = Boat.where(:reknro => @berth.reknro).first
     #if @boat != nil
     #  @boat.Laituri = ""
     #  @boat.Laituripaikka = ""
@@ -129,15 +129,15 @@ class BerthsController < ApplicationController
   end
 
   def create_connection_to_the_boat(format)
-    if params[:berth][:Reknro].strip != ""
-      @boat = Boat.where(:RekNro => params[:berth][:Reknro]).first
+    if params[:berth][:reknro].strip != ""
+      @boat = Boat.where(:reknro => params[:berth][:reknro]).first
       if @boat != nil
-        if @boat.Pituus <= @newBerth.length && @boat.Leveys <= @newBerth.width && @boat.Syvyys <= @newBerth.depth
+        if @boat.pituus <= @newBerth.length && @boat.leveys <= @newBerth.width && @boat.syvyys <= @newBerth.depth
           @boat.Laituri = params[:dock_id]
           @boat.Laituripaikka = params[:berth][:number]
           @boat.save
         else
-          params[:berth][:Reknro] = ""
+          params[:berth][:reknro] = ""
         end
       else
         @okRek = false
@@ -145,7 +145,7 @@ class BerthsController < ApplicationController
       end
     end
     if !@okRek
-      params[:berth][:Reknro] = ""
+      params[:berth][:reknro] = ""
     end
     if params[:berth][:jno].strip != ""
       params[:berth][:jno] = ""

@@ -3,18 +3,18 @@ require 'spec_helper'
 describe "invoices/show" do
   before(:each) do
     @invoice = assign(:invoice, stub_model(Invoice,
-      :nimi => "Nimi",
+      :nimi => "nimi",
       :jno => 1,
-      :toimihlokerroin => "Toimihlokerroin",
+      :toimihlokerroin => "toimihlokerroin",
       :talkookerroin => 2,
       :viitesuoritukset => "9.99",
-      :suorituksetIlmanViitetta => "9.99",
-      :suorituksetKassaan => "9.99",
-      :annetutHyvitykset => "9.99",
-      :maksetunSummanPalautus => "9.99",
+      :suoritukset_ilman_viitetta => "9.99",
+      :suoritukset_kassaan => "9.99",
+      :annetut_hyvitykset => "9.99",
+      :maksetun_summan_palautus => "9.99",
       :liittymismaksu => "9.99",
       :jasenmaksu => "9.99",
-      :edellisenKaudenLaskutus => "9.99",
+      :edellis_kauden_laskutus => "9.99",
       :venerekisterimaksu => "9.99",
       :varastokoppimaksu => "9.99",
       :laiturimaksu => "9.99",
@@ -31,9 +31,9 @@ describe "invoices/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Nimi/)
+    rendered.should match(/nimi/)
     rendered.should match(/1/)
-    rendered.should match(/Toimihlokerroin/)
+    rendered.should match(/toimihlokerroin/)
     rendered.should match(/2/)
     rendered.should match(/9.99/)
     rendered.should match(/9.99/)

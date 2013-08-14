@@ -20,88 +20,88 @@
 
 
   <div class="field">
-    <%= f.label :Nimi %>
-    <%= f.text_field :Nimi %>
+    <%= f.label :nimi %>
+    <%= f.text_field :nimi %>
   </div>
   <div class="field">
-    <%= f.label :Jno, :label => 'Jäsennumero' %>
-    <%= f.number_field :Jno, :value => @nextJno %>
+    <%= f.label :jno, :label => 'Jäsennumero' %>
+    <%= f.number_field :jno, :value => @nextjno %>
   </div>
   <div class="field">
-    <%= f.label :Sotu %>
-    <%= f.text_field :Sotu %>
+    <%= f.label :sotu %>
+    <%= f.text_field :sotu %>
   </div>
   <div class="field">
-    <%= f.label :Liittynyt %>
-    <%= f.date_select :Liittynyt, :order => [ :day, :month, :year] %>
+    <%= f.label :liittynyt %>
+    <%= f.date_select :liittynyt, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label 'Jäsentyyppi' %>
     <%= f.select :jasentyyppi, Member::JASENTYYPIT %><br />
   </div>
   <div class="field">
-    <%= f.label :MuutosPvm %>
-    <%= f.date_select :MuutosPvm, :order => [ :day, :month, :year] %>
+    <%= f.label :muutos_pvm %>
+    <%= f.date_select :muutos_pvm, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
-    <%= f.label :Toimi %>
-    <%= f.text_field :Toimi %>
+    <%= f.label :toimi %>
+    <%= f.text_field :toimi %>
   </div>
   <div class="field">
-    <%= f.label :Lisenssi %>
-    <%= f.text_field :Lisenssi %>
+    <%= f.label :lisenssi %>
+    <%= f.text_field :lisenssi %>
   </div>
   <div class="field">
-    <%= f.label :Osoite %>
-    <%= f.text_field :Osoite %>
+    <%= f.label :osoite %>
+    <%= f.text_field :osoite %>
   </div>
   <div class="field">
-    <%= f.label :Posti %>
-    <%= f.text_field :Posti %>
+    <%= f.label :posti %>
+    <%= f.text_field :posti %>
   </div>
   <div class="field">
-    <%= f.label :Maa %>
-    <%= f.text_field :Maa %>
+    <%= f.label :maa %>
+    <%= f.text_field :maa %>
   </div>
   <div class="field">
-    <%= f.label :KotiPuh %>
-    <%= f.text_field :KotiPuh %>
+    <%= f.label :koti_puh %>
+    <%= f.text_field :koti_puh %>
   </div>
   <div class="field">
-    <%= f.label :MatkaPuh %>
-    <%= f.text_field :MatkaPuh %>
+    <%= f.label :matka_puh %>
+    <%= f.text_field :matka_puh %>
   </div>
   <div class="field">
-    <%= f.label :TyoPuh, :label => 'Työpuh' %>
-    <%= f.text_field :TyoPuh %>
+    <%= f.label :tyo_puh, :label => 'Työpuh' %>
+    <%= f.text_field :tyo_puh %>
   </div>
   <div class="field">
-    <%= f.label :EmailFax %>
-    <%= f.text_field :EmailFax %>
+    <%= f.label :email_fax %>
+    <%= f.text_field :email_fax %>
   </div>
   <div class="field">
-    <%= f.label :Ammatti %>
-    <%= f.text_field :Ammatti %>
+    <%= f.label :ammatti %>
+    <%= f.text_field :ammatti %>
   </div>
   <div class="field">
-    <%= f.label :Laivuri %>
-    <%= f.text_field :Laivuri %>
+    <%= f.label :laivuri %>
+    <%= f.text_field :laivuri %>
   </div>
   <div class="field">
-    <%= f.label :Huom %>
-    <%= f.text_field :Huom %>
+    <%= f.label :huom %>
+    <%= f.text_field :huom %>
   </div>
   <div class="field">
-    <%= f.label :Varasto %>
-    <%= f.text_field :Varasto %>
+    <%= f.label :varasto %>
+    <%= f.text_field :varasto %>
   </div>
   <div class="field">
-    <%= f.label :Avain %>
-    <%= f.text_field :Avain %>
+    <%= f.label :avain %>
+    <%= f.text_field :avain %>
   </div>
   <div class="field">
-    <%= f.label :VeneRekNro %>
-    <%= text_field_tag :VeneRekNro %>
+    <%= f.label :Venereknro %>
+    <%= text_field_tag :Venereknro %>
   </div>
   <div class="field">
     <%= f.hidden_field :viitenumero %>

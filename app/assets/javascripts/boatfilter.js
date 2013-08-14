@@ -1,7 +1,7 @@
 function hideAll() {
   $(".tyyppi").hide();
   $(".reknro").hide();
-  $(".valmmalli").hide();
+  $(".valm_malli").hide();
   $(".pituus").hide();
   $(".leveys").hide();
   $(".syvyys").hide();

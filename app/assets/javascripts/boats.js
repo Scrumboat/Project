@@ -1,15 +1,15 @@
 function taydenna() {
-	var e = document.getElementById('boat_ValmMalli');
+	var e = document.getElementById('boat_valm_malli');
 	var nimi = e.options[e.selectedIndex].text;
-	document.getElementById('boat_ValmMalli').value=nimi;
+	document.getElementById('boat_valm_malli').value=nimi;
 
   if (!nimi || 0 === nimi.length) {
    document.getElementById('boat_Tyyppi').value="";
-   document.getElementById('boat_Pituus').value="";
-   document.getElementById('boat_Leveys').value="";
-   document.getElementById('boat_Syvyys').value="";
-   document.getElementById('boat_Uppouma').value="";
-   document.getElementById('boat_Korkeus').value="";
+   document.getElementById('boat_pituus').value="";
+   document.getElementById('boat_leveys').value="";
+   document.getElementById('boat_syvyys').value="";
+   document.getElementById('boat_uppouma').value="";
+   document.getElementById('boat_korkeus').value="";
    return;
   }
 	$.getJSON('/models/'+nimi+'.json', function(data) {

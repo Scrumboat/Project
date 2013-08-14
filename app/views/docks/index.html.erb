@@ -1,25 +1,59 @@
 <h1>Laiturit</h1>
 
-<table class="table table-condensed">
-  <tr>
-    <th>Laituri</th>
-    <th>Pituus</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+
 
 <% @docks.each do |dock| %>
-  <tr>
-    <td><%= dock.id.to_s %></td>
-    <td><%= dock.length.to_s + ' m' %></td>
-    <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, dock %>
-        <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_dock_path(dock) %>
-        <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, dock, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-  </tr>
+    <h3><%= "#{dock.name} - #{dock.length.to_s} m" %></h3>
+    <div class="row">
+      <div class="span5">
+        <table class="table table-condensed">
+          <% max_id = dock.berths.maximum("id") || 0 %>
+          <% if max_id > 0 %>
+              <% ind = (1..max_id).reject(&:even?) %>
+              <% ind.each do |i| %>
+                  <% berth = dock.berths.find_by_number(i) %>
+                  <tr>
+                    <% if berth %>
+                        <% if berth.boat %>
+                            <td><%= i %>: <%= berth.boat.nimi %> </td>
+                        <% else %>
+                            <td>Ei venettä <%= i %></td>
+                        <% end %>
+                    <% else %>
+                        <td><%= i %>: Ei laituripaikkaa</td>
+                    <% end %>
+                  </tr>
+              <% end %>
+          <% end %>
+
+        </table>
+      </div>
+      <div class="span5">
+        <table class="table table-condensed">
+          <% max_id = dock.berths.maximum("id") || 0  %>
+          <% if max_id > 0 %>
+              <% ind = (1..max_id).reject(&:odd?) %>
+              <% ind.each do |i| %>
+                  <% berth = dock.berths.find_by_number(i) %>
+                  <tr>
+                    <% if berth %>
+                        <% if berth.boat %>
+                            <td><%= i %>: <%= berth.boat.nimi %> </td>
+                        <% else %>
+                            <td>Ei venettä <%= i %></td>
+                        <% end %>
+                    <% else %>
+                        <td><%= i %>: Ei laituripaikkaa</td>
+                    <% end %>
+                  </tr>
+              <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>
 <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i> Luo uusi laituri</i>'.html_safe, new_dock_path %>

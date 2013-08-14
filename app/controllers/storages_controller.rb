@@ -12,17 +12,6 @@ class StoragesController < ApplicationController
     end
   end
 
-  # GET /storages/1
-  # GET /storages/1.json
-  def show
-    @storage = Storage.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @storage }
-    end
-  end
-
   # GET /storages/new
   # GET /storages/new.json
   def new
@@ -46,13 +35,13 @@ class StoragesController < ApplicationController
     fetch_member_and_set_isOk
     respond_to do |format|
       if @isOk && @storage.save
-        @member.Varasto = @storage.vk
+        @member.varasto = @storage.vk
         @member.save
-      format.html { redirect_to @storage, notice: 'Varastokoppi luotu onnistuneesti'}
+      format.html { redirect_to storages_path, notice: 'varastokoppi luotu onnistuneesti'}
       format.json { render json: @storage, status: :created, location: @storage }
       else
         format.html { 
-          flash[:notice] = 'Virheellinen Jno.'
+          flash[:notice] = 'Virheellinen jno.'
           render :new
         }
         format.json { render json: @storage.errors, status: :unprocessable_entity }
@@ -70,19 +59,19 @@ class StoragesController < ApplicationController
     respond_to do |format|
       if @isOk && @storage.update_attributes(params[:storage])
         if oldjno != @storage.jno
-          oldmember = Member.where(:Jno => oldjno).first
+          oldmember = Member.where(:jno => oldjno).first
           if oldmember != nil
-            oldmember.Varasto = ""
+            oldmember.varasto = ""
             oldmember.save
           end
         end
-        @member.Varasto = @storage.vk
+        @member.varasto = @storage.vk
         @member.save
-        format.html { redirect_to @storage, notice: 'Varastokoppi muokattu onnistuneesti' }
+        format.html { redirect_to storages_path, notice: 'varastokoppi muokattu onnistuneesti' }
         format.json { head :no_content }
       else
         format.html { 
-          flash[:error] = 'Virheellinen Jno.'
+          flash[:error] = 'Virheellinen jno.'
           render :edit
         }
         format.json { render json: @storage.errors, status: :unprocessable_entity }
@@ -94,9 +83,9 @@ class StoragesController < ApplicationController
   # DELETE /storages/1.json
   def destroy
     @storage = Storage.find(params[:id])
-	@member = Member.where(:Jno => @storage.jno).first
+	@member = Member.where(:jno => @storage.jno).first
 	if @member != nil
-		@member.Varasto = ""
+		@member.varasto = ""
 		@member.save
 	end
     @storage.destroy
@@ -109,7 +98,7 @@ class StoragesController < ApplicationController
   
   def fetch_member_and_set_isOk
     @isOk= true
-    @member = Member.where(:Jno => params[:storage][:jno]).first
+    @member = Member.where(:jno => params[:storage][:jno]).first
     if @member == nil
       @isOk = false
     end

@@ -26,7 +26,7 @@ class BoatsController < ApplicationController
     @boat = Boat.find(params[:id])
     @dockyard_spot = DockyardSpot.find_by_boat_id(@boat.id)
     @dockyard = Dockyard.find(@dockyard_spot.dockyard_id) unless @dockyard_spot.nil?
-    @berth = Berth.find_by_Reknro(@boat.RekNro)
+    @berth = Berth.find_by_reknro(@boat.reknro)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @boat }
@@ -38,8 +38,8 @@ class BoatsController < ApplicationController
   def new
     @boat = Boat.new
     @boat.BoatsMembers.build
-    @mallit = Model.select("\"ValmMalli\"")
-    @models = Model.all.map(&:ValmMalli).insert(0, "")
+    @mallit = Model.select("\"valm_malli\"")
+    @models = Model.all.map(&:valm_malli).insert(0, "")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -49,8 +49,8 @@ class BoatsController < ApplicationController
   # GET /boats/1/edit
   def edit
     @boat = Boat.find(params[:id], :include => :members)
-    @mallit = Model.select("\"ValmMalli\"")
-    @models = Model.all.map(&:ValmMalli).insert(0, "")
+    @mallit = Model.select("\"valm_malli\"")
+    @models = Model.all.map(&:valm_malli).insert(0, "")
     
 	  show_jno_in_edit_instead_of_id
   end
@@ -60,24 +60,24 @@ class BoatsController < ApplicationController
   def create
     @boat = Boat.new(params[:boat])
 
-    # @malli = Boat.find(:first, :conditions => ["\"ValmMalli\" = ?", params[:boat][:ValmMalli]])
-    @model = Model.where(:ValmMalli => params[:boat][:ValmMalli]).first
-    #@malli = Boat.find(:first, :conditions => [:ValmMalli => boat.ValmMalli, params[:boat][:ValmMalli]])
-    #@malli = Boat.where(:ValmMalli => params[:boat][:ValmMalli])
+    # @malli = Boat.find(:first, :conditions => ["\"valm_malli\" = ?", params[:boat][:valm_malli]])
+    @model = Model.where(:valm_malli => params[:boat][:valm_malli]).first
+    #@malli = Boat.find(:first, :conditions => [:valm_malli => boat.valm_malli, params[:boat][:valm_malli]])
+    #@malli = Boat.where(:valm_malli => params[:boat][:valm_malli])
 
     if @model.nil?
       @model = Model.new
-      @model.Korkeus = @boat.Korkeus
-      @model.Leveys = @boat.Leveys
-      @model.Pituus = @boat.Pituus
-      @model.Syvyys = @boat.Syvyys
-      @model.Uppouma = @boat.Uppouma
-      @model.ValmMalli = @boat.ValmMalli
+      @model.korkeus = @boat.korkeus
+      @model.leveys = @boat.leveys
+      @model.pituus = @boat.pituus
+      @model.syvyys = @boat.syvyys
+      @model.uppouma = @boat.uppouma
+      @model.valm_malli = @boat.valm_malli
       @model.tyyppi = @boat.tyyppi
       @model.save
     end
 	
-    changeJnoToId
+    changejnoToId
     respond_to do |format|
       if @boat.valid? && @onkoOk
 	    check_dock_and_berth(format)
@@ -100,7 +100,7 @@ class BoatsController < ApplicationController
 	  @dockold = Dock.find(params[:Laituri]) unless params[:Laituri].blank?
 	  @berthold = @berth = Berth.where(:dock_id => @dockold.id, :number => params[:Laituripaikka]) unless params[:Laituri].blank?
 	  #@boat = Boat.find(params[:id])
-    #changeJnoToId
+    #changejnoToId
     change_jno_to_id_for_update
     if params[:boat][:BoatsMembers_attributes] == nil
       @onkoOk = false
@@ -136,7 +136,7 @@ class BoatsController < ApplicationController
   def change_jno_to_id_for_update
 
     params[:boat][:BoatsMembers_attributes].values.each do |bm|
-    member = Member.find_by_Jno(bm[:member_id])
+    member = Member.find_by_jno(bm[:member_id])
     if member == nil
       @onkoOk = false
 		  return
@@ -146,7 +146,7 @@ class BoatsController < ApplicationController
     @onkoOk = true
   end
 
-  def changeJnoToId
+  def changejnoToId
     taulu = []
 	  params[:boat][:BoatsMembers_attributes].values.each do |bm|
 		  if bm[:member_id].strip == ""
@@ -159,7 +159,7 @@ class BoatsController < ApplicationController
 	    i = 0
 	    @onkoOk = true
 	    @boat.BoatsMembers.each do |bm|
-		  @member = Member.find_by_Jno(taulu[i])
+		  @member = Member.find_by_jno(taulu[i])
 		  if @member == nil
 			  @onkoOk = false
 			  return
@@ -178,7 +178,7 @@ class BoatsController < ApplicationController
 			@onkoOk = false
 			return
 		end
-		bm.member_id = @member.Jno
+		bm.member_id = @member.jno
     end
   end
   
@@ -190,10 +190,10 @@ class BoatsController < ApplicationController
           @berth = Berth.where(:dock_id => @dock.id, :number => params[:Laituripaikka]).first
           if check_if_it_fit
 		        if !@berthold.nil? && @berthold != @berth
-			        @berthold.Reknro = ""
+			        @berthold.reknro = ""
 			        @berthold.save
 			      end
-            @berth.Reknro = params[:boat][:RekNro]
+            @berth.reknro = params[:boat][:reknro]
             @berth.save
           end
         else
@@ -225,21 +225,21 @@ class BoatsController < ApplicationController
   end
 
   def check_if_it_fit
-    true if BigDecimal(params[:boat][:Pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:Leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:Syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
+    true if BigDecimal(params[:boat][:pituus].to_s) <= BigDecimal(@berth.length.to_s) && BigDecimal(params[:boat][:leveys].to_s) <= BigDecimal(@berth.width.to_s) && BigDecimal(params[:boat][:syvyys].to_s) <= BigDecimal(@berth.depth.to_s)
   end
 
   def remove_reknro_from_berth
     if is_number?(params[:Laituri]) && is_number?(params[:Laituripaikka])
       @dock = Dock.find(@params[:Laituri])
       @berth = Berth.where(:dock_id => @dock.id, :number => params[:Laituripaikka]).first
-      @berth.Reknro = ''
+      @berth.reknro = ''
       @berth.save
     end
   end
 
  # private
    # def sort_column
-    #  Boat.column_names.include?(params[:sort]) ? Boat.connection.quote_column_name(params[:sort]) : Boat.connection.quote_column_name("Nimi")
+    #  Boat.column_names.include?(params[:sort]) ? Boat.connection.quote_column_name(params[:sort]) : Boat.connection.quote_column_name("nimi")
     #end
   
    # def sort_direction

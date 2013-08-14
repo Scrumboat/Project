@@ -1,4 +1,4 @@
 class Dock < ActiveRecord::Base
-  attr_accessible :length
+  attr_accessible :name, :length
   has_many :berths
 end

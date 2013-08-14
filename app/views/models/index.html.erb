@@ -2,12 +2,12 @@
 
 <table>
   <tr>
-    <th>Korkeus</th>
-    <th>Leveys</th>
-	<th>Pituus</th>
-	<th>Syvyys</th>
-	<th>Uppouma</th>
-	<th>ValmMalli</th>
+    <th>korkeus</th>
+    <th>leveys</th>
+	<th>pituus</th>
+	<th>syvyys</th>
+	<th>uppouma</th>
+	<th>valm_malli</th>
 	<th>tyyppi</th>
     <th></th>
     <th></th>
@@ -16,12 +16,12 @@
 
 <% for model in @models %>
   <tr>
-    <td><%= model.Korkeus %></td>
-    <td><%= model.Leveys %></td>
-    <td><%= model.Pituus %></td>
-    <td><%= model.Syvyys %></td>
-    <td><%= model.Uppouma %></td>
-    <td><%= model.ValmMalli %></td>
+    <td><%= model.korkeus %></td>
+    <td><%= model.leveys %></td>
+    <td><%= model.pituus %></td>
+    <td><%= model.syvyys %></td>
+    <td><%= model.uppouma %></td>
+    <td><%= model.valm_malli %></td>
     <td><%= model.tyyppi %></td>
     <td><%= link_to 'Muokkaa', edit_model_path(model) %></td>
     <td><%= link_to 'Poista', model, method: :delete, data: { confirm: 'Oletko varma?' } %></td>

@@ -1,17 +1,17 @@
-<h1>Telakka <%= @dockyard.name %> </h1>
+<h1>telakka <%= @dockyard.name %> </h1>
 
 <p>
-  <b>Nimi:</b>
+  <b>nimi:</b>
   <%= @dockyard.name %>
 </p>
 
 <p>
-  <b>Pituus:</b>
+  <b>pituus:</b>
   <%= @dockyard.length %>
 </p>
 
 <p>
-  <b>Leveys:</b>
+  <b>leveys:</b>
   <%= @dockyard.width %>
 </p>
 
@@ -25,7 +25,7 @@
 <%= link_to 'Takaisin', dockyards_path %>
 <%= link_to 'Uusi telakkapaikka', new_dockyard_dockyard_spot_path(@dockyard) %>
 
-<h2>Telakkapaikat</h2>
+<h2>telakkapaikat</h2>
 
 <table>
   <tr>
@@ -52,9 +52,9 @@
           <td></td>
           <td></td>
       <% else %>
-          <td><%= link_to dys.boat.RekNro, dys.boat  %></td>
-          <td><%= dys.boat.Pituus  %></td>
-          <td><%= dys.boat.Leveys  %></td>
+          <td><%= link_to dys.boat.reknro, dys.boat  %></td>
+          <td><%= dys.boat.pituus  %></td>
+          <td><%= dys.boat.leveys  %></td>
       <% end %>
       <td><%= dys.trailer ? 'Kyllä' : 'Ei' %></td>
       <td><%= dys.lift ? 'Kyllä' : 'Ei' %></td>

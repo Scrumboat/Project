@@ -35,36 +35,36 @@ th { cursor: pointer;}
 
 <form class="form-inline" id="filtterit">
 
-  <label for="ctoimi" class="checkbox"><input type="checkbox" id="ctoimi" onclick="toggle('.toimi', this)"/>Toimi</label>
-  <label for="clisenssi" class="checkbox"><input type="checkbox" id="clisenssi" onclick="toggle('.lisenssi', this)"/>Lisenssi</label>
-  <label for="cposti" class="checkbox"><input type="checkbox" id="cposti" onclick="toggle('.posti', this)"/>Posti</label>
-  <label for="cmaa" class="checkbox"><input type="checkbox" id="cmaa" onclick="toggle('.maa', this)"/>Maa</label>
-  <label for="claivuri" class="checkbox"><input type="checkbox" id="claivuri" onclick="toggle('.laivuri', this)"/>Laivuri</label>
-  <label for="cvarasto" class="checkbox"><input type="checkbox" id="cvarasto" onclick="toggle('.varasto', this)"/>Varasto</label>
-  <label for="cavain" class="checkbox"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>Avain</label>
-  <label for="chuom" class="checkbox"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>Huom</label>
+  <label for="ctoimi" class="checkbox"><input type="checkbox" id="ctoimi" onclick="toggle('.toimi', this)"/>toimi</label>
+  <label for="clisenssi" class="checkbox"><input type="checkbox" id="clisenssi" onclick="toggle('.lisenssi', this)"/>lisenssi</label>
+  <label for="cposti" class="checkbox"><input type="checkbox" id="cposti" onclick="toggle('.posti', this)"/>posti</label>
+  <label for="cmaa" class="checkbox"><input type="checkbox" id="cmaa" onclick="toggle('.maa', this)"/>maa</label>
+  <label for="claivuri" class="checkbox"><input type="checkbox" id="claivuri" onclick="toggle('.laivuri', this)"/>laivuri</label>
+  <label for="cvarasto" class="checkbox"><input type="checkbox" id="cvarasto" onclick="toggle('.varasto', this)"/>varasto</label>
+  <label for="cavain" class="checkbox"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>avain</label>
+  <label for="chuom" class="checkbox"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>huom</label>
 
 </form>
 
 <table id="myTable" class="table table-condensed">
   <thead>
   <tr>
-    <th>Nimi</th>
+    <th>nimi</th>
     <th>Jäsennumero</th>
-    <th>MatkaPuh</th>
-    <th>EmailFax</th>
-    <th>Sotu</th>
-    <th>Liittynyt</th>
+    <th>matka_puh</th>
+    <th>email_fax</th>
+    <th>sotu</th>
+    <th>liittynyt</th>
     <th>Jäsentyyppi</th>
-    <th class="toimi">Toimi</th>
-    <th class="lisenssi">Lisenssi</th>
-    <th class="posti">Posti</th>
-    <th class="maa">Maa</th>
-    <th class="laivuri">Laivuri</th>
-    <th class="varasto">Varasto</th>
-    <th class="avain">Avain</th>
-    <th class="huom">Huom</th>
-    <th>MuutosPvm</th>
+    <th class="toimi">toimi</th>
+    <th class="lisenssi">lisenssi</th>
+    <th class="posti">posti</th>
+    <th class="maa">maa</th>
+    <th class="laivuri">laivuri</th>
+    <th class="varasto">varasto</th>
+    <th class="avain">avain</th>
+    <th class="huom">huom</th>
+    <th>muutos_pvm</th>
     <th>Viitenumero</th>
     <th></th>
   </tr>
@@ -72,22 +72,22 @@ th { cursor: pointer;}
 
   <% for member in @members %>
       <tr>
-        <td><%= member.Nimi %></td>
-        <td><%= member.Jno %></td>
-        <td><%= member.MatkaPuh %></td>
-        <td><%= member.EmailFax %></td>
-        <td><%= truncate(member.Sotu, :length => 7, :omission => "") %></td>
-        <td><%= member.Liittynyt %></td>
+        <td><%= member.nimi %></td>
+        <td><%= member.jno %></td>
+        <td><%= member.matka_puh %></td>
+        <td><%= member.email_fax %></td>
+        <td><%= truncate(member.sotu, :length => 7, :omission => "") %></td>
+        <td><%= member.liittynyt %></td>
         <td><%= member.jasentyyppi %></td>
-        <td class="toimi"><%= member.Toimi %></td>
-        <td class="lisenssi"><%= member.Lisenssi %></td>
-        <td class="posti"><%= member.Posti %></td>
-        <td class="maa"><%= member.Maa %></td>
-        <td class="laivuri"><%= member.Laivuri %></td>
-        <td class="varasto"><%= member.Varasto %></td>
-        <td class="avain"><%= member.Avain %></td>
-        <td class="huom"><%= member.Huom %></td>
-        <td><%= member.MuutosPvm %></td>
+        <td class="toimi"><%= member.toimi %></td>
+        <td class="lisenssi"><%= member.lisenssi %></td>
+        <td class="posti"><%= member.posti %></td>
+        <td class="maa"><%= member.maa %></td>
+        <td class="laivuri"><%= member.laivuri %></td>
+        <td class="varasto"><%= member.varasto %></td>
+        <td class="avain"><%= member.avain %></td>
+        <td class="huom"><%= member.huom %></td>
+        <td><%= member.muutos_pvm %></td>
         <td><%= member.viitenumero %></td>
         <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, member %>
             <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_member_path(member) %>

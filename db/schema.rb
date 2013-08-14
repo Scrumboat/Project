@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130810124456) do
+ActiveRecord::Schema.define(:version => 20130814121628) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20130810124456) do
     t.integer  "dock_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "Reknro"
+    t.string   "reknro"
     t.integer  "jno"
     t.date     "vartio"
     t.integer  "boat_id"
@@ -49,25 +49,25 @@ ActiveRecord::Schema.define(:version => 20130810124456) do
   add_index "berths", ["dock_id"], :name => "index_berths_on_dock_id"
 
   create_table "boats", :force => true do |t|
-    t.date     "RekPvm"
-    t.date     "MuutosPvm"
-    t.string   "Nimi"
+    t.date     "rek_pvm"
+    t.date     "muutos_pvm"
+    t.string   "nimi"
     t.string   "tyyppi"
-    t.string   "RekNro"
-    t.string   "ValmMalli"
-    t.decimal  "Pituus"
-    t.decimal  "Leveys"
-    t.decimal  "Syvyys"
-    t.decimal  "Uppouma"
-    t.decimal  "Korkeus"
-    t.string   "Teho"
-    t.integer  "Vuosimalli"
-    t.string   "VenePuhA"
-    t.string   "VenePuhB"
-    t.string   "Huomautukset"
-    t.integer  "Tarra"
-    t.string   "Katsastus"
-    t.string   "Telakka"
+    t.string   "reknro"
+    t.string   "valm_malli"
+    t.decimal  "pituus"
+    t.decimal  "leveys"
+    t.decimal  "syvyys"
+    t.decimal  "uppouma"
+    t.decimal  "korkeus"
+    t.string   "teho"
+    t.integer  "vuosimalli"
+    t.string   "vene_puh_a"
+    t.string   "vene_puh_b"
+    t.string   "huomautukset"
+    t.integer  "tarra"
+    t.string   "katsastus"
+    t.string   "telakka"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130810124456) do
     t.integer  "berth_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
   create_table "dockyard_spots", :force => true do |t|
@@ -114,7 +115,7 @@ ActiveRecord::Schema.define(:version => 20130810124456) do
     t.string   "toimihlokerroin"
     t.integer  "talkookerroin"
     t.decimal  "viitesuoritukset"
-    t.decimal  "suorituksetKassaan"
+    t.decimal  "suoritukset_kassaan"
     t.decimal  "liittymismaksu"
     t.decimal  "jasenmaksu"
     t.decimal  "venerekisterimaksu"
@@ -127,12 +128,12 @@ ActiveRecord::Schema.define(:version => 20130810124456) do
     t.decimal  "katsastussakko"
     t.decimal  "vartiosakko"
     t.decimal  "laskutuslisa"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.date     "luontipvm"
     t.date     "lahetyspvm"
     t.string   "tunniste"
-    t.boolean  "maksettu",           :default => false
+    t.boolean  "maksettu",            :default => false
     t.integer  "member_id"
     t.date     "erapvm"
     t.decimal  "summa"
@@ -140,49 +141,49 @@ ActiveRecord::Schema.define(:version => 20130810124456) do
     t.integer  "karhuttu"
     t.string   "vapaasana"
     t.string   "lahetystapa"
-    t.boolean  "lahetetty",          :default => false
+    t.boolean  "lahetetty",           :default => false
   end
 
   create_table "members", :force => true do |t|
-    t.string   "Nimi"
-    t.integer  "Jno"
-    t.string   "Sotu"
-    t.date     "Liittynyt"
+    t.string   "nimi"
+    t.integer  "jno"
+    t.string   "sotu"
+    t.date     "liittynyt"
     t.string   "jasentyyppi"
-    t.date     "MuutosPvm"
-    t.string   "Toimi"
-    t.string   "Lisenssi"
-    t.string   "Osoite"
-    t.string   "Posti"
-    t.string   "Maa"
-    t.string   "KotiPuh"
-    t.string   "MatkaPuh"
-    t.string   "TyoPuh"
-    t.string   "EmailFax"
-    t.string   "Ammatti"
-    t.string   "Laivuri"
-    t.string   "Huom"
-    t.string   "Varasto"
-    t.string   "Avain"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "deleted",                  :default => false
+    t.date     "muutos_pvm"
+    t.string   "toimi"
+    t.string   "lisenssi"
+    t.string   "osoite"
+    t.string   "posti"
+    t.string   "maa"
+    t.string   "koti_puh"
+    t.string   "matka_puh"
+    t.string   "tyo_puh"
+    t.string   "email_fax"
+    t.string   "ammatti"
+    t.string   "laivuri"
+    t.string   "huom"
+    t.string   "varasto"
+    t.string   "avain"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.boolean  "deleted",                    :default => false
     t.date     "deleted_at"
     t.string   "viitenumero"
-    t.decimal  "annetutHyvitykset"
-    t.decimal  "suorituksetIlmanViitetta"
-    t.decimal  "maksetunSummanPalautus"
-    t.decimal  "edellisenKaudenLaskutus"
+    t.decimal  "annetut_hyvitykset"
+    t.decimal  "suoritukset_ilman_viitetta"
+    t.decimal  "maksetun_summan_palautus"
+    t.decimal  "edellis_kauden_laskutus"
   end
 
   create_table "models", :force => true do |t|
     t.string   "tyyppi"
-    t.string   "ValmMalli"
-    t.decimal  "Pituus"
-    t.decimal  "Leveys"
-    t.decimal  "Syvyys"
-    t.decimal  "Uppouma"
-    t.decimal  "Korkeus"
+    t.string   "valm_malli"
+    t.decimal  "pituus"
+    t.decimal  "leveys"
+    t.decimal  "syvyys"
+    t.decimal  "uppouma"
+    t.decimal  "korkeus"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

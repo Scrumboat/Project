@@ -1,45 +1,45 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  Nimi: MyString
-  Jno: 12
-  Sotu: MyString
-  Liittynyt: 2013-05-22
+  nimi: MyString
+  jno: 12
+  sotu: MyString
+  liittynyt: 2013-05-22
   jasentyyppi: ainaisjasen
-  MuutosPvm: 2013-05-22
-  Toimi: MyString
-  Lisenssi: MyString
-  Osoite: MyString
-  Posti: MyString
-  Maa: MyString
-  KotiPuh: MyString
-  MatkaPuh: MyString
-  TyoPuh: MyString
-  EmailFax: MyString
-  Ammatti: MyString
-  Laivuri: MyString
-  Huom: MyString
-  Varasto: MyString
-  Avain: MyString
+  muutos_pvm: 2013-05-22
+  toimi: MyString
+  lisenssi: MyString
+  osoite: MyString
+  posti: MyString
+  maa: MyString
+  koti_puh: MyString
+  matka_puh: MyString
+  tyo_puh: MyString
+  email_fax: MyString
+  ammatti: MyString
+  laivuri: MyString
+  huom: MyString
+  varasto: MyString
+  avain: MyString
 
 two:
-  Nimi: MyString
-  Jno: 2
-  Sotu: MyString
-  Liittynyt: 2013-05-22
+  nimi: MyString
+  jno: 2
+  sotu: MyString
+  liittynyt: 2013-05-22
   jasentyyppi: ainaisjasen
-  MuutosPvm: 2013-05-22
-  Toimi: MyString
-  Lisenssi: MyString
-  Osoite: MyString
-  Posti: MyString
-  Maa: MyString
-  KotiPuh: MyString
-  MatkaPuh: MyString
-  TyoPuh: MyString
-  EmailFax: MyString
-  Ammatti: MyString
-  Laivuri: MyString
-  Huom: MyString
-  Varasto: MyString
-  Avain: MyString
+  muutos_pvm: 2013-05-22
+  toimi: MyString
+  lisenssi: MyString
+  osoite: MyString
+  posti: MyString
+  maa: MyString
+  koti_puh: MyString
+  matka_puh: MyString
+  tyo_puh: MyString
+  email_fax: MyString
+  ammatti: MyString
+  laivuri: MyString
+  huom: MyString
+  varasto: MyString
+  avain: MyString

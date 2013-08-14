@@ -1,41 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  RekPvm: 2013-05-22
-  MuutosPvm: 2013-05-22
-  Nimi: MyString
+  rek_pvm: 2013-05-22
+  muutos_pvm: 2013-05-22
+  nimi: MyString
   tyyppi: MyString
-  RekNro: MyString
-  ValmMalli: MyString
-  Pituus: 9.99
-  Leveys: 9.99
-  Syvyys: 9.99
-  Uppouma: 9.99
-  Korkeus: 9.99
-  Teho: MyString
-  Vuosimalli: 1
-  VenePuhA: MyString
-  VenePuhB: MyString
-  Huomautukset: MyString
-  Tarra: 1
-  Katsastus: MyString
+  reknro: MyString
+  valm_malli: MyString
+  pituus: 9.99
+  leveys: 9.99
+  syvyys: 9.99
+  uppouma: 9.99
+  korkeus: 9.99
+  teho: MyString
+  vuosimalli: 1
+  vene_puh_a: MyString
+  vene_puh_b: MyString
+  huomautukset: MyString
+  tarra: 1
+  katsastus: MyString
 
 two:
-  RekPvm: 2013-05-22
-  MuutosPvm: 2013-05-22
-  Nimi: MyString
+  rek_pvm: 2013-05-22
+  muutos_pvm: 2013-05-22
+  nimi: MyString
   tyyppi: MyString
-  RekNro: MyString
-  ValmMalli: MyString
-  Pituus: 9.99
-  Leveys: 9.99
-  Syvyys: 9.99
-  Uppouma: 9.99
-  Korkeus: 9.99
-  Teho: MyString
-  Vuosimalli: 1
-  VenePuhA: MyString
-  VenePuhB: MyString
-  Huomautukset: MyString
-  Tarra: 1
-  Katsastus: MyString
+  reknro: MyString
+  valm_malli: MyString
+  pituus: 9.99
+  leveys: 9.99
+  syvyys: 9.99
+  uppouma: 9.99
+  korkeus: 9.99
+  teho: MyString
+  vuosimalli: 1
+  vene_puh_a: MyString
+  vene_puh_b: MyString
+  huomautukset: MyString
+  tarra: 1
+  katsastus: MyString

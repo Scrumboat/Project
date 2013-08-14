@@ -3,20 +3,20 @@ class InvoicePdf < Prawn::Document
   def initialize(invoice)
     super()
 	@invoice = invoice
-	@member = Member.find_by_Jno(@invoice.jno)
+	@member = Member.find_by_jno(@invoice.jno)
     text "Lasku #{@invoice.tunniste}"
 	move_down 10
-	text "Nimi:  #{@invoice.nimi}"
+	text "nimi:  #{@invoice.nimi}"
 	move_down 10
 	text "Jasennumero:  #{@invoice.jno}"
 	move_down 10
-	text "Osoite:  #{@member.Osoite}"
+	text "osoite:  #{@member.osoite}"
 	move_down 10
-	text "Posti:  #{@member.Posti}"
+	text "posti:  #{@member.posti}"
 	move_down 10
-	text "Email:  #{@member.EmailFax}"
+	text "Email:  #{@member.email_fax}"
 	move_down 10
-	text "Katsastussakko:  #{@invoice.katsastussakko}"
+	text "katsastussakko:  #{@invoice.katsastussakko}"
 	move_down 10
 	text "Laiturimaksu:  #{@invoice.laiturimaksu}"
 	move_down 10
@@ -26,9 +26,9 @@ class InvoicePdf < Prawn::Document
 	move_down 10
 	text "Talkoosakko:  #{@invoice.talkoosakko}"
 	move_down 10
-	text "Telakkamaksu:  #{@invoice.telakkamaksu}"
+	text "telakkamaksu:  #{@invoice.telakkamaksu}"
 	move_down 10
-	text "Varastokoppimaksu:  #{@invoice.varastokoppimaksu}"
+	text "varastokoppimaksu:  #{@invoice.varastokoppimaksu}"
 	move_down 10
 	text "Vartiosakko:  #{@invoice.vartiosakko}"
 	move_down 10

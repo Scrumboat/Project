@@ -54,9 +54,9 @@ class DockyardSpotsController < ApplicationController
     @dockyard = Dockyard.find(params[:dockyard_id])
     @dockyard_spot = DockyardSpot.new(params[:dockyard_spot])
     @dockyard_spot.dockyard_id = @dockyard.id
-    @boat = Boat.find_by_RekNro(params[:dockyard_spot][:boat_id])
-    @dockyard_spot.length = @boat.Pituus + 0.8 rescue params[:dockyard_spot][:length]
-    @dockyard_spot.width = @boat.Leveys + 0.8 rescue params[:dockyard_spot][:width]
+    @boat = Boat.find_by_reknro(params[:dockyard_spot][:boat_id])
+    @dockyard_spot.length = @boat.pituus + 0.8 rescue params[:dockyard_spot][:length]
+    @dockyard_spot.width = @boat.leveys + 0.8 rescue params[:dockyard_spot][:width]
     @dockyard_spot.boat_id = @boat.id rescue nil
     can_fit = check_if_it_fits
 
@@ -69,7 +69,7 @@ class DockyardSpotsController < ApplicationController
         elsif !boat_already_has_spot
           err_msg = 'Veneellä on jo telakkapaikka.'
         else
-          err_msg = 'Telakkapaikan luonti epäonnistui.'
+          err_msg = 'telakkapaikan luonti epäonnistui.'
         end
         format.html { flash.now[:alert] = err_msg
                       render action: 'new' }
@@ -82,7 +82,7 @@ class DockyardSpotsController < ApplicationController
   def update
     @dockyard = Dockyard.find(params[:dockyard_id])
     @dockyard_spot = DockyardSpot.find(params[:id])
-    @boat = Boat.find_by_RekNro(params[:dockyard_spot][:boat_id])
+    @boat = Boat.find_by_reknro(params[:dockyard_spot][:boat_id])
     params[:dockyard_spot][:boat_id] = @boat.id unless @boat.nil?
     if @boat.nil?
       can_fit = true
@@ -92,16 +92,16 @@ class DockyardSpotsController < ApplicationController
 
     respond_to do |format|
       if boat_already_has_spot && can_fit && @dockyard_spot.update_attributes(params[:dockyard_spot])
-        format.html { redirect_to @dockyard, notice: 'Telakkapaikan päivitys onnistui.'}
+        format.html { redirect_to @dockyard, notice: 'telakkapaikan päivitys onnistui.'}
       else
         if can_fit && boat_already_has_spot
-          format.html { flash[:alert] = 'Telakkapaikan päivitys epäonnistui.'
+          format.html { flash[:alert] = 'telakkapaikan päivitys epäonnistui.'
                         render :edit}
         else
           format.html { flash[:alert] = can_fit ? ("Veneellä on jo paikka ("+ @boat_spot.number.to_s + ").") : 'Ei tarpeeksi tilaa veneelle.'
                         render :edit}
         end
-        format.html { flash[:alert] = can_fit ? 'Telakkapaikan päivitys epäonnistui.' : 'Ei tarpeeksi tilaa veneelle.'
+        format.html { flash[:alert] = can_fit ? 'telakkapaikan päivitys epäonnistui.' : 'Ei tarpeeksi tilaa veneelle.'
                       render :edit }
       end
     end
@@ -114,7 +114,7 @@ class DockyardSpotsController < ApplicationController
     @dockyard_spot.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Telakkapaikka poistettu.'}
+      format.html { redirect_to :back, notice: 'telakkapaikka poistettu.'}
       format.json { head :no_content }
     end
   end
@@ -126,9 +126,9 @@ def check_if_it_fits
   spot_width     = @dockyard_spot.width
   spot_length    = @dockyard_spot.length
   if !@boat.nil?
-    if @dockyard_spot.width < @boat.Leveys + 0.8
+    if @dockyard_spot.width < @boat.leveys + 0.8
       return false
-    elsif @dockyard_spot.length < @boat.Pituus + 0.8
+    elsif @dockyard_spot.length < @boat.pituus + 0.8
       return false
     end
   end

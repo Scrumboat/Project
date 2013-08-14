@@ -1,11 +1,11 @@
 <p>
-  <b>Nimi:</b>
-  <%= @member.Nimi %>
+  <b>nimi:</b>
+  <%= @member.nimi %>
 </p>
 
 <p>
   <b>Laskut: </b>
-  <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-plus-sign icon-white"></i> Uusi lasku</i>'.html_safe, new_invoice_path(:jno => @member.Jno)%>
+  <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-plus-sign icon-white"></i> Uusi lasku</i>'.html_safe, new_invoice_path(:jno => @member.jno)%>
   <ul>
     <% @member.invoices.each do |invoice| %>
       <li><%= link_to invoice.erapvm, invoice_path(invoice) %> <%= invoice.maksettu ? 'Maksettu' : (invoice.eraantynyt ? 'ERÄÄNTYNYT' : 'Ei maksettu') %> </li>
@@ -16,17 +16,17 @@
 
 <p>
   <b>Jäsennumero:</b>
-  <%= @member.Jno %>
+  <%= @member.jno %>
 </p>
 
 <p>
-  <b>Sotu:</b>
-  <%= @member.Sotu %>
+  <b>sotu:</b>
+  <%= @member.sotu %>
 </p>
 
 <p>
-  <b>Liittynyt:</b>
-  <%= @member.Liittynyt %>
+  <b>liittynyt:</b>
+  <%= @member.liittynyt %>
 </p>
 
 <p>
@@ -35,78 +35,78 @@
 </p>
 
 <p>
-  <b>Muutospvm:</b>
-  <%= @member.MuutosPvm %>
+  <b>muutos_pvm:</b>
+  <%= @member.muutos_pvm %>
 </p>
 
 <p>
-  <b>Toimi:</b>
-  <%= @member.Toimi %>
+  <b>toimi:</b>
+  <%= @member.toimi %>
 </p>
 
 <p>
-  <b>Lisenssi:</b>
-  <%= @member.Lisenssi %>
+  <b>lisenssi:</b>
+  <%= @member.lisenssi %>
 </p>
 
 <p>
-  <b>Osoite:</b>
-  <%= @member.Osoite %>
+  <b>osoite:</b>
+  <%= @member.osoite %>
 </p>
 
 <p>
-  <b>Posti:</b>
-  <%= @member.Posti %>
+  <b>posti:</b>
+  <%= @member.posti %>
 </p>
 
 <p>
-  <b>Maa:</b>
-  <%= @member.Maa %>
+  <b>maa:</b>
+  <%= @member.maa %>
 </p>
 
 <p>
-  <b>Kotipuh:</b>
-  <%= @member.KotiPuh %>
+  <b>koti_puh:</b>
+  <%= @member.koti_puh %>
 </p>
 
 <p>
-  <b>Matkapuh:</b>
-  <%= @member.MatkaPuh %>
+  <b>matka_puh:</b>
+  <%= @member.matka_puh %>
 </p>
 
 <p>
   <b>Työpuh:</b>
-  <%= @member.TyoPuh %>
+  <%= @member.tyo_puh %>
 </p>
 
 <p>
-  <b>Emailfax:</b>
-  <%= @member.EmailFax %>
+  <b>email_fax:</b>
+  <%= @member.email_fax %>
 </p>
 
 <p>
-  <b>Ammatti:</b>
-  <%= @member.Ammatti %>
+  <b>ammatti:</b>
+  <%= @member.ammatti %>
 </p>
 
 <p>
-  <b>Laivuri:</b>
-  <%= @member.Laivuri %>
+  <b>laivuri:</b>
+  <%= @member.laivuri %>
 </p>
 
 <p>
-  <b>Huom:</b>
-  <%= @member.Huom %>
+  <b>huom:</b>
+  <%= @member.huom %>
 </p>
 
 <p>
-  <b>Varasto:</b>
-  <%= @member.Varasto %>
+  <b>varasto:</b>
+  <%= @member.varasto %>
 </p>
 
 <p>
-  <b>Avain:</b>
-  <%= @member.Avain %>
+  <b>avain:</b>
+  <%= @member.avain %>
 </p>
 
 <% if @member.deleted %>
@@ -119,7 +119,7 @@
   <b>Vene(:et)</b>
   <ul>
   	<% @member.boats.each do |boat| %>
-  		<li><%= link_to boat.Nimi , boat_path(boat) %></li>
+  		<li><%= link_to boat.nimi , boat_path(boat) %></li>
   	<% end %>
   </ul>
 <% end %>

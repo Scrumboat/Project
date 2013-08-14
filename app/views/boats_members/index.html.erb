@@ -10,8 +10,8 @@
 
 <% @boats_members.each do |boats_member| %>
     <tr>
-    <td><%= boats_member.boat.RekNro %></td>
-    <td><%= boats_member.member.Nimi %></td>
+    <td><%= boats_member.boat.reknro %></td>
+    <td><%= boats_member.member.nimi %></td>
     <td><%= link_to 'Muokkaa', edit_boats_member_path(boats_member) %></td>
     <td><%= link_to 'Poista', boats_member_path(boats_member), method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>

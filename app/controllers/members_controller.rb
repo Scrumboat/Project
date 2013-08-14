@@ -44,7 +44,7 @@ class MembersController < ApplicationController
   # GET /members/new.json
   def new
     @member = Member.new
-    @nextJno = Member.maximum("Jno") + 1 unless Member.count == 0
+    @nextjno = Member.maximum("jno") + 1 unless Member.count == 0
 
     respond_to do |format|
       format.html # new.html.erb
@@ -64,8 +64,8 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-	      if params.has_key?(:VeneRekNro) && params[:VeneRekNro].strip != ''
-		      @boat = Boat.find_by_RekNro(params[:VeneRekNro])
+	      if params.has_key?(:Venereknro) && params[:Venereknro].strip != ''
+		      @boat = Boat.find_by_reknro(params[:Venereknro])
           @boats_member = @member.BoatsMembers.create(:boat_id => @boat.id)
 	      end
         format.html { redirect_to @member, notice: 'Jäsen luotiin onnistuneesti.' }
@@ -114,7 +114,7 @@ class MembersController < ApplicationController
 
  # private
  # def sort_column
-  #  Member.column_names.include?(params[:sort]) ? Member.connection.quote_column_name(params[:sort]) : Member.connection.quote_column_name("Jno")
+  #  Member.column_names.include?(params[:sort]) ? Member.connection.quote_column_name(params[:sort]) : Member.connection.quote_column_name("jno")
  # end
   
  # def sort_direction

@@ -15,13 +15,13 @@
   <div class="field">    
     <%= f.label :Numero %>
     <%= f.text_field :number, :value => @next_available_number.nil? ? @dockyard_spot.number : @next_available_number %><br />
-    <%= f.label :Leveys %>
+    <%= f.label :leveys %>
     <%= f.text_field :width %><br />
-    <%= f.label :Pituus %>
+    <%= f.label :pituus %>
     <%= f.text_field :length %><br />
     <%= f.label :Vene %>
     <% if !@dockyard_spot.boat.nil? %>
-    	<%= f.text_field :boat_id, :value => @dockyard_spot.boat.RekNro %>
+    	<%= f.text_field :boat_id, :value => @dockyard_spot.boat.reknro %>
     <% else %>
     	<%= f.text_field :boat_id%>
     <% end %>

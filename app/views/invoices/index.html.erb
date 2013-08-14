@@ -88,7 +88,7 @@
     <label for="cannehyv" class="checkbox"><input type="checkbox" id="cannehyv" onclick="toggle('.annehyv', this)"/>Annetut hyvitykset</label>
     <label for="cedelkau" class="checkbox"><input type="checkbox" id="cedelkau" onclick="toggle('.edelkau', this)"/>Edellisen kauden laskutus</label>
     <label for="ctalksak" class="checkbox"><input type="checkbox" id="ctalksak" onclick="toggle('.talksak', this)"/>Talkoosakko</label>
-    <label for="ckatssak" class="checkbox"><input type="checkbox" id="ckatssak" onclick="toggle('.katssak', this)"/>Katsastussakko</label>
+    <label for="ckatssak" class="checkbox"><input type="checkbox" id="ckatssak" onclick="toggle('.katssak', this)"/>katsastussakko</label>
     <label for="cvartsak" class="checkbox"><input type="checkbox" id="cvartsak" onclick="toggle('.vartsak', this)"/>Vartiosakko</label>
     <label for="clasklis" class="checkbox"><input type="checkbox" id="clasklis" onclick="toggle('.lasklis', this)"/>Laskutuslisä</label>
     <label for="cmuutmak" class="checkbox"><input type="checkbox" id="cmuutmak" onclick="toggle('.muutmak', this)"/>Muut maksut</label>
@@ -99,20 +99,20 @@
   <table id="myTable" class="table table-condensed">
     <thead>
     <tr>
-      <th>Nimi</th>
-      <th>Jno</th>
-      <th class="suorkas">Suorituksetkassaan</th>
+      <th>nimi</th>
+      <th>jno</th>
+      <th class="suorkas">suoritukset_kassaan</th>
       <th>Liittymismaksu</th>
       <th>Jasenmaksu</th>
       <th>Venerekisterimaksu</th>
-      <th>Varastokoppimaksu</th>
+      <th>varastokoppimaksu</th>
       <th>Laiturimaksu</th>
       <th class="ensrekm">Ensirekisterimaksu</th>
-      <th>Telakkamaksu</th>
+      <th>telakkamaksu</th>
       <th class="muutmak">Muutmaksut</th>
       <th>Viitenumero</th>
       <th class="talksak">Talkoosakko</th>
-      <th class="katssak">Katsastussakko</th>
+      <th class="katssak">katsastussakko</th>
       <th class="vartsak">Vartiosakko</th>
       <th class="lasklis">Laskutuslisa</th>
       <th></th>
@@ -121,10 +121,10 @@
 
     <tbody>
     <% @invoices.each do |invoice| %>
-        <tr rel="popover" class="popover-link" id="<%= invoice.id %>" data-trigger="hover" data-toggle="popover" data-placement="top" data-title="<%= invoice.member.Nimi %>" data-html="true" data-content="<%= InvoicesHelper.popover_text(invoice) %>" >
-          <td><%= link_to !invoice.member.nil? ? invoice.member.Nimi : invoice.nimi, member_path(invoice.member) %></td>
+        <tr rel="popover" class="popover-link" id="<%= invoice.id %>" data-trigger="hover" data-toggle="popover" data-placement="top" data-title="<%= invoice.member.nimi %>" data-html="true" data-content="<%= InvoicesHelper.popover_text(invoice) %>" >
+          <td><%= link_to !invoice.member.nil? ? invoice.member.nimi : invoice.nimi, member_path(invoice.member) %></td>
           <td><%= invoice.jno %></td>
-          <td class="suorkas"><%= invoice.suorituksetKassaan %></td>
+          <td class="suorkas"><%= invoice.suoritukset_kassaan %></td>
           <td><%= invoice.liittymismaksu %></td>
           <td><%= invoice.jasenmaksu %></td>
           <td><%= invoice.venerekisterimaksu %></td>
@@ -142,7 +142,7 @@
           <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, invoice %>
             <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_invoice_path(invoice) %>
             <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, invoice, method: :delete, data: { confirm: 'Oletko varma?' } %>
-            <%= link_to '<i class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i>  Uusi lasku</i>'.html_safe, new_invoice_path(:jno => invoice.member.Jno) %>
+            <%= link_to '<i class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i>  Uusi lasku</i>'.html_safe, new_invoice_path(:jno => invoice.member.jno) %>
             <%= link_to '<i class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i>Suoritukset</i>'.html_safe, invoice_payments_path(invoice) %>
 
           </td>

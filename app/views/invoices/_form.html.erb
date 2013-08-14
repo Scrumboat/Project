@@ -5,10 +5,10 @@
     <%= f.input :nimi %>
     <%= f.input :jno, input_html: { value: params[:jno]}, :label => 'Jäsennumero' %>
     <%= f.input :erapvm, :default => Date.today + 1.month, :order => [ :day, :month, :year], :label => 'Eräpvm' %>
-    <%= f.input :toimihlokerroin, :label => 'Toimihlökerroin' %>
+    <%= f.input :toimihlokerroin, :label => 'toimihlökerroin' %>
     <%= f.input :talkookerroin %>
     <%= f.input :viitesuoritukset %>
-    <%= f.input :suorituksetKassaan %>
+    <%= f.input :suoritukset_kassaan %>
     <%= f.input :liittymismaksu %>
     <%= f.input :jasenmaksu, :label => 'Jäsenmaksu' %>
     <%= f.input :venerekisterimaksu %>

@@ -4,7 +4,7 @@ module InvoicesHelper
 
   def self.popover_text(invoice)
     o = {
-        'suorituksetKassaan' => nil,
+        'suoritukset_kassaan' => nil,
         'liittymismaksu' => nil,
         'jasenmaksu' => 'Jäsenmaksu',
         'venerekisterimaksu' => nil,

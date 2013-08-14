@@ -7,20 +7,20 @@ class Boat < ActiveRecord::Base
 versioned :dependent => :tracking
 attr_accessible :updated_by
 
-validates_presence_of :RekPvm
-validates_presence_of :Nimi
+validates_presence_of :rek_pvm
+validates_presence_of :nimi
 validates_presence_of :tyyppi
-validates_presence_of :RekNro
-validates_presence_of :ValmMalli
-validates_presence_of :Pituus
-validates_presence_of :Leveys
-validates_presence_of :Syvyys
-validates_presence_of :Vuosimalli
+validates_presence_of :reknro
+validates_presence_of :valm_malli
+validates_presence_of :pituus
+validates_presence_of :leveys
+validates_presence_of :syvyys
+validates_presence_of :vuosimalli
 
-validates_numericality_of :Pituus, :greater_than => 0
-validates_numericality_of :Leveys, :greater_than => 0
-validates_numericality_of :Syvyys
-validates_numericality_of :Vuosimalli, :only_integer => true
+validates_numericality_of :pituus, :greater_than => 0
+validates_numericality_of :leveys, :greater_than => 0
+validates_numericality_of :syvyys
+validates_numericality_of :vuosimalli, :only_integer => true
 
 has_many :BoatsMembers, :dependent => :destroy
 has_many :members, :through => :BoatsMembers
@@ -28,11 +28,11 @@ has_one :berth
 has_one :dockyard_spot
 
 accepts_nested_attributes_for :BoatsMembers, :allow_destroy => true
-attr_accessible :BoatsMembers_attributes, :members, :Huomautukset, :Katsastus, :Korkeus, :Laituri, :Leveys, :MuutosPvm, :Nimi, :Pituus, :RekNro, :RekPvm, :Syvyys, :Tarra, :Teho, :Telakka, :Uppouma, :ValmMalli, :VenePuhA, :VenePuhB, :Vuosimalli, :tyyppi, :tag_attributes
+attr_accessible :BoatsMembers_attributes, :members, :huomautukset, :katsastus, :korkeus, :Laituri, :leveys, :muutos_pvm, :nimi, :pituus, :reknro, :rek_pvm, :syvyys, :tarra, :teho, :telakka, :uppouma, :valm_malli, :vene_puh_a, :vene_puh_b, :vuosimalli, :tyyppi, :tag_attributes
 def self.search(search)
   if search
-    #@omistajat = Member.where(:Nimi => search).map(&:id)
-    @omistajat = Member.where("Nimi LIKE ?", "%"+search+"%").map(&:id)
+    #@omistajat = Member.where(:nimi => search).map(&:id)
+    @omistajat = Member.where("nimi LIKE ?", "%"+search+"%").map(&:id)
     @bmt = BoatsMember.where(:member_id => @omistajat).all
     @veneet = []
     for bm in @bmt
@@ -40,9 +40,9 @@ def self.search(search)
     end
     #Boat.where(:id => @veneet).all
     if @veneet.empty?
-      find(:all, :conditions => ['"RekNro" LIKE ? OR "Nimi" LIKE ?', "%#{search}%", "%#{search}%"])
+      find(:all, :conditions => ['"reknro" LIKE ? OR "nimi" LIKE ?', "%#{search}%", "%#{search}%"])
     else
-      #find(:all, :conditions => ['"RekNro" LIKE ? OR "Nimi" LIKE ? OR id IN ?', "%#{search}%", "%#{search}%", @veneet])
+      #find(:all, :conditions => ['"reknro" LIKE ? OR "nimi" LIKE ? OR id IN ?', "%#{search}%", "%#{search}%", @veneet])
       Boat.where(:id => @veneet).all
     end
     

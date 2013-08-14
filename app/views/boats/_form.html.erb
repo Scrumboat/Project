@@ -22,82 +22,82 @@
       </div>
 
   <div class="field">
-    <%= f.label :RekPvm %>
-    <%= f.date_select :RekPvm, :order => [ :day, :month, :year] %>
+    <%= f.label :rek_pvm %>
+    <%= f.date_select :rek_pvm, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
-    <%= f.label :MuutosPvm %>
-    <%= f.date_select :MuutosPvm, :order => [ :day, :month, :year] %>
+    <%= f.label :muutos_pvm %>
+    <%= f.date_select :muutos_pvm, :order => [ :day, :month, :year] %>
   </div>
   <div class="field">
-    <%= f.label :Nimi %>
-    <%= f.text_field :Nimi %>
+    <%= f.label :nimi %>
+    <%= f.text_field :nimi %>
   </div>
   <div class="field">
     <%= f.label :tyyppi %>
     <%= f.text_field :tyyppi %>
   </div>
   <div class="field">
-    <%= f.label :RekNro %>
-    <%= f.text_field :RekNro %>
+    <%= f.label :reknro %>
+    <%= f.text_field :reknro %>
   </div>
 
   <% if @mallit != nil %>
       <%= f.label 'Veneiden tiedot' %>
-      <%= f.select :ValmMalli, @models, {}, onchange: "taydenna()" %>
+      <%= f.select :valm_malli, @models, {}, onchange: "taydenna()" %>
   <% end %>
 
   <div class="field">
-    <%= f.label :ValmMalli %>
-    <%= f.text_field :ValmMalli %>
+    <%= f.label :valm_malli %>
+    <%= f.text_field :valm_malli %>
   </div>
   <div class="field">
-    <%= f.label :Pituus %>
-    <%= f.text_field :Pituus %>
+    <%= f.label :pituus %>
+    <%= f.text_field :pituus %>
   </div>
   <div class="field">
-    <%= f.label :Leveys %>
-    <%= f.text_field :Leveys %>
+    <%= f.label :leveys %>
+    <%= f.text_field :leveys %>
   </div>
   <div class="field">
-    <%= f.label :Syvyys %>
-    <%= f.text_field :Syvyys %>
+    <%= f.label :syvyys %>
+    <%= f.text_field :syvyys %>
   </div>
   <div class="field">
-    <%= f.label :Uppouma %>
-    <%= f.text_field :Uppouma %>
+    <%= f.label :uppouma %>
+    <%= f.text_field :uppouma %>
   </div>
   <div class="field">
-    <%= f.label :Korkeus %>
-    <%= f.text_field :Korkeus %>
+    <%= f.label :korkeus %>
+    <%= f.text_field :korkeus %>
   </div>
   <div class="field">
-    <%= f.label :Teho %>
-    <%= f.text_field :Teho %>
+    <%= f.label :teho %>
+    <%= f.text_field :teho %>
   </div>
   <div class="field">
-    <%= f.label :Vuosimalli %>
-    <%= f.number_field :Vuosimalli %>
+    <%= f.label :vuosimalli %>
+    <%= f.number_field :vuosimalli %>
   </div>
   <div class="field">
-    <%= f.label :VenePuhA %>
-    <%= f.text_field :VenePuhA %>
+    <%= f.label :vene_puh_a %>
+    <%= f.text_field :vene_puh_a %>
   </div>
   <div class="field">
-    <%= f.label :VenePuhB %>
-    <%= f.text_field :VenePuhB %>
+    <%= f.label :vene_puh_b %>
+    <%= f.text_field :vene_puh_b %>
   </div>
   <div class="field">
-    <%= f.label :Huomautukset %>
-    <%= f.text_field :Huomautukset %>
+    <%= f.label :huomautukset %>
+    <%= f.text_field :huomautukset %>
   </div>
   <div class="field">
-    <%= f.label :Tarra %>
-    <%= f.number_field :Tarra %>
+    <%= f.label :tarra %>
+    <%= f.number_field :tarra %>
   </div>
   <div class="field">
-    <%= f.label :Katsastus %>
-    <%= f.text_field :Katsastus %>
+    <%= f.label :katsastus %>
+    <%= f.text_field :katsastus %>
   </div>
   <div class="field">
     <%= f.label :Laituri %>

@@ -17,7 +17,7 @@ function toggle(className, obj) {
 }
 
 function generateIndexNumber() {
-    var jno = document.getElementById('member_Jno').value.toString();
+    var jno = document.getElementById('member_jno').value.toString();
     while (jno.length < 5) {
         jno = "0" + jno;
     }

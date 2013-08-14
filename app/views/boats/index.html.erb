@@ -30,15 +30,15 @@ $(document).ready(function(){
 <button class="btn btn-info" type="button" id="button">Filtterit</button>
 
   <form id="filtterit" class ="form-inline">
-      <label for="cvalmmalli" class="checkbox"><input type="checkbox" id="cvalmmalli" onclick="toggle('.valmmalli', this)"/>Valmistusmalli</label> 
-      <label for="cpituus" class="checkbox"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>Pituus</label> 
-      <label for="cleveys" class="checkbox"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>Leveys</label> 
-      <label for="csyvyys" class="checkbox"><input type="checkbox" id="csyvyys" onclick="toggle('.syvyys', this)"/>Syvyys</label> 
-      <label for="ckorkeus" class="checkbox"><input type="checkbox" id="ckorkeus" onclick="toggle('.korkeus', this)"/>Korkeus</label> 
-      <label for="cteho" class="checkbox"><input type="checkbox" id="cteho" onclick="toggle('.teho', this)"/>Teho</label>
-      <label for="cvuosimalli" class="checkbox"><input type="checkbox" id="cvuosimalli" onclick="toggle('.vuosimalli', this)"/>Vuosimalli</label> 
-      <label for="chuomautukset" class="checkbox"><input type="checkbox" id="chuomautukset" onclick="toggle('.huomautukset', this)"/>Huomautukset</label> 
-      <label for="ckatsastus" class="checkbox"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>Katsastus</label>  
+      <label for="cvalm_malli" class="checkbox"><input type="checkbox" id="cvalm_malli" onclick="toggle('.valm_malli', this)"/>Valmistusmalli</label> 
+      <label for="cpituus" class="checkbox"><input type="checkbox" id="cpituus" onclick="toggle('.pituus', this)"/>pituus</label> 
+      <label for="cleveys" class="checkbox"><input type="checkbox" id="cleveys" onclick="toggle('.leveys', this)"/>leveys</label> 
+      <label for="csyvyys" class="checkbox"><input type="checkbox" id="csyvyys" onclick="toggle('.syvyys', this)"/>syvyys</label> 
+      <label for="ckorkeus" class="checkbox"><input type="checkbox" id="ckorkeus" onclick="toggle('.korkeus', this)"/>korkeus</label> 
+      <label for="cteho" class="checkbox"><input type="checkbox" id="cteho" onclick="toggle('.teho', this)"/>teho</label>
+      <label for="cvuosimalli" class="checkbox"><input type="checkbox" id="cvuosimalli" onclick="toggle('.vuosimalli', this)"/>vuosimalli</label> 
+      <label for="chuomautukset" class="checkbox"><input type="checkbox" id="chuomautukset" onclick="toggle('.huomautukset', this)"/>huomautukset</label> 
+      <label for="ckatsastus" class="checkbox"><input type="checkbox" id="ckatsastus" onclick="toggle('.katsastus', this)"/>katsastus</label>  
 
     </form>
 
@@ -47,20 +47,20 @@ $(document).ready(function(){
 <table id="myTable" class="table table-condensed">
   <thead>
   <tr>
-    <th>RekPvm</th>
-    <th>MuutosPvm</th>
-    <th>Nimi</th>
+    <th>rek_pvm</th>
+    <th>muutos_pvm</th>
+    <th>nimi</th>
     <th>Tyyppi</th>
-    <th>Reknro</th>
-    <th class="valmmalli">Valmmalli</th>
-    <th class="pituus">Pituus</th>
-    <th class="leveys">Leveys</th>
-    <th class="syvyys">Syvyys</th>
-    <th class="korkeus">Korkeus</th>
-    <th class="teho">Teho</th>
-    <th class="vuosimalli">Vuosimalli</th>
-    <th class="huomautukset">Huomautukset</th>
-    <th class="katsastus">Katsastus</th>
+    <th>reknro</th>
+    <th class="valm_malli">valm_malli</th>
+    <th class="pituus">pituus</th>
+    <th class="leveys">leveys</th>
+    <th class="syvyys">syvyys</th>
+    <th class="korkeus">korkeus</th>
+    <th class="teho">teho</th>
+    <th class="vuosimalli">vuosimalli</th>
+    <th class="huomautukset">huomautukset</th>
+    <th class="katsastus">katsastus</th>
     <th></th>
     <th></th>
     <th></th>
@@ -69,21 +69,21 @@ $(document).ready(function(){
 
 <% for boat in @boats %>
   <tr>
-    <td><%= boat.RekPvm %></td>
-    <td><%= boat.MuutosPvm %></td>
-    <td><%= boat.Nimi %></td>
+    <td><%= boat.rek_pvm %></td>
+    <td><%= boat.muutos_pvm %></td>
+    <td><%= boat.nimi %></td>
     <td><%= boat.tyyppi %></td>
-    <td><%= boat.RekNro %></td>
+    <td><%= boat.reknro %></td>
 
-    <td class="valmmalli"><%= boat.ValmMalli %></td>
-    <td class="pituus"><%= boat.Pituus %></td>
-    <td class="leveys"><%= boat.Leveys %></td>
-    <td class="syvyys"><%= boat.Syvyys %></td>
-    <td class="korkeus"><%= boat.Korkeus %></td>
-    <td class="teho"><%= boat.Teho %></td>
-    <td class="vuosimalli"><%= boat.Vuosimalli %></td>
-    <td class="huomautukset"><%= boat.Huomautukset %></td>
-    <td class="katsastus"><%= boat.Katsastus %></td>
+    <td class="valm_malli"><%= boat.valm_malli %></td>
+    <td class="pituus"><%= boat.pituus %></td>
+    <td class="leveys"><%= boat.leveys %></td>
+    <td class="syvyys"><%= boat.syvyys %></td>
+    <td class="korkeus"><%= boat.korkeus %></td>
+    <td class="teho"><%= boat.teho %></td>
+    <td class="vuosimalli"><%= boat.vuosimalli %></td>
+    <td class="huomautukset"><%= boat.huomautukset %></td>
+    <td class="katsastus"><%= boat.katsastus %></td>
 
     <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-info-sign icon-white"></i>Tiedot</i>'.html_safe, boat %>
         <%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_boat_path(boat) %>

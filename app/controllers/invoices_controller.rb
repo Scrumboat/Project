@@ -122,7 +122,7 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(params[:invoice])
-    member = Member.find_all_by_Jno(params[:invoice][:jno]).first
+    member = Member.find_all_by_jno(params[:invoice][:jno]).first
     @invoice.member_id = member.id
     @invoice.viitenumero = member.viitenumero
     @invoice.summa = @invoice.amount_left_to_pay

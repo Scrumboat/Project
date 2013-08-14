@@ -2,24 +2,24 @@
 <b>Omistaja(:t)</b>
 <ul>
   <% @boat.members.each do |member| %>
-      <li><%= link_to member.Nimi , member_path(member) %></li>
+      <li><%= link_to member.nimi , member_path(member) %></li>
   <% end %>
 </ul>
 
 
 <p>
-  <b>Rekpvm:</b>
-  <%= @boat.RekPvm %>
+  <b>rek_pvm:</b>
+  <%= @boat.rek_pvm %>
 </p>
 
 <p>
-  <b>Muutospvm:</b>
-  <%= @boat.MuutosPvm %>
+  <b>muutos_pvm:</b>
+  <%= @boat.muutos_pvm %>
 </p>
 
 <p>
-  <b>Nimi:</b>
-  <%= @boat.Nimi %>
+  <b>nimi:</b>
+  <%= @boat.nimi %>
 </p>
 
 <p>
@@ -28,73 +28,73 @@
 </p>
 
 <p>
-  <b>Reknro:</b>
-  <%= @boat.RekNro %>
+  <b>reknro:</b>
+  <%= @boat.reknro %>
 </p>
 
 <p>
-  <b>Valmmalli:</b>
-  <%= @boat.ValmMalli %>
+  <b>valm_malli:</b>
+  <%= @boat.valm_malli %>
 </p>
 
 <p>
-  <b>Pituus:</b>
-  <%= @boat.Pituus %>
+  <b>pituus:</b>
+  <%= @boat.pituus %>
 </p>
 
 <p>
-  <b>Leveys:</b>
-  <%= @boat.Leveys %>
+  <b>leveys:</b>
+  <%= @boat.leveys %>
 </p>
 
 <p>
-  <b>Syvyys:</b>
-  <%= @boat.Syvyys %>
+  <b>syvyys:</b>
+  <%= @boat.syvyys %>
 </p>
 
 <p>
-  <b>Uppouma:</b>
-  <%= @boat.Uppouma %>
+  <b>uppouma:</b>
+  <%= @boat.uppouma %>
 </p>
 
 <p>
-  <b>Korkeus:</b>
-  <%= @boat.Korkeus %>
+  <b>korkeus:</b>
+  <%= @boat.korkeus %>
 </p>
 
 <p>
-  <b>Teho:</b>
-  <%= @boat.Teho %>
+  <b>teho:</b>
+  <%= @boat.teho %>
 </p>
 
 <p>
-  <b>Vuosimalli:</b>
-  <%= @boat.Vuosimalli %>
+  <b>vuosimalli:</b>
+  <%= @boat.vuosimalli %>
 </p>
 
 <p>
-  <b>Venepuha:</b>
-  <%= @boat.VenePuhA %>
+  <b>vene_puh_a:</b>
+  <%= @boat.vene_puh_a %>
 </p>
 
 <p>
-  <b>Venepuhb:</b>
-  <%= @boat.VenePuhB %>
+  <b>vene_puh_b:</b>
+  <%= @boat.vene_puh_b %>
 </p>
 
 <p>
-  <b>Huomautukset:</b>
-  <%= @boat.Huomautukset %>
+  <b>huomautukset:</b>
+  <%= @boat.huomautukset %>
 </p>
 
 <p>
-  <b>Tarra:</b>
-  <%= @boat.Tarra %>
+  <b>tarra:</b>
+  <%= @boat.tarra %>
 </p>
 
 <p>
-  <b>Katsastus:</b>
-  <%= @boat.Katsastus %>
+  <b>katsastus:</b>
+  <%= @boat.katsastus %>
 </p>
 
 <p>
@@ -104,7 +104,7 @@
 </p>
 
 <p>
-  <b>Telakka / paikka:</b>
+  <b>telakka / paikka:</b>
     <% dockyard_string = @dockyard.name + " / " + @dockyard_spot.number.to_s unless @dockyard.nil? %>
     <%= link_to dockyard_string, edit_dockyard_dockyard_spot_path(@dockyard, @dockyard_spot) unless @dockyard.nil? %>
 </p>

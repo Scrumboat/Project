@@ -11,17 +11,17 @@ class BoatTest < ActiveSupport::TestCase
     assert @boat.version == 1
     assert @boat.Omistaja == "MyString"
 
-    @boat.update_attributes(:Omistaja => "Mauri", :JnoOm => "1111")
+    @boat.update_attributes(:Omistaja => "Mauri", :jnoOm => "1111")
 
     assert @boat.version == 2
     assert @boat.Omistaja == "Mauri"
-    assert @boat.JnoOm == "1111"
+    assert @boat.jnoOm == "1111"
 
     @boat.revert_to(@boat.version-1)
 
     assert @boat.version == 1
     assert @boat.Omistaja == "MyString"
-    assert @boat.JnoOm == "MyString"
+    assert @boat.jnoOm == "MyString"
 
   end
 
@@ -35,16 +35,16 @@ class BoatTest < ActiveSupport::TestCase
 
   boat = Boat.new
   boat.Omistaja = "Karl Segelbåt"
-  boat.RekPvm = "2012-09-10"
-  boat.Nimi = "Virgin of the Maries"
+  boat.rek_pvm = "2012-09-10"
+  boat.nimi = "Virgin of the Maries"
   boat.tyyppi = "Segelbåt"
-  boat.RekNro = "T1t4n1c"
-  boat.ValmMalli = "Busteri"
-  boat.Pituus = "5.7"
-  boat.Leveys = "2.5"
-  boat.Syvyys = "0.8"
-  boat.Korkeus = "2.0"
-  boat.Vuosimalli = "2009"
+  boat.reknro = "T1t4n1c"
+  boat.valm_malli = "Busteri"
+  boat.pituus = "5.7"
+  boat.leveys = "2.5"
+  boat.syvyys = "0.8"
+  boat.korkeus = "2.0"
+  boat.vuosimalli = "2009"
   assert boat.save, "Creates a new boat with all needed information"
   end
 
@@ -52,15 +52,15 @@ class BoatTest < ActiveSupport::TestCase
 
   boat = Boat.new
   boat.Omistaja = "Karl Segelbåt"
-  boat.RekPvm = "2012-09-10"
-  boat.Nimi = "Virgin of the Maries"
+  boat.rek_pvm = "2012-09-10"
+  boat.nimi = "Virgin of the Maries"
   boat.tyyppi = "Segelbåt"
-  boat.RekNro = "T1t4n1c"
-  boat.ValmMalli = "Busteri"
-  boat.Pituus = "5.7"
-  boat.Leveys = "2.5"
-  boat.Syvyys = "0.8"
-  boat.Vuosimalli = "kivi"
+  boat.reknro = "T1t4n1c"
+  boat.valm_malli = "Busteri"
+  boat.pituus = "5.7"
+  boat.leveys = "2.5"
+  boat.syvyys = "0.8"
+  boat.vuosimalli = "kivi"
   assert !boat.save, "Creates a new boat with incorrect year input"
   end
 
@@ -68,16 +68,16 @@ class BoatTest < ActiveSupport::TestCase
 
   boat = Boat.new
   boat.Omistaja = "Karl Segelbåt"
-  boat.RekPvm = "2012-09-10"
-  boat.Nimi = "Virgin of the Maries"
+  boat.rek_pvm = "2012-09-10"
+  boat.nimi = "Virgin of the Maries"
   boat.tyyppi = "Segelbåt"
-  boat.RekNro = "T1t4n1c"
-  boat.ValmMalli = "Busteri"
-  boat.Pituus = "long"
-  boat.Leveys = "wide"
-  boat.Syvyys = "deep"
-  boat.Korkeus = "high"
-  boat.Vuosimalli = "2009"
+  boat.reknro = "T1t4n1c"
+  boat.valm_malli = "Busteri"
+  boat.pituus = "long"
+  boat.leveys = "wide"
+  boat.syvyys = "deep"
+  boat.korkeus = "high"
+  boat.vuosimalli = "2009"
   assert !boat.save, "Creates a new boat with incorrect inputs in decimal fields"
   end
 end
