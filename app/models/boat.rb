@@ -4,6 +4,7 @@ class Boat < ActiveRecord::Base
 
 #dependent->tracking tracks DESTROYs and marks them only as deleted in db.
 #or something
+
 versioned :dependent => :tracking
 attr_accessible :updated_by
 

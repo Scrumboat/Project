@@ -1,3 +1,4 @@
+<script src="/assets/dockswap.js"></script>
 <h1>Laituri <%= @dock.id %> # </h1>
 <p id="notice"><%= notice %></p>
 
@@ -12,9 +13,12 @@
 <%= link_to 'Uusi laituripaikka', new_dock_berth_path(@dock) %>
 
 <h2>Laituripaikat</h2>
+
+<button type="button" id="button">Swap</button>
 <h3>Laituri <%= @dock.id %># vasen: </h3>
 <table>
  	<tr>
+            <th>Vaihto</th>
 	    <th>Numero</th>
 	    <th>Pituus</th>
 	    <th>Leveys</th>
@@ -35,7 +39,8 @@
 	    <td><%= berth.length.to_s + ' m' %></td>
 	    <td><%= berth.width.to_s + ' m' %></td>
 	    <td><%= berth.depth.to_s + ' m' %></td>
-            <td><%= link_to berth.Reknro.to_s, Boat.where(:RekNro => berth.Reknro).first %></td>
+            <td>
+            	<%= link_to berth.Reknro.to_s, Boat.where(:RekNro => berth.Reknro).first %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
             <td><%= (berth.width.to_s.to_d/@leveysLaituripaikanHinnanKasvuun.data)*@veneenHinnanKasvu.data+@minLaituripaikanHinta.data unless @veneenHinnanKasvu.nil? %></td>

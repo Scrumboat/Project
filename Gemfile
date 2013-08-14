@@ -32,6 +32,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'rails3-jquery-autocomplete'
 gem "bcrypt-ruby", "~> 3.0.1"
 gem "orm_adapter", "~> 0.4.0"
 gem "railties", "~> 3.2.13"

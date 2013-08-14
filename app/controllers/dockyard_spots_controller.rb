@@ -61,12 +61,13 @@ class DockyardSpotsController < ApplicationController
     can_fit = check_if_it_fits
 
     respond_to do |format|
-      if boat_already_has_spot && can_fit && @dockyard_spot.save
+      # && can_fit alempaan if-lauseeseen, jos halutaan rajoittaa telakkapaikan kokoa
+      if boat_already_has_spot && @dockyard_spot.save
         format.html { redirect_to @dockyard, notice: 'Uusi telakkapaikka luotiin onnistuneesti.'}
       else
-        if !can_fit
-          err_msg = 'Ei tarpeeksi tilaa veneelle.'
-        elsif !boat_already_has_spot
+        #if !can_fit
+         # err_msg = 'Ei tarpeeksi tilaa veneelle.'
+        if !boat_already_has_spot
           err_msg = 'Veneellä on jo telakkapaikka.'
         else
           err_msg = 'Telakkapaikan luonti epäonnistui.'
@@ -86,8 +87,8 @@ class DockyardSpotsController < ApplicationController
     params[:dockyard_spot][:boat_id] = @boat.id unless @boat.nil?
     if @boat.nil?
       can_fit = true
-    elsif
-      can_fit = check_if_it_fits
+   # elsif
+    #  can_fit = check_if_it_fits
     end
 
     respond_to do |format|
