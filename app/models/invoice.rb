@@ -45,7 +45,7 @@ class Invoice < ActiveRecord::Base
 	end
   end
   
-  def self.laskuta()
+  def self.laskuta(haluttumaara)
     yhdistettavat = []
     @jasenet = Member.all
 	for jasen in @jasenet
@@ -72,7 +72,7 @@ class Invoice < ActiveRecord::Base
 	end
 	counter = 0
 	filuja = 0
-	haluttumaaraperpdf = 2
+	haluttumaaraperpdf = haluttumaara
 	pdf = Prawn::Document.new
 	  for lasku in yhdistettavat
 	    if filuja%haluttumaaraperpdf == 0 && filuja != 0

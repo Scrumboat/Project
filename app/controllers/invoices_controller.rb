@@ -71,7 +71,12 @@ class InvoicesController < ApplicationController
       return
     end
 	if params[:sposti]
-      Invoice.laskuta()
+	  if params[:maara].blank?
+        flash[:error] = 'Lisää haluttujen laskujen määrä / PDF'
+        redirect_to invoices_url
+        return
+      end
+      Invoice.laskuta(params[:maara].to_i)
       flash[:notice] = "Laskut lähetetty!"
       redirect_to invoices_url
       return
