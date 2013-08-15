@@ -8,24 +8,24 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 puts 'CREATING FEW MEMBERS'
-Member.create([{ id: 1, jasentyyppi: 'puolisojasen', Jno: 4421, MatkaPuh: "044-4443331", Nimi: "Esa Esimerkki", Osoite: "Osoitetie 4",
-                 Posti: "00100 Helsinki", Sotu: "010177-124M", Liittynyt: "5-11-2005", viitenumero: "044215"},
-               { id: 2, jasentyyppi: 'ainaisjasen', Jno: 2149, MatkaPuh: "044-3334442", Nimi: "Eero Engel", Osoite: "Venepolku 85 c 35",
-                 Posti: "00500 Helsinki", Sotu: "221166-031W", Liittynyt: "1-6-1999", viitenumero: "021490"},
-               { id: 3, jasentyyppi: 'kunniajasen', Jno: 2222, MatkaPuh: "050-8497764", Nimi: "Mauri Menomajava", Osoite: "Patokuja 1",
-                 Posti: "99500 Kaukana", Sotu: "091033-129K", Liittynyt: "31-1-1940", viitenumero: "022224"},
-               { id: 4, jasentyyppi: 'kutsujasen', Jno: 12, MatkaPuh: "040-1234567", Nimi: "Matti Meikalainen", Osoite: "Jokutie 6",
-                 Posti: "10101 Jyvaskyla", Sotu: "041055-52A", Liittynyt: "15-04-2008", viitenumero: "000123", deleted: true}])
+Member.create([{ id: 1, jasentyyppi: 'puolisojasen', jno: 4421, matka_puh: "044-4443331", nimi: "Esa Esimerkki", osoite: "osoitetie 4",
+                 posti: "00100 Helsinki", sotu: "010177-124M", liittynyt: "5-11-2005", viitenumero: "044215"},
+               { id: 2, jasentyyppi: 'ainaisjasen', jno: 2149, matka_puh: "044-3334442", nimi: "Eero Engel", osoite: "Venepolku 85 c 35",
+                 posti: "00500 Helsinki", sotu: "221166-031W", liittynyt: "1-6-1999", viitenumero: "021490"},
+               { id: 3, jasentyyppi: 'kunniajasen', jno: 2222, matka_puh: "050-8497764", nimi: "Mauri Menomajava", osoite: "Patokuja 1",
+                 posti: "99500 Kaukana", sotu: "091033-129K", liittynyt: "31-1-1940", viitenumero: "022224"},
+               { id: 4, jasentyyppi: 'kutsujasen', jno: 12, matka_puh: "040-1234567", nimi: "Matti Meikalainen", osoite: "Jokutie 6",
+                 posti: "10101 Jyvaskyla", sotu: "041055-52A", liittynyt: "15-04-2008", viitenumero: "000123", deleted: true}])
 
 puts 'CREATING FEW BOATS'
-Boat.create([{ id: 1, RekPvm: "1-1-1990", Nimi: "Jallu Kola", tyyppi: "S/S", RekNro: "aaa-bbb", ValmMalli: "xxx-1", Pituus: 30,
-               Leveys: 3.5, Syvyys: 2.1, Vuosimalli: 1903, Korkeus: 6.9 },
-             { id: 2, RekPvm: "3-11-2000", Nimi: "Rommi Kola", tyyppi: "GTS", RekNro: "ccc-ddd", ValmMalli: "hoplaa", Pituus: 50,
-               Leveys: 9, Syvyys: 3.5, Vuosimalli: 1949, Korkeus: 9.1 },
-             { id: 3, RekPvm: "1-1-1990", Nimi: "Kossu Kola", tyyppi: "NS", RekNro: "eee-fff", ValmMalli: "nuc", Pituus: 10,
-               Leveys: 1.5, Syvyys: 1.1, Vuosimalli: 2014, Korkeus: 2.5 },
-             { id: 4, RekPvm: "3-7-2010", Nimi: "Tupla-Omistus", tyyppi: "soutuvene", RekNro: "ggg-hhh", ValmMalli: "Terhi", Pituus: 2,
-               Leveys: 1, Syvyys: 0.3, Vuosimalli: 1986, Korkeus: 0.4}])
+Boat.create([{ id: 1, rek_pvm: "1-1-1990", nimi: "Jallu Kola", tyyppi: "S/S", reknro: "aaa-bbb", valm_malli: "xxx-1", pituus: 30,
+               leveys: 3.5, syvyys: 2.1, vuosimalli: 1903, korkeus: 6.9 },
+             { id: 2, rek_pvm: "3-11-2000", nimi: "Rommi Kola", tyyppi: "GTS", reknro: "ccc-ddd", valm_malli: "hoplaa", pituus: 50,
+               leveys: 9, syvyys: 3.5, vuosimalli: 1949, korkeus: 9.1 },
+             { id: 3, rek_pvm: "1-1-1990", nimi: "Kossu Kola", tyyppi: "NS", reknro: "eee-fff", valm_malli: "nuc", pituus: 10,
+               leveys: 1.5, syvyys: 1.1, vuosimalli: 2014, korkeus: 2.5 },
+             { id: 4, rek_pvm: "3-7-2010", nimi: "Tupla-Omistus", tyyppi: "soutuvene", reknro: "ggg-hhh", valm_malli: "Terhi", pituus: 2,
+               leveys: 1, syvyys: 0.3, vuosimalli: 1986, korkeus: 0.4}])
 
 puts 'ADDING BOATS TO MEMBERS RELATIONS'
 BoatsMember.create([{ boat_id: 2, member_id: 1},
