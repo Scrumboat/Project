@@ -1,3 +1,17 @@
+
+<%= form_tag storages_path, :method => 'get' do %>
+    <%= hidden_field_tag :search, "tyhjat" %>
+    <%= button_tag(type: "submit", class: "btn") do %>
+        <i class="icon-ok"></i> Tyhjät kopit
+    <% end %>
+<% end %>
+<%= form_tag storages_path, :method => 'get' do %>
+      <%= hidden_field_tag :search, "kaikki" %>
+      <%= button_tag(type: "submit", class: "btn") do %>
+          <i class="icon-list"></i> Näytä kaikki
+      <% end %>
+  <% end %>
+
 <h1>varastokopit</h1>
 
 <table class="table table-condensed">
@@ -12,12 +26,18 @@
   </tr>
 
 <% @storages.each do |storage| %>
-	<% omistaja = Member.where(:jno => storage.jno).first %>
+    <% if !storage.jno.nil? %>
+	  <% omistaja = Member.where(:jno => storage.jno).first %>
+	<% end %>
   <tr>
     <td><%= storage.vk %></td>
     <td><%= storage.pala %></td>
     <td><%= storage.jno %></td>
-	<td><%= omistaja.nimi %></td>
+	<% if !storage.jno.nil? && !omistaja.nil? %>
+	  <td><%= omistaja.nimi %></td>
+	<% else %>
+	  <td>Ei omistajaa </td>
+	<% end %>
         <td><%= link_to '<i class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>Muokkaa</i>'.html_safe, edit_storage_path(storage) %>
         <%= link_to '<i class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>Poista</i>'.html_safe, storage, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
   </tr>

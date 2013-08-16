@@ -4,8 +4,9 @@ class StoragesController < ApplicationController
   # GET /storages
   # GET /storages.json
   def index
-    @storages = Storage.all
-
+    #@storages = Storage.all
+    if params[:search].blank? then params[:search] = 'kaikki' end
+	@storages = Storage.search(params[:search])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @storages }
@@ -32,11 +33,19 @@ class StoragesController < ApplicationController
   # POST /storages.json
   def create
     @storage = Storage.new(params[:storage])
-    fetch_member_and_set_isOk
+	@onkojno = false
+	if params[:jno]
+	  fetch_member_and_set_isOk
+	  @onkojno = true
+	else
+	  @isOk = true
+	end
     respond_to do |format|
       if @isOk && @storage.save
-        @member.varasto = @storage.vk
-        @member.save
+	    if @onkojno
+		  @member.varasto = @storage.vk
+          @member.save
+		end
       format.html { redirect_to storages_path, notice: 'varastokoppi luotu onnistuneesti'}
       format.json { render json: @storage, status: :created, location: @storage }
       else
@@ -53,20 +62,33 @@ class StoragesController < ApplicationController
   # PUT /storages/1.json
   def update
     @storage = Storage.find(params[:id])
-	fetch_member_and_set_isOk
-	oldjno = @storage.jno
+	@onkovanhaomistaja = false
+	if params[:jno]
+	  fetch_member_and_set_isOk
+	  @onkojno = true
+	else
+	  @isOk = true
+	end
 	
+	if !@storage.jno.nil?
+	  oldjno = @storage.jno
+	  @onkovanhaomistaja = true
+	end
     respond_to do |format|
       if @isOk && @storage.update_attributes(params[:storage])
-        if oldjno != @storage.jno
-          oldmember = Member.where(:jno => oldjno).first
-          if oldmember != nil
-            oldmember.varasto = ""
-            oldmember.save
+        if @onkovanhaomistaja
+		  if oldjno != @storage.jno
+            oldmember = Member.where(:jno => oldjno).first
+            if oldmember != nil
+              oldmember.varasto = ""
+              oldmember.save
+            end
           end
-        end
-        @member.varasto = @storage.vk
-        @member.save
+		end
+        if @onkojno
+		  @member.varasto = @storage.vk
+          @member.save
+		end
         format.html { redirect_to storages_path, notice: 'varastokoppi muokattu onnistuneesti' }
         format.json { head :no_content }
       else
