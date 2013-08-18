@@ -33,6 +33,7 @@
   <% @berths.each do |berth| %>
       <% if berth.number % 2 != 0 %>
           <tr>
+		    <td></td>
             <td><%= berth.number.to_s %></td>
             <td><%= berth.length.to_s + ' m' %></td>
             <td><%= berth.width.to_s + ' m' %></td>
@@ -40,11 +41,13 @@
             <td><%= link_to berth.reknro.to_s, Boat.where(:reknro => berth.reknro).first %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
-            <% if berth.length > 7 %>
-                <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
-            <% else %>
-                <td><%= berth.width*@hintaAlle7.to_s.to_i %></td>
-            <% end %>
+
+			<% if berth.length > 7 %>
+			  <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
+			<% else %>
+			  <td><%=  berth.width*@hintaAlle7.to_s.to_i %></td>
+			<% end %>
+
             <td><%= berth.printExists %></td>
             <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
             <td><%= link_to 'Poista', berth, method: :delete, data: {confirm: 'Oletko varma?'} %></td>
@@ -80,10 +83,12 @@
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
             <% if berth.length > 7 %>
+
                 <td><%= berth.width*@hintaYli7.to_s.to_i%></td>
             <% else %>
                 <td><%= berth.width*@hintaAlle7.to_s.to_i %></td>
             <% end %>
+
             <td><%= berth.printExists %></td>
             <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
             <td><%= link_to 'Poista', berth, method: :delete, data: {confirm: 'Oletko varma?'} %></td>

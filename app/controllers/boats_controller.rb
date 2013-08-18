@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class BoatsController < ApplicationController
-
+  autocomplete :member, :nimi
+  autocomplete :member, :jno
  # helper_method :sort_column, :sort_direction
 
   # GET /boats
