@@ -8,7 +8,10 @@ Venerekisteri::Application.routes.draw do
     resources :payments
   end
 
-
+  resources :boats do
+    get :autocomplete_member_nimi, :on => :collection
+	get :autocomplete_member_jno, :on => :collection
+  end
   resources :pricings
 
 
