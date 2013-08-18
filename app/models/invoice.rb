@@ -146,30 +146,64 @@ class Invoice < ActiveRecord::Base
       jno = jasen.jno
       liittymismaksu = 0
       if jasen.liittynyt > (Date.today - 6.months)
-        liittymismaksu = Pricing.find_by_target("liittymismaksu").data
+	    #Liittymismaksu jäsentyypin perusteella
+		if jasen.jasentyyppi == "aikuisjasen"
+          liittymismaksu = Pricing.find_by_target("liittymismaksuAikuinen").data
+		else
+		  liittymismaksu = 0
+		end
+		liittymismaksu += Pricing.find_by_target("ensirekmaksu").data
       end
-      jasenmaksu = Pricing.find_by_target("jasenmaksu").data
+	  # Jäsenmaksu jäsentyypin mukaan
+	  if jasen.jasentyyppi == "aikuisjasen"
+	    jasenmaksu = Pricing.find_by_target("jasenmaksuAikuinen").data
+	  elsif jasen.jasentyyppi == "puolisojasen"
+	    jasenmaksu = Pricing.find_by_target("jasenmaksuPerhe").data
+	  elsif jasen.jasentyyppi == "nuorisojasen"
+	    jasenmaksu = Pricing.find_by_target("jasenmaksuNuoriso").data
+	  elsif jasen.jasentyyppi == "ainaisjasen"
+	    jasenmaksu = Pricing.find_by_target("jasenmaksuAinais").data
+	  end
+      #jasenmaksu = Pricing.find_by_target("jasenmaksu").data
       varastomaksu = 0
       if !jasen.varasto.blank?
-        varastomaksu = (Pricing.find_by_target("varastokoppinelio").data)*(Storage.find_by_vk(jasen.varasto).pala)
+        #varastomaksu = (Pricing.find_by_target("varastokoppinelio").data)*(Storage.find_by_vk(jasen.varasto).pala)
+		varastomaksu = Pricing.find_by_target("varastokoppivuosi").data
       end
-      laiturimaksu = Pricing.find_by_target("minLaituripaikanHinta").data
+      #laiturimaksu = Pricing.find_by_target("minLaituripaikanHinta").data
+	  laiturimaksu = 0
       telakkamaksu = 0
       veneet = jasen.boats
       for vene in veneet
-        #veneelle voisi luoda boolean muuttujakentän siitä että onko veneen laiturimaksu jo laskutettu jos on monta omistajaa samalla veneellä, jos true niin skipattais tässä
         laituri = Berth.find_by_reknro(vene.reknro)
         if !DockyardSpot.find_by_boat_id(vene.id).nil?
           telakka = DockyardSpot.find_by_boat_id(vene.id)
           telakkamaksu = (Pricing.find_by_target("telakanNeliohinta").data)*(telakka.length*telakka.width)
         end
         if !laituri.nil? && laituri.width > 2
-          laiturimaksu += (Pricing.find_by_target("leveysLaituripaikanHinnanKasvuun").data)*((laituri.width - 2)/0.5).ceil
+		  if vene.pituus > 7
+		    laiturimaksu += (Pricing.find_by_target("minLaituripaikanHintaYli7").data)*laituri.width
+		  else
+		    laiturimaksu += (Pricing.find_by_target("minLaituripaikanHintaAlle7").data)*laituri.width
+		  end
+          #laiturimaksu += (Pricing.find_by_target("leveysLaituripaikanHinnanKasvuun").data)*((laituri.width - 2)/0.5).ceil
         end
       end
+	  vartiosakko = 0
+	  talkoosakko = 0
+	  if !jasen.vartiolaiminlyonti.nil?
+	    vartiosakko += jasen.vartiolaiminlyonti*Pricing.find_by_target("vartioLaiminlyonti").data
+	  end
+	  if !jasen.talkoolaiminlyonti.nil?
+	    talkoosakko = jasen.talkoolaiminlyonti*Pricing.find_by_target("talkoonLaiminlyonti").data
+	  end
+	  muut = 0
+	  if !jasen.saunottu.nil?
+	    muut += Pricing.find_by_target("saunatunti").data*jasen.saunottu
+	  end
       erapaiva = Time.now + 1.month #Pricingsi tableen laskunmaksuaika data? Time.now + n.days esim
       luontipaiva = Time.now
-      inv = Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: 300, maksettu: false, tunniste: tunniste})
+      inv = Invoice.create({member_id: jasen.id, nimi: nimi, summa: summa, jno: jno, luontipvm: luontipaiva, liittymismaksu: liittymismaksu, jasenmaksu: jasenmaksu, laiturimaksu: laiturimaksu,varastokoppimaksu: varastomaksu, telakkamaksu: telakkamaksu, erapvm: erapaiva, vartiosakko: vartiosakko, talkoosakko: talkoosakko, muutMaksut: muut, maksettu: false, tunniste: tunniste})
       inv.summa = inv.amount_left_to_pay
       inv.save
     end

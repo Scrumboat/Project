@@ -42,6 +42,8 @@ class InvoicePdf < Prawn::Document
 	move_down 10
 	text "Viitenumero:  #{@member.viitenumero}"
 	move_down 10
+	text "tyyppi:  #{@member.jasentyyppi}"
+	move_down 10
 	text "Lahetyspvm:  #{@invoice.lahetyspvm}"
 	move_down 10
 	text "Erapvm:  #{@invoice.erapvm}"

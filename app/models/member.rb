@@ -26,7 +26,7 @@ has_many :invoices
 
 attr_accessible :boats, :ammatti, :avain, :email_fax, :huom, :jasentyyppi, :jno, :koti_puh, :laivuri, :liittynyt, :lisenssi, :maa, :matka_puh, :muutos_pvm, :nimi, :osoite, :posti, :sotu, :toimi, :tyo_puh, :varasto, :deleted, :deleted_at, :viitenumero
 
-JASENTYYPIT = {'Ainaisjäsen' => 'ainaisjasen', 'Puolisojäsen' => 'puolisojasen', 'Nuorisojäsen' => 'nuorisojasen', 'Kunniajäsen' => 'kunniajasen', 'Kutsujäsen' => 'kutsujasen'}
+JASENTYYPIT = {'Aikuisjäsen' => 'aikuisjasen', 'Ainaisjäsen' => 'ainaisjasen', 'Puolisojäsen' => 'puolisojasen', 'Nuorisojäsen' => 'nuorisojasen', 'Kunniajäsen' => 'kunniajasen', 'Kutsujäsen' => 'kutsujasen'}
 
 def self.search(search)
   if search

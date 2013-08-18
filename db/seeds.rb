@@ -60,15 +60,27 @@ DockyardSpot.create([{id: 1, boat_length: 50, boat_width: 9, length: 50.8, width
 
 puts 'CREATING PRICING'
 
-Pricing.create([{target: "minLaituripaikanHinta", data: 50},
-                {target: "karhumaksu", data: 20},
+Pricing.create([{target: "minLaituripaikanHintaYli7", data: 36},
+                {target: "minLaituripaikanHintaAlle7", data: 34},
+				{target: "laiturinPaatyPaikka", data: 200},
+				{target: "laituriKavelyaisaLisa", data: 100},
+                {target: "karhumaksu", data: 10},
                 {target: "veneenHinnanKasvu", data: 10},
                 {target: "leveysLaituripaikanHinnanKasvuun", data: 0.25},
                 {target: "telakanNeliohinta", data: 5},
-                {target: "liittymismaksu", data: 100},
-                {target: "jasenmaksu", data: 50},
-                {target: "ensirekmaksu", data: 40},
-                {target: "veneenvuosimaksu", data: 25},
+                {target: "liittymismaksuAikuinen", data: 100},
+				{target: "liittymismaksuPerhe", data: 0},
+				{target: "liittymismaksuNuoriso", data: 0},
+                {target: "jasenmaksuAikuinen", data: 42},
+				{target: "jasenmaksuPerhe", data: 42},
+				{target: "jasenmaksuNuoriso", data: 8.5},
+				{target: "jasenmaksuAinais", data: 0},
+                {target: "ensirekmaksu", data: 600},
+                {target: "veneenvuosimaksu", data: 15},
+				{target: "talkoonLaiminlyonti", data: 100},
+				{target: "vartioLaiminlyonti", data: 300},
+				{target: "varastokoppivuosi", data: 50},
+				{target: "saunatunti", data: 4},
                 {target: "varastokoppinelio", data: 5}])
 
 puts 'DEFAULT ADMIN (if we got ENV variables for it)'
