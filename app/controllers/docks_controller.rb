@@ -6,20 +6,46 @@ class DocksController < ApplicationController
 
     if !(params[:vene1].blank?) && !(params[:vene2].blank?)
       @teksti = "onnistu"
+
       @paikka1 = Berth.where(:boat_id => params[:vene1]).first
-      @boat1 = Boat.where(:id => params[:vene1]).first
       @paikka2 = Berth.where(:boat_id => params[:vene2]).first
+
+      @boat1 = Boat.where(:id => params[:vene1]).first
       @boat2 = Boat.where(:id => params[:vene2]).first
 
-      if (@boat1.pituus <= @paikka2.length && @boat2.pituus <= @paikka1.length)
-        if (@boat1.leveys <= @paikka2.width && @boat2.leveys <= @paikka1.width)
-          if (@boat1.syvyys <= @paikka2.depth && @boat2.syvyys <= @paikka1.depth)
+      unless (@boat1.nil? || @boat2.nil?)
+        if (@boat1.pituus <= @paikka2.length && @boat2.pituus <= @paikka1.length)
+          if (@boat1.leveys <= @paikka2.width && @boat2.leveys <= @paikka1.width)
+            if (@boat1.syvyys <= @paikka2.depth && @boat2.syvyys <= @paikka1.depth)
 
-            @paikka1.boat_id = params[:vene2]
+              @paikka1.boat_id = params[:vene2]
+              @paikka2.boat_id = params[:vene1]
+              @paikka1.save
+              @paikka2.save
+              @teksti ="onnistu NYT"
+            end
+          end
+        end
+      else
+        @teksti = "lahella :x"
+        unless (@boat1.nil?)
+          @paikka2 = Berth.where(:id => params[:vene2]).first
+          if (@boat1.pituus <= @paikka2.length && @boat1.leveys <= @paikka2.width && @boat1.syvyys <= @paikka2.depth)
+            @paikka1.boat_id = nil
             @paikka2.boat_id = params[:vene1]
             @paikka1.save
             @paikka2.save
-            @teksti ="onnistu NYT"
+            @teksti ="onnistu NYT JEE"
+          end
+        end
+        unless (@boat2.nil?)
+          @paikka1 = Berth.where(:id => params[:vene1]).first
+          if (@boat2.pituus <= @paikka1.length && @boat2.leveys <= @paikka1.width && @boat2.syvyys <= @paikka1.depth)
+            @paikka2.boat_id = nil
+            @paikka1.boat_id = params[:vene2]
+            @paikka1.save
+            @paikka2.save
+            @teksti ="onnistu NYT JEE"
           end
         end
       end

@@ -7,9 +7,9 @@
     <div class="row">
       <div class="span5">
         <table class="table table-condensed">
-          <% max_id = dock.berths.count || 0 %>
-          <% if max_id > 0 %>
-              <% ind = (1..max_id).reject(&:even?) %>
+          <% max_numero = dock.berths.max_by(&:number).number || 0 %>
+          <% if max_numero > 0 %>
+              <% ind = (1..max_numero).reject(&:even?) %>
               <% ind.each do |i| %>
                   <% berth = dock.berths.find_by_number(i) %>
                   <tr>
@@ -17,7 +17,7 @@
                         <% if berth.boat %>
                             <td><%= check_box_tag(berth.boat.id, berth.boat.id, checked = false, :onclick => "swap()", :class => "boat") %><b> <%= i %></b>: <%= berth.boat.nimi %> </td>
                         <% else %>
-                            <td><b><%= i %></b>: Ei venettä</td>
+                            <td><%= check_box_tag(berth.id, berth.id, checked = false) %><b> <%= i %></b>: Ei venettä</td>
                         <% end %>
                     <% else %>
                         <td><b><%= i %></b>: Ei laituripaikkaa</td>
@@ -30,9 +30,9 @@
       </div>
       <div class="span5">
         <table class="table table-condensed">
-          <% max_id = dock.berths.count || 0 %>
-          <% if max_id > 0 %>
-              <% ind = (1..max_id).reject(&:odd?) %>
+          <% max_numero = dock.berths.max_by(&:number).number || 0 %>
+          <% if max_numero > 0 %>
+              <% ind = (1..max_numero).reject(&:odd?) %>
               <% ind.each do |i| %>
                   <% berth = dock.berths.find_by_number(i) %>
                   <tr>
@@ -40,7 +40,7 @@
                         <% if berth.boat %>
                             <td><%= check_box_tag(berth.boat.id, berth.boat.id, checked = false) %> <b><%= i %></b>: <%= berth.boat.nimi %> </td>
                         <% else %>
-                            <td><b><%= i %></b>: Ei venettä</td>
+                            <td><%= check_box_tag(berth.id, berth.id, checked = false) %><b><%= i %></b>: Ei venettä</td>
                         <% end %>
                     <% else %>
                         <td><b><%= i %></b>: Ei laituripaikkaa</td>
