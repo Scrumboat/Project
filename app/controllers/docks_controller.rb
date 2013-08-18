@@ -17,9 +17,11 @@ class DocksController < ApplicationController
     @berths = @dock.berths
     currentTotalWidth = Berth.where(:dock_id => params[:id]).sum("width")
     @spaceLeft = @dock.length - currentTotalWidth
-    @minLaituripaikanHinta = Pricing.where(:target => "minLaituripaikanHinta").first
-    @veneenHinnanKasvu = Pricing.where(:target => "veneenHinnanKasvu").first
-    @leveysLaituripaikanHinnanKasvuun = Pricing.where(:target => "leveysLaituripaikanHinnanKasvuun").first
+    @minLaituripaikanHinta = Pricing.where(:target => "minLaituripaikanHintaAlle7").first
+	@hintaAlle7 = Pricing.where(:target => "minLaituripaikanHintaAlle7").first
+	@hintaYli7 = Pricing.where(:target => "minLaituripaikanHintaYli7").first
+    #@veneenHinnanKasvu = Pricing.where(:target => "veneenHinnanKasvu").first
+    #@leveysLaituripaikanHinnanKasvuun = Pricing.where(:target => "leveysLaituripaikanHinnanKasvuun").first
      #Dock.find(:width => params[:id])
     #<td><%= (berth.width/@leveysLaituripaikanHinnanKasvuun.to_s).ceil.to_s %></td>
      #<td><%= BigDecimal(berth.width.to_s)/BigDecimal(@leveysLaituripaikanHinnanKasvuun.to_s).to_s.ceil %></td>
