@@ -28,6 +28,8 @@ has_many :members, :through => :BoatsMembers
 has_one :berth
 has_one :dockyard_spot
 
+belongs_to :model
+
 accepts_nested_attributes_for :BoatsMembers, :allow_destroy => true
 attr_accessible :BoatsMembers_attributes, :members, :huomautukset, :katsastus, :korkeus, :Laituri, :leveys, :muutos_pvm, :nimi, :pituus, :reknro, :rek_pvm, :syvyys, :tarra, :teho, :telakka, :uppouma, :valm_malli, :vene_puh_a, :vene_puh_b, :vuosimalli, :tyyppi, :tag_attributes
 def self.search(search)

@@ -1,6 +1,8 @@
 class Model < ActiveRecord::Base
   attr_accessible :korkeus, :leveys, :pituus, :syvyys, :uppouma, :valm_malli, :tyyppi
 
+  has_many :boats
+
   #validates_numericality_of :korkeus, :only_integer => true
   #validates :korkeus, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
 

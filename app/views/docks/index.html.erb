@@ -3,11 +3,11 @@
 
 
 <% @docks.each do |dock| %>
-    <h3><%= "#{dock.name} - #{dock.length.to_s} m" %></h3>
+    <h3>Laituri <%= "#{dock.name} - #{dock.length.to_s} m" %> <%= link_to 'Näytä', dock %></h3>
     <div class="row">
       <div class="span5">
         <table class="table table-condensed">
-          <% max_id = dock.berths.maximum("id") || 0 %>
+          <% max_id = dock.berths.count || 0 %>
           <% if max_id > 0 %>
               <% ind = (1..max_id).reject(&:even?) %>
               <% ind.each do |i| %>
@@ -15,12 +15,12 @@
                   <tr>
                     <% if berth %>
                         <% if berth.boat %>
-                            <td><%= i %>: <%= berth.boat.nimi %> </td>
+                            <td><%= check_box_tag(berth.boat.id, berth.boat.id, checked = false, :onclick => "swap()", :class => "boat") %><b> <%= i %></b>: <%= berth.boat.nimi %> </td>
                         <% else %>
-                            <td>Ei venettä <%= i %></td>
+                            <td><b><%= i %></b>: Ei venettä</td>
                         <% end %>
                     <% else %>
-                        <td><%= i %>: Ei laituripaikkaa</td>
+                        <td><b><%= i %></b>: Ei laituripaikkaa</td>
                     <% end %>
                   </tr>
               <% end %>
@@ -30,7 +30,7 @@
       </div>
       <div class="span5">
         <table class="table table-condensed">
-          <% max_id = dock.berths.maximum("id") || 0  %>
+          <% max_id = dock.berths.count || 0 %>
           <% if max_id > 0 %>
               <% ind = (1..max_id).reject(&:odd?) %>
               <% ind.each do |i| %>
@@ -38,12 +38,12 @@
                   <tr>
                     <% if berth %>
                         <% if berth.boat %>
-                            <td><%= i %>: <%= berth.boat.nimi %> </td>
+                            <td><%= check_box_tag(berth.boat.id, berth.boat.id, checked = false) %> <b><%= i %></b>: <%= berth.boat.nimi %> </td>
                         <% else %>
-                            <td>Ei venettä <%= i %></td>
+                            <td><b><%= i %></b>: Ei venettä</td>
                         <% end %>
                     <% else %>
-                        <td><%= i %>: Ei laituripaikkaa</td>
+                        <td><b><%= i %></b>: Ei laituripaikkaa</td>
                     <% end %>
                   </tr>
               <% end %>
@@ -53,7 +53,24 @@
     </div>
 <% end %>
 </table>
+<%= @teksti %>
+<br/>
+<% #@paikka1.length %>
+<br/>
+<% #@boat1.pituus %>
+<br/>
+<% #@paikka2.length %>
+
+<div id="error"></div>
 
 <br/>
+
+<%= form_tag docks_path, :method => 'get' do %>
+    <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
+        <i class="icon-briefcase icon-white"></i> Vaihda
+    <% end %>
+    <%= text_field_tag :vene1, nil %>
+    <%= text_field_tag :vene2, nil %>
+<% end %>
 
 <%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i> Luo uusi laituri</i>'.html_safe, new_dock_path %>

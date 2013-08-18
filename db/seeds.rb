@@ -18,14 +18,14 @@ Member.create([{ id: 1, jasentyyppi: 'puolisojasen', jno: 4421, matka_puh: "044-
                  posti: "10101 Jyvaskyla", sotu: "041055-52A", liittynyt: "15-04-2008", viitenumero: "000123", deleted: true}])
 
 puts 'CREATING FEW BOATS'
-Boat.create([{ id: 1, rek_pvm: "1-1-1990", nimi: "Jallu Kola", tyyppi: "S/S", reknro: "aaa-bbb", valm_malli: "xxx-1", pituus: 30,
-               leveys: 3.5, syvyys: 2.1, vuosimalli: 1903, korkeus: 6.9 },
-             { id: 2, rek_pvm: "3-11-2000", nimi: "Rommi Kola", tyyppi: "GTS", reknro: "ccc-ddd", valm_malli: "hoplaa", pituus: 50,
-               leveys: 9, syvyys: 3.5, vuosimalli: 1949, korkeus: 9.1 },
-             { id: 3, rek_pvm: "1-1-1990", nimi: "Kossu Kola", tyyppi: "NS", reknro: "eee-fff", valm_malli: "nuc", pituus: 10,
-               leveys: 1.5, syvyys: 1.1, vuosimalli: 2014, korkeus: 2.5 },
+Boat.create([{ id: 1, rek_pvm: "1-1-1990", nimi: "Jallu Kola", tyyppi: "S/S", reknro: "aaa-bbb", valm_malli: "xxx-1", pituus: 1.5,
+               leveys: 3.5, syvyys: 0.1, vuosimalli: 1903, korkeus: 0.5 },
+             { id: 2, rek_pvm: "3-11-2000", nimi: "Rommi Kola", tyyppi: "GTS", reknro: "ccc-ddd", valm_malli: "hoplaa", pituus: 0.5,
+               leveys: 9, syvyys: 0.5, vuosimalli: 1949, korkeus: 1 },
+             { id: 3, rek_pvm: "1-1-1990", nimi: "Kossu Kola", tyyppi: "NS", reknro: "eee-fff", valm_malli: "nuc", pituus: 2.5,
+               leveys: 1.5, syvyys: 1.1, vuosimalli: 2014, korkeus: 0.5 },
              { id: 4, rek_pvm: "3-7-2010", nimi: "Tupla-Omistus", tyyppi: "soutuvene", reknro: "ggg-hhh", valm_malli: "Terhi", pituus: 2,
-               leveys: 1, syvyys: 0.3, vuosimalli: 1986, korkeus: 0.4}])
+               leveys: 1, syvyys: 1.3, vuosimalli: 1986, korkeus: 1}])
 
 puts 'ADDING BOATS TO MEMBERS RELATIONS'
 BoatsMember.create([{ boat_id: 2, member_id: 1},
@@ -46,7 +46,10 @@ Berth.create([{ id: 1, number: 1, length: 11, width: 2.4, depth: 1.6, exists: tr
               { id: 6, number: 6, length: 2, width: 2, depth: 2, exists: true, dock_id: 1},
               { id: 7, number: 7, length: 1.5, width: 1.5, depth: 1.5, exists: true, dock_id: 2},
               { id: 8, number: 8, length: 1.2, width: 2.2, depth: 2.1, exists: true, dock_id: 2},
-              { id: 9, number: 9, length: 9, width: 3.5, depth: 3.2, exists: true, dock_id: 1}])
+              { id: 9, number: 9, length: 9, width: 3.5, depth: 3.2, exists: true, dock_id: 1},
+              { id: 10, number: 4, length: 3, width: 3, depth: 3, exists: true, dock_id: 2},
+              { id: 11, number: 3, length: 5, width: 5, depth: 5, exists: true, dock_id: 2},
+              { id: 12, number: 1, length: 2.5, width: 8, depth: 4, exists: true, dock_id: 2}])
 
 
 puts 'CREATING 2 DOCKYARDS'

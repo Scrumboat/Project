@@ -174,9 +174,9 @@ ActiveRecord::Schema.define(:version => 20130818103525) do
     t.decimal  "suoritukset_ilman_viitetta"
     t.decimal  "maksetun_summan_palautus"
     t.decimal  "edellis_kauden_laskutus"
-    t.integer  "vartiolaiminlyonti"
-    t.integer  "talkoolaiminlyonti"
-    t.integer  "saunottu"
+    t.integer  "vartiolaiminlyonti",         :default => 0
+    t.integer  "talkoolaiminlyonti",         :default => 0
+    t.integer  "saunottu",                   :default => 0
   end
 
   create_table "models", :force => true do |t|

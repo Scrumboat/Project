@@ -14,23 +14,21 @@
 
 <h2>Laituripaikat</h2>
 
-<button type="button" id="button">Swap</button>
 <h3>Laituri <%= @dock.id %># vasen: </h3>
 <table>
- 	<tr>
-      <th>Vaihto</th>
-	    <th>Numero</th>
-	    <th>Pituus</th>
-	    <th>Leveys</th>
-	    <th>Syvyys</th>
-	    <th>Reknro</th>
-	    <th>Jno</th>
-	    <th>Vartiovuoro</th>
-            <th>Hinta</th>
-	    <th>On olemassa</th>
-	    <th></th>
-	    <th></th>
-  	</tr>
+  <tr>
+    <th>Numero</th>
+    <th>Pituus</th>
+    <th>Leveys</th>
+    <th>Syvyys</th>
+    <th>Reknro</th>
+    <th>Jäsennumero</th>
+    <th>Vartiovuoro</th>
+    <th>Hinta</th>
+    <th>On olemassa</th>
+    <th></th>
+    <th></th>
+  </tr>
 
   <% @berths.each do |berth| %>
       <% if berth.number % 2 != 0 %>
@@ -42,7 +40,11 @@
             <td><%= link_to berth.reknro.to_s, Boat.where(:reknro => berth.reknro).first %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
-            <td><%= (berth.width.to_s.to_d/@leveysLaituripaikanHinnanKasvuun.data)*@veneenHinnanKasvu.data+@minLaituripaikanHinta.data unless @veneenHinnanKasvu.nil? %></td>
+            <% if berth.length > 7 %>
+                <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
+            <% else %>
+                <td><%= berth.width*@hintaAlle7.to_s.to_i %></td>
+            <% end %>
             <td><%= berth.printExists %></td>
             <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
             <td><%= link_to 'Poista', berth, method: :delete, data: {confirm: 'Oletko varma?'} %></td>
@@ -55,11 +57,11 @@
 <table>
   <tr>
     <th>Numero</th>
-    <th>pituus</th>
-    <th>leveys</th>
-    <th>syvyys</th>
-    <th>reknro</th>
-    <th>jno</th>
+    <th>Pituus</th>
+    <th>Leveys</th>
+    <th>Syvyys</th>
+    <th>Reknro</th>
+    <th>Jäsennumero</th>
     <th>Vartiovuoro</th>
     <th>Hinta</th>
     <th>On olemassa</th>
@@ -77,7 +79,11 @@
             <td><%= link_to berth.reknro.to_s, Boat.where(:reknro => berth.reknro).first %></td>
             <td><%= berth.jno.to_s %></td>
             <td><%= berth.vartio.to_s %></td>
-            <td><%= (berth.width.to_s.to_d/@leveysLaituripaikanHinnanKasvuun.data)*@veneenHinnanKasvu.data+@minLaituripaikanHinta.data unless @veneenHinnanKasvu.nil? %></td>
+            <% if berth.length > 7 %>
+                <td><%= berth.width*@hintaYli7.to_s.to_i%></td>
+            <% else %>
+                <td><%= berth.width*@hintaAlle7.to_s.to_i %></td>
+            <% end %>
             <td><%= berth.printExists %></td>
             <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
             <td><%= link_to 'Poista', berth, method: :delete, data: {confirm: 'Oletko varma?'} %></td>
