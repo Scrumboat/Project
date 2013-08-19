@@ -8,7 +8,7 @@ class Berth < ActiveRecord::Base
   before_save :reknro_default_value
 
   validates_numericality_of :number, :only_integer => true
-  validates :jno, :presence => true, :uniqueness => true, length: {maximum: 2}, :numericality => { :greater_than_or_equal_to => 1 }
+  validates :number, :presence => true, :uniqueness => true, length: {maximum: 2}, :numericality => { :greater_than_or_equal_to => 1 }
 
   def reknro_default_value
     self.reknro ||= ""
