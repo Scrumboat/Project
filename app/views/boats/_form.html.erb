@@ -100,14 +100,18 @@
     <%= f.label :katsastus %>
     <%= f.text_field :katsastus %>
   </div>
+    <div class="field">
+      <%= f.label :telakka %>
+      <%= f.text_field :telakka %>
+    </div>
   <div class="field">
     <%= f.label :Laituri %>
-    <%= number_field_tag :Laituri %>
+    <%= f.select :laituri, @laituri_idt, :selected => params[:laituri], onchange: "changeUrl();" %>
   </div>
   <div class="field">
     <%= f.label :Laituripaikka %>
-    <%= number_field_tag :Laituripaikka %>
-  </div>
+    <%= f.select :laituripaikka, @laituripaikat %>
+
   <div class="actions">
     <%= f.submit @teksti %>
   </div>
