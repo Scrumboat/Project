@@ -16,7 +16,7 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-      <%= f.input :number, input_html: { value: params[:number]} %>
+      <%= f.input :number, input_html: { value: @free_number} %>
       <%= f.input :width %>
       <%= f.input :length %>
       <%= f.input :depth %>
@@ -30,3 +30,6 @@
       <%= f.submit @teksti, :id => 'lisaa_laituripaikka' %>
     </div>
 <% end %>
+
+
+<%= @testi %>
