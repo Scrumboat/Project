@@ -1,51 +1,74 @@
+# encoding: UTF-8
 class DocksController < ApplicationController
   # GET /docks
   # GET /docks.json
   def index
     @docks = Dock.all
+    @virhe = ""
+    if !(params[:paikka1].blank?) && !(params[:paikka2].blank?)
 
-    if !(params[:vene1].blank?) && !(params[:vene2].blank?)
-      @teksti = "onnistu"
+      @paikka1 = Berth.where(:id => params[:paikka1]).first
+      @paikka2 = Berth.where(:id => params[:paikka2]).first
 
-      @paikka1 = Berth.where(:boat_id => params[:vene1]).first
-      @paikka2 = Berth.where(:boat_id => params[:vene2]).first
-
-      @boat1 = Boat.where(:id => params[:vene1]).first
-      @boat2 = Boat.where(:id => params[:vene2]).first
+      @boat1 = Boat.where(:id => @paikka1.boat_id).first
+      @boat2 = Boat.where(:id => @paikka2.boat_id).first
 
       unless (@boat1.nil? || @boat2.nil?)
         if (@boat1.pituus <= @paikka2.length && @boat2.pituus <= @paikka1.length)
           if (@boat1.leveys <= @paikka2.width && @boat2.leveys <= @paikka1.width)
             if (@boat1.syvyys <= @paikka2.depth && @boat2.syvyys <= @paikka1.depth)
-
-              @paikka1.boat_id = params[:vene2]
-              @paikka2.boat_id = params[:vene1]
+              @paikka1.boat_id = params[:paikka2]
+              @paikka1.boat = @boat2
+              @paikka2.boat_id = params[:paikka1]
+              @paikka2.boat = @boat1
               @paikka1.save
               @paikka2.save
-              @teksti ="onnistu NYT"
+            else
+              @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan syvyys oli liian pieni"
             end
+          else
+            @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan leveys oli liian pieni"
           end
+        else
+          @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan pituus oli liian pieni"
         end
       else
-        @teksti = "lahella :x"
         unless (@boat1.nil?)
-          @paikka2 = Berth.where(:id => params[:vene2]).first
-          if (@boat1.pituus <= @paikka2.length && @boat1.leveys <= @paikka2.width && @boat1.syvyys <= @paikka2.depth)
-            @paikka1.boat_id = nil
-            @paikka2.boat_id = params[:vene1]
-            @paikka1.save
-            @paikka2.save
-            @teksti ="onnistu NYT JEE"
+          if (@boat1.pituus <= @paikka2.length)
+            if (@boat1.leveys <= @paikka2.width)
+              if (@boat1.syvyys <= @paikka2.depth)
+                @paikka1.boat_id = nil
+                @paikka2.boat_id = params[:paikka1]
+                @paikka2.boat = @boat1
+                @paikka1.save
+                @paikka2.save
+              else
+                @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan syvyys oli liian pieni"
+              end
+            else
+              @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan leveys oli liian pieni"
+            end
+          else
+            @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan pituus oli liian pieni"
           end
         end
         unless (@boat2.nil?)
-          @paikka1 = Berth.where(:id => params[:vene1]).first
-          if (@boat2.pituus <= @paikka1.length && @boat2.leveys <= @paikka1.width && @boat2.syvyys <= @paikka1.depth)
-            @paikka2.boat_id = nil
-            @paikka1.boat_id = params[:vene2]
-            @paikka1.save
-            @paikka2.save
-            @teksti ="onnistu NYT JEE"
+          if (@boat2.pituus <= @paikka1.length)
+            if (@boat2.leveys <= @paikka1.width)
+              if (@boat2.syvyys <= @paikka1.depth)
+                @paikka2.boat_id = nil
+                @paikka1.boat_id = params[:paikka2]
+                @paikka1.boat = @boat2
+                @paikka1.save
+                @paikka2.save
+              else
+                @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan syvyys oli liian pieni"
+              end
+            else
+              @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan leveys oli liian pieni"
+            end
+          else
+            @virhe = "Ei voitu vaihtaa, (ainakin) toisen paikan pituus oli liian pieni"
           end
         end
       end

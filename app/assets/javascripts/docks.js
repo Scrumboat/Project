@@ -14,8 +14,8 @@ jQuery(document).ready(function($) {
 });
 
 function set_id(id, olio) {
-    var eka = $("#vene1");
-    var toka = $("#vene2");
+    var eka = $("#paikka1");
+    var toka = $("#paikka2");
     console.log(eka.val());
     if (eka.val() === "") {
         eka.val(id);
@@ -30,8 +30,8 @@ function set_id(id, olio) {
 }
 
 function unset_id(id) {
-    var eka = $("#vene1");
-    var toka = $("#vene2");
+    var eka = $("#paikka1");
+    var toka = $("#paikka2");
     if (eka.val() === id) {
         eka.val("");
     } else if (toka.val() === id) {

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PricingsController < ApplicationController
   # GET /pricings
   # GET /pricings.json

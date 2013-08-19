@@ -38,18 +38,18 @@ puts 'CREATING DOCKS: 1, 2'
 Dock.create([{name: 'a', length: 30}, {name: 'b', length: 40}])
 
 puts 'CREATING BERTHS: 1, 2'
-Berth.create([{ id: 1, number: 1, length: 11, width: 2.4, depth: 1.6, exists: true, dock_id: 1, boat_id: 1},
-              { id: 2, number: 2, length: 31, width: 5.5, depth: 2.4, exists: false, dock_id: 2, boat_id: 2},
-              { id: 3, number: 3, length: 5, width: 3, depth: 2.7, exists: true, dock_id: 1,  boat_id: 3},
-              { id: 4, number: 4, length: 2, width: 4, depth: 5, exists: true, dock_id: 1, boat_id: 4},
-              { id: 5, number: 5, length: 1, width: 1, depth: 1, exists: true, dock_id: 1},
-              { id: 6, number: 6, length: 2, width: 2, depth: 2, exists: true, dock_id: 1},
-              { id: 7, number: 7, length: 1.5, width: 1.5, depth: 1.5, exists: true, dock_id: 2},
-              { id: 8, number: 8, length: 1.2, width: 2.2, depth: 2.1, exists: true, dock_id: 2},
-              { id: 9, number: 9, length: 9, width: 3.5, depth: 3.2, exists: true, dock_id: 1},
+Berth.create([{ id: 1, number: 1, length: 11, width: 5, depth: 6, exists: true, dock_id: 1, boat_id: 1},
+              { id: 2, number: 2, length: 15, width: 5.5, depth: 4, exists: false, dock_id: 2, boat_id: 2},
+              { id: 3, number: 3, length: 5, width: 5, depth: 6.5, exists: true, dock_id: 1,  boat_id: 3},
+              { id: 4, number: 4, length: 7, width: 4, depth: 5, exists: true, dock_id: 1, boat_id: 4},
+              { id: 5, number: 5, length: 4, width: 4, depth: 4, exists: true, dock_id: 1},
+              { id: 6, number: 6, length: 5.5, width: 5.5, depth: 5.5, exists: true, dock_id: 1},
+              { id: 7, number: 7, length: 4.7, width: 4.7, depth: 4.7, exists: true, dock_id: 2},
+              { id: 8, number: 8, length: 4, width: 4, depth: 4, exists: true, dock_id: 2},
+              { id: 9, number: 9, length: 9, width: 3.5, depth: 3, exists: true, dock_id: 1},
               { id: 10, number: 4, length: 3, width: 3, depth: 3, exists: true, dock_id: 2},
               { id: 11, number: 3, length: 5, width: 5, depth: 5, exists: true, dock_id: 2},
-              { id: 12, number: 1, length: 2.5, width: 8, depth: 4, exists: true, dock_id: 2}])
+              { id: 12, number: 1, length: 5, width: 8, depth: 4, exists: true, dock_id: 2}])
 
 
 puts 'CREATING 2 DOCKYARDS'

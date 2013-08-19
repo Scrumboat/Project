@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class BoatsMembersController < ApplicationController
   # GET /boats_members
   # GET /boats_members.json

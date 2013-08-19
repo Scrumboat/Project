@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class OwnershipsController < ApplicationController
   # GET /ownerships
   # GET /ownerships.json
