@@ -20,7 +20,7 @@
                             <td><b><%= i %></b>: <%= check_box_tag(berth.id, berth.id, checked = false) %> Ei venettä</td>
                         <% end %>
                     <% else %>
-                        <td><b><%= i %></b>: Ei laituripaikkaa <%= link_to 'Luo uusi laituripaikka', new_dock_berth_path(dock) %></td>
+                        <td><b><%= i %></b>: Ei laituripaikkaa - <%= link_to 'Luo uusi laituripaikka', new_dock_berth_path(dock, :number => i) %></td>
                     <% end %>
                   </tr>
               <% end %>
@@ -43,7 +43,7 @@
                             <td><b><%= i %></b>: <%= check_box_tag(berth.id, berth.id, checked = false) %> Ei venettä</td>
                         <% end %>
                     <% else %>
-                        <td><b><%= i %></b>: Ei laituripaikkaa <%= link_to 'Luo uusi laituripaikka', new_dock_berth_path(dock) %></td>
+                        <td><b><%= i %></b>: Ei laituripaikkaa - <%= link_to 'Luo uusi laituripaikka', new_dock_berth_path(dock, :number => i) %></td>
                     <% end %>
                   </tr>
               <% end %>

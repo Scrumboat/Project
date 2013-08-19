@@ -1,38 +1,21 @@
 <h2> Laiturille <%= @dock.id %></h2>
-<p>Laiturissa tilaa: <%= @spaceLeft.to_s + ' m'%> </p>
+<p>Laiturissa tilaa: <%= @spaceLeft.to_s + ' m' %> </p>
 
-<%= simple_form_for([@dock, @berth], :html => {:multipart => true}) do |f| %>
-  <% if @berth.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@berth.errors.count, "error") %> prohibited this dock from being saved:</h2>
+<%= simple_form_for(@berth) do |f| %>
+    <%= f.error_notification %>
 
-      <ul>
-      <% @berth.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="form-inputs">
+      <%= f.input :number, input_html: { value: params[:number]} %>
+      <%= f.input :width %>
+      <%= f.input :length %>
+      <%= f.input :depth %>
+      <%= f.input :reknro %>
+      <%= f.input :jno %>
+      <%= f.input :vartio %>
+      <%= f.check_box :exists %>
     </div>
-  <% end %>
 
-  <div class="field">    
-    <%= f.label :Numero %>
-    <%= f.text_field :number %><br />
-    <%= f.label :leveys %>
-    <%= f.text_field :width %><br />
-    <%= f.label :pituus %>
-    <%= f.text_field :length %><br />
-    <%= f.label :syvyys %>
-    <%= f.text_field :depth %><br />
-    <%= f.label :reknro %>
-    <%= f.text_field :reknro %><br />
-    <%= f.label :jno %>
-    <%= f.text_field :jno %><br />
-    <%= f.label :Vartiovuoro %>
-    <%= f.date_select :vartio %><br />
-    <%= f.label 'On olemassa' %>
-    <%= f.check_box :exists %>
-  </div>
-  <div class="actions">
-    <%= f.submit @teksti, :id => 'lisaa_laituripaikka'%>
-  </div>
+    <div class="actions">
+      <%= f.submit @teksti, :id => 'lisaa_laituripaikka' %>
+    </div>
 <% end %>
