@@ -47,7 +47,14 @@ class BoatsController < ApplicationController
        @laituri_idt.push(f.id)
     end
 
-    @laituripaikat = Berth.where(:dock_id => params[:laituri]).all.map(&:id)
+    @laituri = params[:laituri]
+    if @laituri.nil?
+      @laituri = 1
+    end
+
+    laituripaikat = Berth.where(:dock_id => @laituri).all.map(&:id)
+    taulu = (1..25)
+    @vapaat_laituripaikat = taulu.replace(laituripaikat)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -66,6 +73,11 @@ class BoatsController < ApplicationController
       @laituri_idt.push(f.id)
     end
 
+    @laituri = params[:laituri]
+    if @laituri.nil?
+      @laituri = 1
+    end
+    @laituripaikat = Berth.where(:dock_id => @laituri).all.map(&:id)
     
 	  show_jno_in_edit_instead_of_id
   end
