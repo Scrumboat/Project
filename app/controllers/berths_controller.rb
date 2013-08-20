@@ -30,6 +30,17 @@ class BerthsController < ApplicationController
     @berth = @dock.berths.build
     currentTotalWidth = Berth.where(:dock_id => params[:dock_id]).sum('width')
     @spaceLeft = @dock.length - currentTotalWidth
+    @free_number = 1
+    # ^ HUOM !!!!!!! tähän pitäis laittaa mut ei toimi :( @free_number = @dock.berths.max_by(&:number).number
+    ind = @dock.berths.all.map(&:number)
+    indeksi = 1
+    ind.each do |i|
+       if i != indeksi
+         @free_number = indeksi
+         break
+       end
+      indeksi = indeksi + 1
+    end
 
     respond_to do |format|
       format.html # new.html.erb

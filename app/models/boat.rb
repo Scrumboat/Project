@@ -20,7 +20,7 @@ validates_presence_of :vuosimalli
 
 validates_numericality_of :pituus, :greater_than => 0
 validates_numericality_of :leveys, :greater_than => 0
-validates_numericality_of :syvyys
+validates_numericality_of :syvyys, :greater_than => 0
 validates_numericality_of :vuosimalli, :only_integer => true
 
 has_many :BoatsMembers, :dependent => :destroy
@@ -31,7 +31,7 @@ has_one :dockyard_spot
 belongs_to :model
 
 accepts_nested_attributes_for :BoatsMembers, :allow_destroy => true
-attr_accessible :BoatsMembers_attributes, :members, :huomautukset, :katsastus, :korkeus, :Laituri, :leveys, :muutos_pvm, :nimi, :pituus, :reknro, :rek_pvm, :syvyys, :tarra, :teho, :telakka, :uppouma, :valm_malli, :vene_puh_a, :vene_puh_b, :vuosimalli, :tyyppi, :tag_attributes
+attr_accessible :BoatsMembers_attributes, :members, :huomautukset, :katsastus, :korkeus, :Laituri, :leveys, :muutos_pvm, :nimi, :pituus, :reknro, :rek_pvm, :syvyys, :tarra, :teho, :telakka, :uppouma, :valm_malli, :vene_puh_a, :vene_puh_b, :vuosimalli, :laituri, :laituripaikka, :tyyppi, :tag_attributes
 def self.search(search)
   if search
     #@omistajat = Member.where(:nimi => search).map(&:id)

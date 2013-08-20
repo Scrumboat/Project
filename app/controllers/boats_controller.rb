@@ -41,6 +41,21 @@ class BoatsController < ApplicationController
     @boat.BoatsMembers.build
     @mallit = Model.select("\"valm_malli\"")
     @models = Model.all.map(&:valm_malli).insert(0, "")
+    @laituri_idt = Array.new
+    @laiturit = Dock.all
+    @laiturit.each do |f|
+       @laituri_idt.push(f.id)
+    end
+
+    @laituri = params[:laituri]
+    if @laituri.nil?
+      @laituri = 1
+    end
+
+    laituripaikat = Berth.where(:dock_id => @laituri).all.map(&:id)
+    taulu = (1..25)
+    @vapaat_laituripaikat = taulu.replace(laituripaikat)
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @boat }
@@ -52,6 +67,17 @@ class BoatsController < ApplicationController
     @boat = Boat.find(params[:id], :include => :members)
     @mallit = Model.select("\"valm_malli\"")
     @models = Model.all.map(&:valm_malli).insert(0, "")
+    @laituri_idt = Array.new
+    @laiturit = Dock.all
+    @laiturit.each do |f|
+      @laituri_idt.push(f.id)
+    end
+
+    @laituri = params[:laituri]
+    if @laituri.nil?
+      @laituri = 1
+    end
+    @laituripaikat = Berth.where(:dock_id => @laituri).all.map(&:id)
     
 	  show_jno_in_edit_instead_of_id
   end
@@ -61,10 +87,7 @@ class BoatsController < ApplicationController
   def create
     @boat = Boat.new(params[:boat])
 
-    # @malli = Boat.find(:first, :conditions => ["\"valm_malli\" = ?", params[:boat][:valm_malli]])
     @model = Model.where(:valm_malli => params[:boat][:valm_malli]).first
-    #@malli = Boat.find(:first, :conditions => [:valm_malli => boat.valm_malli, params[:boat][:valm_malli]])
-    #@malli = Boat.where(:valm_malli => params[:boat][:valm_malli])
 
     if @model.nil?
       @model = Model.new
