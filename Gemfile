@@ -43,6 +43,7 @@ gem 'figaro'
 gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
 gem 'prawn'
 gem 'pdf-merger'
+gem 'i18n'
 
 group :development, :test do
   # Pretty printed test output

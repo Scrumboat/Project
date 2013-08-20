@@ -12,4 +12,8 @@ class Storage < ActiveRecord::Base
       find(:all)
 	end
   end
+
+      def pala=(pala)
+    write_attribute :pala, pala.to_s.gsub(',', '.')
+  end
 end

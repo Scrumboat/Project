@@ -219,6 +219,7 @@ DEPENDENCIES
   devise (~> 2.2.4)
   execjs
   figaro
+  i18n
   jquery-rails (= 2.3.0)
   launchy
   money-rails

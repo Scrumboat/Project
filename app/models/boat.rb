@@ -53,5 +53,25 @@ def self.search(search)
     find(:all)
   end
 end
+# Pilkut muutetaan pisteiksi
+def pituus=(pituus)
+    write_attribute :pituus, pituus.to_s.gsub(',', '.')
+end
+
+def leveys=(leveys)
+    write_attribute :leveys, leveys.to_s.gsub(',', '.')
+end
+
+def syvyys=(syvyys)
+    write_attribute :syvyys, syvyys.to_s.gsub(',', '.')
+end
+
+def korkeus=(korkeus)
+    write_attribute :korkeus, korkeus.to_s.gsub(',', '.')
+end
+
+def uppouma=(uppouma)
+    write_attribute :uppouma, uppouma.to_s.gsub(',', '.')
+end
 
 end

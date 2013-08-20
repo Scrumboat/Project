@@ -9,12 +9,12 @@
 
 <p>
   <b>rek_pvm:</b>
-  <%= @boat.rek_pvm %>
+ <%= I18n.l @boat.rek_pvm, format: :short %>
 </p>
 
 <p>
   <b>muutos_pvm:</b>
-  <%= @boat.muutos_pvm %>
+  <%= I18n.l (@boat.muutos_pvm) if @boat.muutos_pvm %>
 </p>
 
 <p>
@@ -38,8 +38,9 @@
 </p>
 
 <p>
+  <%= I18n.l Time.now %>
   <b>pituus:</b>
-  <%= @boat.pituus %>
+  <%= I18n.t @boat.pituus %>
 </p>
 
 <p>

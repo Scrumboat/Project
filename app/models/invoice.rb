@@ -238,4 +238,59 @@ class Invoice < ActiveRecord::Base
     end
     (sum - self.payments.sum(:amount)).to_d(2)
   end
+
+    def ensirekisterimaksu=(ensirekisterimaksu)
+    write_attribute :ensirekisterimaksu, ensirekisterimaksu.to_s.gsub(',', '.')
+  end
+    def jasenmaksu=(jasenmaksu)
+    write_attribute :jasenmaksu, jasenmaksu.to_s.gsub(',', '.')
+  end
+      def katsastussakko=(katsastussakko)
+    write_attribute :katsastussakko, katsastussakko.to_s.gsub(',', '.')
+  end
+      def laiturimaksu=(laiturimaksu)
+    write_attribute :laiturimaksu, laiturimaksu.to_s.gsub(',', '.')
+  end
+      def laskutuslisa=(laskutuslisa)
+    write_attribute :laskutuslisa, laskutuslisa.to_s.gsub(',', '.')
+  end
+      def liittymismaksu=(liittymismaksu)
+    write_attribute :liittymismaksu, liittymismaksu.to_s.gsub(',', '.')
+  end
+      def muutMaksut=(muutMaksut)
+    write_attribute :muutMaksut, muutMaksut.to_s.gsub(',', '.')
+  end
+      def suoritukset_kassaan=(suoritukset_kassaan)
+    write_attribute :suoritukset_kassaan, suoritukset_kassaan.to_s.gsub(',', '.')
+  end
+      def talkookerroin=(talkookerroin)
+    write_attribute :talkookerroin, talkookerroin.to_s.gsub(',', '.')
+  end
+      def talkoosakko=(talkoosakko)
+    write_attribute :talkoosakko, talkoosakko.to_s.gsub(',', '.')
+  end
+      def telakkamaksu=(telakkamaksu)
+    write_attribute :telakkamaksu, telakkamaksu.to_s.gsub(',', '.')
+  end
+      def toimihlokerroin=(toimihlokerroin)
+    write_attribute :toimihlokerroin, toimihlokerroin.to_s.gsub(',', '.')
+  end
+      def varastokoppimaksu=(varastokoppimaksu)
+    write_attribute :varastokoppimaksu, varastokoppimaksu.to_s.gsub(',', '.')
+  end 
+      def vartiosakko=(vartiosakko)
+    write_attribute :vartiosakko, vartiosakko.to_s.gsub(',', '.')
+  end
+      def venerekisterimaksu=(venerekisterimaksu)
+    write_attribute :venerekisterimaksu, venerekisterimaksu.to_s.gsub(',', '.')
+  end
+      def viitesuoritukset=(viitesuoritukset)
+    write_attribute :viitesuoritukset, viitesuoritukset.to_s.gsub(',', '.')
+  end
+      def summa=(summa)
+    write_attribute :summa, summa.to_s.gsub(',', '.')
+  end
+      def karhuttu=(karhuttu)
+    write_attribute :karhuttu, karhuttu.to_s.gsub(',', '.')
+  end
 end
