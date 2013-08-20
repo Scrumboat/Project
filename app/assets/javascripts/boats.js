@@ -21,8 +21,11 @@ function taydenna() {
 	});
 }
 
-function changeUrl() {
-    alert("JES!");
-    //value = document.getElementById('boat_laituri').value;
-   // window.location = "http://localhost:3000/boats/new?laituri="+value
-}
+//function changeUrl() {
+//   value = document.getElementById('boat_laituri').value;
+//   window.location = "http://localhost:3000/boats/new?laituri="+value
+//}
+
+//function changeDefaultValue(value) {
+//    document.getElementById('boat_laituri').value = value;
+//}

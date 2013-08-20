@@ -46,7 +46,7 @@ Berth.create([{ id: 1, number: 1, length: 11, width: 5, depth: 6, exists: true, 
               { id: 6, number: 6, length: 5.5, width: 5.5, depth: 5.5, exists: true, dock_id: 1},
               { id: 7, number: 7, length: 4.7, width: 4.7, depth: 4.7, exists: true, dock_id: 2},
               { id: 8, number: 8, length: 4, width: 4, depth: 4, exists: true, dock_id: 2},
-              { id: 9, number: 9, length: 9, width: 3.5, depth: 3, exists: true, dock_id: 1},
+              { id: 9, number: 13, length: 9, width: 3.5, depth: 3, exists: true, dock_id: 1},
               { id: 10, number: 10, length: 3, width: 3, depth: 3, exists: true, dock_id: 2},
               { id: 11, number: 11, length: 5, width: 5, depth: 5, exists: true, dock_id: 2},
               { id: 12, number: 12, length: 5, width: 8, depth: 4, exists: true, dock_id: 2}])
