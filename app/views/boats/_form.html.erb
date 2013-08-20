@@ -1,4 +1,5 @@
 <%= javascript_include_tag "autocomplete-rails.js" %>
+<body onload="changeDefaultValue(<%= params[:laituri] %>);">
 <%= simple_nested_form_for @boat, :html => { :class => 'form-horizontal'} do |f| %>
   <% if @boat.errors.any? %>
     <div id="error_explanation">
@@ -106,11 +107,13 @@
     </div>
   <div class="field">
     <%= f.label :Laituri %>
-    <%= f.select :laituri, @laituri_idt, :selected => @laituri, onchange: "changeUrl();" %>
+    <%= f.text_field :laituri %>
+    <% # f.select :laituri, @laituri_idt %>
   </div>
   <div class="field">
     <%= f.label :Laituripaikka %>
-    <%= f.select :laituripaikka, @vapaat_laituripaikat %>
+    <%= f.text_field :laituripaikka %>
+    <% # f.select :laituripaikka, @vapaat_laituripaikat %>
 
   <div class="actions">
     <%= f.submit @teksti %>
