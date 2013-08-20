@@ -34,7 +34,7 @@ class StoragesController < ApplicationController
   def create
     @storage = Storage.new(params[:storage])
 	@onkojno = false
-	if params[:storage][:jno]
+	if params[:jno]
 	  fetch_member_and_set_isOk
 	  @onkojno = true
 	else
