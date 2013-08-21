@@ -17,7 +17,7 @@ Given(/^I sign up as "(.*?)" with "(.*?)"$/) do |arg1, arg2|
 end
 
 Then(/^I should be signed in$/) do
-  page.should have_content('success')
+  page.should have_content('onnistui')
 end
 
 def sign_up arg1, arg2

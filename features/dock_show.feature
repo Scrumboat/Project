@@ -17,8 +17,8 @@ Feature: Show dock with list of berth
 		|5|5.5|2.5|1.6|true|1|
 		|7|4.5|3.5|1.7|false|2|
 		And I am on the "/docks/1" page		
-		Then page should have content "Laituri 1"
+		Then page should have content "Laituri"
 		And page should have content "30"
 		And page should have content "Laituripaikat"
-		And page should have content "1 5.5 m 2.4 m 1.6 m Kyllä"
-		And page should have content "5 5.5 m 2.5 m 1.6 m Kyllä"
+		And page should have content "1 5.5 m 2.4 m 1.6 m 0.0 Kyllä"
+		And page should have content "5 5.5 m 2.5 m 1.6 m 0.0 Kyllä"

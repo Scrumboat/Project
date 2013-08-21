@@ -10,7 +10,7 @@ Given(/^I add new member:$/) do |table|
     fill_in 'member[matka_puh]', :with => member[:Matkapuh]
     select member[:Jäsentyyppi], :from => 'member[jasentyyppi]'
     select '1', :from => 'member[liittynyt(3i)]'
-    select 'January', :from => 'member[liittynyt(2i)]'
+    select 'Tammikuu', :from => 'member[liittynyt(2i)]'
     select '2011', :from => 'member[liittynyt(1i)]'
   end
   click_button 'Luo jäsen'
