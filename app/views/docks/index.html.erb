@@ -7,9 +7,14 @@
     <div class="row">
       <div class="span5">
         <table class="table table-condensed">
-          <% max_numero = dock.berths.max_by(&:number).number || 0 %>
-          <% if max_numero > 0 %>
-              <% ind = (1..max_numero).reject(&:even?) %>
+		  <% max_nro = 0 %>
+		  <% for paikka in dock.berths %>
+		  <% if paikka.number > max_nro %>
+		    <% max_nro = paikka.number %>
+		  <% end %>
+		  <% end %>
+          <% if max_nro > 0 %>
+              <% ind = (1..max_nro).reject(&:even?) %>
               <% ind.each do |i| %>
                   <% berth = dock.berths.find_by_number(i) %>
                   <tr>
@@ -30,9 +35,14 @@
       </div>
       <div class="span5">
         <table class="table table-condensed">
-          <% max_numero = dock.berths.max_by(&:number).number || 0 %>
-          <% if max_numero > 0 %>
-              <% ind = (1..max_numero).reject(&:odd?) %>
+		<% max_nro = 0 %>
+		  <% for paikka in dock.berths %>
+		  <% if paikka.number > max_nro %>
+		    <% max_nro = paikka.number %>
+		  <% end %>
+		  <% end %>
+          <% if max_nro > 0 %>
+              <% ind = (1..max_nro).reject(&:odd?) %>
               <% ind.each do |i| %>
                   <% berth = dock.berths.find_by_number(i) %>
                   <tr>
