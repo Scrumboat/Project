@@ -107,13 +107,11 @@
     </div>
   <div class="field">
     <%= f.label :Laituri %>
-    <%= f.text_field :laituri %>
-    <% # f.select :laituri, @laituri_idt %>
+    <%= f.select :laituri, @laituri_idt, {}, onchange: "changeBerths();" %>
   </div>
   <div class="field">
     <%= f.label :Laituripaikka %>
-    <%= f.text_field :laituripaikka %>
-    <% # f.select :laituripaikka, @vapaat_laituripaikat %>
+    <%= f.select :laituripaikka, @vapaat_laituripaikat %>
 
   <div class="actions">
     <%= f.submit @teksti %>
