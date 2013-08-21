@@ -21,11 +21,37 @@ function taydenna() {
 	});
 }
 
-//function changeUrl() {
-//   value = document.getElementById('boat_laituri').value;
-//   window.location = "http://localhost:3000/boats/new?laituri="+value
-//}
+function changeBerths() {
 
-//function changeDefaultValue(value) {
-//    document.getElementById('boat_laituri').value = value;
-//}
+    var select = document.getElementById('boat_laituripaikka');
+
+    while (select.options.length > 0) {
+        select.remove(select.options.length - 1);
+    }
+
+    var e = document.getElementById('boat_laituri');
+    var laituri_id = e.options[e.selectedIndex].value;
+
+    var table = new Array();
+
+    $.getJSON('/berths.json', function(data) {
+        for (var i = 0; i < data.length; i++) {
+            onkoDockOikea = false;
+            onkoBoatOikea = false;
+            $.each(data[i], function(key, val) {
+                if (key == 'boat_id' && val == null) {
+                    onkoBoatOikea = true;
+                }
+               if (key == 'dock_id' && val == laituri_id) {
+                     onkoDockOikea = true;
+               }
+                if (onkoDockOikea == true && onkoBoatOikea == true && key == 'number') {
+                    var opt = document.createElement('option');
+                    opt.text = val;
+                    opt.value = val;
+                    select.add(opt, null);
+                }
+            });
+    }
+    });
+}

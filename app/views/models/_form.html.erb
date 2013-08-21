@@ -11,7 +11,10 @@
     </div>
   <% end %>
 
-
+  <div class="field">
+      <%= f.label :valm_malli, :label => 'Nimi' %><br />
+      <%= f.text_field :valm_malli %>
+    </div>
   <div class="field">
     <%= f.label :korkeus %><br />
     <%= f.text_field :korkeus %>
@@ -32,10 +35,7 @@
     <%= f.label :uppouma %><br />
     <%= f.text_field :uppouma %>
   </div>
-  <div class="field">
-    <%= f.label :valm_malli %><br />
-    <%= f.text_field :valm_malli %>
-  </div>
+
   <div class="field">
     <%= f.label :tyyppi %><br />
     <%= f.text_field :tyyppi %>

@@ -41,22 +41,15 @@ class BoatsController < ApplicationController
     @boat.BoatsMembers.build
     @mallit = Model.select("\"valm_malli\"")
     @models = Model.all.map(&:valm_malli).insert(0, "")
-    @laituri_idt = Array.new
-    @laiturit = Dock.all
-    @laiturit.each do |f|
-       @laituri_idt.push(f.id)
-    end
+    #@laituri_idt = Array.new
+    #@laiturit = Dock.all
+    #@laiturit.each do |f|
+    #   @laituri_idt.push(f.id)
+    #end
 
-    @laituri_idt = [1,2]
+    @laituri_idt = Dock.all.map(&:id)
 
-    @laituri = params[:laituri]
-    if @laituri.nil?
-      @laituri = 1
-    end
-
-    #laituripaikat = Berth.where(:dock_id => @laituri).all.map(&:id)
-    #taulu = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-    #@vapaat_laituripaikat = taulu - laituripaikat
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -76,16 +69,10 @@ class BoatsController < ApplicationController
     #end
     @laituri_idt = Dock.all.map(&:id)
 
-    @laituri = params[:laituri]
-    if @laituri.nil?
-      @laituri = 1
-    end
+    # @laituri_idt = [1,2]
 
-    @laituri_idt = [1,2]
 
-    #laituripaikat = Berth.where(:dock_id => @laituri).all.map(&:id)
-    #taulu = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-    #@vapaat_laituripaikat = taulu - laituripaikat
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1, :boat_id => nil).all.map(&:number)
   end
 
   # POST /boats
