@@ -54,4 +54,8 @@ function changeBerths() {
             });
     }
     });
+    var opt = document.createElement('option');
+    opt.text = "";
+    opt.value = "";
+    select.add(opt,null);
 }

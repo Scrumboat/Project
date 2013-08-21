@@ -48,8 +48,10 @@ class BoatsController < ApplicationController
     #end
 
     @laituri_idt = Dock.all.map(&:id)
+    @laituri_idt.insert(0,nil)
 
     @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -68,11 +70,11 @@ class BoatsController < ApplicationController
     #  @laituri_idt.push(f.id)
     #end
     @laituri_idt = Dock.all.map(&:id)
+    @laituri_idt.insert(0,nil)
 
-    # @laituri_idt = [1,2]
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
 
-
-    @vapaat_laituripaikat = Berth.where(:dock_id => 1, :boat_id => nil).all.map(&:number)
   end
 
   # POST /boats
