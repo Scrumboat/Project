@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nimi:</b>
+  <%= @guardseason.nimi %>
+</p>
+
+<p>
+  <b>Guardturn:</b>
+  <%= @guardseason.guardturn_id %>
+</p>
+
+<p>
+  <b>Alku pvm:</b>
+  <%= @guardseason.alku_pvm %>
+</p>
+
+<p>
+  <b>Loppu pvm:</b>
+  <%= @guardseason.loppu_pvm %>
+</p>
+
+
+<%= link_to 'Edit', edit_guardseason_path(@guardseason) %> |
+<%= link_to 'Back', guardseasons_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820124250) do
+ActiveRecord::Schema.define(:version => 20130822160335) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -109,6 +109,22 @@ ActiveRecord::Schema.define(:version => 20130820124250) do
     t.float    "width"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "guardseasons", :force => true do |t|
+    t.string   "nimi"
+    t.integer  "guardturn_id"
+    t.date     "alku_pvm"
+    t.date     "loppu_pvm"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "guardturns", :force => true do |t|
+    t.date     "vartiointi_pvm"
+    t.integer  "jno"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "invoices", :force => true do |t|

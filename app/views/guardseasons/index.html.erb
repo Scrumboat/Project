@@ -1,0 +1,29 @@
+<h1>Listing guardseasons</h1>
+
+<table>
+  <tr>
+    <th>Nimi</th>
+    <th>Guardturn</th>
+    <th>Alku pvm</th>
+    <th>Loppu pvm</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @guardseasons.each do |guardseason| %>
+  <tr>
+    <td><%= guardseason.nimi %></td>
+    <td><%= guardseason.guardturn_id %></td>
+    <td><%= guardseason.alku_pvm %></td>
+    <td><%= guardseason.loppu_pvm %></td>
+    <td><%= link_to 'Show', guardseason %></td>
+    <td><%= link_to 'Edit', edit_guardseason_path(guardseason) %></td>
+    <td><%= link_to 'Destroy', guardseason, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Guardseason', new_guardseason_path %>
