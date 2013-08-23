@@ -41,5 +41,9 @@ end
   scope :is_deleted, -> { where(deleted: true) }
   scope :active, -> { where(deleted: false) }
 
+def naytaJnoJaNimi
+  #jasen = find(:first, :conditions => ['"jno" LIKE ?', self.jno]
+  "#{self.jno} / #{self.nimi}"
+end
 
 end
