@@ -113,10 +113,21 @@
   <b>Avain:</b>
   <%= @member.avain %>
 </p>
-
 <p>
-  <b>Erityisjäsen:</b>
-  <%= @member.special_billing %>
+  <b>Laituripaikkahyvitys:</b>
+  <%= @member.berthrefund %>
+</p>
+<p>
+  <b>Telakkapaikkahyvitys:</b>
+  <%= @member.dockyardspotrefund %>
+</p>
+<p>
+  <b>Varastokoppihyvitys:</b>
+  <%= @member.storagerefund %>
+</p>
+<p>
+  <b>Jäsenmaksuhyvitys:</b>
+  <%= @member.membershiprefund %>
 </p>
 
 <% if @member.deleted %>

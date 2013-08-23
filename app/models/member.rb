@@ -25,7 +25,7 @@ has_many :boats, :through => :BoatsMembers
 has_many :invoices
 has_one :employment
 
-attr_accessible :boats, :ammatti, :avain, :email_fax, :huom, :jasentyyppi, :jno, :koti_puh, :laivuri, :liittynyt, :lisenssi, :maa, :matka_puh, :muutos_pvm, :nimi, :osoite, :posti, :sotu, :toimi, :tyo_puh, :varasto, :deleted, :deleted_at, :viitenumero, :special_billing
+attr_accessible :boats, :ammatti, :avain, :email_fax, :huom, :jasentyyppi, :jno, :koti_puh, :laivuri, :liittynyt, :lisenssi, :maa, :matka_puh, :muutos_pvm, :nimi, :osoite, :posti, :sotu, :toimi, :tyo_puh, :varasto, :deleted, :deleted_at, :viitenumero, :berthrefund, :dockyardspotrefund, :storagerefund, :membershiprefund
 
 JASENTYYPIT = {'Aikuisjäsen' => 'aikuisjasen', 'Ainaisjäsen' => 'ainaisjasen', 'Puolisojäsen' => 'puolisojasen', 'Nuorisojäsen' => 'nuorisojasen', 'Kunniajäsen' => 'kunniajasen', 'Kutsujäsen' => 'kutsujasen'}
 

@@ -103,15 +103,28 @@
     <%= f.label :Venereknro %>
     <%= text_field_tag :Venereknro %>
   </div>
+  <div class ="field">
+    <%= f.label :Laituripaikkahyvitys %>
+    <%= f.check_box :berthrefund, {}, true, false %>
+  </div>
+  <div class="field">
+    <%= f.label :Telakkapaikkahyvitys %>
+    <%= f.check_box :dockyardspotrefund %>
+  </div>
+  <div class="field">
+    <%= f.label :Varastokoppihyvitys %>
+    <%= f.check_box :storagerefund %>
+  </div>
+  <div class="field">
+    <%= f.label :Jäsenmaksuhyvitys %>
+    <%= f.check_box :membershiprefund %>
+  </div>
   <div class="field">
     <%= f.hidden_field :viitenumero %>
   </div>
   <div class="actions">
     <%= f.submit @teksti %>
   </div>
-    <div class="field">
-      <label> <%= f.check_box :special_billing %>  Erityislaskutus</label>
-    </div>
 
 
 <% end %>
