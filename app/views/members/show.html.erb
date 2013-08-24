@@ -41,7 +41,12 @@
 
 <p>
   <b>Toimi:</b>
-  <%= @member.toimi %>
+  <% if @member.toimi.empty? %>
+    <% toimenNimi = "" %>
+  <% else %>
+    <% toimenNimi = Employment.find(@member.toimi).nimi %>
+  <% end %>
+  <%= toimenNimi %>
 </p>
 
 <p>

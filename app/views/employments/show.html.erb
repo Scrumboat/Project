@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nimi:</b>
+  <%= @employment.nimi %>
+</p>
+
+<p>
+  <b>Hyvityksen suuruus:</b>
+  <%= @employment.hyvityksenSuuruus %>
+</p>
+
+
+<%= link_to 'Edit', edit_employment_path(@employment) %> |
+<%= link_to 'Back', employments_path %>
