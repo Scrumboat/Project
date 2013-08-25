@@ -104,20 +104,16 @@
     <%= text_field_tag :Venereknro %>
   </div>
   <div class ="field">
-    <%= f.label :Laituripaikkahyvitys %>
-    <%= f.check_box :berthrefund, {}, true, false %>
+    <%= f.input :berthrefund %>
   </div>
   <div class="field">
-    <%= f.label :Telakkapaikkahyvitys %>
-    <%= f.check_box :dockyardspotrefund %>
+    <%= f.input :dockyardspotrefund %>
   </div>
   <div class="field">
-    <%= f.label :Varastokoppihyvitys %>
-    <%= f.check_box :storagerefund %>
+    <%= f.input :storagerefund %>
   </div>
   <div class="field">
-    <%= f.label :Jäsenmaksuhyvitys %>
-    <%= f.check_box :membershiprefund %>
+    <%= f.input :membershiprefund %>
   </div>
   <div class="field">
     <%= f.hidden_field :viitenumero %>

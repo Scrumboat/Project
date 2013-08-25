@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    jQuery("input[type=checkbox]").click(function() {
+    jQuery(#freakingdockshowdotheywork "input[type=checkbox]").click(function() {
         var boat_id = $(this).attr("id");
         if ($(this).hasClass("selected")) {
             unset_id(boat_id);
