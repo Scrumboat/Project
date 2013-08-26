@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class GuardturnsController < ApplicationController
   # GET /guardturns
   # GET /guardturns.json
@@ -13,6 +15,7 @@ class GuardturnsController < ApplicationController
   # GET /guardturns/1
   # GET /guardturns/1.json
   def show
+    @guardseason = Guardseason.find(params[:guardseason_id])
     @guardturn = Guardturn.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +27,7 @@ class GuardturnsController < ApplicationController
   # GET /guardturns/new
   # GET /guardturns/new.json
   def new
+    @guardseason = Guardseason.find(params[:guardseason_id])
     @guardturn = Guardturn.new
 
     respond_to do |format|
@@ -34,21 +38,23 @@ class GuardturnsController < ApplicationController
 
   # GET /guardturns/1/edit
   def edit
+    @guardseason = Guardseason.find(params[:guardseason_id])
     @guardturn = Guardturn.find(params[:id])
   end
 
   # POST /guardturns
   # POST /guardturns.json
   def create
+    @guardseason = Guardseason.find(params[:guardseason_id])
     @guardturn = Guardturn.new(params[:guardturn])
 
     respond_to do |format|
       if @guardturn.save
-        format.html { redirect_to @guardturn, notice: 'Guardturn was successfully created.' }
-        format.json { render json: @guardturn, status: :created, location: @guardturn }
+        format.html { redirect_to @guardseason, notice: 'Vartiovuoro luotu.' }
+       # format.json { render json: @guardturn, status: :created, location: @guardturn }
       else
-        format.html { render action: "new" }
-        format.json { render json: @guardturn.errors, status: :unprocessable_entity }
+        format.html { redirect_to @guardseason, notice: 'Vartiovuoron luonti epäonnistui' }
+     #   format.json { render json: @guardturn.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,12 +62,13 @@ class GuardturnsController < ApplicationController
   # PUT /guardturns/1
   # PUT /guardturns/1.json
   def update
+    @guardseason = Guardseason.find(params[:guardseason_id])
     @guardturn = Guardturn.find(params[:id])
 
     respond_to do |format|
       if @guardturn.update_attributes(params[:guardturn])
-        format.html { redirect_to @guardturn, notice: 'Guardturn was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to @guardseason, notice: 'Vartiovuoro päivitetty.' }
+      #  format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @guardturn.errors, status: :unprocessable_entity }
@@ -72,6 +79,7 @@ class GuardturnsController < ApplicationController
   # DELETE /guardturns/1
   # DELETE /guardturns/1.json
   def destroy
+    @guardseason = Guardseason.find(params[:guardseason_id])
     @guardturn = Guardturn.find(params[:id])
     @guardturn.destroy
 

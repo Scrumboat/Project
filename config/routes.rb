@@ -1,11 +1,5 @@
 Venerekisteri::Application.routes.draw do
 
-  resources :guardseasons
-
-
-  resources :guardturns
-
-
   get '/payments/survey', to: 'payments#survey_index'
   get '/payments/:id/survey', to: 'payments#survey'
   post '/payments/:id/survey', to: 'payments#survey_done', as: :survey_done
@@ -32,7 +26,11 @@ Venerekisteri::Application.routes.draw do
   resources :docks do    
     resources :berths
   end
-  
+
+  resources :guardseasons do
+    resources :guardturns
+  end
+
   resources :docks
 
   resources :berths

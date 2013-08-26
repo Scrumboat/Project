@@ -1,9 +1,9 @@
-<%= simple_form_for(@guardturn) do |f| %>
+<%= simple_form_for([@guardseason, @guardturn], :html => {:multipart => true}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :vartiointi_pvm %>
-    <%= f.input :jno %>
+    <%= f.input :jno, :label => "Jäsennumero" %>
   </div>
 
   <div class="form-actions">

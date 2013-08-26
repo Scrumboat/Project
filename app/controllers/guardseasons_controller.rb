@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class GuardseasonsController < ApplicationController
   # GET /guardseasons
   # GET /guardseasons.json
@@ -14,7 +16,7 @@ class GuardseasonsController < ApplicationController
   # GET /guardseasons/1.json
   def show
     @guardseason = Guardseason.find(params[:id])
-
+    @guardturns = @guardseason.guardturns
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @guardseason }

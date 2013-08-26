@@ -1,25 +1,29 @@
+<h1>Vartiokausi <%= @guardseason.nimi %></h1>
+<p><b>Aika <%= @guardseason.alku_pvm %> - <%= @guardseason.loppu_pvm %></b></p>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Nimi:</b>
-  <%= @guardseason.nimi %>
-</p>
 
-<p>
-  <b>Guardturn:</b>
-  <%= @guardseason.guardturn_id %>
-</p>
-
-<p>
-  <b>Alku pvm:</b>
-  <%= @guardseason.alku_pvm %>
-</p>
-
-<p>
-  <b>Loppu pvm:</b>
-  <%= @guardseason.loppu_pvm %>
-</p>
+<br/>
 
 
-<%= link_to 'Edit', edit_guardseason_path(@guardseason) %> |
-<%= link_to 'Back', guardseasons_path %>
+<table>
+  <tr>
+    <th>Päivämäärä</th>
+    <th>Jäsennumero</th>
+  </tr>
+
+  <% @guardturns.each do |guardturn| %>
+  <tr>
+    <td>guardturn.vartiointi_pvm</td>
+    <td>guardturn.jno</td>
+  </tr>
+  <% end %>
+</table>
+
+
+<br/>
+
+
+<%= link_to 'Muokkaa', edit_guardseason_path(@guardseason) %> |
+<%= link_to 'Takaisin', guardseasons_path %> |
+<%= link_to 'Uusi vartiovuoro', new_guardseason_guardturn_path(@guardseason) %>
