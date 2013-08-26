@@ -120,7 +120,6 @@ ActiveRecord::Schema.define(:version => 20130826201334) do
 
   create_table "guardseasons", :force => true do |t|
     t.string   "nimi"
-    t.integer  "guardturn_id"
     t.date     "alku_pvm"
     t.date     "loppu_pvm"
     t.datetime "created_at",   :null => false

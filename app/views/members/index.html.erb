@@ -16,9 +16,13 @@ th { cursor: pointer;}
 </style>
 
 <body onload="hideAll();">
-
 <h1>Jäsenet</h1>
 
+<div class="refundcontainer">
+<h5>Hyvityksiä</h5>
+<div class="refundlist">
+</div>
+</div>
 <%= form_tag members_path, :method => 'get', :class => 'form-search' do %>
     <p>
       <%= text_field_tag :search, params[:search], :class => 'input-medium search-query' %>
@@ -30,6 +34,7 @@ th { cursor: pointer;}
     <%= hidden_field_tag @osoite, 1 %>
     <%= submit_tag @naytateksti, :class => 'btn btn-info' %>
 <% end %>
+
 
 <button class="btn btn-info" type="button" id="button">Filtterit</button>
 
@@ -45,7 +50,6 @@ th { cursor: pointer;}
   <label for="chuom" class="checkbox"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>huom</label>
 
 </form>
-
 <table id="myTable" class="table table-condensed">
   <thead>
   <tr>
@@ -71,6 +75,11 @@ th { cursor: pointer;}
   </thead>
 
   <% for member in @members %>
+  <% if member.berthrefund == true or member.dockyardspotrefund == true or member.storagerefund == true or member.membershiprefund == true %>
+
+  <script> $( ".refundlist").append( "<li><%= member.nimi %></li>"); </script>
+
+  <% end %>
       <tr>
         <td><%= member.nimi %></td>
         <td><%= member.jno %></td>

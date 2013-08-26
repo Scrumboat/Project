@@ -1,3 +1,19 @@
 // Place all the styles related to the members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.refundcontainer {
+  float:right;
+  height: 210px;
+  border-radius: 15px;
+  padding: 2px;
+  background:#6CD9FF;
+  -moz-box-shadow: 6px 6px 3px #888;
+  -webkit-box-shadow: 6px 6px 3px #888;
+  box-shadow: 6px 6px 3px #888;
+}
+.refundlist {
+  height:160px;
+  
+  overflow:auto;
+  background:#fff;
+}
