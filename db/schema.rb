@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 49f0ef8cb37d22a604814367967cafc6f8a6d793
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -11,7 +15,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130824095950) do
+ActiveRecord::Schema.define(:version => 20130826120322) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -84,9 +88,9 @@ ActiveRecord::Schema.define(:version => 20130824095950) do
   create_table "docks", :force => true do |t|
     t.decimal  "length"
     t.integer  "berth_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.string   "name",       :limit => nil
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
   create_table "dockyard_spots", :force => true do |t|
@@ -132,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20130824095950) do
     t.integer  "jno"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "guardseason_id"
   end
 
   create_table "invoices", :force => true do |t|
