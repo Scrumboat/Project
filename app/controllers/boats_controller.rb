@@ -106,7 +106,7 @@ class BoatsController < ApplicationController
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
-        format.html { flash.now[:alert] = @member == nil ? 'Jäsentä ei löytynyt' : 'Tuntematon virhe' 
+        format.html { flash.now[:alert] = @member == nil ? 'Jäsentä ei löytynyt' : 'Tuntematon virhe'
                       render action: "new" }
         format.json { render json: @boat.errors, status: :unprocessable_entity }
       end

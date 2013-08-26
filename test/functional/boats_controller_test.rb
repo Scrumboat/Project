@@ -4,6 +4,7 @@ class BoatsControllerTest < ActionController::TestCase
   setup do
 	sign_in admins(:one)
 	@boat = boats(:one)
+  @boat2 = boats(:two)
   @member = members(:one)
   end
 
@@ -52,7 +53,7 @@ class BoatsControllerTest < ActionController::TestCase
   test "should save new boat models to db" do
     #Model.count is different after creating a new boat -> there must be new entry in models table!
     assert_difference('Model.count') do
-      post :create, boat: { :rek_pvm => "1.5.1000", :nimi => "nimi", :tyyppi => "type-a", :reknro => 'aaaa', :valm_malli => 'type-a', :pituus => 10, :leveys => 10, :syvyys => 10, :vuosimalli => 1999 }
+      post :create, boat: { huomautukset: @boat2.huomautukset, katsastus: @boat2.katsastus, korkeus: @boat2.korkeus, leveys: @boat2.leveys, muutos_pvm: @boat2.muutos_pvm, nimi: @boat2.nimi, pituus: @boat2.pituus, reknro: @boat2.reknro, rek_pvm: @boat2.rek_pvm, syvyys: @boat2.syvyys, tarra: @boat2.tarra, teho: @boat2.teho, uppouma: @boat2.uppouma, valm_malli: @boat2.valm_malli, vene_puh_a: @boat2.vene_puh_a, vene_puh_b: @boat2.vene_puh_b, vuosimalli: @boat2.vuosimalli, tyyppi: @boat2.tyyppi, BoatsMembers_attributes: {"1" => {member_id: @member.jno, boat_id: @boat2.id}} }
     end
   end
 
