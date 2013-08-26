@@ -12,10 +12,10 @@
     <th>Jäsennumero</th>
   </tr>
 
-  <% @guardturns.each do |guardturn| %>
+   <%  @guardturns.each do |guardturn| %>
   <tr>
-    <td>guardturn.vartiointi_pvm</td>
-    <td>guardturn.jno</td>
+    <td><% guardturn.vartiointi_pvm%></td>
+    <td><% guardturn.jno%></td>
   </tr>
   <% end %>
 </table>

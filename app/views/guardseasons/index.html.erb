@@ -3,7 +3,6 @@
 <table>
   <tr>
     <th>Nimi</th>
-    <th>Guardturn</th>
     <th>Alku pvm</th>
     <th>Loppu pvm</th>
     <th></th>
@@ -14,7 +13,6 @@
 <% @guardseasons.each do |guardseason| %>
   <tr>
     <td><%= guardseason.nimi %></td>
-    <td><%= guardseason.guardturn_id %></td>
     <td><%= guardseason.alku_pvm %></td>
     <td><%= guardseason.loppu_pvm %></td>
     <td><%= link_to 'Näytä', guardseason %></td>
