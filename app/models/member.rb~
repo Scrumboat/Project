@@ -23,6 +23,7 @@ has_many :BoatsMembers
 has_many :storages
 has_many :boats, :through => :BoatsMembers
 has_many :invoices
+has_one :employment
 
 attr_accessible :boats, :ammatti, :avain, :email_fax, :huom, :jasentyyppi, :jno, :koti_puh, :laivuri, :liittynyt, :lisenssi, :maa, :matka_puh, :muutos_pvm, :nimi, :osoite, :posti, :sotu, :toimi, :tyo_puh, :varasto, :deleted, :deleted_at, :viitenumero
 
@@ -41,5 +42,9 @@ end
   scope :is_deleted, -> { where(deleted: true) }
   scope :active, -> { where(deleted: false) }
 
+def naytaJnoJaNimi
+  #jasen = find(:first, :conditions => ['"jno" LIKE ?', self.jno]
+  "#{self.jno} / #{self.nimi}"
+end
 
 end

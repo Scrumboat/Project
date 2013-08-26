@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class BoatsController < ApplicationController
   autocomplete :member, :nimi
-  autocomplete :member, :jno
+  autocomplete :member, :jno, :extra_data => [:nimi], :display_value => :naytaJnoJaNimi
  # helper_method :sort_column, :sort_direction
 
   # GET /boats
@@ -74,6 +74,8 @@ class BoatsController < ApplicationController
 
     @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
     @vapaat_laituripaikat.insert(0,nil)
+	
+	show_jno_in_edit_instead_of_id
 
   end
 

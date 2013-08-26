@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822160335) do
+ActiveRecord::Schema.define(:version => 20130824095950) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -111,6 +111,13 @@ ActiveRecord::Schema.define(:version => 20130822160335) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "employments", :force => true do |t|
+    t.string   "nimi"
+    t.integer  "hyvityksenSuuruus"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "guardseasons", :force => true do |t|
     t.string   "nimi"
     t.integer  "guardturn_id"
@@ -195,7 +202,10 @@ ActiveRecord::Schema.define(:version => 20130822160335) do
     t.integer  "vartiolaiminlyonti",         :default => 0
     t.integer  "talkoolaiminlyonti",         :default => 0
     t.integer  "saunottu",                   :default => 0
-    t.boolean  "special_billing"
+    t.boolean  "berthrefund",                :default => false
+    t.boolean  "dockyardspotrefund",         :default => false
+    t.boolean  "storagerefund",              :default => false
+    t.boolean  "membershiprefund",           :default => false
   end
 
   create_table "models", :force => true do |t|

@@ -1,5 +1,7 @@
 Venerekisteri::Application.routes.draw do
 
+  resources :employments
+
   get '/payments/survey', to: 'payments#survey_index'
   get '/payments/:id/survey', to: 'payments#survey'
   post '/payments/:id/survey', to: 'payments#survey_done', as: :survey_done

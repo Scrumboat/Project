@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :jno, :label => 'Jäsennumero' %>
-    <%= f.number_field :jno, :value => @nextjno %>
+    <%= f.number_field :jno %>
   </div>
   <div class="field">
     <%= f.label :sotu %>
@@ -45,7 +45,7 @@
   </div>
   <div class="field">
     <%= f.label :toimi %>
-    <%= f.text_field :toimi %>
+    <%= f.collection_select :toimi, Employment.order(:nimi),:id,:nimi, include_blank: true %>
   </div>
   <div class="field">
     <%= f.label :lisenssi %>
@@ -103,15 +103,24 @@
     <%= f.label :Venereknro %>
     <%= text_field_tag :Venereknro %>
   </div>
+  <div class ="field">
+    <%= f.input :berthrefund %>
+  </div>
+  <div class="field">
+    <%= f.input :dockyardspotrefund %>
+  </div>
+  <div class="field">
+    <%= f.input :storagerefund %>
+  </div>
+  <div class="field">
+    <%= f.input :membershiprefund %>
+  </div>
   <div class="field">
     <%= f.hidden_field :viitenumero %>
   </div>
   <div class="actions">
     <%= f.submit @teksti %>
   </div>
-    <div class="field">
-      <label> <%= f.check_box :special_billing %>  Erityislaskutus</label>
-    </div>
 
 
 <% end %>
