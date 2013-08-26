@@ -1,4 +1,5 @@
 class Dock < ActiveRecord::Base
+  versioned :dependent => :tracking
   attr_accessible :name, :length
   has_many :berths
 

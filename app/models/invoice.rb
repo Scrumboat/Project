@@ -1,4 +1,5 @@
 class Invoice < ActiveRecord::Base
+  versioned :dependent => :tracking
   belongs_to :member, :foreign_key => 'member_id'
   attr_accessible :ensirekisterimaksu, :jasenmaksu, :jno, :katsastussakko, :laiturimaksu, :laskutuslisa, :liittymismaksu, :muutMaksut, :nimi, :suoritukset_kassaan, :talkookerroin, :talkoosakko, :telakkamaksu, :toimihlokerroin, :varastokoppimaksu, :vartiosakko, :venerekisterimaksu, :viitesuoritukset, :luontipvm, :lahetyspvm, :tunniste, :maksettu, :erapvm, :member_id, :summa, :viitenumero, :karhuttu, :vapaasana
   accepts_nested_attributes_for :member
