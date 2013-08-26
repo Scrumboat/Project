@@ -84,9 +84,9 @@ ActiveRecord::Schema.define(:version => 20130824095950) do
   create_table "docks", :force => true do |t|
     t.decimal  "length"
     t.integer  "berth_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "name"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "name",       :limit => nil
   end
 
   create_table "dockyard_spots", :force => true do |t|
