@@ -48,8 +48,10 @@ class GuardturnsController < ApplicationController
     @guardseason = Guardseason.find(params[:guardseason_id])
     @guardturn = Guardturn.new(params[:guardturn])
 
+    @newGuardturn = @guardseason.guardturns.build(params[:guardturn])
+
     respond_to do |format|
-      if @guardturn.save
+      if @newGuardturn.save
         format.html { redirect_to @guardseason, notice: 'Vartiovuoro luotu.' }
        # format.json { render json: @guardturn, status: :created, location: @guardturn }
       else

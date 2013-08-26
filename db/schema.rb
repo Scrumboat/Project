@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826120322) do
+ActiveRecord::Schema.define(:version => 20130826201334) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -123,8 +122,9 @@ ActiveRecord::Schema.define(:version => 20130826120322) do
     t.string   "nimi"
     t.date     "alku_pvm"
     t.date     "loppu_pvm"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "guardturn_id"
   end
 
   create_table "guardturns", :force => true do |t|
