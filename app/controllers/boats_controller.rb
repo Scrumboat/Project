@@ -189,7 +189,13 @@ class BoatsController < ApplicationController
 			  i = i+1
 		  end
 	  end
-	  @onkoOk = !taulu.empty?
+	  #@onkoOk = !taulu.empty?
+	  if !taulu.nil?
+	    @onkoOk = !taulu.empty?
+	  else
+	    @onkoOk = false
+	  end
+	  
   end
   
   def show_jno_in_edit_instead_of_id

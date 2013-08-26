@@ -7,7 +7,6 @@ one:
   liittynyt: 2013-05-22
   jasentyyppi: ainaisjasen
   muutos_pvm: 2013-05-22
-  toimi: MyString
   lisenssi: MyString
   osoite: MyString
   posti: MyString
@@ -29,7 +28,6 @@ two:
   liittynyt: 2013-05-22
   jasentyyppi: ainaisjasen
   muutos_pvm: 2013-05-22
-  toimi: MyString
   lisenssi: MyString
   osoite: MyString
   posti: MyString

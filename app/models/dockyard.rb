@@ -1,4 +1,5 @@
 class Dockyard < ActiveRecord::Base
+  versioned :dependent => :tracking
   attr_accessible :length, :name, :width
   has_many :dockyard_spots
 

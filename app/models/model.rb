@@ -1,4 +1,5 @@
 class Model < ActiveRecord::Base
+  versioned :dependent => :tracking
   attr_accessible :korkeus, :leveys, :pituus, :syvyys, :uppouma, :valm_malli, :tyyppi
 
   has_many :boats

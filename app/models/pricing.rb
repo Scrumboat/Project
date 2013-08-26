@@ -1,4 +1,5 @@
 class Pricing < ActiveRecord::Base
+  versioned :dependent => :tracking
   attr_accessible :data, :target
 
   monetize :data

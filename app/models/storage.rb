@@ -1,4 +1,5 @@
 class Storage < ActiveRecord::Base
+  versioned :dependent => :tracking
   validates_uniqueness_of :vk
   validates_presence_of :vk
   validates_presence_of :pala
