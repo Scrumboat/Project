@@ -53,6 +53,14 @@ class InvoicesController < ApplicationController
     #listataan defaulttina maksamattomat!
     if params[:search].blank? then params[:search] = 'unpaid' end
     @invoices = Invoice.search(params[:search])
+	if params[:tunnisteella]
+      if params[:tunnus].blank?
+        flash[:error] = 'Lisää laskulle tunniste!'
+        redirect_to invoices_url
+        return
+      end
+      @invoices = Invoice.where(:tunniste => params[:tunnus])
+    end
     if params[:create]
       if params[:tunniste].blank?
         flash[:error] = 'Lisää laskulle tunniste!'

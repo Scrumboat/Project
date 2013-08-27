@@ -4,7 +4,12 @@ class SummariesController < ApplicationController
   def index
     
 	if params[:uusi]
-      @laskut = Invoice.all
+	  if params[:tunniste].blank?
+        flash[:error] = 'Laskulta puuttuu tunniste!'
+        redirect_to summaries_url
+        return
+      end
+      @laskut = Invoice.where(:tunniste => params[:tunniste])
 	  @saatavat = 0
 	  @maksetut = 0
 	  for lasku in @laskut
@@ -14,7 +19,7 @@ class SummariesController < ApplicationController
 	      @saatavat += lasku.summa
 	    end
 	  end
-	  summary = Summary.create({saatavat: @saatavat, maksetut: @maksetut})
+	  summary = Summary.create({saatavat: @saatavat, maksetut: @maksetut, tunnus: params[:tunniste]})
       flash[:notice] = "Uusi yhteenveto luotu"
       redirect_to summaries_url
       return

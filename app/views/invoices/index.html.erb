@@ -43,12 +43,23 @@
     <% end %>
 <% end %>
 </span>
-
+  
+  <span style="float:left;">
   <%= form_tag invoices_path, :method => 'get' do %>
       <%= button_tag(type: "submit", class: "btn") do %>
           <i class="icon-list"></i> Näytä kaikki
       <% end %>
   <% end %>
+  </span>
+  
+  <%= form_tag invoices_path, :method => 'get' do %>
+      <%= hidden_field_tag :tunnisteella, "tunnisteella" %>
+      <%= button_tag(type: "submit", class: "btn") do %>
+          <i class="icon-list"></i> Näytä tunnisteella:
+      <% end %>
+	  <%= text_field_tag :tunnus, nil, :placeholder => 'Laskun tunniste' %>
+  <% end %>
+  
   <%= form_tag invoices_path, :method => 'get' do %>
       <%= hidden_field_tag :create, "create" %>
       <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
@@ -119,7 +130,7 @@
       <th></th>
     </tr>
     </thead>
-
+    <% @naytettavienLaskujenSumma = 0 %>
     <tbody>
     <% @invoices.each do |invoice| %>
         <tr rel="popover" class="popover-link" id="<%= invoice.id %>" data-trigger="hover" data-toggle="popover" data-placement="top" data-title="<%= invoice.member.nimi %>" data-html="true" data-content="<%= InvoicesHelper.popover_text(invoice) %>" >
@@ -149,15 +160,19 @@
           </td>
 
         </tr>
+		<% @naytettavienLaskujenSumma += invoice.summa %>
     <% end %>
     </tbody>
   </table>
 
+  <b><p>Listattujen laskujen summa: <%=  @naytettavienLaskujenSumma %> </p> </b>
+  
   <br />
 
   <%= link_to '<i class="btn btn-danger"><i class="icon-home icon-white"></i>    Etusivulle</i>'.html_safe, root_path %>
 
   <%= link_to '<i class="btn btn-success"><i class="icon-plus icon-white"></i>  Luo uusi lasku</i>'.html_safe, new_invoice_path %>
+  
   <script>
       $(document).ready(function()
               {

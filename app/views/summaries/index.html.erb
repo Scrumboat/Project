@@ -5,6 +5,7 @@
       <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
           <i class="icon-briefcase icon-white"></i> Luo yhteenveto
       <% end %>
+	   <%= text_field_tag :tunniste, nil, :placeholder => 'Laskun tunniste' %>
   <% end %>
 
 <table>
@@ -12,6 +13,7 @@
     <th>Maksettu</th>
 	<th>Saatavana</th>
 	<th>Yht</th>
+	<th>Laskun tunnus</th>
 	<th>Luotu</th>
     <th></th>
     <th></th>
@@ -23,6 +25,7 @@
     <td><%= summary.maksetut %></td>
 	<td><%= summary.saatavat %></td>
 	<td><%= summary.maksetut+summary.saatavat %></td>
+	<td><%= summary.tunnus %></td>
 	<td><%= summary.created_at %></td>
     <td><%= link_to 'Show', summary %></td>
     <td><%= link_to 'Edit', edit_summary_path(summary) %></td>
