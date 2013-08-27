@@ -1,5 +1,8 @@
 Venerekisteri::Application.routes.draw do
 
+  resources :summaries
+
+
   resources :employments
 
   get '/payments/survey', to: 'payments#survey_index'
