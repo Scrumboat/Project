@@ -18,6 +18,13 @@ class GuardseasonsController < ApplicationController
     @guardseason = Guardseason.find(params[:id])
     @guardturns = @guardseason.guardturns
 
+    if params[:vartiovuoro]
+      Guardseason.luovartiovuorot(params[:guardseason_id])
+      flash[:notice] = "Vartiovuorot luotu kaudelle " + params[:nimi] + "!"
+      redirect_to guardseasons_url
+      return
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @guardseason }

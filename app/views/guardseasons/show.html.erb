@@ -6,6 +6,8 @@
 
 <%= form_tag @guardseason_path, :method => 'get' do %>
     <%= hidden_field_tag :vartiovuoro, "vartiovuoro" %>
+    <%= hidden_field_tag :guardseason_id, @guardseason.id %>
+    <%= hidden_field_tag :nimi, @guardseason.nimi %>
     <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
         <i class="icon-briefcase icon-white"></i> Luo vartiovuorot
     <% end %>
