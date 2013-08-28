@@ -3,19 +3,29 @@
 <p id="notice"><%= notice %></p>
 
 
-<br/>
+
+<%= form_tag @guardseason_path, :method => 'get' do %>
+    <%= hidden_field_tag :vartiovuoro, "vartiovuoro" %>
+    <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
+        <i class="icon-briefcase icon-white"></i> Luo vartiovuorot
+    <% end %>
+<% end %>
 
 
 <table>
   <tr>
     <th>Päivämäärä</th>
     <th>Jäsennumero</th>
+    <th></th>
+    <th></th>
   </tr>
 
    <%  @guardturns.each do |guardturn| %>
   <tr>
-    <td><% guardturn.vartiointi_pvm%></td>
-    <td><% guardturn.jno%></td>
+    <td><%= guardturn.vartiointi_pvm%></td>
+    <td><%= guardturn.jno%></td>
+    <td><%= link_to 'Muokkaa', edit_guardseason_guardturn_path(@guardseason.id, guardturn) %></td>
+    <td></td>
   </tr>
   <% end %>
 </table>

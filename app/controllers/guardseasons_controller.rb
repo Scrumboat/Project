@@ -17,6 +17,7 @@ class GuardseasonsController < ApplicationController
   def show
     @guardseason = Guardseason.find(params[:id])
     @guardturns = @guardseason.guardturns
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @guardseason }
