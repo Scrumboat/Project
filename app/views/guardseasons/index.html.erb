@@ -12,10 +12,12 @@
       </tr>
 
       <% guardseason.guardturns.each do |guardturn| %>
-          <tr>
-            <td><%= guardturn.jno %></td>
-            <td><%= guardturn.vartiointi_pvm %></td>
-          </tr>
+          <% if guardturn.vartioidaanko %>
+             <tr>
+               <td><%= guardturn.jno %></td>
+               <td><%= guardturn.vartiointi_pvm %></td>
+             </tr>
+          <% end %>
       <% end %>
     </table>
 <% end %>

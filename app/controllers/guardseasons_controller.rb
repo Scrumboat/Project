@@ -18,8 +18,27 @@ class GuardseasonsController < ApplicationController
     @guardseason = Guardseason.find(params[:id])
     @guardturns = @guardseason.guardturns
 
-    if params[:vartiovuoro]
-      Guardseason.luovartiovuorot(params[:guardseason_id])
+    if params[:paivat] != nil
+      params[:paivat].each do |paiva_id|
+        @guardturn = Guardturn.where(:id => paiva_id).first
+        if @guardturn.vartioidaanko
+          @guardturn.vartioidaanko = false
+          @guardturn.save
+        else
+          @guardturn.vartioidaanko = true
+          @guardturn.save
+        end
+      end
+    end
+    if params[:vartiopaiva]
+      Guardseason.alustavartiopaivat(params[:guardseason_id])
+      flash[:notice] = "Vartiopäivät luotu kaudelle " + params[:nimi] + "!"
+      redirect_to guardseasons_url
+      return
+    end
+
+    if params[:vartiojno]
+      Guardseason.alustavartiovuorot(params[:guardseason_id])
       flash[:notice] = "Vartiovuorot luotu kaudelle " + params[:nimi] + "!"
       redirect_to guardseasons_url
       return

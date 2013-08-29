@@ -2,33 +2,44 @@
 <p><b>Aika <%= @guardseason.alku_pvm %> - <%= @guardseason.loppu_pvm %></b></p>
 <p id="notice"><%= notice %></p>
 
-
-
 <%= form_tag @guardseason_path, :method => 'get' do %>
-    <%= hidden_field_tag :vartiovuoro, "vartiovuoro" %>
+    <%= hidden_field_tag :vartiopaiva, "vartiopaiva" %>
     <%= hidden_field_tag :guardseason_id, @guardseason.id %>
     <%= hidden_field_tag :nimi, @guardseason.nimi %>
     <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
-        <i class="icon-briefcase icon-white"></i> Luo vartiovuorot
+        <i class="icon-briefcase icon-white"></i> Luo vartiointipäivät
     <% end %>
 <% end %>
 
+<%= form_tag @guardseason_path, :method => 'get' do %>
+    <%= hidden_field_tag :vartiojno, "vartiojno" %>
+    <%= hidden_field_tag :guardseason_id, @guardseason.id %>
+    <%= hidden_field_tag :nimi, @guardseason.nimi %>
+    <%= button_tag(type: "submit", class: "btn btn-warning", data: { confirm: 'Oletko varma?' }) do %>
+        <i class="icon-briefcase icon-white"></i> Aseta vartiointivuorot
+    <% end %>
+<% end %>
 
 <table>
   <tr>
+    <th>Vartioidaanko?</th>
     <th>Päivämäärä</th>
     <th>Jäsennumero</th>
     <th></th>
     <th></th>
   </tr>
-
-   <%  @guardturns.each do |guardturn| %>
+  <%= form_tag @guardseason, method: :get do %>
+  <%  @guardturns.each do |guardturn| %>
   <tr>
-    <td><%= guardturn.vartiointi_pvm%></td>
-    <td><%= guardturn.jno%></td>
+
+    <td><%= check_box_tag 'paivat[]', guardturn.id %> <% if guardturn.vartioidaanko then %> Kyllä <% else %> Ei <% end %></td>
+    <td><%= guardturn.vartiointi_pvm %></td>
+    <td><%= guardturn.jno %></td>
     <td><%= link_to 'Muokkaa', edit_guardseason_guardturn_path(@guardseason.id, guardturn) %></td>
     <td></td>
   </tr>
+  <% end %>
+  <%= submit_tag 'Muuta vartiointipäiviä'%>
   <% end %>
 </table>
 

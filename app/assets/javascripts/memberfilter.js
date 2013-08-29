@@ -36,6 +36,10 @@ function generateIndexNumber() {
        }
     }
     var checksum = miinustettava - sum;
+    if (checksum == 10) {
+        checksum = 0;
+    }
+    alert(checksum);
     var viitenumero = jno + (checksum.toString());
     
     document.getElementById('member_viitenumero').value=viitenumero;

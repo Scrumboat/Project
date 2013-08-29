@@ -15,7 +15,15 @@ Member.create([{id: 1, jasentyyppi: 'puolisojasen', jno: 4421, matka_puh: "044-4
                {id: 3, jasentyyppi: 'kunniajasen', jno: 2222, matka_puh: "050-8497764", nimi: "Mauri Menomajava", osoite: "Patokuja 1",
                 posti: "99500 Kaukana", sotu: "091033-129K", liittynyt: "31-1-1940", viitenumero: "022224"},
                {id: 4, jasentyyppi: 'kutsujasen', jno: 12, matka_puh: "040-1234567", nimi: "Matti Meikalainen", osoite: "Jokutie 6",
-                posti: "10101 Jyvaskyla", sotu: "041055-52A", liittynyt: "15-04-2008", viitenumero: "000123", deleted: true}])
+                posti: "10101 Jyvaskyla", sotu: "041055-52A", liittynyt: "15-04-2008", viitenumero: "000123", deleted: true},
+               {id: 5, jasentyyppi: 'ainaisjasen', jno: 3333, matka_puh: "044-5551232", nimi: "Erkki Angel", osoite: "Venepolku 23 d 35",
+                posti: "00500 Helsinki", sotu: "230555-029A", liittynyt: "1-6-2002", viitenumero: "033336"},
+               {id: 6, jasentyyppi: 'ainaisjasen', jno: 4455, matka_puh: "044-3334442", nimi: "Eero Engel", osoite: "Venepolku 85 c 35",
+                posti: "00500 Helsinki", sotu: "221166-031W", liittynyt: "1-6-1999", viitenumero: "044558"},
+               {id: 7, jasentyyppi: 'kutsujasen', jno: 6543, matka_puh: "040-1234567", nimi: "Matti Mehilainen", osoite: "Tiejossai 11",
+                posti: "11111"" Jyvaskyla", sotu: "041055-11C", liittynyt: "15-04-2009", viitenumero: "065430", deleted: true}])
+
+
 
 puts 'CREATING FEW BOATS'
 Boat.create([{id: 1, rek_pvm: "1-1-1990", nimi: "Jallu Kola", tyyppi: "S/S", reknro: "aaa-bbb", valm_malli: "xxx-1", pituus: 1.5,
