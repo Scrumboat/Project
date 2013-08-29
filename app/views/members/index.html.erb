@@ -17,12 +17,6 @@ th { cursor: pointer;}
 
 <body onload="hideAll();">
 <h1>Jäsenet</h1>
-
-<div class="refundcontainer">
-<h5>Hyvityksiä</h5>
-<div class="refundlist">
-</div>
-</div>
 <%= form_tag members_path, :method => 'get', :class => 'form-search' do %>
     <p>
       <%= text_field_tag :search, params[:search], :class => 'input-medium search-query' %>
@@ -47,6 +41,7 @@ th { cursor: pointer;}
   <label for="claivuri" class="checkbox"><input type="checkbox" id="claivuri" onclick="toggle('.laivuri', this)"/>laivuri</label>
   <label for="cvarasto" class="checkbox"><input type="checkbox" id="cvarasto" onclick="toggle('.varasto', this)"/>varasto</label>
   <label for="cavain" class="checkbox"><input type="checkbox" id="cavain" onclick="toggle('.avain', this)"/>avain</label>
+  <label for="chyvitys" class="checkbox"><input type="checkbox" id "chyvitys" onclick="toggle('.hyvitys', this)"/>hyvitys</label>
   <label for="chuom" class="checkbox"><input type="checkbox" id="chuom" onclick="toggle('.huom', this)"/>huom</label>
 
 </form>
@@ -60,6 +55,7 @@ th { cursor: pointer;}
     <th>Sotu</th>
     <th>Liittynyt</th>
     <th>Jäsentyyppi</th>
+    <th class="hyvitys">hyvitys</th>
     <th class="toimi">toimi</th>
     <th class="lisenssi">lisenssi</th>
     <th class="posti">posti</th>
@@ -75,11 +71,7 @@ th { cursor: pointer;}
   </thead>
 
   <% for member in @members %>
-  <% if member.berthrefund == true or member.dockyardspotrefund == true or member.storagerefund == true or member.membershiprefund == true %>
 
-  <script> $( ".refundlist").append( "<li><%= member.nimi %></li>"); </script>
-
-  <% end %>
       <tr>
         <td><%= member.nimi %></td>
         <td><%= member.jno %></td>
@@ -88,6 +80,11 @@ th { cursor: pointer;}
         <td><%= truncate(member.sotu, :length => 7, :omission => "") %></td>
         <td><%= member.liittynyt %></td>
         <td><%= member.jasentyyppi %></td>
+        <% if member.berthrefund == true or member.dockyardspotrefund == true or member.storagerefund == true or member.membershiprefund == true %>
+        <td class="hyvitys">true</td>
+        <% else %>
+        <td class="hyvitys">false</td>
+        <% end %>
         <td class="toimi"><%= member.toimi %></td>
         <td class="lisenssi"><%= member.lisenssi %></td>
         <td class="posti"><%= member.posti %></td>

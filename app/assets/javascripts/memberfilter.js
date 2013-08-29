@@ -7,6 +7,7 @@ function hideAll() {
   $(".varasto").hide();
   $(".avain").hide();
   $(".huom").hide();
+  $(".hyvitys").hide();
   $("#filtterit").hide();
 }
 
