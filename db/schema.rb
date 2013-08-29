@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826201334) do
+ActiveRecord::Schema.define(:version => 20130829103445) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20130826201334) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "guardseason_id"
+    t.boolean  "vartioidaanko"
   end
 
   create_table "invoices", :force => true do |t|
@@ -253,6 +254,14 @@ ActiveRecord::Schema.define(:version => 20130826201334) do
     t.integer  "jno"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "summaries", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "tunnus"
+    t.decimal  "saatavat"
+    t.decimal  "maksetut"
   end
 
   create_table "versions", :force => true do |t|
