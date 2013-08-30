@@ -17,7 +17,6 @@
     <th>Syvyys</th>
     <th>Reknro</th>
     <th>Jäsennumero</th>
-    <th>Vartiovuoro</th>
     <th>Hinta</th>
     <th>On olemassa</th>
     <th></th>
@@ -31,10 +30,8 @@
             <td><%= berth.length.to_s + ' m' %></td>
             <td><%= berth.width.to_s + ' m' %></td>
             <td><%= berth.depth.to_s + ' m' %></td>
-            <td><%= link_to berth.reknro.to_s, Boat.where(:reknro => berth.reknro).first %></td>
+            <td><% if berth.boat_id != nil %> <%= link_to Boat.where(:id => berth.boat_id).first.reknro.to_s, Boat.where(:id => berth.boat_id).first %> <% end %> </td>
             <td><%= berth.jno.to_s %></td>
-            <td><%= berth.vartio.to_s %></td>
-
 			<% if berth.length > 7 %>
 			  <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
 			<% else %>
@@ -42,7 +39,7 @@
 			<% end %>
 
             <td><%= berth.printExists %></td>
-            <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
+            <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth, :numero => berth.number) %></td>
             <td><%= link_to 'Poista', berth, method: :delete, data: {confirm: 'Oletko varma?'} %></td>
           </tr>
       <% end %>
@@ -58,7 +55,6 @@
     <th>Syvyys</th>
     <th>Reknro</th>
     <th>Jäsennumero</th>
-    <th>Vartiovuoro</th>
     <th>Hinta</th>
     <th>On olemassa</th>
     <th></th>
@@ -72,9 +68,8 @@
             <td><%= berth.length.to_s + ' m' %></td>
             <td><%= berth.width.to_s + ' m' %></td>
             <td><%= berth.depth.to_s + ' m' %></td>
-            <td><%= link_to berth.reknro.to_s, Boat.where(:reknro => berth.reknro).first %></td>
+            <td><% if berth.boat_id != nil %> <%= link_to Boat.where(:id => berth.boat_id).first.reknro.to_s, Boat.where(:id => berth.boat_id).first %> <% end %> </td>
             <td><%= berth.jno.to_s %></td>
-            <td><%= berth.vartio.to_s %></td>
             <% if berth.length > 7 %>
 
                 <td><%= berth.width*@hintaYli7.to_s.to_i%></td>
@@ -83,7 +78,7 @@
             <% end %>
 
             <td><%= berth.printExists %></td>
-            <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth) %></td>
+            <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth, :numero => berth.number) %></td>
             <td><%= link_to 'Poista', berth, method: :delete, data: {confirm: 'Oletko varma?'} %></td>
           </tr>
       <% end %>

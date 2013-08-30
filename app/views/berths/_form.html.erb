@@ -16,15 +16,17 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-      <%= f.input :number, input_html: { value: @free_number} %>
-      <%= f.input :width %>
-      <%= f.input :length %>
-      <%= f.input :depth %>
-      <%= f.input :reknro %>
-      <%= f.input :jno %>
-      <%= f.input :vartio %>
+      <%= f.input :number, input_html: { value: params[:numero] }, :label => "Laiturin numero" %>
+      <%= f.input :width, :label => "Leveys" %>
+      <%= f.input :length, :label => "Pituus" %>
+      <%= f.input :depth, :label => "Syvyys" %>
+      <%= f.input :boat_id, :label => "Veneen id" %>
+      <%= f.input :jno, :label => "Jäsennumero" %>
+      <%= f.label "Onko olemassa?" %>
       <%= f.check_box :exists %>
     </div>
+
+    <br/>
 
     <div class="actions">
       <%= f.submit @teksti, :id => 'lisaa_laituripaikka' %>
