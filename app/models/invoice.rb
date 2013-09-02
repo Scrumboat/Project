@@ -176,7 +176,8 @@ class Invoice < ActiveRecord::Base
       telakkamaksu = 0
       veneet = jasen.boats
       for vene in veneet
-        laituri = Berth.find_by_reknro(vene.reknro)
+        unless jasen.paying_member?(vene.id) then break end
+        laituri = Berth.find_by_boat_id(vene.id)
         if !DockyardSpot.find_by_boat_id(vene.id).nil?
           telakka = DockyardSpot.find_by_boat_id(vene.id)
           telakkamaksu = (Pricing.find_by_target("telakanNeliohinta").data)*(telakka.length*telakka.width)
@@ -312,3 +313,5 @@ class Invoice < ActiveRecord::Base
     write_attribute :karhuttu, karhuttu.to_s.gsub(',', '.')
   end
 end
+
+

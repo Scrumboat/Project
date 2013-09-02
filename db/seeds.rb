@@ -36,11 +36,11 @@ Boat.create([{id: 1, rek_pvm: "1-1-1990", nimi: "Jallu Kola", tyyppi: "S/S", rek
               leveys: 1, syvyys: 1.3, vuosimalli: 1986, korkeus: 1}])
 
 puts 'ADDING BOATS TO MEMBERS RELATIONS'
-BoatsMember.create([{boat_id: 2, member_id: 1},
-                    {boat_id: 1, member_id: 2},
-                    {boat_id: 3, member_id: 3},
-                    {boat_id: 4, member_id: 1},
-                    {boat_id: 4, member_id: 3}])
+BoatsMember.create([{boat_id: 2, member_id: 1, paying_member: true},
+                    {boat_id: 1, member_id: 2, paying_member: true},
+                    {boat_id: 3, member_id: 3, paying_member: true},
+                    {boat_id: 4, member_id: 1, paying_member: false},
+                    {boat_id: 4, member_id: 3, paying_member: true}])
 
 puts 'CREATING DOCKS: 1, 2'
 Dock.create([{name: 'a', length: 30}, {name: 'b', length: 40}])

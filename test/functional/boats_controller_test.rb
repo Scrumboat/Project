@@ -38,7 +38,7 @@ class BoatsControllerTest < ActionController::TestCase
   end
 
   test "should update boat" do
-    put :update, id: @boat, boat: { huomautukset: @boat.huomautukset, katsastus: @boat.katsastus, korkeus: @boat.korkeus, leveys: @boat.leveys, muutos_pvm: @boat.muutos_pvm, nimi: @boat.nimi, pituus: @boat.pituus, reknro: @boat.reknro, rek_pvm: @boat.rek_pvm, syvyys: @boat.syvyys, tarra: @boat.tarra, teho: @boat.teho, uppouma: @boat.uppouma, valm_malli: @boat.valm_malli, vene_puh_a: @boat.vene_puh_a, vene_puh_b: @boat.vene_puh_b, vuosimalli: @boat.vuosimalli, tyyppi: @boat.tyyppi, BoatsMembers_attributes: {"0" => {member_id: @member.jno, boat_id: @boat.id}} }
+    put :update, id: @boat, boat: { huomautukset: @boat.huomautukset, katsastus: @boat.katsastus, korkeus: @boat.korkeus, leveys: @boat.leveys, muutos_pvm: @boat.muutos_pvm, nimi: @boat.nimi, pituus: @boat.pituus, reknro: @boat.reknro, rek_pvm: @boat.rek_pvm, syvyys: @boat.syvyys, tarra: @boat.tarra, teho: @boat.teho, uppouma: @boat.uppouma, valm_malli: @boat.valm_malli, vene_puh_a: @boat.vene_puh_a, vene_puh_b: @boat.vene_puh_b, vuosimalli: @boat.vuosimalli, tyyppi: @boat.tyyppi, BoatsMembers_attributes: {"0" => {member_id: @member.jno, boat_id: @boat.id, paying_member: '1'}} }
     assert_redirected_to boat_path(assigns(:boat))
   end
 

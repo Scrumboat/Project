@@ -2,7 +2,7 @@
 <b>Omistaja(:t)</b>
 <ul>
   <% @boat.members.each do |member| %>
-      <li><%= link_to member.nimi , member_path(member) %></li>
+      <li><%= link_to member.nimi , member_path(member) %> <%= member.paying_member?(@boat.id) ? '<b>      Maksaja</b>'.html_safe : '' %></li>
   <% end %>
 </ul>
 

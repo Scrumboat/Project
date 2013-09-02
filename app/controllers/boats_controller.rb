@@ -97,10 +97,16 @@ class BoatsController < ApplicationController
       @model.tyyppi = @boat.tyyppi
       @model.save
     end
+
+    @laituri_idt = Dock.all.map(&:id)
+    @laituri_idt.insert(0,nil)
+
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
 	
     changejnoToId
     respond_to do |format|
-      if @boat.valid? && @onkoOk
+      if @boat.valid? && @onkoOk #&& check_for_only_one_payer
 	    check_dock_and_berth(format)
 	    @boat.save
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
@@ -126,14 +132,21 @@ class BoatsController < ApplicationController
     if params[:boat][:BoatsMembers_attributes] == nil
       @onkoOk = false
     end
+
+    @laituri_idt = Dock.all.map(&:id)
+    @laituri_idt.insert(0,nil)
+
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
+
     respond_to do |format|
-      if @onkoOk && @boat.update_attributes(params[:boat])
+      if @onkoOk && check_for_only_one_payer && @boat.update_attributes(params[:boat])
 	      check_dock_and_berth(format)
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
         format.html { 
-	        flash[:notice] = 'Virheellinen jäsennumero.'
+	        flash[:notice] = 'Virhe.'
 	        render action: "edit"
 	      }
         format.json { render json: @boat.errors, status: :unprocessable_entity }
@@ -154,16 +167,26 @@ class BoatsController < ApplicationController
     end
   end
 
+  def check_for_only_one_payer
+    number_of_payers = 0
+    params[:boat][:BoatsMembers_attributes].values.each do |bm|
+      if bm[:paying_member] == '1'
+        number_of_payers += 1
+      end
+    end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+    number_of_payers == 1
+  end
+
   def change_jno_to_id_for_update
 
     params[:boat][:BoatsMembers_attributes].values.each do |bm|
-    member = Member.find_by_jno(bm[:member_id])
-    if member == nil
-      @onkoOk = false
-		  return
-    end
-    bm[:member_id] = member.id
-    end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+      member = Member.find_by_jno(bm[:member_id])
+      if member == nil
+        @onkoOk = false
+		    return
+      end
+      bm[:member_id] = member.id
+      end if params[:boat] and params[:boat][:BoatsMembers_attributes]
     @onkoOk = true
   end
 
