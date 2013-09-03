@@ -103,7 +103,7 @@ class BoatsController < ApplicationController
 
     @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
     @vapaat_laituripaikat.insert(0,nil)
-	
+	parse_jno_from_omistajatxtbox
     changejnoToId
     respond_to do |format|
       if @boat.valid? && @onkoOk #&& check_for_only_one_payer
@@ -128,6 +128,7 @@ class BoatsController < ApplicationController
 	  @berthold = @berth = Berth.where(:dock_id => @dockold.id, :number => params[:Laituripaikka]) unless params[:Laituri].blank?
 	  #@boat = Boat.find(params[:id])
     #changejnoToId
+	parse_jno_from_omistajatxtbox
     change_jno_to_id_for_update
     if params[:boat][:BoatsMembers_attributes] == nil
       @onkoOk = false
@@ -193,7 +194,7 @@ class BoatsController < ApplicationController
   def changejnoToId
     taulu = []
 	  params[:boat][:BoatsMembers_attributes].values.each do |bm|
-		  if bm[:member_id].strip == ""
+		  if bm[:member_id] == ""
 			  @onkoOk = false
 			  return
 		  end
@@ -285,6 +286,12 @@ class BoatsController < ApplicationController
       @berth.reknro = ''
       @berth.save
     end
+  end
+  
+  def parse_jno_from_omistajatxtbox
+    params[:boat][:BoatsMembers_attributes].values.each do |bm|
+	  bm[:member_id] = bm[:member_id].to_i
+	end
   end
 
  # private
