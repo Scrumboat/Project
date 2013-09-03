@@ -1,5 +1,5 @@
 # encoding: UTF-8
-
+#Turha kommentti
 class StoragesController < ApplicationController
   # GET /storages
   # GET /storages.json
