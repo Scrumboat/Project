@@ -30,7 +30,7 @@
             <td><%= berth.width.to_s + ' m' %></td>
             <td><%= berth.depth.to_s + ' m' %></td>
             <td>
-              <% if (berth.boat_id != nil) %> <%= link_to Boat.where(:id => berth.boat_id).first.reknro.to_s, Boat.where(:id => berth.boat_id).first %>
+              <% unless (berth.boat_id.blank?) %> <%= link_to Boat.where(:id => berth.boat_id).first.reknro.to_s, Boat.where(:id => berth.boat_id).first %>
               <% end %> </td>
             <% if berth.length > 7 %>
                 <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
