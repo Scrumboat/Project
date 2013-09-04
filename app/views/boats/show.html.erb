@@ -8,17 +8,17 @@
 
 
 <p>
-  <b>rek_pvm:</b>
+  <b>Rekpvm:</b>
  <%= I18n.l @boat.rek_pvm, format: :short %>
 </p>
 
 <p>
-  <b>muutos_pvm:</b>
+  <b>Muutospvm:</b>
   <%= I18n.l (@boat.muutos_pvm) if @boat.muutos_pvm %>
 </p>
 
 <p>
-  <b>nimi:</b>
+  <b>Nimi:</b>
   <%= @boat.nimi %>
 </p>
 
@@ -28,72 +28,72 @@
 </p>
 
 <p>
-  <b>reknro:</b>
+  <b>Reknro:</b>
   <%= @boat.reknro %>
 </p>
 
 <p>
-  <b>valm_malli:</b>
+  <b>Malli:</b>
   <%= @boat.valm_malli %>
 </p>
 
 <p>
-  <b>pituus:</b>
+  <b>Pituus:</b>
   <%= @boat.pituus %>
 </p>
 
 <p>
-  <b>leveys:</b>
+  <b>Leveys:</b>
   <%= @boat.leveys %>
 </p>
 
 <p>
-  <b>syvyys:</b>
+  <b>Syvyys:</b>
   <%= @boat.syvyys %>
 </p>
 
 <p>
-  <b>uppouma:</b>
+  <b>Uppouma:</b>
   <%= @boat.uppouma %>
 </p>
 
 <p>
-  <b>korkeus:</b>
+  <b>Korkeus:</b>
   <%= @boat.korkeus %>
 </p>
 
 <p>
-  <b>teho:</b>
+  <b>Teho:</b>
   <%= @boat.teho %>
 </p>
 
 <p>
-  <b>vuosimalli:</b>
+  <b>Vuosimalli:</b>
   <%= @boat.vuosimalli %>
 </p>
 
 <p>
-  <b>vene_puh_a:</b>
+  <b>Vene puh a:</b>
   <%= @boat.vene_puh_a %>
 </p>
 
 <p>
-  <b>vene_puh_b:</b>
+  <b>Vene puh b:</b>
   <%= @boat.vene_puh_b %>
 </p>
 
 <p>
-  <b>huomautukset:</b>
+  <b>Huomautukset:</b>
   <%= @boat.huomautukset %>
 </p>
 
 <p>
-  <b>tarra:</b>
+  <b>Tarra:</b>
   <%= @boat.tarra %>
 </p>
 
 <p>
-  <b>katsastus:</b>
+  <b>Katsastus:</b>
   <%= @boat.katsastus %>
 </p>
 
@@ -104,7 +104,7 @@
 </p>
 
 <p>
-  <b>telakka / paikka:</b>
+  <b>Telakka / paikka:</b>
     <% dockyard_string = @dockyard.name + " / " + @dockyard_spot.number.to_s unless @dockyard.nil? %>
     <%= link_to dockyard_string, edit_dockyard_dockyard_spot_path(@dockyard, @dockyard_spot) unless @dockyard.nil? %>
 </p>
