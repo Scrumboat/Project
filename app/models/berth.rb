@@ -3,7 +3,7 @@ class Berth < ActiveRecord::Base
   belongs_to :dock
   belongs_to :boat
 
-  attr_accessible :depth, :exists, :length, :number, :width, :dock_id, :jno, :boat_id
+  attr_accessible :depth, :exists, :length, :number, :width, :dock_id, :boat_reknro
 
   validates_numericality_of :number, :only_integer => true
   validates :number, :presence => true, length: {maximum: 2}, :numericality => { :greater_than_or_equal_to => 1 }

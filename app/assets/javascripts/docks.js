@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
     jQuery("#freakingdockshowdotheywork input[type=checkbox]").click(function() {
+        $("#error").html("");
         var boat_id = $(this).attr("id");
         if ($(this).hasClass("selected")) {
             unset_id(boat_id);

@@ -16,7 +16,6 @@
     <th>Leveys</th>
     <th>Syvyys</th>
     <th>Reknro</th>
-    <th>Jäsennumero</th>
     <th>Hinta</th>
     <th>On olemassa</th>
     <th></th>
@@ -30,13 +29,14 @@
             <td><%= berth.length.to_s + ' m' %></td>
             <td><%= berth.width.to_s + ' m' %></td>
             <td><%= berth.depth.to_s + ' m' %></td>
-            <td><% if berth.boat_id != nil %> <%= link_to Boat.where(:id => berth.boat_id).first.reknro.to_s, Boat.where(:id => berth.boat_id).first %> <% end %> </td>
-            <td><%= berth.jno.to_s %></td>
-			<% if berth.length > 7 %>
-			  <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
-			<% else %>
-			  <td><%=  berth.width*@hintaAlle7.to_s.to_i %></td>
-			<% end %>
+            <td>
+              <% if (berth.boat_reknro != nil) %> <%= link_to Boat.where(:reknro => berth.boat_reknro).first.reknro.to_s, Boat.where(:reknro => berth.boat_reknro).first %>
+              <% end %> </td>
+            <% if berth.length > 7 %>
+                <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
+            <% else %>
+                <td><%= berth.width*@hintaAlle7.to_s.to_i %></td>
+            <% end %>
 
             <td><%= berth.printExists %></td>
             <td><%= link_to 'Muokkaa', edit_dock_berth_path(@dock.id, berth, :numero => berth.number) %></td>
@@ -54,7 +54,6 @@
     <th>Leveys</th>
     <th>Syvyys</th>
     <th>Reknro</th>
-    <th>Jäsennumero</th>
     <th>Hinta</th>
     <th>On olemassa</th>
     <th></th>
@@ -68,11 +67,12 @@
             <td><%= berth.length.to_s + ' m' %></td>
             <td><%= berth.width.to_s + ' m' %></td>
             <td><%= berth.depth.to_s + ' m' %></td>
-            <td><% if berth.boat_id != nil %> <%= link_to Boat.where(:id => berth.boat_id).first.reknro.to_s, Boat.where(:id => berth.boat_id).first %> <% end %> </td>
-            <td><%= berth.jno.to_s %></td>
+            <td>
+              <% if (berth.boat_reknro != nil) %> <%= link_to Boat.where(:reknro => berth.boat_reknro).first.reknro.to_s, Boat.where(:reknro => berth.boat_reknro).first %>
+              <% end %> </td>
             <% if berth.length > 7 %>
 
-                <td><%= berth.width*@hintaYli7.to_s.to_i%></td>
+                <td><%= berth.width*@hintaYli7.to_s.to_i %></td>
             <% else %>
                 <td><%= berth.width*@hintaAlle7.to_s.to_i %></td>
             <% end %>

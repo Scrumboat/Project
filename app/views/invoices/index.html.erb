@@ -44,13 +44,11 @@
 <% end %>
 </span>
   
-  <span style="float:left;">
   <%= form_tag invoices_path, :method => 'get' do %>
       <%= button_tag(type: "submit", class: "btn") do %>
           <i class="icon-list"></i> Näytä kaikki
       <% end %>
   <% end %>
-  </span>
   
   <%= form_tag invoices_path, :method => 'get' do %>
       <%= hidden_field_tag :tunnisteella, "tunnisteella" %>

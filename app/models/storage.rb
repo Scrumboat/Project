@@ -3,6 +3,7 @@ class Storage < ActiveRecord::Base
   validates_uniqueness_of :vk
   validates_presence_of :vk
   validates_presence_of :pala
+  validates :pala, :numericality => { :greater_than_or_equal_to => 0 }
   belongs_to :member
   attr_accessible :jno, :pala, :vk, :member_id
   
