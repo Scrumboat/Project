@@ -1,0 +1,13 @@
+<%= simple_form_for(@queuing) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.select :tyyppi, [['Laituripaikka', 'laituripaikka'],['Telakkapaikka','telakkapaikka'],['Varastokoppi','varastokoppi']], :label => 'Tyyppi' %>
+    <%= f.input :jno, :label => 'Jäsennumero' %>
+    <%= f.input :pvm, :label => 'Päivämäärä' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit @teksti %>
+  </div>
+<% end %>

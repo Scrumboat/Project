@@ -1,0 +1,17 @@
+<p>
+  <b>Tyyppi:</b>
+  <%= @queuing.tyyppi %>
+</p>
+
+<p>
+  <b>Jäsennumero:</b>
+  <%= @queuing.jno %>
+</p>
+
+<p>
+  <b>Päiväys:</b>
+  <%= @queuing.pvm %>
+</p>
+
+<%= link_to 'Muokkaa', edit_queuing_path(@queuing) %> |
+<%= link_to 'Takaisin', queuings_path %>

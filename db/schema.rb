@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130902172613) do
+ActiveRecord::Schema.define(:version => 20130902172614) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -243,6 +243,14 @@ ActiveRecord::Schema.define(:version => 20130902172613) do
   create_table "pricings", :force => true do |t|
     t.string   "target"
     t.decimal  "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "queuings", :force => true do |t|
+    t.string   "tyyppi"
+    t.integer  "jno"
+    t.date     "pvm"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

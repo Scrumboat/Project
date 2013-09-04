@@ -14,13 +14,16 @@
 		<%= link_to('Telakat', dockyards_path) %>
 		</li>
 		<li>
-		<%= link_to('varastokopit', storages_path) %>
+		<%= link_to('Varastokopit', storages_path) %>
 		</li>
                 <li>
                 <%= link_to('Hinnasto', pricings_path) %>
                 </li>
                 <li>
                 <%= link_to 'Laskut', invoices_path %>
+                </li>
+                <li>
+                <%= link_to 'Jonotus', queuings_path %>
                 </li>
         <% end %>
         <% if admin_signed_in? %>

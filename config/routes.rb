@@ -35,6 +35,8 @@ Venerekisteri::Application.routes.draw do
   resources :guardseasons do
     resources :guardturns
   end
+  
+  resources :queuings
 
   resources :docks
 
