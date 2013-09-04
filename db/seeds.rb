@@ -35,8 +35,8 @@ Boat.create([{id: 1, rek_pvm: "1-1-1990", nimi: "Jallu Kola", tyyppi: "S/S", rek
              {id: 4, rek_pvm: "3-7-2010", nimi: "Tupla-Omistus", tyyppi: "soutuvene", reknro: "ggg-hhh", valm_malli: "Terhi", pituus: 2,
               leveys: 1, syvyys: 1.3, vuosimalli: 1986, korkeus: 1}])
 
-#puts 'CREATING MODELS'
-#Model.create([{id: 1, tyyppi: "turbovene", ... }])
+puts 'CREATING MODELS'
+Model.create([{id: 1, tyyppi: "turbovene", valm_malli: "malli1", pituus: 2, leveys: 1, syvyys: 1, korkeus: 1.5}])
 
 puts 'ADDING BOATS TO MEMBERS RELATIONS'
 BoatsMember.create([{boat_id: 2, member_id: 1, paying_member: true},
@@ -49,10 +49,10 @@ puts 'CREATING DOCKS: 1, 2'
 Dock.create([{name: 'a', length: 30}, {name: 'b', length: 40}])
 
 puts 'CREATING BERTHS: 1, 2'
-Berth.create([{id: 1, number: 1, length: 11, width: 5, depth: 6, exists: true, dock_id: 1, boat_reknro: "aaa-bbb"},
-              {id: 2, number: 2, length: 15, width: 5.5, depth: 4, exists: false, dock_id: 2, boat_reknro: "ccc-ddd"},
-              {id: 3, number: 3, length: 5, width: 5, depth: 6.5, exists: true, dock_id: 1, boat_reknro: "eee-fff"},
-              {id: 4, number: 4, length: 7, width: 4, depth: 5, exists: true, dock_id: 1, boat_reknro: "ggg-hhh"},
+Berth.create([{id: 1, number: 1, length: 11, width: 5, depth: 6, exists: true, dock_id: 1, boat_id: 1},
+              {id: 2, number: 2, length: 15, width: 5.5, depth: 4, exists: false, dock_id: 2, boat_id: 2},
+              {id: 3, number: 3, length: 5, width: 5, depth: 6.5, exists: true, dock_id: 1, boat_id: 3},
+              {id: 4, number: 4, length: 7, width: 4, depth: 5, exists: true, dock_id: 1, boat_id: 4},
               {id: 5, number: 5, length: 4, width: 4, depth: 4, exists: true, dock_id: 1},
               {id: 6, number: 6, length: 5.5, width: 5.5, depth: 5.5, exists: true, dock_id: 1},
               {id: 7, number: 7, length: 4.7, width: 4.7, depth: 4.7, exists: true, dock_id: 2},

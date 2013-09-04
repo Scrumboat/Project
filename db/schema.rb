@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130903201942) do
+
+ActiveRecord::Schema.define(:version => 20130904094838) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -38,9 +39,9 @@ ActiveRecord::Schema.define(:version => 20130903201942) do
     t.decimal  "depth"
     t.boolean  "exists"
     t.integer  "dock_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "boat_reknro"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "boat_id"
   end
 
   add_index "berths", ["dock_id"], :name => "index_berths_on_dock_id"
