@@ -26,9 +26,19 @@
 <% end %>
 </span>
 <div style="clear: both;"></div>
+<h4>
+    <% if params[:search] == "laituripaikka" %>
+    Laituripaikat
+    <% end %>
+    <% if params[:search] == "telakkapaikka" %>
+    Telakkapaikat
+    <% end %>
+    <% if params[:search] == "varastokoppi" %>
+    Varastokopit
+    <% end %>
+</h4>
 <table>
   <tr>
-    <th>Tyyppi</th>
     <th>Jäsennumero</th>
     <th>Päiväys</th>
     <th></th>
@@ -38,7 +48,6 @@
 
 <% @queuings.each do |queuing| %>
   <tr>
-    <td><%= queuing.tyyppi %></td>
     <td><%= queuing.jno %></td>
     <td><%= queuing.pvm %></td>
     <td><%= link_to 'Muokkaa', edit_queuing_path(queuing) %></td>
