@@ -48,7 +48,7 @@ def naytaJnoJaNimi
 end
 
   def paying_member?(boat_id)
-    self.boats.joins(:BoatsMembers).where("boats_members.paying_member IS ? AND boats_members.boat_id = ?", true, boat_id).first
+    self.boats.joins(:BoatsMembers).where("boats_members.paying_member = ? AND boats_members.boat_id = ?", true, boat_id).first
   end
 
 end
