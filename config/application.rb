@@ -61,7 +61,7 @@ module Venerekisteri
     config.i18n.default_locale = :fi
 
     # Added by jussi, for heroku
-    config.assets.precompile += ['invoicefilter.js', 'boatfilter.js', 'memberfilter.js', 'jquery.tablesorter.js', 'bootstrap-tooltip.js', 'bootstrap-popover.js']
+    config.assets.precompile += ['invoicefilter.js', 'boatfilter.js', 'memberfilter.js', 'jquery.tablesorter.js', 'bootstrap-tooltip.js', 'bootstrap-popover.js', 'autocomplete-rails.js']
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
