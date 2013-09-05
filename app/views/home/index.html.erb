@@ -1,20 +1,52 @@
 <% unless admin_signed_in? -%>
-  <p><%= link_to 'Rekisteröidy', new_admin_registration_path %></p>
+    <p><%= link_to 'Rekisteröidy', new_admin_registration_path %></p>
 
-  <p><%= link_to 'Kirjaudu sisään', new_admin_session_path %></p>
+    <p><%= link_to 'Kirjaudu sisään', new_admin_session_path %></p>
 <% end -%>
 <% if admin_signed_in? -%>
-<p> <%= link_to 'Veneet', boats_path %></p>
-<p> <%= link_to 'Jäsenet', members_path %></p>
-<p> <%= link_to 'Luo uusi vene-jäsen yhteys', boats_members_path %></p>
-<p> <%= link_to 'Laiturit', docks_path %></p>
-<p> <%= link_to 'varastokopit', storages_path %></p>
-<p> <%= link_to 'Telakat', dockyards_path %></p>
-<p> <%= link_to 'Mallit', models_path %></p>
-<p> <%= link_to 'Hinnasto', pricings_path %></p>
-<p> <%= link_to 'Laskut', invoices_path %></p>
-<p> <%= link_to 'Toimet', employments_path %></p>
-<p> <%= link_to 'Jonotus', queuings_path %></p>
-<p> <%= link_to 'Vartiokaudet', guardseasons_path %></p>
-<p> <%= link_to 'Yhteenveto', summaries_path %></p>
+
+
+    <table>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <td>
+          <p> <%= link_to 'Veneet', boats_path %></p>
+
+          <p> <%= link_to 'Jäsenet', members_path %></p>
+
+          <p> <%= link_to 'Luo uusi vene-jäsen yhteys', boats_members_path %></p>
+
+          <p> <%= link_to 'Laiturit', docks_path %></p>
+
+          <p> <%= link_to 'varastokopit', storages_path %></p>
+
+          <p> <%= link_to 'Telakat', dockyards_path %></p>
+
+          <p> <%= link_to 'Mallit', models_path %></p>
+
+          <p> <%= link_to 'Hinnasto', pricings_path %></p>
+
+          <p> <%= link_to 'Laskut', invoices_path %></p>
+
+          <p> <%= link_to 'Toimet', employments_path %></p>
+
+          <p> <%= link_to 'Jonotus', queuings_path %></p>
+
+          <p> <%= link_to 'Vartiokaudet', guardseasons_path %></p>
+
+          <p> <%= link_to 'Yhteenveto', summaries_path %></p>
+          </div>
+
+        </td>
+        <td>
+          <div style="text-align: right;"> <%= image_tag("aamuyo.jpg", :alt => "rss feed", :height => "80%", :width => "80%") %> </div>
+        </td>
+
+      </tr>
+    </table>
 <% end -%>
+

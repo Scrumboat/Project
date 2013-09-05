@@ -73,7 +73,7 @@ class GuardseasonsController < ApplicationController
 
     respond_to do |format|
       if @guardseason.save
-        format.html { redirect_to @guardseason, notice: 'Guardseason was successfully created.' }
+        format.html { redirect_to @guardseason, notice: 'Vartiokausi luotu.' }
         format.json { render json: @guardseason, status: :created, location: @guardseason }
       else
         format.html { render action: "new" }
@@ -89,7 +89,7 @@ class GuardseasonsController < ApplicationController
 
     respond_to do |format|
       if @guardseason.update_attributes(params[:guardseason])
-        format.html { redirect_to @guardseason, notice: 'Guardseason was successfully updated.' }
+        format.html { redirect_to @guardseason, notice: 'Vartiokausi päivitetty.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

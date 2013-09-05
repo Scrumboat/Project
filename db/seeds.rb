@@ -36,7 +36,7 @@ Boat.create([{id: 1, rek_pvm: "1-1-1990", nimi: "Jallu Kola", tyyppi: "S/S", rek
               leveys: 1, syvyys: 1.3, vuosimalli: 1986, korkeus: 1}])
 
 puts 'CREATING MODELS'
-Model.create([{id: 1, tyyppi: "turbovene", valm_malli: "malli1", pituus: 2, leveys: 1, syvyys: 1, korkeus: 1.5}])
+Model.create([{id: 1, tyyppi: "Turbovene", valm_malli: "Buster", pituus: 2, leveys: 1, syvyys: 1, korkeus: 1.5}])
 
 puts 'ADDING BOATS TO MEMBERS RELATIONS'
 BoatsMember.create([{boat_id: 2, member_id: 1, paying_member: true},

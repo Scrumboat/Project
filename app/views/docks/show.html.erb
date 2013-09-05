@@ -1,6 +1,5 @@
 <h1>Laituri <%= @dock.name %></h1>
 <p id="notice"><%= notice %></p>
-
 <p>
   <b>Laiturin pituus:</b>
   <%= @dock.length.to_s + ' m' %>
@@ -90,4 +89,3 @@
 <%= link_to 'Muokkaa', edit_dock_path(@dock) %>
 <%= link_to 'Takaisin', docks_path %>
 <%= link_to 'Uusi laituripaikka', new_dock_berth_path(@dock) %>
-
