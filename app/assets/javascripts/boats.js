@@ -47,8 +47,8 @@ function changeBerths() {
                }
                 if (onkoDockOikea == true && onkoBoatOikea == true && key == 'number') {
                     var opt = document.createElement('option');
-                    opt.text = val;
-                    opt.value = val;
+                    opt.text = "" + val;
+                    opt.value = "" + val;
                     select.add(opt, null);
                 }
             });
@@ -58,4 +58,5 @@ function changeBerths() {
     opt.text = "";
     opt.value = "";
     select.add(opt,null);
+
 }
