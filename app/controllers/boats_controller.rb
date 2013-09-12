@@ -2,7 +2,7 @@
 class BoatsController < ApplicationController
   autocomplete :member, :nimi
   autocomplete :member, :jno, :extra_data => [:nimi], :display_value => :naytaJnoJaNimi
- # helper_method :sort_column, :sort_direction
+  # helper_method :sort_column, :sort_direction
 
   # GET /boats
   # GET /boats.json
@@ -39,10 +39,10 @@ class BoatsController < ApplicationController
     @models = Model.all.map(&:valm_malli).insert(0, "")
 
     @laituri_idt = Dock.all.map(&:id)
-    @laituri_idt.insert(0,nil)
+    @laituri_idt.insert(0, nil)
 
     @vapaat_laituripaikat = []
-    @vapaat_laituripaikat.insert(0,nil)
+    @vapaat_laituripaikat.insert(0, nil)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,12 +58,12 @@ class BoatsController < ApplicationController
     @models = Model.all.map(&:valm_malli).insert(0, "")
 
     @laituri_idt = Dock.all.map(&:id)
-    @laituri_idt.insert(0,nil)
+    @laituri_idt.insert(0, nil)
 
     @vapaat_laituripaikat = []
-    @vapaat_laituripaikat.insert(0,nil)
-	
-	show_jno_in_edit_instead_of_id
+    @vapaat_laituripaikat.insert(0, nil)
+
+    show_jno_in_edit_instead_of_id
 
   end
 
@@ -87,24 +87,26 @@ class BoatsController < ApplicationController
       @model.save
     end
 
-    if !params[:boat][:laituri].empty?  && !params[:boat][:laituripaikka].empty?
-    @dock = Dock.find(params[:boat][:laituri])
-    @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
-    @berth.boat = @boat
+    if !params[:boat][:laituri] != nil && !params[:boat][:laituripaikka] != nil
+      if !params[:boat][:laituri].empty? && !params[:boat][:laituripaikka].empty?
+        @dock = Dock.find(params[:boat][:laituri])
+        @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
+        @berth.boat = @boat
 
-    @berth.save!
-  end
+        @berth.save!
+      end
+    end
 
-	parse_jno_from_omistajatxtbox
+    parse_jno_from_omistajatxtbox
     changejnoToId
     respond_to do |format|
 
-       if @boat.valid? && @onkoOk #&& check_for_only_one_payer
+      if @boat.valid? && @onkoOk #&& check_for_only_one_payer
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
         format.html { flash.now[:alert] = @member == nil ? 'Jäsentä ei löytynyt' : 'Tuntematon virhe'
-                      render action: "new" }
+        render action: "new" }
         format.json { render json: @boat.errors, status: :unprocessable_entity }
       end
     end
@@ -116,18 +118,20 @@ class BoatsController < ApplicationController
   def update
     @boat = Boat.find(params[:id], :include => [:members])
 
-	parse_jno_from_omistajatxtbox
+    parse_jno_from_omistajatxtbox
     change_jno_to_id_for_update
     if params[:boat][:BoatsMembers_attributes] == nil
       @onkoOk = false
     end
 
-    if !params[:boat][:laituri].empty?  && !params[:boat][:laituripaikka].empty?
-    @dock = Dock.find(params[:boat][:laituri])
-    @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
-    @berth.boat = @boat
+    if !params[:boat][:laituri] != nil && !params[:boat][:laituripaikka] != nil
+      if !params[:boat][:laituri].empty? && !params[:boat][:laituripaikka].empty?
+        @dock = Dock.find(params[:boat][:laituri])
+        @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
+        @berth.boat = @boat
 
-    @berth.save!
+        @berth.save!
+      end
     end
 
     respond_to do |format|
@@ -135,10 +139,10 @@ class BoatsController < ApplicationController
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
-        format.html { 
-	        flash[:notice] = 'Virhe.'
-	        render action: "edit"
-	      }
+        format.html {
+          flash[:notice] = 'Virhe.'
+          render action: "edit"
+        }
         format.json { render json: @boat.errors, status: :unprocessable_entity }
       end
     end
@@ -148,7 +152,7 @@ class BoatsController < ApplicationController
   # DELETE /boats/1.json
   def destroy
     @boat = Boat.find(params[:id])
-	  remove_reknro_from_berth
+    remove_reknro_from_berth
     @boat.destroy
 
     respond_to do |format|
@@ -173,52 +177,52 @@ class BoatsController < ApplicationController
       member = Member.find_by_jno(bm[:member_id])
       if member == nil
         @onkoOk = false
-		    return
+        return
       end
       bm[:member_id] = member.id
-      end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+    end if params[:boat] and params[:boat][:BoatsMembers_attributes]
     @onkoOk = true
   end
 
   def changejnoToId
     taulu = []
-	  params[:boat][:BoatsMembers_attributes].values.each do |bm|
-		  if bm[:member_id] == ""
-			  @onkoOk = false
-			  return
-		  end
-		  taulu << bm[:member_id]
-	    end if params[:boat] and params[:boat][:BoatsMembers_attributes]
-	
-	    i = 0
-	    @onkoOk = true
-	    @boat.BoatsMembers.each do |bm|
-		  @member = Member.find_by_jno(taulu[i])
-		  if @member == nil
-			  @onkoOk = false
-			  return
-		  else
-			  bm.member_id = @member.id
-			  i = i+1
-		  end
-	  end
-	  #@onkoOk = !taulu.empty?
-	  if !taulu.nil?
-	    @onkoOk = !taulu.empty?
-	  else
-	    @onkoOk = false
-	  end
-	  
+    params[:boat][:BoatsMembers_attributes].values.each do |bm|
+      if bm[:member_id] == ""
+        @onkoOk = false
+        return
+      end
+      taulu << bm[:member_id]
+    end if params[:boat] and params[:boat][:BoatsMembers_attributes]
+
+    i = 0
+    @onkoOk = true
+    @boat.BoatsMembers.each do |bm|
+      @member = Member.find_by_jno(taulu[i])
+      if @member == nil
+        @onkoOk = false
+        return
+      else
+        bm.member_id = @member.id
+        i = i+1
+      end
+    end
+    #@onkoOk = !taulu.empty?
+    if !taulu.nil?
+      @onkoOk = !taulu.empty?
+    else
+      @onkoOk = false
+    end
+
   end
-  
+
   def show_jno_in_edit_instead_of_id
-	  @boat.BoatsMembers.each do |bm|
-		@member = Member.find(bm.member_id)
-		if @member == nil
-			@onkoOk = false
-			return
-		end
-		bm.member_id = @member.jno
+    @boat.BoatsMembers.each do |bm|
+      @member = Member.find(bm.member_id)
+      if @member == nil
+        @onkoOk = false
+        return
+      end
+      bm.member_id = @member.jno
     end
   end
 
@@ -243,10 +247,10 @@ class BoatsController < ApplicationController
       @berth.save
     end
   end
-  
+
   def parse_jno_from_omistajatxtbox
     params[:boat][:BoatsMembers_attributes].values.each do |bm|
-	  bm[:member_id] = bm[:member_id].to_i
-	end
+      bm[:member_id] = bm[:member_id].to_i
+    end
   end
 end
