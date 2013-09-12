@@ -87,15 +87,13 @@ class BoatsController < ApplicationController
       @model.save
     end
 
+    if params[:boat][:laituri] != ""  && params[:boat][:laituripaikka] != ""
     @dock = Dock.find(params[:boat][:laituri])
     @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
     @berth.boat = @boat
 
     @berth.save!
-    @boat.laituri = params[:boat][:laituri]
-    @boat.laituripaikka = params[:boat][:laituripaikka]
-    @boat.berth = @berth
-    @boat.save!
+  end
 
 	parse_jno_from_omistajatxtbox
     changejnoToId
@@ -117,8 +115,6 @@ class BoatsController < ApplicationController
   # PUT /boats/1.json
   def update
     @boat = Boat.find(params[:id], :include => [:members])
-	  #@dockold = Dock.find(params[:boat][:laituri]) unless params[:boat][:laituri].blank?
-	  #@berthold = @berth = Berth.where(:dock_id => @dockold.id, :number => params[:boat][:laituripaikka]) unless params[:boat][:laituri].blank?
 
 	parse_jno_from_omistajatxtbox
     change_jno_to_id_for_update
@@ -126,16 +122,13 @@ class BoatsController < ApplicationController
       @onkoOk = false
     end
 
+    if params[:boat][:laituri] != "" && params[:boat][:laituripaikka] != ""
     @dock = Dock.find(params[:boat][:laituri])
     @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
     @berth.boat = @boat
 
     @berth.save!
-    @boat.laituri = params[:boat][:laituri]
-    @boat.laituripaikka = params[:boat][:laituripaikka]
-    @boat.berth = @berth
-    @boat.save!
-
+    end
 
     respond_to do |format|
       if @onkoOk && check_for_only_one_payer && @boat.update_attributes(params[:boat])
