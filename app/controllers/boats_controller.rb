@@ -87,7 +87,7 @@ class BoatsController < ApplicationController
       @model.save
     end
 
-    if params[:boat][:laituri] != ""  && params[:boat][:laituripaikka] != ""
+    if !params[:boat][:laituri].empty?  && !params[:boat][:laituripaikka].empty?
     @dock = Dock.find(params[:boat][:laituri])
     @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
     @berth.boat = @boat
@@ -122,7 +122,7 @@ class BoatsController < ApplicationController
       @onkoOk = false
     end
 
-    if params[:boat][:laituri] != "" && params[:boat][:laituripaikka] != ""
+    if !params[:boat][:laituri].empty?  && !params[:boat][:laituripaikka].empty?
     @dock = Dock.find(params[:boat][:laituri])
     @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
     @berth.boat = @boat
