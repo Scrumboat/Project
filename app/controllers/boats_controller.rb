@@ -8,8 +8,13 @@ class BoatsController < ApplicationController
   # GET /boats.json
 
   def index
+    #@boats = Boat.order(sort_column + ' ' + sort_direction)
+    # @boats = Boat.all
+    # if params[:search]
     @boats = Boat.search(params[:search])
-
+    # else
+    # @boats = Boat.order(sort_column + ' ' + sort_direction)
+    # end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @boats }
@@ -32,17 +37,21 @@ class BoatsController < ApplicationController
   # GET /boats/new
   # GET /boats/new.json
   def new
-    @http_method = 'POST'
     @boat = Boat.new
     @boat.BoatsMembers.build
     @mallit = Model.select("\"valm_malli\"")
     @models = Model.all.map(&:valm_malli).insert(0, "")
+    #@laituri_idt = Array.new
+    #@laiturit = Dock.all
+    #@laiturit.each do |f|
+    #   @laituri_idt.push(f.id)
+    #end
 
     @laituri_idt = Dock.all.map(&:id)
-    @laituri_idt.insert(0, nil)
+    @laituri_idt.insert(0,nil)
 
-    @vapaat_laituripaikat = []
-    @vapaat_laituripaikat.insert(0, nil)
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,16 +61,19 @@ class BoatsController < ApplicationController
 
   # GET /boats/1/edit
   def edit
-    @http_method = 'PUT'
     @boat = Boat.find(params[:id], :include => :members)
     @mallit = Model.select("\"valm_malli\"")
     @models = Model.all.map(&:valm_malli).insert(0, "")
-
+    #@laituri_idt = Array.new
+    @laiturit = Dock.all
+    #@laiturit.each do |f|
+    #  @laituri_idt.push(f.id)
+    #end
     @laituri_idt = Dock.all.map(&:id)
-    @laituri_idt.insert(0, nil)
+    @laituri_idt.insert(0,nil)
 
-    @vapaat_laituripaikat = []
-    @vapaat_laituripaikat.insert(0, nil)
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
 
     show_jno_in_edit_instead_of_id
 
@@ -70,7 +82,6 @@ class BoatsController < ApplicationController
   # POST /boats
   # POST /boats.json
   def create
-
     @boat = Boat.new(params[:boat])
 
     @model = Model.where(:valm_malli => params[:boat][:valm_malli]).first
@@ -87,21 +98,17 @@ class BoatsController < ApplicationController
       @model.save
     end
 
-    if params[:boat][:laituri] != nil && params[:boat][:laituripaikka] != nil
-      if !params[:boat][:laituri].empty? && !params[:boat][:laituripaikka].empty?
-        @dock = Dock.find(params[:boat][:laituri])
-        @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
-        @berth.boat = @boat
+    @laituri_idt = Dock.all.map(&:id)
+    @laituri_idt.insert(0,nil)
 
-        @berth.save!
-      end
-    end
-
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
     parse_jno_from_omistajatxtbox
     changejnoToId
     respond_to do |format|
-
       if @boat.valid? && @onkoOk #&& check_for_only_one_payer
+        check_dock_and_berth(format)
+        @boat.save
         format.html { redirect_to @boat, notice: 'Vene luotiin onnistuneesti.' }
         format.json { render json: @boat, status: :created, location: @boat }
       else
@@ -117,37 +124,37 @@ class BoatsController < ApplicationController
   # PUT /boats/1.json
   def update
     @boat = Boat.find(params[:id], :include => [:members])
-
+    @dockold = Dock.find(params[:Laituri]) unless params[:Laituri].blank?
+    @berthold = @berth = Berth.where(:dock_id => @dockold.id, :number => params[:Laituripaikka]) unless params[:Laituri].blank?
+    #@boat = Boat.find(params[:id])
+    #changejnoToId
     parse_jno_from_omistajatxtbox
     change_jno_to_id_for_update
     if params[:boat][:BoatsMembers_attributes] == nil
       @onkoOk = false
     end
 
-    if params[:boat][:laituri] != nil && params[:boat][:laituripaikka] != nil
-      if !params[:boat][:laituri].empty? && !params[:boat][:laituripaikka].empty?
-        @dock = Dock.find(params[:boat][:laituri])
-        @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
-        @berth.boat = @boat
+    @laituri_idt = Dock.all.map(&:id)
+    @laituri_idt.insert(0,nil)
 
-        @berth.save!
-      end
-    end
+    @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
+    @vapaat_laituripaikat.insert(0,nil)
 
 
- #   if params[:boat][:laituri] != nil && params[:boat][:laituripaikka] != nil
- #     if !params[:boat][:laituri].empty? && !params[:boat][:laituripaikka].empty?
- #       @dock = Dock.find(params[:boat][:laituri])
- #       @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
- #       @berth.boat = @boat
- #
- #       @berth.save!
- #     end
- #   end
+    #   if params[:boat][:laituri] != nil && params[:boat][:laituripaikka] != nil
+    #     if !params[:boat][:laituri].empty? && !params[:boat][:laituripaikka].empty?
+    #       @dock = Dock.find(params[:boat][:laituri])
+    #       @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
+    #       @berth.boat = @boat
+    #
+    #       @berth.save!
+    #     end
+    #   end
 
 
     respond_to do |format|
       if @onkoOk && check_for_only_one_payer && @boat.update_attributes(params[:boat])
+        check_dock_and_berth(format)
         format.html { redirect_to @boat, notice: 'Veneen muokkaus onnistui.' }
         format.json { head :no_content }
       else
@@ -238,6 +245,39 @@ class BoatsController < ApplicationController
     end
   end
 
+  def check_dock_and_berth(format)
+    if is_number?(params[:Laituripaikka]) && is_number?(params[:Laituri])
+      if Dock.exists?(params[:Laituri])
+        @dock = Dock.find(params[:Laituri])
+        if Berth.exists?(:dock_id => @dock.id, :number => params[:Laituripaikka])
+          @berth = Berth.where(:dock_id => @dock.id, :number => params[:Laituripaikka]).first
+          if check_if_it_fit
+            if !@berthold.nil? && @berthold != @berth
+              @berthold.reknro = ""
+              @berthold.save
+            end
+            @berth.reknro = params[:boat][:reknro]
+            @berth.save
+          end
+        else
+          show_jno_in_edit_instead_of_id
+          set_dock_and_bert_empty
+          format.html {
+            flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+            render action: "new"
+          }
+        end
+      else
+        show_jno_in_edit_instead_of_id
+        set_dock_and_bert_empty
+        format.html {
+          flash[:notice] = 'Virheellinen laituri/laituripaikka.'
+          render action: "new"
+        }
+      end
+    end
+  end
+
   def is_number?(object)
     true if Integer(object) rescue false
   end
@@ -265,4 +305,13 @@ class BoatsController < ApplicationController
       bm[:member_id] = bm[:member_id].to_i
     end
   end
+
+  # private
+  # def sort_column
+  #  Boat.column_names.include?(params[:sort]) ? Boat.connection.quote_column_name(params[:sort]) : Boat.connection.quote_column_name("nimi")
+  #end
+
+  # def sort_direction
+  # %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  #end
 end
