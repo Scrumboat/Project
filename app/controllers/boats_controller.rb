@@ -140,18 +140,6 @@ class BoatsController < ApplicationController
     @vapaat_laituripaikat = Berth.where(:dock_id => 1).all.map(&:number)
     @vapaat_laituripaikat.insert(0,nil)
 
-
-    #   if params[:boat][:laituri] != nil && params[:boat][:laituripaikka] != nil
-    #     if !params[:boat][:laituri].empty? && !params[:boat][:laituripaikka].empty?
-    #       @dock = Dock.find(params[:boat][:laituri])
-    #       @berth = Berth.where(:dock_id => @dock.id, :number => params[:boat][:laituripaikka]).first
-    #       @berth.boat = @boat
-    #
-    #       @berth.save!
-    #     end
-    #   end
-
-
     respond_to do |format|
       if @onkoOk && check_for_only_one_payer && @boat.update_attributes(params[:boat])
         check_dock_and_berth(format)
